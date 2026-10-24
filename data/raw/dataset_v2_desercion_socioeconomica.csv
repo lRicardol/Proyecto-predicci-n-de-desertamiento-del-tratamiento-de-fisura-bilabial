@@ -1,0 +1,3001 @@
+ID_Paciente,Tipo_Fisura_Bilateral,Edad_Inicio_Meses,Distancia_Hospital_KM,Nivel_Socioeconomico,Ingresos_Mensuales_USD,Apoyo_Psicologico,Citas_Perdidas_NoShow,Desertor
+PAC-2000,Bilateral Completa,10,28.5,Medio-Bajo,1112,1,3,0
+PAC-2001,Asimétrica,6,155.5,Medio-Bajo,612,1,5,1
+PAC-2002,Asimétrica,4,70.8,Bajo,297,0,3,1
+PAC-2003,Incompleta,2,50.6,Medio-Bajo,970,0,0,0
+PAC-2004,Incompleta,5,13.5,Medio-Bajo,890,0,4,1
+PAC-2005,Bilateral Completa,11,13.5,Medio,1531,1,4,0
+PAC-2006,Asimétrica,1,8.0,Medio,1460,0,5,1
+PAC-2007,Asimétrica,7,105.6,Bajo,527,0,3,1
+PAC-2008,Incompleta,9,51.0,Medio-Bajo,804,1,2,1
+PAC-2009,Incompleta,3,66.6,Bajo,434,0,5,1
+PAC-2010,Incompleta,6,6.0,Medio-Bajo,986,0,6,1
+PAC-2011,Bilateral Completa,9,180.2,Bajo,558,1,1,0
+PAC-2012,Asimétrica,11,94.3,Bajo,318,0,6,1
+PAC-2013,Incompleta,4,16.9,Bajo,353,1,6,1
+PAC-2014,Incompleta,6,15.0,Medio-Bajo,760,0,5,1
+PAC-2015,Incompleta,3,15.1,Bajo,449,1,3,0
+PAC-2016,Asimétrica,9,23.1,Medio-Bajo,815,0,3,1
+PAC-2017,Incompleta,7,42.2,Bajo,461,0,4,1
+PAC-2018,Bilateral Completa,7,33.3,Bajo,265,0,3,1
+PAC-2019,Bilateral Completa,4,22.2,Medio-Bajo,1097,0,3,1
+PAC-2020,Asimétrica,6,52.3,Bajo,581,0,1,0
+PAC-2021,Incompleta,11,12.5,Bajo,454,0,6,1
+PAC-2022,Asimétrica,11,22.3,Medio-Bajo,1150,0,5,1
+PAC-2023,Asimétrica,8,27.8,Bajo,338,0,6,1
+PAC-2024,Incompleta,6,35.4,Bajo,505,0,4,1
+PAC-2025,Bilateral Completa,6,81.9,Bajo,503,0,6,1
+PAC-2026,Bilateral Completa,4,16.1,Medio,1927,0,5,1
+PAC-2027,Incompleta,8,41.1,Medio-Bajo,771,0,3,0
+PAC-2028,Bilateral Completa,10,49.9,Medio-Bajo,1097,0,4,1
+PAC-2029,Incompleta,8,7.4,Medio-Bajo,1070,1,2,1
+PAC-2030,Incompleta,9,51.8,Bajo,427,1,1,0
+PAC-2031,Bilateral Completa,6,14.3,Bajo,326,1,5,0
+PAC-2032,Incompleta,2,8.4,Medio-Bajo,1106,0,3,1
+PAC-2033,Bilateral Completa,4,153.7,Bajo,264,1,7,1
+PAC-2034,Bilateral Completa,4,173.5,Bajo,541,0,8,1
+PAC-2035,Bilateral Completa,8,87.6,Bajo,568,0,7,1
+PAC-2036,Asimétrica,5,23.2,Bajo,574,1,6,0
+PAC-2037,Bilateral Completa,4,10.1,Alto,2713,0,0,0
+PAC-2038,Bilateral Completa,8,62.6,Bajo,457,1,3,1
+PAC-2039,Bilateral Completa,3,34.0,Medio-Bajo,768,1,2,0
+PAC-2040,Bilateral Completa,2,11.5,Bajo,579,0,6,0
+PAC-2041,Incompleta,4,39.2,Alto,5851,0,6,0
+PAC-2042,Bilateral Completa,11,6.7,Bajo,554,0,7,1
+PAC-2043,Asimétrica,1,125.0,Bajo,395,1,2,1
+PAC-2044,Bilateral Completa,1,20.0,Medio-Bajo,1115,0,7,1
+PAC-2045,Incompleta,5,59.3,Medio-Bajo,689,1,1,0
+PAC-2046,Bilateral Completa,11,23.7,Bajo,309,1,3,1
+PAC-2047,Asimétrica,1,41.7,Bajo,560,1,3,1
+PAC-2048,Bilateral Completa,4,44.6,Bajo,265,1,2,0
+PAC-2049,Asimétrica,8,15.2,Bajo,476,1,2,0
+PAC-2050,Incompleta,8,179.6,Bajo,278,1,1,0
+PAC-2051,Incompleta,2,79.6,Medio-Bajo,678,0,3,1
+PAC-2052,Asimétrica,3,145.3,Bajo,538,1,7,1
+PAC-2053,Bilateral Completa,3,117.6,Bajo,402,1,7,1
+PAC-2054,Incompleta,1,50.6,Medio-Bajo,1000,1,2,1
+PAC-2055,Bilateral Completa,11,132.5,Alto,5850,0,0,0
+PAC-2056,Incompleta,3,9.6,Medio-Bajo,656,1,3,0
+PAC-2057,Asimétrica,8,15.9,Bajo,435,0,6,1
+PAC-2058,Asimétrica,6,7.3,Bajo,342,0,9,1
+PAC-2059,Bilateral Completa,5,24.7,Alto,5335,1,2,0
+PAC-2060,Bilateral Completa,10,29.6,Bajo,407,0,2,0
+PAC-2061,Bilateral Completa,9,20.8,Bajo,524,1,4,1
+PAC-2062,Bilateral Completa,7,93.2,Medio-Bajo,958,0,4,1
+PAC-2063,Bilateral Completa,6,27.1,Medio-Bajo,1039,0,2,0
+PAC-2064,Bilateral Completa,5,21.5,Medio-Bajo,1188,1,6,1
+PAC-2065,Asimétrica,5,44.1,Bajo,400,1,4,0
+PAC-2066,Incompleta,10,12.6,Bajo,487,0,2,0
+PAC-2067,Incompleta,9,86.0,Alto,5348,0,6,1
+PAC-2068,Bilateral Completa,10,8.9,Bajo,480,1,3,0
+PAC-2069,Incompleta,6,221.7,Medio-Bajo,1087,0,3,1
+PAC-2070,Asimétrica,11,79.0,Medio-Bajo,1129,0,3,0
+PAC-2071,Incompleta,4,16.1,Medio-Bajo,672,0,5,1
+PAC-2072,Bilateral Completa,4,5.3,Bajo,438,1,2,0
+PAC-2073,Bilateral Completa,4,89.5,Bajo,266,0,6,1
+PAC-2074,Asimétrica,11,66.4,Medio-Bajo,1130,0,3,1
+PAC-2075,Bilateral Completa,6,70.3,Medio,1930,1,3,1
+PAC-2076,Incompleta,1,78.8,Medio,1525,0,1,1
+PAC-2077,Bilateral Completa,9,8.8,Bajo,369,0,4,1
+PAC-2078,Bilateral Completa,2,27.2,Bajo,350,0,7,1
+PAC-2079,Asimétrica,2,11.2,Medio,1745,1,4,1
+PAC-2080,Bilateral Completa,5,104.4,Medio-Bajo,1195,0,1,1
+PAC-2081,Bilateral Completa,11,53.8,Medio,2120,1,1,0
+PAC-2082,Bilateral Completa,4,25.1,Bajo,445,0,2,0
+PAC-2083,Asimétrica,3,8.3,Medio-Bajo,801,1,4,1
+PAC-2084,Bilateral Completa,5,23.6,Medio-Bajo,943,0,8,1
+PAC-2085,Asimétrica,7,24.7,Medio-Bajo,1122,0,3,1
+PAC-2086,Bilateral Completa,10,70.4,Bajo,596,1,4,0
+PAC-2087,Asimétrica,2,55.7,Bajo,467,0,3,1
+PAC-2088,Asimétrica,6,114.1,Medio-Bajo,1044,0,4,1
+PAC-2089,Bilateral Completa,4,37.0,Bajo,502,1,2,1
+PAC-2090,Bilateral Completa,2,11.4,Medio-Bajo,821,0,4,1
+PAC-2091,Bilateral Completa,1,67.5,Alto,5954,0,3,0
+PAC-2092,Incompleta,8,76.5,Bajo,329,1,7,0
+PAC-2093,Bilateral Completa,5,46.2,Medio,2230,1,3,0
+PAC-2094,Bilateral Completa,10,78.7,Bajo,521,1,5,0
+PAC-2095,Bilateral Completa,2,39.0,Medio-Bajo,615,1,3,0
+PAC-2096,Bilateral Completa,8,42.0,Alto,3947,0,0,0
+PAC-2097,Bilateral Completa,3,32.9,Bajo,261,1,6,1
+PAC-2098,Asimétrica,7,6.3,Bajo,540,0,7,1
+PAC-2099,Asimétrica,2,10.7,Bajo,490,0,5,1
+PAC-2100,Bilateral Completa,7,6.6,Bajo,270,1,4,0
+PAC-2101,Incompleta,4,55.6,Medio-Bajo,827,0,1,1
+PAC-2102,Incompleta,10,23.9,Medio,2207,0,8,1
+PAC-2103,Incompleta,1,40.5,Bajo,522,0,4,1
+PAC-2104,Incompleta,5,124.1,Bajo,537,1,0,0
+PAC-2105,Incompleta,4,19.3,Bajo,546,1,3,1
+PAC-2106,Incompleta,8,31.4,Medio-Bajo,733,0,3,1
+PAC-2107,Incompleta,1,75.4,Bajo,532,0,3,1
+PAC-2108,Bilateral Completa,2,18.0,Medio-Bajo,1003,0,3,1
+PAC-2109,Bilateral Completa,5,9.0,Medio-Bajo,665,0,3,1
+PAC-2110,Bilateral Completa,10,22.1,Medio-Bajo,1036,1,5,0
+PAC-2111,Incompleta,10,13.8,Bajo,566,0,9,1
+PAC-2112,Bilateral Completa,2,137.7,Medio-Bajo,858,1,4,0
+PAC-2113,Incompleta,11,87.5,Bajo,352,1,1,0
+PAC-2114,Bilateral Completa,1,55.2,Bajo,304,0,1,0
+PAC-2115,Asimétrica,6,107.6,Medio,1968,1,3,1
+PAC-2116,Bilateral Completa,10,86.4,Medio-Bajo,700,0,2,0
+PAC-2117,Incompleta,4,15.3,Bajo,447,0,3,1
+PAC-2118,Incompleta,5,116.5,Bajo,550,1,1,1
+PAC-2119,Bilateral Completa,3,43.8,Bajo,475,0,5,1
+PAC-2120,Bilateral Completa,10,87.4,Bajo,486,0,4,1
+PAC-2121,Asimétrica,6,118.2,Bajo,275,0,10,1
+PAC-2122,Bilateral Completa,4,24.1,Bajo,370,1,4,1
+PAC-2123,Asimétrica,6,10.8,Medio-Bajo,1105,1,3,1
+PAC-2124,Asimétrica,5,17.9,Medio-Bajo,781,0,5,1
+PAC-2125,Incompleta,11,32.9,Medio-Bajo,1142,1,2,1
+PAC-2126,Incompleta,2,90.2,Medio-Bajo,914,1,3,0
+PAC-2127,Incompleta,4,103.6,Bajo,534,0,4,1
+PAC-2128,Incompleta,2,5.3,Alto,5165,1,2,0
+PAC-2129,Asimétrica,5,40.7,Medio,1472,0,1,0
+PAC-2130,Bilateral Completa,3,32.0,Medio,1431,1,5,0
+PAC-2131,Bilateral Completa,6,17.6,Medio,1967,0,6,1
+PAC-2132,Bilateral Completa,11,11.4,Medio,1695,0,7,1
+PAC-2133,Incompleta,5,25.6,Medio-Bajo,623,1,2,0
+PAC-2134,Bilateral Completa,2,148.2,Bajo,358,1,5,1
+PAC-2135,Asimétrica,10,24.5,Medio-Bajo,1101,0,5,1
+PAC-2136,Bilateral Completa,11,41.6,Medio-Bajo,624,0,7,0
+PAC-2137,Asimétrica,8,65.7,Medio-Bajo,786,0,5,1
+PAC-2138,Bilateral Completa,6,27.6,Medio-Bajo,887,1,4,1
+PAC-2139,Bilateral Completa,9,183.4,Bajo,365,1,7,1
+PAC-2140,Bilateral Completa,3,169.1,Bajo,587,0,9,1
+PAC-2141,Bilateral Completa,11,19.5,Medio,2260,0,3,0
+PAC-2142,Bilateral Completa,4,39.4,Medio-Bajo,736,0,5,1
+PAC-2143,Asimétrica,11,22.9,Medio-Bajo,1107,0,3,0
+PAC-2144,Bilateral Completa,8,21.8,Bajo,476,0,1,0
+PAC-2145,Incompleta,7,6.9,Bajo,569,0,5,1
+PAC-2146,Bilateral Completa,8,52.0,Medio,2115,1,3,1
+PAC-2147,Bilateral Completa,9,39.9,Medio-Bajo,781,0,4,0
+PAC-2148,Incompleta,8,7.6,Medio-Bajo,685,0,6,1
+PAC-2149,Bilateral Completa,8,21.3,Medio-Bajo,1066,1,3,1
+PAC-2150,Asimétrica,6,124.4,Medio-Bajo,652,0,4,1
+PAC-2151,Incompleta,11,18.7,Bajo,597,0,8,1
+PAC-2152,Bilateral Completa,2,12.8,Medio-Bajo,834,0,6,1
+PAC-2153,Incompleta,7,38.6,Bajo,516,0,2,1
+PAC-2154,Bilateral Completa,4,217.2,Bajo,536,0,3,0
+PAC-2155,Incompleta,3,18.9,Medio-Bajo,1032,1,6,1
+PAC-2156,Asimétrica,4,60.8,Medio,2198,0,1,0
+PAC-2157,Asimétrica,4,76.7,Bajo,349,0,2,1
+PAC-2158,Bilateral Completa,3,18.6,Medio,2189,0,4,1
+PAC-2159,Bilateral Completa,9,70.1,Bajo,336,1,0,0
+PAC-2160,Incompleta,3,27.9,Bajo,264,1,2,0
+PAC-2161,Asimétrica,2,55.0,Bajo,350,0,4,1
+PAC-2162,Asimétrica,1,55.2,Bajo,414,0,7,1
+PAC-2163,Bilateral Completa,11,43.4,Medio-Bajo,1062,0,3,1
+PAC-2164,Incompleta,1,9.7,Bajo,278,0,3,1
+PAC-2165,Asimétrica,5,95.2,Medio-Bajo,963,0,3,1
+PAC-2166,Bilateral Completa,5,24.3,Medio,2353,0,6,0
+PAC-2167,Asimétrica,9,15.3,Bajo,333,0,5,1
+PAC-2168,Bilateral Completa,4,7.1,Medio-Bajo,870,1,4,0
+PAC-2169,Bilateral Completa,5,49.7,Bajo,493,0,2,1
+PAC-2170,Bilateral Completa,6,61.6,Medio-Bajo,987,0,5,1
+PAC-2171,Incompleta,10,5.8,Bajo,463,1,6,1
+PAC-2172,Asimétrica,7,40.9,Bajo,555,1,2,0
+PAC-2173,Incompleta,9,17.8,Bajo,415,1,4,1
+PAC-2174,Bilateral Completa,6,56.8,Bajo,528,0,2,1
+PAC-2175,Bilateral Completa,1,14.6,Bajo,308,1,3,0
+PAC-2176,Incompleta,8,63.7,Medio-Bajo,1103,0,6,1
+PAC-2177,Incompleta,2,29.4,Medio,1322,0,3,1
+PAC-2178,Incompleta,9,143.0,Medio,2362,0,1,0
+PAC-2179,Bilateral Completa,11,12.4,Medio-Bajo,828,0,3,1
+PAC-2180,Incompleta,7,25.9,Bajo,523,1,7,0
+PAC-2181,Asimétrica,7,11.0,Bajo,299,0,6,1
+PAC-2182,Incompleta,10,134.3,Bajo,367,0,1,1
+PAC-2183,Incompleta,10,109.9,Bajo,451,0,3,1
+PAC-2184,Asimétrica,5,19.9,Medio-Bajo,1082,1,7,1
+PAC-2185,Incompleta,8,58.9,Medio-Bajo,994,0,4,1
+PAC-2186,Incompleta,10,90.0,Bajo,440,0,3,1
+PAC-2187,Incompleta,1,45.5,Bajo,572,0,0,1
+PAC-2188,Bilateral Completa,3,42.7,Medio,2134,0,6,1
+PAC-2189,Incompleta,9,18.8,Medio-Bajo,677,0,4,1
+PAC-2190,Asimétrica,1,9.9,Bajo,324,0,6,1
+PAC-2191,Bilateral Completa,11,118.8,Medio,1494,0,6,1
+PAC-2192,Asimétrica,8,120.3,Alto,2520,0,2,1
+PAC-2193,Incompleta,6,55.1,Bajo,420,1,5,1
+PAC-2194,Bilateral Completa,10,25.7,Bajo,264,1,4,1
+PAC-2195,Incompleta,5,26.5,Medio-Bajo,810,1,6,1
+PAC-2196,Bilateral Completa,6,69.7,Medio,1759,1,4,0
+PAC-2197,Asimétrica,11,118.7,Medio,2309,1,4,1
+PAC-2198,Bilateral Completa,5,114.1,Bajo,398,0,2,1
+PAC-2199,Asimétrica,9,80.7,Bajo,437,1,5,1
+PAC-2200,Incompleta,2,56.4,Medio-Bajo,971,0,5,1
+PAC-2201,Incompleta,10,9.4,Medio-Bajo,1079,1,3,1
+PAC-2202,Asimétrica,6,13.8,Bajo,555,1,4,1
+PAC-2203,Bilateral Completa,4,119.4,Medio,2374,1,5,0
+PAC-2204,Incompleta,3,51.6,Medio-Bajo,740,1,6,1
+PAC-2205,Bilateral Completa,5,5.5,Medio,2292,0,5,0
+PAC-2206,Asimétrica,2,10.3,Medio,2483,0,7,1
+PAC-2207,Incompleta,3,59.5,Medio-Bajo,1120,1,5,1
+PAC-2208,Asimétrica,7,5.3,Bajo,370,0,2,1
+PAC-2209,Asimétrica,1,13.8,Medio-Bajo,970,0,7,1
+PAC-2210,Bilateral Completa,2,44.8,Bajo,350,0,1,1
+PAC-2211,Bilateral Completa,3,63.9,Medio-Bajo,842,0,5,1
+PAC-2212,Incompleta,10,57.8,Bajo,490,0,6,1
+PAC-2213,Incompleta,7,17.7,Medio-Bajo,1111,0,4,1
+PAC-2214,Bilateral Completa,4,67.3,Bajo,586,0,4,0
+PAC-2215,Bilateral Completa,8,18.5,Bajo,292,1,4,0
+PAC-2216,Incompleta,8,24.7,Bajo,344,0,0,1
+PAC-2217,Bilateral Completa,1,73.6,Bajo,475,0,6,1
+PAC-2218,Asimétrica,5,57.4,Medio-Bajo,1117,0,3,0
+PAC-2219,Asimétrica,1,99.6,Medio-Bajo,813,0,3,1
+PAC-2220,Incompleta,7,58.6,Medio-Bajo,666,0,5,1
+PAC-2221,Bilateral Completa,4,47.0,Bajo,349,1,5,0
+PAC-2222,Bilateral Completa,8,9.9,Bajo,261,0,3,1
+PAC-2223,Incompleta,8,27.9,Bajo,486,0,2,0
+PAC-2224,Asimétrica,9,20.4,Bajo,571,0,3,1
+PAC-2225,Bilateral Completa,11,19.0,Medio,1969,0,3,1
+PAC-2226,Bilateral Completa,6,185.6,Bajo,586,0,4,1
+PAC-2227,Bilateral Completa,7,30.0,Bajo,384,1,1,0
+PAC-2228,Incompleta,7,116.3,Bajo,471,0,6,1
+PAC-2229,Incompleta,5,54.9,Bajo,405,0,6,1
+PAC-2230,Bilateral Completa,7,84.2,Medio-Bajo,1027,0,5,0
+PAC-2231,Bilateral Completa,9,39.9,Medio-Bajo,757,1,5,1
+PAC-2232,Incompleta,11,48.0,Bajo,575,0,3,1
+PAC-2233,Bilateral Completa,4,38.9,Bajo,593,0,1,0
+PAC-2234,Incompleta,2,15.9,Bajo,511,0,0,0
+PAC-2235,Asimétrica,8,69.1,Bajo,532,0,3,1
+PAC-2236,Incompleta,7,21.5,Bajo,587,0,1,1
+PAC-2237,Incompleta,6,6.2,Alto,5403,1,4,0
+PAC-2238,Asimétrica,7,56.8,Medio-Bajo,828,1,1,0
+PAC-2239,Asimétrica,3,14.7,Medio-Bajo,879,0,4,1
+PAC-2240,Bilateral Completa,6,146.1,Bajo,539,0,5,1
+PAC-2241,Bilateral Completa,10,158.9,Bajo,417,1,7,0
+PAC-2242,Asimétrica,7,128.2,Medio-Bajo,646,1,7,1
+PAC-2243,Bilateral Completa,7,28.1,Medio-Bajo,813,1,4,1
+PAC-2244,Asimétrica,5,5.8,Medio-Bajo,623,0,3,1
+PAC-2245,Bilateral Completa,3,136.8,Bajo,570,1,3,1
+PAC-2246,Asimétrica,2,32.9,Medio-Bajo,873,0,5,1
+PAC-2247,Incompleta,7,175.0,Bajo,293,0,7,1
+PAC-2248,Incompleta,4,170.7,Medio,2043,1,2,0
+PAC-2249,Bilateral Completa,2,100.9,Medio-Bajo,912,0,5,1
+PAC-2250,Asimétrica,8,22.4,Medio-Bajo,962,1,7,1
+PAC-2251,Bilateral Completa,2,29.3,Bajo,405,0,4,1
+PAC-2252,Bilateral Completa,6,100.2,Medio-Bajo,979,1,2,0
+PAC-2253,Bilateral Completa,4,24.1,Bajo,448,0,5,1
+PAC-2254,Asimétrica,9,14.3,Bajo,411,0,5,1
+PAC-2255,Bilateral Completa,5,45.7,Bajo,483,1,3,1
+PAC-2256,Incompleta,4,142.6,Medio-Bajo,715,1,8,1
+PAC-2257,Incompleta,8,64.5,Bajo,342,0,2,0
+PAC-2258,Asimétrica,3,47.2,Bajo,291,1,4,1
+PAC-2259,Incompleta,9,10.1,Medio,1578,0,4,1
+PAC-2260,Incompleta,8,52.7,Bajo,459,0,6,1
+PAC-2261,Incompleta,8,235.5,Medio-Bajo,805,0,4,1
+PAC-2262,Incompleta,10,12.5,Bajo,469,0,1,1
+PAC-2263,Bilateral Completa,5,41.5,Bajo,529,0,2,1
+PAC-2264,Bilateral Completa,1,109.9,Medio-Bajo,717,0,6,1
+PAC-2265,Bilateral Completa,11,72.5,Bajo,486,0,5,1
+PAC-2266,Bilateral Completa,10,64.7,Medio-Bajo,908,1,8,0
+PAC-2267,Bilateral Completa,9,65.6,Medio-Bajo,1055,1,4,0
+PAC-2268,Incompleta,2,27.3,Medio-Bajo,1074,0,4,1
+PAC-2269,Asimétrica,1,22.4,Medio-Bajo,699,0,4,1
+PAC-2270,Bilateral Completa,6,87.9,Bajo,510,0,3,1
+PAC-2271,Incompleta,1,88.1,Bajo,554,1,3,0
+PAC-2272,Incompleta,10,105.9,Medio-Bajo,953,0,7,1
+PAC-2273,Bilateral Completa,10,127.2,Medio-Bajo,885,1,3,1
+PAC-2274,Incompleta,10,40.8,Medio,1527,1,3,0
+PAC-2275,Asimétrica,7,39.8,Medio,2326,0,6,1
+PAC-2276,Bilateral Completa,7,85.0,Medio,1262,1,3,0
+PAC-2277,Incompleta,1,57.5,Medio-Bajo,881,0,3,1
+PAC-2278,Bilateral Completa,10,65.5,Bajo,542,1,2,0
+PAC-2279,Bilateral Completa,5,84.4,Medio-Bajo,606,0,5,1
+PAC-2280,Incompleta,3,115.4,Medio-Bajo,691,0,5,1
+PAC-2281,Asimétrica,11,25.6,Bajo,439,1,6,1
+PAC-2282,Incompleta,2,28.5,Medio,1675,1,3,1
+PAC-2283,Bilateral Completa,11,9.9,Medio,1252,0,6,1
+PAC-2284,Asimétrica,5,48.2,Medio-Bajo,1085,0,2,0
+PAC-2285,Bilateral Completa,5,6.8,Bajo,381,0,4,1
+PAC-2286,Incompleta,2,36.3,Bajo,361,1,9,1
+PAC-2287,Bilateral Completa,6,44.1,Medio,1608,0,4,1
+PAC-2288,Asimétrica,7,21.9,Medio,2230,0,4,1
+PAC-2289,Incompleta,1,49.7,Bajo,479,0,1,1
+PAC-2290,Asimétrica,3,6.5,Bajo,405,0,0,1
+PAC-2291,Bilateral Completa,4,6.9,Medio,2420,1,4,1
+PAC-2292,Incompleta,2,91.5,Bajo,572,1,2,0
+PAC-2293,Incompleta,10,27.3,Medio-Bajo,966,0,4,1
+PAC-2294,Incompleta,11,11.8,Alto,3501,0,2,0
+PAC-2295,Incompleta,5,41.9,Bajo,499,1,3,0
+PAC-2296,Bilateral Completa,4,78.5,Medio-Bajo,1194,0,4,0
+PAC-2297,Bilateral Completa,11,17.2,Bajo,489,1,4,1
+PAC-2298,Bilateral Completa,2,53.8,Bajo,572,1,4,0
+PAC-2299,Asimétrica,11,9.5,Medio,1974,1,4,0
+PAC-2300,Asimétrica,1,7.7,Bajo,438,1,4,1
+PAC-2301,Bilateral Completa,8,42.9,Alto,5002,0,6,1
+PAC-2302,Asimétrica,2,43.9,Medio-Bajo,965,0,5,1
+PAC-2303,Bilateral Completa,4,55.7,Bajo,539,1,4,0
+PAC-2304,Bilateral Completa,10,69.7,Bajo,307,1,6,1
+PAC-2305,Bilateral Completa,5,191.2,Bajo,258,0,2,1
+PAC-2306,Asimétrica,2,41.3,Bajo,553,1,6,0
+PAC-2307,Incompleta,10,24.5,Bajo,364,0,4,1
+PAC-2308,Bilateral Completa,9,84.3,Bajo,459,1,2,0
+PAC-2309,Incompleta,2,20.8,Medio-Bajo,640,0,10,1
+PAC-2310,Bilateral Completa,6,33.9,Medio-Bajo,772,1,4,0
+PAC-2311,Bilateral Completa,7,9.1,Medio-Bajo,833,1,5,1
+PAC-2312,Bilateral Completa,6,6.3,Medio-Bajo,1189,1,6,1
+PAC-2313,Bilateral Completa,11,169.4,Bajo,357,1,5,1
+PAC-2314,Asimétrica,11,95.4,Bajo,530,0,2,1
+PAC-2315,Incompleta,4,64.5,Medio-Bajo,1002,0,1,1
+PAC-2316,Bilateral Completa,1,31.3,Medio-Bajo,638,1,4,0
+PAC-2317,Bilateral Completa,2,14.5,Bajo,368,1,4,1
+PAC-2318,Bilateral Completa,10,13.5,Medio,1534,0,7,1
+PAC-2319,Bilateral Completa,10,19.4,Medio-Bajo,935,0,2,1
+PAC-2320,Incompleta,6,44.8,Medio-Bajo,1138,0,1,1
+PAC-2321,Bilateral Completa,8,67.7,Bajo,353,0,6,1
+PAC-2322,Incompleta,3,59.0,Medio-Bajo,673,0,3,0
+PAC-2323,Bilateral Completa,7,21.4,Medio-Bajo,790,0,1,1
+PAC-2324,Bilateral Completa,9,159.9,Medio-Bajo,923,0,3,1
+PAC-2325,Asimétrica,4,72.0,Medio-Bajo,746,0,4,0
+PAC-2326,Bilateral Completa,11,45.4,Medio,1483,1,1,0
+PAC-2327,Bilateral Completa,7,52.3,Medio-Bajo,812,1,3,0
+PAC-2328,Bilateral Completa,7,32.2,Bajo,372,1,5,0
+PAC-2329,Bilateral Completa,10,19.2,Medio-Bajo,993,0,1,1
+PAC-2330,Bilateral Completa,9,27.0,Medio-Bajo,938,0,2,1
+PAC-2331,Bilateral Completa,3,75.9,Medio-Bajo,621,0,5,1
+PAC-2332,Asimétrica,11,5.7,Bajo,508,1,7,0
+PAC-2333,Incompleta,1,11.2,Bajo,354,0,6,1
+PAC-2334,Incompleta,8,7.4,Medio,1969,0,1,1
+PAC-2335,Bilateral Completa,4,7.1,Medio-Bajo,820,1,2,1
+PAC-2336,Incompleta,2,101.7,Medio,1578,0,2,0
+PAC-2337,Bilateral Completa,5,65.8,Medio-Bajo,821,0,2,1
+PAC-2338,Bilateral Completa,4,37.1,Medio-Bajo,857,0,8,1
+PAC-2339,Bilateral Completa,1,10.1,Medio-Bajo,966,0,7,1
+PAC-2340,Bilateral Completa,7,38.8,Medio,1424,0,2,0
+PAC-2341,Bilateral Completa,4,37.1,Medio-Bajo,835,0,2,0
+PAC-2342,Bilateral Completa,8,14.5,Medio-Bajo,782,0,4,1
+PAC-2343,Bilateral Completa,9,33.4,Bajo,449,0,7,1
+PAC-2344,Bilateral Completa,8,30.4,Medio-Bajo,1043,1,8,1
+PAC-2345,Bilateral Completa,1,52.8,Medio-Bajo,605,0,3,1
+PAC-2346,Bilateral Completa,8,55.4,Bajo,485,1,4,1
+PAC-2347,Bilateral Completa,5,7.3,Bajo,376,1,2,0
+PAC-2348,Bilateral Completa,1,28.5,Bajo,353,0,3,1
+PAC-2349,Bilateral Completa,9,54.2,Bajo,486,0,3,1
+PAC-2350,Bilateral Completa,9,40.0,Bajo,404,0,7,1
+PAC-2351,Bilateral Completa,7,102.1,Bajo,506,1,2,0
+PAC-2352,Incompleta,7,58.7,Medio,1434,1,6,1
+PAC-2353,Bilateral Completa,11,13.9,Medio-Bajo,1099,1,2,0
+PAC-2354,Bilateral Completa,1,8.7,Bajo,538,1,2,0
+PAC-2355,Bilateral Completa,9,56.4,Bajo,289,0,3,1
+PAC-2356,Bilateral Completa,1,6.3,Medio-Bajo,1168,1,7,1
+PAC-2357,Bilateral Completa,7,49.1,Bajo,547,0,3,1
+PAC-2358,Asimétrica,9,145.9,Medio,1336,1,2,0
+PAC-2359,Asimétrica,9,47.8,Medio-Bajo,975,0,6,1
+PAC-2360,Bilateral Completa,5,29.6,Medio-Bajo,686,1,0,0
+PAC-2361,Incompleta,6,56.5,Bajo,491,1,2,1
+PAC-2362,Bilateral Completa,2,35.6,Medio-Bajo,798,1,3,0
+PAC-2363,Bilateral Completa,2,44.4,Bajo,559,0,3,0
+PAC-2364,Incompleta,10,146.9,Medio,1963,0,1,1
+PAC-2365,Bilateral Completa,9,29.4,Medio-Bajo,751,0,4,1
+PAC-2366,Bilateral Completa,1,167.5,Bajo,551,0,5,1
+PAC-2367,Incompleta,10,122.9,Bajo,527,1,3,0
+PAC-2368,Incompleta,5,15.9,Bajo,388,0,1,1
+PAC-2369,Asimétrica,7,8.6,Medio-Bajo,607,0,4,1
+PAC-2370,Incompleta,10,10.3,Bajo,544,1,5,0
+PAC-2371,Incompleta,6,5.9,Medio-Bajo,834,1,5,0
+PAC-2372,Bilateral Completa,6,10.0,Bajo,412,1,0,0
+PAC-2373,Bilateral Completa,6,62.4,Medio-Bajo,1160,1,7,1
+PAC-2374,Incompleta,8,8.7,Medio,1237,0,4,1
+PAC-2375,Asimétrica,7,24.2,Medio-Bajo,735,1,1,0
+PAC-2376,Bilateral Completa,5,98.2,Medio-Bajo,1020,1,8,1
+PAC-2377,Asimétrica,10,6.2,Bajo,468,1,3,1
+PAC-2378,Bilateral Completa,2,89.2,Bajo,597,0,1,1
+PAC-2379,Bilateral Completa,10,21.6,Medio-Bajo,1145,0,2,0
+PAC-2380,Bilateral Completa,6,11.3,Bajo,328,1,7,1
+PAC-2381,Bilateral Completa,10,64.7,Bajo,485,1,4,1
+PAC-2382,Incompleta,5,54.6,Bajo,522,1,4,1
+PAC-2383,Bilateral Completa,4,110.0,Bajo,410,0,3,1
+PAC-2384,Asimétrica,10,71.4,Bajo,424,1,2,0
+PAC-2385,Incompleta,11,86.3,Medio,1507,0,5,0
+PAC-2386,Bilateral Completa,5,21.6,Bajo,470,0,2,1
+PAC-2387,Incompleta,9,14.8,Medio-Bajo,608,0,4,1
+PAC-2388,Bilateral Completa,2,74.4,Bajo,538,1,6,1
+PAC-2389,Incompleta,6,87.2,Medio-Bajo,1043,0,3,1
+PAC-2390,Bilateral Completa,11,237.9,Bajo,362,0,5,1
+PAC-2391,Bilateral Completa,9,31.6,Medio,2428,1,3,0
+PAC-2392,Incompleta,10,28.3,Medio,1604,1,4,1
+PAC-2393,Asimétrica,5,79.9,Bajo,435,1,2,1
+PAC-2394,Incompleta,11,25.8,Medio,2052,1,8,0
+PAC-2395,Incompleta,6,138.5,Alto,3720,1,4,1
+PAC-2396,Incompleta,10,102.7,Medio,1977,0,5,1
+PAC-2397,Bilateral Completa,4,33.0,Medio,1314,0,3,1
+PAC-2398,Asimétrica,5,74.5,Bajo,370,0,4,1
+PAC-2399,Bilateral Completa,8,75.2,Medio-Bajo,664,1,6,1
+PAC-2400,Bilateral Completa,1,10.4,Bajo,525,0,3,1
+PAC-2401,Bilateral Completa,1,121.4,Bajo,562,1,5,1
+PAC-2402,Bilateral Completa,10,40.2,Alto,4786,0,6,0
+PAC-2403,Bilateral Completa,4,92.6,Bajo,551,1,4,0
+PAC-2404,Bilateral Completa,10,24.3,Medio-Bajo,991,1,3,0
+PAC-2405,Bilateral Completa,3,117.9,Medio,2168,0,5,1
+PAC-2406,Incompleta,5,29.6,Medio,1568,1,2,0
+PAC-2407,Incompleta,11,5.5,Alto,2732,0,7,1
+PAC-2408,Incompleta,10,122.9,Bajo,444,0,4,1
+PAC-2409,Bilateral Completa,8,9.8,Bajo,261,0,3,0
+PAC-2410,Incompleta,1,24.2,Bajo,426,0,2,1
+PAC-2411,Bilateral Completa,5,154.8,Bajo,426,0,2,1
+PAC-2412,Incompleta,5,155.4,Bajo,466,1,2,0
+PAC-2413,Bilateral Completa,2,47.6,Bajo,260,0,0,0
+PAC-2414,Incompleta,5,55.0,Medio-Bajo,1045,0,5,1
+PAC-2415,Bilateral Completa,8,34.8,Medio-Bajo,763,1,4,1
+PAC-2416,Incompleta,10,22.4,Bajo,288,1,1,0
+PAC-2417,Asimétrica,7,24.9,Medio-Bajo,652,0,3,1
+PAC-2418,Incompleta,2,60.8,Bajo,467,0,9,1
+PAC-2419,Bilateral Completa,6,74.8,Bajo,455,0,3,1
+PAC-2420,Bilateral Completa,10,83.4,Medio-Bajo,959,1,5,1
+PAC-2421,Asimétrica,11,82.9,Medio-Bajo,984,0,7,1
+PAC-2422,Bilateral Completa,11,9.8,Medio-Bajo,655,1,6,1
+PAC-2423,Asimétrica,1,39.1,Bajo,367,0,4,1
+PAC-2424,Bilateral Completa,10,8.0,Medio,2099,0,4,0
+PAC-2425,Asimétrica,10,44.9,Medio-Bajo,852,1,6,1
+PAC-2426,Asimétrica,3,34.1,Medio-Bajo,779,0,3,1
+PAC-2427,Incompleta,11,114.3,Medio-Bajo,1014,0,2,1
+PAC-2428,Bilateral Completa,11,26.6,Medio,2458,0,4,1
+PAC-2429,Bilateral Completa,6,11.2,Medio-Bajo,679,0,0,0
+PAC-2430,Asimétrica,9,12.7,Medio-Bajo,621,0,5,1
+PAC-2431,Asimétrica,1,76.7,Alto,4000,0,3,0
+PAC-2432,Bilateral Completa,6,53.1,Medio-Bajo,1039,1,5,1
+PAC-2433,Bilateral Completa,2,10.3,Bajo,474,1,4,0
+PAC-2434,Asimétrica,9,9.4,Medio-Bajo,1169,1,1,1
+PAC-2435,Incompleta,2,65.4,Bajo,342,0,9,1
+PAC-2436,Asimétrica,3,8.8,Bajo,441,0,4,1
+PAC-2437,Asimétrica,2,91.3,Medio-Bajo,702,1,2,0
+PAC-2438,Asimétrica,11,66.2,Medio,1595,0,6,1
+PAC-2439,Bilateral Completa,4,9.2,Medio,2230,0,5,1
+PAC-2440,Bilateral Completa,4,9.4,Bajo,377,0,6,1
+PAC-2441,Bilateral Completa,10,220.8,Medio-Bajo,1166,1,6,1
+PAC-2442,Asimétrica,1,28.4,Bajo,480,0,5,1
+PAC-2443,Bilateral Completa,8,28.2,Alto,3373,1,2,1
+PAC-2444,Bilateral Completa,5,88.8,Alto,5121,1,2,1
+PAC-2445,Bilateral Completa,8,152.1,Medio-Bajo,839,0,4,1
+PAC-2446,Bilateral Completa,6,218.4,Medio,1289,1,4,1
+PAC-2447,Asimétrica,2,75.0,Medio-Bajo,831,1,8,1
+PAC-2448,Incompleta,7,28.6,Medio-Bajo,1056,0,3,1
+PAC-2449,Incompleta,10,9.4,Bajo,482,1,2,0
+PAC-2450,Bilateral Completa,9,80.1,Medio-Bajo,953,0,0,1
+PAC-2451,Asimétrica,7,45.9,Medio-Bajo,932,1,5,0
+PAC-2452,Bilateral Completa,11,32.6,Medio-Bajo,1038,1,3,0
+PAC-2453,Incompleta,5,123.4,Bajo,541,1,3,1
+PAC-2454,Bilateral Completa,4,10.9,Medio,1544,1,1,0
+PAC-2455,Bilateral Completa,11,38.9,Bajo,401,0,3,1
+PAC-2456,Bilateral Completa,8,5.6,Medio-Bajo,1027,0,4,1
+PAC-2457,Incompleta,6,36.6,Medio-Bajo,729,0,3,1
+PAC-2458,Incompleta,5,7.9,Medio-Bajo,740,0,0,1
+PAC-2459,Bilateral Completa,7,11.3,Medio-Bajo,1014,1,1,0
+PAC-2460,Bilateral Completa,11,11.3,Bajo,342,0,5,0
+PAC-2461,Asimétrica,3,57.4,Bajo,363,0,3,0
+PAC-2462,Bilateral Completa,9,73.5,Medio-Bajo,883,0,1,1
+PAC-2463,Bilateral Completa,4,48.8,Medio-Bajo,822,1,8,1
+PAC-2464,Bilateral Completa,4,168.7,Bajo,481,0,8,1
+PAC-2465,Asimétrica,8,28.5,Medio-Bajo,1062,0,1,1
+PAC-2466,Bilateral Completa,6,21.8,Medio-Bajo,1144,1,5,0
+PAC-2467,Asimétrica,11,106.5,Medio-Bajo,875,0,2,1
+PAC-2468,Bilateral Completa,1,17.7,Medio,2363,1,7,0
+PAC-2469,Bilateral Completa,2,170.1,Bajo,450,0,1,1
+PAC-2470,Bilateral Completa,9,5.6,Bajo,272,0,3,1
+PAC-2471,Incompleta,6,180.1,Medio-Bajo,869,0,7,1
+PAC-2472,Bilateral Completa,7,7.2,Medio-Bajo,932,0,6,1
+PAC-2473,Incompleta,11,115.9,Medio-Bajo,684,1,2,0
+PAC-2474,Bilateral Completa,9,42.5,Medio,1820,0,3,1
+PAC-2475,Bilateral Completa,3,252.8,Medio,2254,0,4,1
+PAC-2476,Asimétrica,5,8.8,Alto,4264,1,3,1
+PAC-2477,Incompleta,5,45.4,Medio-Bajo,839,0,4,1
+PAC-2478,Bilateral Completa,10,179.2,Medio-Bajo,962,0,2,1
+PAC-2479,Incompleta,7,42.0,Bajo,559,1,4,0
+PAC-2480,Incompleta,2,54.6,Bajo,390,1,3,0
+PAC-2481,Bilateral Completa,4,64.5,Medio-Bajo,898,1,6,1
+PAC-2482,Bilateral Completa,11,35.3,Bajo,594,0,7,1
+PAC-2483,Bilateral Completa,4,54.4,Medio,1298,0,3,0
+PAC-2484,Bilateral Completa,8,48.9,Medio-Bajo,646,0,4,1
+PAC-2485,Incompleta,10,120.7,Medio-Bajo,1021,0,2,1
+PAC-2486,Bilateral Completa,3,7.3,Bajo,316,0,2,0
+PAC-2487,Bilateral Completa,2,21.5,Bajo,311,0,4,1
+PAC-2488,Bilateral Completa,9,155.2,Bajo,358,1,1,1
+PAC-2489,Asimétrica,11,115.5,Bajo,416,0,4,1
+PAC-2490,Incompleta,4,35.4,Bajo,286,0,3,1
+PAC-2491,Bilateral Completa,9,53.4,Medio-Bajo,718,0,11,1
+PAC-2492,Bilateral Completa,6,21.2,Medio,2209,0,3,1
+PAC-2493,Bilateral Completa,1,15.4,Medio,1797,1,4,1
+PAC-2494,Incompleta,11,36.2,Medio-Bajo,981,0,10,1
+PAC-2495,Bilateral Completa,3,26.8,Bajo,301,1,5,1
+PAC-2496,Asimétrica,7,48.8,Medio,1802,0,3,0
+PAC-2497,Bilateral Completa,9,9.0,Medio,1536,1,3,0
+PAC-2498,Incompleta,8,188.2,Bajo,547,0,3,1
+PAC-2499,Incompleta,5,219.2,Medio-Bajo,803,1,3,1
+PAC-2500,Asimétrica,8,64.9,Bajo,487,1,3,0
+PAC-2501,Bilateral Completa,2,43.4,Medio,1951,1,1,0
+PAC-2502,Incompleta,3,23.5,Alto,3659,1,4,0
+PAC-2503,Bilateral Completa,8,89.0,Bajo,313,1,6,1
+PAC-2504,Bilateral Completa,9,62.7,Medio,1834,0,3,1
+PAC-2505,Asimétrica,10,13.9,Medio-Bajo,853,0,4,1
+PAC-2506,Asimétrica,8,125.9,Alto,5685,1,3,0
+PAC-2507,Incompleta,4,91.4,Medio-Bajo,619,1,4,1
+PAC-2508,Bilateral Completa,6,154.6,Medio,1727,0,4,0
+PAC-2509,Asimétrica,11,69.7,Bajo,394,0,6,1
+PAC-2510,Bilateral Completa,5,52.5,Bajo,457,0,3,1
+PAC-2511,Bilateral Completa,4,32.1,Bajo,268,0,6,0
+PAC-2512,Incompleta,9,140.0,Alto,4923,1,3,1
+PAC-2513,Bilateral Completa,10,105.5,Medio,1365,1,0,0
+PAC-2514,Asimétrica,3,7.3,Medio,2404,1,6,1
+PAC-2515,Bilateral Completa,1,6.3,Medio,2060,0,4,0
+PAC-2516,Bilateral Completa,7,28.6,Bajo,354,0,7,1
+PAC-2517,Incompleta,10,88.2,Bajo,349,0,4,1
+PAC-2518,Incompleta,8,223.2,Bajo,339,1,7,1
+PAC-2519,Bilateral Completa,11,13.2,Bajo,549,1,1,0
+PAC-2520,Bilateral Completa,3,50.1,Bajo,581,1,2,0
+PAC-2521,Incompleta,3,29.0,Medio-Bajo,1102,0,1,1
+PAC-2522,Bilateral Completa,6,180.2,Bajo,328,1,4,0
+PAC-2523,Bilateral Completa,2,97.3,Bajo,322,0,7,1
+PAC-2524,Incompleta,6,96.1,Bajo,425,1,2,0
+PAC-2525,Bilateral Completa,5,36.6,Bajo,345,0,2,1
+PAC-2526,Asimétrica,7,31.8,Alto,4380,0,9,1
+PAC-2527,Incompleta,9,21.0,Medio-Bajo,702,0,4,1
+PAC-2528,Asimétrica,9,7.9,Alto,2901,0,3,1
+PAC-2529,Bilateral Completa,1,105.0,Bajo,473,0,9,1
+PAC-2530,Asimétrica,7,88.8,Bajo,255,0,2,1
+PAC-2531,Bilateral Completa,3,300.0,Medio-Bajo,835,0,3,1
+PAC-2532,Bilateral Completa,4,289.7,Bajo,365,0,3,1
+PAC-2533,Bilateral Completa,2,45.5,Bajo,412,0,2,0
+PAC-2534,Bilateral Completa,1,78.3,Bajo,475,0,2,1
+PAC-2535,Bilateral Completa,10,149.8,Bajo,479,0,6,1
+PAC-2536,Incompleta,3,99.7,Bajo,431,0,1,1
+PAC-2537,Bilateral Completa,10,19.2,Bajo,498,1,10,1
+PAC-2538,Bilateral Completa,9,34.9,Medio-Bajo,917,1,4,0
+PAC-2539,Incompleta,1,11.9,Bajo,459,0,4,1
+PAC-2540,Bilateral Completa,3,159.0,Bajo,393,0,4,1
+PAC-2541,Incompleta,11,51.6,Medio,1295,0,1,1
+PAC-2542,Incompleta,5,18.0,Bajo,595,0,6,1
+PAC-2543,Asimétrica,3,60.7,Bajo,493,0,3,0
+PAC-2544,Bilateral Completa,4,53.1,Medio,2309,0,2,0
+PAC-2545,Asimétrica,4,27.2,Bajo,433,1,2,1
+PAC-2546,Incompleta,1,11.0,Bajo,370,0,2,1
+PAC-2547,Asimétrica,6,60.7,Medio-Bajo,1100,0,6,1
+PAC-2548,Bilateral Completa,11,41.7,Bajo,341,1,10,1
+PAC-2549,Incompleta,7,79.0,Medio-Bajo,1181,0,3,1
+PAC-2550,Asimétrica,7,41.7,Medio,1332,0,4,1
+PAC-2551,Bilateral Completa,6,100.6,Bajo,528,1,3,1
+PAC-2552,Incompleta,7,45.1,Medio-Bajo,913,1,4,1
+PAC-2553,Asimétrica,3,46.2,Medio-Bajo,820,0,2,1
+PAC-2554,Incompleta,5,109.6,Bajo,295,1,9,1
+PAC-2555,Bilateral Completa,7,30.8,Medio-Bajo,791,1,6,0
+PAC-2556,Incompleta,10,12.2,Bajo,257,1,3,1
+PAC-2557,Bilateral Completa,5,6.5,Medio-Bajo,978,0,4,1
+PAC-2558,Asimétrica,10,75.4,Bajo,525,0,2,1
+PAC-2559,Bilateral Completa,2,53.4,Medio-Bajo,933,0,3,1
+PAC-2560,Bilateral Completa,6,65.9,Bajo,288,1,5,1
+PAC-2561,Bilateral Completa,7,17.0,Medio,1889,0,2,1
+PAC-2562,Incompleta,11,12.3,Bajo,411,1,4,0
+PAC-2563,Asimétrica,2,5.7,Bajo,580,1,2,0
+PAC-2564,Bilateral Completa,10,26.6,Medio-Bajo,703,0,5,1
+PAC-2565,Bilateral Completa,8,49.6,Medio-Bajo,760,1,3,1
+PAC-2566,Bilateral Completa,5,29.9,Medio-Bajo,653,0,4,1
+PAC-2567,Asimétrica,11,33.8,Medio-Bajo,633,0,5,1
+PAC-2568,Bilateral Completa,8,122.3,Medio-Bajo,841,1,1,1
+PAC-2569,Bilateral Completa,3,26.4,Medio,2166,0,3,1
+PAC-2570,Incompleta,2,41.1,Bajo,362,0,3,1
+PAC-2571,Bilateral Completa,7,81.5,Medio-Bajo,917,0,2,1
+PAC-2572,Bilateral Completa,5,30.3,Medio,1222,1,5,1
+PAC-2573,Bilateral Completa,5,53.7,Alto,5371,0,2,0
+PAC-2574,Asimétrica,8,104.2,Medio,2341,1,6,0
+PAC-2575,Asimétrica,9,154.3,Bajo,438,0,2,1
+PAC-2576,Incompleta,8,13.0,Bajo,380,1,3,1
+PAC-2577,Bilateral Completa,10,135.6,Medio-Bajo,811,0,6,1
+PAC-2578,Incompleta,2,38.9,Medio-Bajo,1017,1,6,1
+PAC-2579,Bilateral Completa,10,19.9,Medio-Bajo,712,1,2,1
+PAC-2580,Incompleta,11,35.7,Medio-Bajo,643,0,3,0
+PAC-2581,Incompleta,7,200.7,Medio,1327,0,3,1
+PAC-2582,Asimétrica,11,38.9,Bajo,407,0,6,1
+PAC-2583,Bilateral Completa,5,24.9,Medio,2026,0,0,0
+PAC-2584,Incompleta,7,55.2,Bajo,589,1,1,0
+PAC-2585,Incompleta,3,18.7,Bajo,294,0,7,1
+PAC-2586,Bilateral Completa,4,8.9,Medio-Bajo,707,0,6,1
+PAC-2587,Incompleta,7,11.9,Medio-Bajo,818,1,2,0
+PAC-2588,Asimétrica,2,11.9,Bajo,567,0,7,1
+PAC-2589,Asimétrica,2,13.2,Bajo,564,0,2,1
+PAC-2590,Incompleta,1,12.5,Alto,4724,0,7,1
+PAC-2591,Bilateral Completa,1,56.2,Bajo,477,0,4,1
+PAC-2592,Asimétrica,1,15.0,Medio-Bajo,866,0,2,0
+PAC-2593,Incompleta,6,26.2,Medio-Bajo,978,1,6,1
+PAC-2594,Bilateral Completa,5,118.5,Medio-Bajo,1088,1,3,1
+PAC-2595,Bilateral Completa,10,37.1,Medio-Bajo,889,0,4,1
+PAC-2596,Bilateral Completa,8,60.1,Bajo,394,1,1,1
+PAC-2597,Bilateral Completa,5,14.5,Medio-Bajo,803,1,3,0
+PAC-2598,Incompleta,1,15.7,Bajo,462,0,4,1
+PAC-2599,Bilateral Completa,8,7.1,Medio-Bajo,1151,0,3,1
+PAC-2600,Bilateral Completa,6,14.3,Bajo,524,1,2,0
+PAC-2601,Bilateral Completa,8,21.3,Medio-Bajo,922,0,5,1
+PAC-2602,Bilateral Completa,2,14.7,Bajo,331,0,1,0
+PAC-2603,Bilateral Completa,10,9.6,Bajo,430,1,2,0
+PAC-2604,Bilateral Completa,8,11.4,Bajo,569,0,1,0
+PAC-2605,Bilateral Completa,6,35.9,Bajo,332,0,6,0
+PAC-2606,Incompleta,1,16.6,Medio,1502,0,1,0
+PAC-2607,Bilateral Completa,1,27.6,Bajo,511,0,2,1
+PAC-2608,Incompleta,10,40.0,Medio,1983,1,6,0
+PAC-2609,Bilateral Completa,5,63.6,Alto,3723,0,3,1
+PAC-2610,Bilateral Completa,7,7.0,Medio-Bajo,839,1,2,0
+PAC-2611,Bilateral Completa,4,85.3,Bajo,429,0,3,0
+PAC-2612,Bilateral Completa,10,54.4,Bajo,420,0,2,0
+PAC-2613,Bilateral Completa,5,9.3,Medio-Bajo,894,0,8,1
+PAC-2614,Bilateral Completa,10,108.4,Bajo,426,1,13,1
+PAC-2615,Bilateral Completa,3,131.8,Bajo,486,1,3,1
+PAC-2616,Incompleta,2,8.2,Medio-Bajo,737,1,6,1
+PAC-2617,Bilateral Completa,2,21.2,Medio,2038,0,0,0
+PAC-2618,Asimétrica,5,87.0,Medio-Bajo,728,1,4,1
+PAC-2619,Asimétrica,4,74.0,Bajo,298,0,3,1
+PAC-2620,Incompleta,2,15.2,Medio-Bajo,892,1,1,0
+PAC-2621,Bilateral Completa,5,16.7,Bajo,365,0,3,1
+PAC-2622,Asimétrica,10,28.1,Bajo,273,1,3,0
+PAC-2623,Bilateral Completa,9,38.1,Medio,1510,0,6,1
+PAC-2624,Bilateral Completa,8,53.2,Bajo,274,0,6,1
+PAC-2625,Bilateral Completa,9,28.0,Bajo,376,0,3,1
+PAC-2626,Asimétrica,9,36.0,Bajo,483,0,4,1
+PAC-2627,Bilateral Completa,8,73.8,Medio,2432,0,7,1
+PAC-2628,Asimétrica,9,6.9,Medio-Bajo,693,0,3,1
+PAC-2629,Bilateral Completa,4,19.5,Medio-Bajo,926,1,6,0
+PAC-2630,Asimétrica,8,67.5,Medio-Bajo,824,1,4,0
+PAC-2631,Asimétrica,2,117.8,Bajo,529,0,5,1
+PAC-2632,Asimétrica,9,40.8,Medio-Bajo,610,0,2,1
+PAC-2633,Bilateral Completa,9,43.0,Bajo,578,0,6,1
+PAC-2634,Asimétrica,11,10.7,Bajo,261,1,6,1
+PAC-2635,Asimétrica,3,34.7,Medio-Bajo,634,1,2,1
+PAC-2636,Bilateral Completa,6,43.0,Medio,1646,1,2,0
+PAC-2637,Bilateral Completa,7,18.9,Bajo,477,1,2,0
+PAC-2638,Incompleta,3,20.7,Bajo,469,1,4,0
+PAC-2639,Bilateral Completa,5,28.7,Bajo,390,1,5,1
+PAC-2640,Incompleta,1,6.0,Bajo,272,1,3,0
+PAC-2641,Bilateral Completa,11,24.4,Medio,1794,0,1,0
+PAC-2642,Incompleta,3,16.9,Medio-Bajo,828,1,6,0
+PAC-2643,Bilateral Completa,8,24.8,Medio-Bajo,943,0,2,1
+PAC-2644,Bilateral Completa,3,11.4,Medio-Bajo,679,1,7,1
+PAC-2645,Bilateral Completa,8,115.6,Bajo,539,0,5,1
+PAC-2646,Asimétrica,9,50.0,Medio-Bajo,1054,0,3,1
+PAC-2647,Bilateral Completa,6,61.8,Bajo,580,1,3,0
+PAC-2648,Asimétrica,7,82.8,Medio-Bajo,727,0,4,1
+PAC-2649,Incompleta,6,39.5,Alto,5456,1,4,0
+PAC-2650,Bilateral Completa,8,9.5,Medio-Bajo,1142,0,3,1
+PAC-2651,Bilateral Completa,7,43.5,Bajo,264,1,5,0
+PAC-2652,Bilateral Completa,10,49.2,Medio,1274,0,3,0
+PAC-2653,Bilateral Completa,1,73.4,Bajo,283,0,6,1
+PAC-2654,Bilateral Completa,3,33.3,Bajo,445,1,5,1
+PAC-2655,Incompleta,3,11.8,Bajo,580,0,4,1
+PAC-2656,Asimétrica,3,21.7,Bajo,278,1,2,1
+PAC-2657,Bilateral Completa,4,27.6,Medio-Bajo,615,0,5,1
+PAC-2658,Incompleta,1,56.9,Medio-Bajo,1022,0,5,1
+PAC-2659,Asimétrica,11,47.3,Medio,2004,0,6,0
+PAC-2660,Asimétrica,2,27.0,Medio-Bajo,1192,1,3,0
+PAC-2661,Asimétrica,5,220.3,Medio-Bajo,1004,0,8,1
+PAC-2662,Asimétrica,11,51.5,Bajo,373,0,6,1
+PAC-2663,Bilateral Completa,6,18.5,Bajo,268,1,5,1
+PAC-2664,Asimétrica,9,10.4,Medio-Bajo,676,1,4,1
+PAC-2665,Asimétrica,2,13.3,Bajo,478,1,4,0
+PAC-2666,Bilateral Completa,9,19.1,Medio,2161,0,9,1
+PAC-2667,Bilateral Completa,7,13.8,Bajo,546,1,5,0
+PAC-2668,Bilateral Completa,9,15.3,Bajo,452,0,8,1
+PAC-2669,Bilateral Completa,4,21.8,Bajo,310,1,3,0
+PAC-2670,Bilateral Completa,7,14.5,Bajo,275,1,5,0
+PAC-2671,Incompleta,1,118.5,Bajo,320,0,2,1
+PAC-2672,Incompleta,8,9.2,Medio-Bajo,925,0,5,1
+PAC-2673,Bilateral Completa,7,42.2,Bajo,406,0,3,0
+PAC-2674,Bilateral Completa,7,31.4,Medio-Bajo,958,0,5,0
+PAC-2675,Incompleta,2,206.9,Bajo,443,0,4,1
+PAC-2676,Bilateral Completa,10,10.9,Bajo,524,1,4,1
+PAC-2677,Bilateral Completa,9,30.4,Bajo,573,1,6,0
+PAC-2678,Incompleta,11,179.5,Medio,1364,0,2,1
+PAC-2679,Bilateral Completa,8,105.3,Bajo,310,0,3,1
+PAC-2680,Bilateral Completa,1,89.9,Medio-Bajo,1054,0,5,1
+PAC-2681,Bilateral Completa,11,19.9,Bajo,402,1,7,0
+PAC-2682,Incompleta,1,14.4,Medio-Bajo,726,1,3,0
+PAC-2683,Incompleta,5,60.2,Bajo,442,1,1,0
+PAC-2684,Bilateral Completa,2,137.5,Medio-Bajo,1129,0,3,1
+PAC-2685,Bilateral Completa,1,45.7,Medio-Bajo,609,0,5,1
+PAC-2686,Incompleta,10,47.4,Medio,1291,0,4,0
+PAC-2687,Asimétrica,11,21.4,Bajo,388,1,5,1
+PAC-2688,Incompleta,8,78.4,Bajo,582,0,2,1
+PAC-2689,Asimétrica,4,15.4,Bajo,589,0,2,1
+PAC-2690,Incompleta,2,24.6,Medio,2275,1,5,0
+PAC-2691,Incompleta,5,32.7,Medio-Bajo,1065,0,4,1
+PAC-2692,Asimétrica,11,40.4,Medio-Bajo,1074,1,3,0
+PAC-2693,Incompleta,6,18.9,Bajo,342,1,10,1
+PAC-2694,Asimétrica,8,11.1,Bajo,558,0,5,1
+PAC-2695,Bilateral Completa,7,52.2,Bajo,394,0,4,1
+PAC-2696,Asimétrica,7,22.0,Alto,3097,0,4,0
+PAC-2697,Incompleta,1,48.5,Medio-Bajo,1108,0,6,1
+PAC-2698,Asimétrica,3,13.4,Medio,2376,1,4,1
+PAC-2699,Bilateral Completa,3,37.8,Bajo,251,0,1,1
+PAC-2700,Incompleta,7,43.0,Medio-Bajo,1102,0,2,0
+PAC-2701,Asimétrica,2,7.7,Medio-Bajo,605,0,3,1
+PAC-2702,Bilateral Completa,10,25.5,Bajo,398,0,7,1
+PAC-2703,Incompleta,7,12.2,Medio,1916,1,4,0
+PAC-2704,Asimétrica,9,8.3,Medio,2341,1,3,1
+PAC-2705,Bilateral Completa,1,235.1,Medio,1800,0,9,1
+PAC-2706,Bilateral Completa,2,24.5,Medio-Bajo,1067,1,5,1
+PAC-2707,Incompleta,11,88.0,Bajo,410,0,3,1
+PAC-2708,Incompleta,6,19.7,Bajo,519,1,3,1
+PAC-2709,Bilateral Completa,2,62.2,Alto,3579,1,3,0
+PAC-2710,Bilateral Completa,2,76.4,Bajo,477,1,5,1
+PAC-2711,Bilateral Completa,5,50.3,Medio-Bajo,748,0,3,1
+PAC-2712,Bilateral Completa,7,36.9,Medio-Bajo,645,1,5,1
+PAC-2713,Bilateral Completa,4,31.5,Medio-Bajo,743,0,5,0
+PAC-2714,Incompleta,6,26.5,Alto,3131,0,2,1
+PAC-2715,Incompleta,3,137.6,Bajo,589,1,2,1
+PAC-2716,Incompleta,4,93.8,Bajo,469,0,2,1
+PAC-2717,Bilateral Completa,4,172.7,Bajo,257,0,1,1
+PAC-2718,Bilateral Completa,4,11.6,Bajo,593,0,4,1
+PAC-2719,Bilateral Completa,1,70.6,Bajo,524,0,1,1
+PAC-2720,Asimétrica,4,144.3,Bajo,315,1,4,1
+PAC-2721,Incompleta,4,15.0,Medio,2302,1,8,1
+PAC-2722,Asimétrica,6,8.4,Medio,1797,0,3,0
+PAC-2723,Bilateral Completa,9,72.6,Bajo,373,1,3,0
+PAC-2724,Incompleta,10,47.7,Bajo,451,0,3,1
+PAC-2725,Incompleta,6,97.2,Medio,1757,0,5,1
+PAC-2726,Asimétrica,6,12.5,Bajo,362,1,3,1
+PAC-2727,Incompleta,7,84.3,Bajo,340,0,4,1
+PAC-2728,Incompleta,7,16.3,Bajo,390,1,8,1
+PAC-2729,Bilateral Completa,1,13.9,Medio-Bajo,888,1,5,1
+PAC-2730,Incompleta,8,14.0,Bajo,467,1,5,0
+PAC-2731,Bilateral Completa,1,89.3,Alto,3088,0,1,1
+PAC-2732,Bilateral Completa,9,59.7,Bajo,583,1,5,1
+PAC-2733,Bilateral Completa,4,42.0,Medio-Bajo,751,0,7,1
+PAC-2734,Asimétrica,9,27.2,Bajo,572,0,7,1
+PAC-2735,Bilateral Completa,8,109.9,Medio-Bajo,918,0,2,0
+PAC-2736,Asimétrica,9,29.9,Medio-Bajo,968,0,3,1
+PAC-2737,Asimétrica,6,89.8,Medio-Bajo,1159,0,2,0
+PAC-2738,Asimétrica,9,33.9,Medio-Bajo,1061,1,3,1
+PAC-2739,Asimétrica,4,28.7,Medio-Bajo,611,0,7,1
+PAC-2740,Asimétrica,3,36.1,Medio,2379,0,3,0
+PAC-2741,Bilateral Completa,3,22.9,Medio,1676,0,4,1
+PAC-2742,Bilateral Completa,8,73.8,Medio-Bajo,1000,0,4,1
+PAC-2743,Incompleta,2,39.9,Bajo,545,0,7,1
+PAC-2744,Bilateral Completa,6,18.2,Bajo,426,0,1,1
+PAC-2745,Bilateral Completa,9,119.9,Bajo,590,0,4,1
+PAC-2746,Incompleta,9,29.2,Medio-Bajo,656,0,4,1
+PAC-2747,Incompleta,8,44.2,Bajo,592,0,5,1
+PAC-2748,Asimétrica,8,123.5,Bajo,589,1,1,1
+PAC-2749,Incompleta,1,53.9,Medio,1647,0,1,0
+PAC-2750,Incompleta,11,11.2,Medio,1402,0,2,1
+PAC-2751,Bilateral Completa,7,145.5,Medio,1937,0,1,1
+PAC-2752,Bilateral Completa,1,54.4,Bajo,451,0,4,1
+PAC-2753,Asimétrica,9,25.4,Medio-Bajo,929,0,2,1
+PAC-2754,Bilateral Completa,3,12.5,Bajo,465,1,1,0
+PAC-2755,Bilateral Completa,1,84.0,Bajo,292,0,3,1
+PAC-2756,Incompleta,8,53.4,Bajo,272,0,2,1
+PAC-2757,Bilateral Completa,7,43.1,Bajo,404,1,2,0
+PAC-2758,Bilateral Completa,2,117.2,Bajo,435,0,4,1
+PAC-2759,Bilateral Completa,7,82.7,Medio,1448,0,5,1
+PAC-2760,Bilateral Completa,5,13.2,Bajo,486,0,1,0
+PAC-2761,Bilateral Completa,7,23.7,Medio-Bajo,733,1,1,0
+PAC-2762,Asimétrica,10,19.3,Medio-Bajo,920,0,4,1
+PAC-2763,Incompleta,7,73.1,Bajo,271,0,5,1
+PAC-2764,Bilateral Completa,2,6.7,Medio-Bajo,1199,0,4,1
+PAC-2765,Bilateral Completa,2,47.2,Bajo,402,1,2,0
+PAC-2766,Bilateral Completa,7,76.9,Medio-Bajo,724,0,3,0
+PAC-2767,Asimétrica,3,109.7,Bajo,328,0,7,1
+PAC-2768,Bilateral Completa,4,25.9,Bajo,595,0,2,1
+PAC-2769,Asimétrica,7,91.1,Bajo,300,0,6,1
+PAC-2770,Bilateral Completa,2,10.9,Medio-Bajo,775,1,9,1
+PAC-2771,Asimétrica,2,98.7,Medio,2069,0,4,1
+PAC-2772,Bilateral Completa,9,11.8,Bajo,502,0,4,0
+PAC-2773,Bilateral Completa,11,30.3,Medio-Bajo,845,0,2,1
+PAC-2774,Bilateral Completa,1,84.8,Medio-Bajo,705,0,3,1
+PAC-2775,Incompleta,3,13.1,Medio,2416,0,4,1
+PAC-2776,Bilateral Completa,10,18.0,Medio,1501,1,3,0
+PAC-2777,Bilateral Completa,4,69.1,Medio-Bajo,1147,0,2,1
+PAC-2778,Asimétrica,5,68.7,Medio-Bajo,867,1,1,1
+PAC-2779,Bilateral Completa,3,56.2,Medio,2393,1,4,0
+PAC-2780,Bilateral Completa,9,64.2,Bajo,288,0,3,1
+PAC-2781,Asimétrica,5,44.1,Bajo,388,0,4,1
+PAC-2782,Bilateral Completa,7,19.5,Bajo,541,0,4,0
+PAC-2783,Asimétrica,11,26.2,Medio,2364,0,4,1
+PAC-2784,Bilateral Completa,7,15.0,Medio,2369,0,4,1
+PAC-2785,Bilateral Completa,11,124.5,Bajo,563,0,4,1
+PAC-2786,Bilateral Completa,9,48.8,Medio-Bajo,783,0,5,0
+PAC-2787,Asimétrica,2,30.6,Medio-Bajo,727,1,1,0
+PAC-2788,Asimétrica,3,36.0,Bajo,536,0,6,1
+PAC-2789,Asimétrica,4,152.1,Alto,5824,0,2,0
+PAC-2790,Bilateral Completa,8,13.3,Bajo,515,0,2,0
+PAC-2791,Asimétrica,1,49.1,Bajo,437,1,5,0
+PAC-2792,Bilateral Completa,9,40.2,Medio-Bajo,985,1,4,0
+PAC-2793,Bilateral Completa,5,52.3,Medio-Bajo,829,1,6,1
+PAC-2794,Asimétrica,4,5.9,Bajo,520,1,7,1
+PAC-2795,Bilateral Completa,8,107.8,Medio-Bajo,1014,0,3,1
+PAC-2796,Bilateral Completa,9,139.5,Medio-Bajo,797,1,0,0
+PAC-2797,Bilateral Completa,3,46.6,Bajo,572,1,5,1
+PAC-2798,Incompleta,4,64.6,Bajo,305,1,10,0
+PAC-2799,Bilateral Completa,1,132.9,Medio-Bajo,802,1,9,1
+PAC-2800,Bilateral Completa,3,66.4,Bajo,520,1,5,0
+PAC-2801,Asimétrica,10,13.3,Medio,1827,0,5,0
+PAC-2802,Bilateral Completa,5,47.9,Medio,1803,0,3,0
+PAC-2803,Bilateral Completa,8,51.7,Alto,3661,1,2,0
+PAC-2804,Incompleta,1,32.6,Bajo,552,0,5,1
+PAC-2805,Asimétrica,1,71.7,Alto,3580,0,4,1
+PAC-2806,Bilateral Completa,3,141.2,Bajo,299,1,4,1
+PAC-2807,Incompleta,9,134.9,Bajo,320,0,3,1
+PAC-2808,Bilateral Completa,9,35.0,Bajo,331,0,2,1
+PAC-2809,Incompleta,1,11.0,Bajo,354,0,3,1
+PAC-2810,Bilateral Completa,4,214.5,Medio-Bajo,1199,0,6,1
+PAC-2811,Bilateral Completa,8,96.3,Medio-Bajo,1113,1,8,1
+PAC-2812,Bilateral Completa,2,11.7,Bajo,333,0,2,1
+PAC-2813,Asimétrica,4,131.8,Medio-Bajo,642,0,2,1
+PAC-2814,Incompleta,7,107.0,Bajo,403,0,2,1
+PAC-2815,Asimétrica,7,41.6,Medio-Bajo,732,1,4,1
+PAC-2816,Incompleta,5,49.7,Bajo,314,0,3,0
+PAC-2817,Bilateral Completa,7,30.5,Medio,1489,0,4,1
+PAC-2818,Bilateral Completa,6,7.8,Medio,1575,0,5,1
+PAC-2819,Asimétrica,2,25.4,Medio-Bajo,1066,1,6,1
+PAC-2820,Incompleta,9,86.2,Bajo,462,0,5,1
+PAC-2821,Asimétrica,5,5.2,Bajo,397,0,5,1
+PAC-2822,Bilateral Completa,2,25.3,Medio,1670,0,5,1
+PAC-2823,Bilateral Completa,6,30.4,Bajo,398,0,4,0
+PAC-2824,Bilateral Completa,10,43.5,Bajo,337,0,3,1
+PAC-2825,Bilateral Completa,5,131.2,Bajo,573,0,4,1
+PAC-2826,Bilateral Completa,2,26.3,Medio-Bajo,995,0,7,1
+PAC-2827,Bilateral Completa,10,26.3,Medio-Bajo,1003,0,3,0
+PAC-2828,Incompleta,10,71.9,Medio,2305,0,5,1
+PAC-2829,Bilateral Completa,7,35.1,Bajo,378,1,4,1
+PAC-2830,Bilateral Completa,10,17.7,Bajo,535,0,4,1
+PAC-2831,Incompleta,2,35.1,Medio,2064,0,2,1
+PAC-2832,Bilateral Completa,7,12.6,Medio,2493,0,4,1
+PAC-2833,Incompleta,6,14.7,Bajo,541,0,6,1
+PAC-2834,Bilateral Completa,4,39.5,Medio-Bajo,1052,0,3,1
+PAC-2835,Asimétrica,4,32.1,Bajo,452,0,4,1
+PAC-2836,Incompleta,6,128.2,Medio,1223,1,7,1
+PAC-2837,Asimétrica,9,27.5,Bajo,560,0,4,0
+PAC-2838,Incompleta,10,48.4,Medio,2431,1,4,0
+PAC-2839,Bilateral Completa,6,55.0,Medio-Bajo,1037,1,4,0
+PAC-2840,Bilateral Completa,6,5.7,Medio-Bajo,1137,0,6,1
+PAC-2841,Incompleta,11,59.5,Bajo,443,0,5,1
+PAC-2842,Incompleta,1,14.8,Medio-Bajo,935,0,2,1
+PAC-2843,Incompleta,5,167.3,Bajo,487,1,1,1
+PAC-2844,Bilateral Completa,1,13.0,Bajo,570,1,5,1
+PAC-2845,Incompleta,11,31.8,Medio-Bajo,1096,0,3,1
+PAC-2846,Incompleta,9,9.5,Alto,5134,0,3,0
+PAC-2847,Incompleta,10,293.4,Medio-Bajo,762,1,6,1
+PAC-2848,Bilateral Completa,4,39.9,Medio-Bajo,1140,0,3,1
+PAC-2849,Asimétrica,2,50.2,Bajo,414,0,2,0
+PAC-2850,Bilateral Completa,9,8.5,Bajo,586,0,3,1
+PAC-2851,Bilateral Completa,6,74.3,Bajo,435,0,2,1
+PAC-2852,Asimétrica,11,16.8,Medio-Bajo,1165,1,7,1
+PAC-2853,Bilateral Completa,10,119.2,Medio,1241,0,3,1
+PAC-2854,Incompleta,3,16.5,Medio-Bajo,884,0,5,1
+PAC-2855,Bilateral Completa,2,15.6,Bajo,387,1,5,1
+PAC-2856,Bilateral Completa,6,6.9,Bajo,436,0,4,1
+PAC-2857,Bilateral Completa,10,36.9,Medio-Bajo,1030,0,3,1
+PAC-2858,Bilateral Completa,6,46.6,Bajo,291,0,2,0
+PAC-2859,Bilateral Completa,9,8.4,Medio,1999,1,3,0
+PAC-2860,Bilateral Completa,5,79.7,Medio,1625,1,3,0
+PAC-2861,Incompleta,11,35.2,Medio-Bajo,1015,1,5,0
+PAC-2862,Incompleta,9,42.2,Bajo,275,0,7,1
+PAC-2863,Asimétrica,5,34.1,Bajo,305,0,7,1
+PAC-2864,Asimétrica,2,30.6,Bajo,502,1,7,1
+PAC-2865,Bilateral Completa,1,46.0,Bajo,371,0,5,1
+PAC-2866,Asimétrica,9,13.4,Bajo,355,0,4,1
+PAC-2867,Incompleta,10,15.0,Medio-Bajo,729,0,6,1
+PAC-2868,Bilateral Completa,7,103.9,Medio-Bajo,975,0,2,1
+PAC-2869,Incompleta,3,151.0,Bajo,480,0,4,1
+PAC-2870,Bilateral Completa,6,28.4,Bajo,557,0,4,1
+PAC-2871,Incompleta,10,20.8,Bajo,340,0,3,1
+PAC-2872,Bilateral Completa,4,56.6,Bajo,271,1,2,0
+PAC-2873,Bilateral Completa,9,31.3,Medio,2001,1,3,0
+PAC-2874,Bilateral Completa,2,6.3,Bajo,359,1,7,0
+PAC-2875,Bilateral Completa,11,13.5,Bajo,298,0,1,0
+PAC-2876,Asimétrica,4,67.9,Bajo,378,1,0,0
+PAC-2877,Asimétrica,1,58.8,Medio,1784,1,5,1
+PAC-2878,Bilateral Completa,7,6.4,Medio-Bajo,939,0,4,0
+PAC-2879,Bilateral Completa,4,17.5,Bajo,302,1,6,1
+PAC-2880,Bilateral Completa,5,18.1,Medio-Bajo,955,1,2,0
+PAC-2881,Asimétrica,1,60.7,Medio-Bajo,767,1,3,0
+PAC-2882,Bilateral Completa,2,6.0,Alto,3056,0,4,1
+PAC-2883,Asimétrica,4,10.5,Bajo,354,1,1,0
+PAC-2884,Incompleta,2,85.5,Medio,1349,0,1,1
+PAC-2885,Asimétrica,1,14.8,Medio,1345,0,4,0
+PAC-2886,Incompleta,10,57.9,Medio,1915,0,3,0
+PAC-2887,Incompleta,1,18.6,Medio-Bajo,898,0,5,0
+PAC-2888,Incompleta,6,10.2,Medio-Bajo,766,0,4,1
+PAC-2889,Asimétrica,2,18.9,Bajo,450,1,7,1
+PAC-2890,Asimétrica,3,69.1,Medio-Bajo,647,1,3,1
+PAC-2891,Incompleta,5,101.8,Medio-Bajo,838,1,1,0
+PAC-2892,Incompleta,3,93.7,Medio-Bajo,606,1,6,1
+PAC-2893,Asimétrica,6,30.3,Bajo,521,1,1,0
+PAC-2894,Asimétrica,7,60.1,Medio-Bajo,970,1,2,0
+PAC-2895,Incompleta,10,16.5,Medio,1686,0,1,0
+PAC-2896,Bilateral Completa,6,22.3,Bajo,460,0,4,1
+PAC-2897,Bilateral Completa,2,118.3,Medio,1364,1,2,1
+PAC-2898,Asimétrica,9,5.7,Medio-Bajo,724,0,5,1
+PAC-2899,Bilateral Completa,2,9.5,Medio,1391,1,3,0
+PAC-2900,Bilateral Completa,6,16.7,Bajo,467,1,4,0
+PAC-2901,Bilateral Completa,9,6.3,Bajo,463,0,6,1
+PAC-2902,Incompleta,9,15.0,Medio,1773,1,3,1
+PAC-2903,Incompleta,2,48.7,Bajo,577,1,2,1
+PAC-2904,Bilateral Completa,9,32.4,Medio,2156,0,3,1
+PAC-2905,Bilateral Completa,8,116.6,Medio-Bajo,980,0,4,1
+PAC-2906,Incompleta,7,90.0,Medio-Bajo,1177,0,3,1
+PAC-2907,Asimétrica,11,25.9,Bajo,535,1,4,0
+PAC-2908,Bilateral Completa,8,20.0,Medio-Bajo,838,0,4,1
+PAC-2909,Bilateral Completa,10,28.9,Bajo,269,0,3,1
+PAC-2910,Incompleta,8,49.6,Bajo,437,0,2,0
+PAC-2911,Asimétrica,1,20.6,Bajo,331,0,5,1
+PAC-2912,Incompleta,9,53.9,Bajo,451,0,6,1
+PAC-2913,Incompleta,6,31.3,Alto,5467,1,5,0
+PAC-2914,Asimétrica,1,45.2,Alto,4027,0,4,1
+PAC-2915,Bilateral Completa,1,33.6,Bajo,381,0,2,1
+PAC-2916,Bilateral Completa,7,22.4,Medio-Bajo,636,0,4,1
+PAC-2917,Incompleta,10,153.3,Bajo,381,0,5,1
+PAC-2918,Asimétrica,2,77.1,Medio-Bajo,1188,0,1,1
+PAC-2919,Incompleta,6,12.5,Medio,1964,0,5,1
+PAC-2920,Asimétrica,5,106.4,Medio,1905,0,1,0
+PAC-2921,Incompleta,5,38.4,Bajo,425,0,1,1
+PAC-2922,Incompleta,10,117.5,Medio-Bajo,1144,0,3,1
+PAC-2923,Bilateral Completa,6,85.4,Bajo,307,1,4,1
+PAC-2924,Bilateral Completa,11,32.7,Alto,3990,1,6,1
+PAC-2925,Incompleta,8,6.1,Bajo,450,0,1,0
+PAC-2926,Bilateral Completa,5,20.6,Medio-Bajo,1139,0,3,1
+PAC-2927,Bilateral Completa,8,44.0,Medio-Bajo,1146,0,3,1
+PAC-2928,Asimétrica,5,55.2,Medio-Bajo,993,0,5,1
+PAC-2929,Asimétrica,10,19.9,Bajo,570,1,8,1
+PAC-2930,Bilateral Completa,6,12.5,Medio,2265,1,1,0
+PAC-2931,Incompleta,8,95.1,Bajo,334,0,4,1
+PAC-2932,Bilateral Completa,2,213.0,Medio-Bajo,992,1,1,0
+PAC-2933,Bilateral Completa,7,42.3,Bajo,437,1,2,0
+PAC-2934,Incompleta,3,14.4,Bajo,360,1,1,0
+PAC-2935,Incompleta,9,20.9,Medio-Bajo,1040,1,3,0
+PAC-2936,Bilateral Completa,10,5.9,Bajo,574,0,3,0
+PAC-2937,Bilateral Completa,7,127.8,Bajo,354,1,6,1
+PAC-2938,Bilateral Completa,3,11.3,Bajo,569,0,2,1
+PAC-2939,Asimétrica,8,48.0,Bajo,290,1,4,1
+PAC-2940,Incompleta,10,21.0,Medio-Bajo,814,0,5,0
+PAC-2941,Bilateral Completa,2,45.4,Medio,2294,1,5,1
+PAC-2942,Bilateral Completa,10,57.7,Bajo,305,0,7,1
+PAC-2943,Incompleta,8,93.5,Bajo,485,0,7,1
+PAC-2944,Incompleta,7,16.6,Bajo,530,1,7,1
+PAC-2945,Asimétrica,5,5.6,Bajo,354,0,4,1
+PAC-2946,Bilateral Completa,4,12.4,Medio-Bajo,761,0,0,0
+PAC-2947,Asimétrica,11,120.1,Medio-Bajo,790,0,1,1
+PAC-2948,Bilateral Completa,10,108.5,Bajo,258,1,3,1
+PAC-2949,Bilateral Completa,10,50.5,Bajo,309,0,2,0
+PAC-2950,Bilateral Completa,1,50.9,Bajo,554,0,4,1
+PAC-2951,Incompleta,4,59.7,Medio,1424,1,7,1
+PAC-2952,Asimétrica,6,14.6,Alto,4342,1,7,0
+PAC-2953,Incompleta,6,127.9,Bajo,437,0,7,1
+PAC-2954,Incompleta,2,32.1,Bajo,319,0,2,1
+PAC-2955,Bilateral Completa,9,29.2,Medio,2193,0,5,1
+PAC-2956,Bilateral Completa,1,41.6,Medio,1368,0,9,1
+PAC-2957,Incompleta,4,7.4,Bajo,311,0,1,0
+PAC-2958,Incompleta,4,14.1,Bajo,598,1,1,0
+PAC-2959,Incompleta,2,72.0,Bajo,263,1,1,1
+PAC-2960,Bilateral Completa,8,9.3,Medio-Bajo,763,0,2,1
+PAC-2961,Bilateral Completa,11,51.2,Bajo,494,0,1,0
+PAC-2962,Bilateral Completa,2,19.1,Bajo,584,1,6,1
+PAC-2963,Asimétrica,2,29.7,Medio-Bajo,1119,0,2,1
+PAC-2964,Incompleta,2,22.0,Bajo,403,0,6,1
+PAC-2965,Bilateral Completa,1,27.0,Medio-Bajo,1147,0,9,0
+PAC-2966,Bilateral Completa,5,68.5,Bajo,297,0,4,1
+PAC-2967,Bilateral Completa,11,22.6,Bajo,334,0,1,1
+PAC-2968,Bilateral Completa,4,46.8,Medio-Bajo,627,1,4,1
+PAC-2969,Incompleta,2,37.3,Bajo,445,0,2,1
+PAC-2970,Asimétrica,1,59.5,Alto,2945,0,7,1
+PAC-2971,Incompleta,1,143.1,Medio-Bajo,807,0,5,1
+PAC-2972,Bilateral Completa,2,70.9,Bajo,453,0,7,1
+PAC-2973,Incompleta,1,17.1,Medio-Bajo,703,0,5,1
+PAC-2974,Incompleta,9,6.6,Bajo,479,1,5,1
+PAC-2975,Bilateral Completa,2,20.2,Medio,1625,1,7,1
+PAC-2976,Asimétrica,3,50.2,Bajo,350,0,3,1
+PAC-2977,Asimétrica,9,7.6,Medio-Bajo,1140,1,3,0
+PAC-2978,Bilateral Completa,5,39.3,Bajo,376,1,6,0
+PAC-2979,Incompleta,8,50.4,Bajo,587,0,3,1
+PAC-2980,Incompleta,7,25.3,Medio,2329,0,6,1
+PAC-2981,Incompleta,6,78.7,Medio,1968,1,4,0
+PAC-2982,Bilateral Completa,2,10.6,Bajo,544,0,6,1
+PAC-2983,Bilateral Completa,4,8.9,Bajo,526,0,5,1
+PAC-2984,Bilateral Completa,9,70.1,Medio,2288,0,7,1
+PAC-2985,Incompleta,7,39.2,Medio,2099,0,5,0
+PAC-2986,Bilateral Completa,3,63.3,Bajo,437,0,4,1
+PAC-2987,Incompleta,6,33.5,Medio-Bajo,916,1,7,1
+PAC-2988,Incompleta,8,19.1,Bajo,387,1,3,1
+PAC-2989,Bilateral Completa,8,90.5,Medio,1304,0,2,0
+PAC-2990,Incompleta,8,85.3,Bajo,283,0,4,1
+PAC-2991,Bilateral Completa,8,64.3,Bajo,359,0,6,1
+PAC-2992,Bilateral Completa,10,20.9,Medio-Bajo,1144,0,5,0
+PAC-2993,Bilateral Completa,6,49.6,Bajo,480,0,2,0
+PAC-2994,Asimétrica,11,27.4,Medio-Bajo,916,0,1,0
+PAC-2995,Incompleta,10,9.8,Bajo,515,1,3,1
+PAC-2996,Bilateral Completa,11,129.6,Bajo,431,1,8,1
+PAC-2997,Asimétrica,3,12.4,Bajo,589,0,7,1
+PAC-2998,Incompleta,9,155.0,Medio-Bajo,664,1,3,1
+PAC-2999,Bilateral Completa,3,34.5,Bajo,582,1,4,1
+PAC-3000,Bilateral Completa,4,15.2,Medio-Bajo,1112,0,3,1
+PAC-3001,Bilateral Completa,10,44.0,Medio,2356,0,0,1
+PAC-3002,Incompleta,1,108.2,Medio-Bajo,1191,0,4,1
+PAC-3003,Incompleta,2,70.9,Bajo,520,1,5,0
+PAC-3004,Bilateral Completa,6,87.1,Bajo,490,1,5,1
+PAC-3005,Bilateral Completa,1,58.8,Bajo,277,1,3,1
+PAC-3006,Bilateral Completa,9,63.9,Bajo,472,0,2,1
+PAC-3007,Bilateral Completa,8,99.6,Bajo,272,1,4,0
+PAC-3008,Incompleta,2,19.4,Medio-Bajo,1095,0,7,1
+PAC-3009,Bilateral Completa,2,38.6,Bajo,358,0,0,1
+PAC-3010,Incompleta,8,17.5,Bajo,356,0,8,1
+PAC-3011,Asimétrica,11,224.8,Bajo,394,1,3,0
+PAC-3012,Bilateral Completa,8,149.2,Medio-Bajo,968,0,6,1
+PAC-3013,Bilateral Completa,1,7.0,Bajo,388,0,2,1
+PAC-3014,Bilateral Completa,5,66.1,Medio-Bajo,698,0,1,1
+PAC-3015,Bilateral Completa,11,134.7,Bajo,566,0,4,1
+PAC-3016,Incompleta,2,15.0,Medio,1322,1,5,1
+PAC-3017,Incompleta,1,47.0,Medio,1998,0,0,0
+PAC-3018,Bilateral Completa,3,128.5,Bajo,330,1,4,1
+PAC-3019,Bilateral Completa,3,6.7,Bajo,259,1,4,0
+PAC-3020,Bilateral Completa,10,64.8,Bajo,257,1,2,0
+PAC-3021,Bilateral Completa,9,22.6,Bajo,454,0,4,1
+PAC-3022,Incompleta,10,134.1,Medio-Bajo,914,0,3,1
+PAC-3023,Bilateral Completa,1,182.1,Medio,1908,1,2,1
+PAC-3024,Incompleta,11,149.4,Medio-Bajo,1141,0,3,1
+PAC-3025,Incompleta,2,37.1,Medio,2243,1,4,0
+PAC-3026,Bilateral Completa,9,104.0,Bajo,297,0,7,1
+PAC-3027,Incompleta,5,98.1,Bajo,379,1,5,1
+PAC-3028,Asimétrica,9,24.2,Medio-Bajo,892,1,7,0
+PAC-3029,Bilateral Completa,6,93.3,Bajo,381,0,4,1
+PAC-3030,Bilateral Completa,10,6.9,Medio-Bajo,955,1,4,0
+PAC-3031,Bilateral Completa,10,50.4,Bajo,303,0,6,1
+PAC-3032,Incompleta,3,18.1,Bajo,530,1,4,1
+PAC-3033,Bilateral Completa,8,11.4,Alto,5958,0,6,0
+PAC-3034,Asimétrica,9,9.0,Bajo,514,1,2,0
+PAC-3035,Incompleta,2,64.6,Alto,3481,0,5,0
+PAC-3036,Asimétrica,9,25.8,Alto,5786,0,3,0
+PAC-3037,Bilateral Completa,4,69.5,Medio-Bajo,1059,1,2,0
+PAC-3038,Asimétrica,8,8.4,Medio-Bajo,1057,0,3,1
+PAC-3039,Bilateral Completa,5,23.9,Medio-Bajo,642,1,4,1
+PAC-3040,Bilateral Completa,6,43.8,Medio,2061,0,1,1
+PAC-3041,Asimétrica,4,83.2,Bajo,527,1,5,1
+PAC-3042,Bilateral Completa,5,24.2,Medio-Bajo,729,0,6,1
+PAC-3043,Asimétrica,1,54.2,Medio-Bajo,949,0,1,0
+PAC-3044,Bilateral Completa,3,113.6,Bajo,443,0,2,1
+PAC-3045,Asimétrica,4,52.8,Bajo,281,0,2,1
+PAC-3046,Incompleta,1,18.3,Bajo,355,0,5,1
+PAC-3047,Incompleta,3,6.2,Medio-Bajo,600,0,4,1
+PAC-3048,Bilateral Completa,4,107.0,Medio,1783,0,4,1
+PAC-3049,Bilateral Completa,9,6.1,Bajo,555,0,5,1
+PAC-3050,Incompleta,3,108.9,Medio,1252,1,6,1
+PAC-3051,Incompleta,11,42.6,Medio-Bajo,1119,0,5,1
+PAC-3052,Bilateral Completa,3,144.9,Medio,2337,0,4,1
+PAC-3053,Bilateral Completa,4,85.2,Medio-Bajo,746,0,2,1
+PAC-3054,Bilateral Completa,9,300.0,Medio-Bajo,765,0,6,1
+PAC-3055,Bilateral Completa,9,26.6,Bajo,388,1,2,1
+PAC-3056,Bilateral Completa,1,77.9,Medio,1828,0,4,1
+PAC-3057,Asimétrica,8,30.7,Bajo,548,1,4,0
+PAC-3058,Bilateral Completa,10,37.7,Medio,2499,1,9,1
+PAC-3059,Bilateral Completa,1,54.4,Alto,4439,1,3,0
+PAC-3060,Asimétrica,2,108.4,Bajo,526,0,4,1
+PAC-3061,Bilateral Completa,10,212.0,Bajo,587,1,6,1
+PAC-3062,Incompleta,11,78.1,Medio-Bajo,777,1,1,0
+PAC-3063,Incompleta,5,32.0,Bajo,579,0,6,1
+PAC-3064,Incompleta,11,32.4,Medio,2377,1,5,0
+PAC-3065,Incompleta,11,71.9,Bajo,450,1,6,1
+PAC-3066,Incompleta,6,18.6,Bajo,364,1,4,1
+PAC-3067,Bilateral Completa,2,10.9,Alto,4077,1,3,0
+PAC-3068,Incompleta,10,26.9,Medio-Bajo,667,0,4,1
+PAC-3069,Incompleta,5,21.9,Medio,1644,1,6,1
+PAC-3070,Bilateral Completa,3,22.6,Bajo,575,0,3,0
+PAC-3071,Bilateral Completa,7,18.3,Medio-Bajo,958,0,3,1
+PAC-3072,Asimétrica,1,7.2,Medio-Bajo,744,1,6,1
+PAC-3073,Incompleta,5,5.9,Medio-Bajo,874,1,4,1
+PAC-3074,Bilateral Completa,3,225.0,Medio-Bajo,1108,0,1,1
+PAC-3075,Asimétrica,11,32.9,Medio-Bajo,778,0,5,1
+PAC-3076,Incompleta,2,29.3,Bajo,490,1,1,1
+PAC-3077,Asimétrica,3,61.9,Bajo,575,1,4,0
+PAC-3078,Asimétrica,10,17.3,Medio-Bajo,1076,0,5,1
+PAC-3079,Bilateral Completa,4,154.7,Bajo,580,1,6,1
+PAC-3080,Incompleta,11,82.2,Medio-Bajo,1013,1,1,0
+PAC-3081,Incompleta,2,9.7,Bajo,402,0,4,1
+PAC-3082,Asimétrica,2,32.0,Medio-Bajo,703,0,4,0
+PAC-3083,Incompleta,3,110.6,Medio-Bajo,674,1,5,0
+PAC-3084,Bilateral Completa,2,149.8,Bajo,377,0,3,0
+PAC-3085,Bilateral Completa,6,36.5,Bajo,448,1,2,1
+PAC-3086,Bilateral Completa,2,52.5,Bajo,403,0,5,1
+PAC-3087,Asimétrica,1,14.1,Medio-Bajo,1167,0,7,1
+PAC-3088,Asimétrica,8,241.5,Medio,1730,0,3,1
+PAC-3089,Bilateral Completa,10,18.2,Bajo,408,0,5,1
+PAC-3090,Incompleta,4,148.0,Medio-Bajo,1137,0,3,1
+PAC-3091,Asimétrica,2,57.4,Bajo,418,0,1,0
+PAC-3092,Bilateral Completa,4,51.8,Medio-Bajo,622,0,11,1
+PAC-3093,Bilateral Completa,11,40.9,Medio,2270,1,4,0
+PAC-3094,Bilateral Completa,2,18.1,Bajo,262,0,6,1
+PAC-3095,Asimétrica,11,14.7,Medio-Bajo,743,0,3,1
+PAC-3096,Incompleta,5,17.5,Bajo,322,0,4,1
+PAC-3097,Bilateral Completa,7,15.3,Bajo,405,1,8,1
+PAC-3098,Bilateral Completa,6,80.6,Bajo,326,0,5,1
+PAC-3099,Incompleta,2,26.5,Bajo,418,0,2,1
+PAC-3100,Asimétrica,11,8.0,Medio-Bajo,684,0,7,1
+PAC-3101,Incompleta,4,178.9,Bajo,431,0,4,1
+PAC-3102,Bilateral Completa,8,112.6,Medio-Bajo,1081,1,1,1
+PAC-3103,Bilateral Completa,7,136.4,Bajo,564,1,10,1
+PAC-3104,Asimétrica,7,269.0,Bajo,546,1,5,1
+PAC-3105,Bilateral Completa,4,14.6,Medio-Bajo,711,1,2,0
+PAC-3106,Bilateral Completa,1,30.2,Alto,3753,0,3,0
+PAC-3107,Asimétrica,7,76.0,Bajo,345,0,2,1
+PAC-3108,Asimétrica,6,64.5,Medio,2149,0,2,1
+PAC-3109,Incompleta,8,13.4,Medio-Bajo,977,0,2,1
+PAC-3110,Incompleta,11,89.6,Medio-Bajo,755,1,5,1
+PAC-3111,Bilateral Completa,5,17.7,Medio-Bajo,1020,1,5,1
+PAC-3112,Bilateral Completa,8,17.7,Bajo,354,1,7,1
+PAC-3113,Bilateral Completa,10,43.5,Bajo,442,1,5,1
+PAC-3114,Incompleta,11,49.9,Medio-Bajo,929,0,4,1
+PAC-3115,Bilateral Completa,8,48.4,Bajo,381,1,5,1
+PAC-3116,Asimétrica,9,9.8,Medio,1581,1,3,1
+PAC-3117,Bilateral Completa,1,110.0,Bajo,387,1,4,1
+PAC-3118,Incompleta,3,20.4,Bajo,580,0,4,1
+PAC-3119,Incompleta,11,11.9,Medio-Bajo,869,0,6,1
+PAC-3120,Incompleta,6,114.8,Bajo,287,0,2,1
+PAC-3121,Bilateral Completa,4,160.8,Medio-Bajo,995,0,4,1
+PAC-3122,Asimétrica,8,104.1,Medio-Bajo,1156,0,4,1
+PAC-3123,Bilateral Completa,10,87.9,Medio,2112,1,4,1
+PAC-3124,Incompleta,1,58.2,Medio-Bajo,1063,0,5,1
+PAC-3125,Incompleta,5,45.0,Medio-Bajo,1049,0,2,1
+PAC-3126,Bilateral Completa,4,9.6,Medio-Bajo,930,0,6,0
+PAC-3127,Incompleta,1,31.3,Medio,2476,0,3,1
+PAC-3128,Incompleta,10,28.3,Bajo,418,1,3,0
+PAC-3129,Asimétrica,6,20.0,Bajo,534,0,1,0
+PAC-3130,Asimétrica,10,69.3,Bajo,523,1,3,1
+PAC-3131,Bilateral Completa,3,39.2,Bajo,269,0,3,1
+PAC-3132,Bilateral Completa,11,9.2,Medio-Bajo,838,1,3,0
+PAC-3133,Bilateral Completa,11,17.4,Medio-Bajo,869,1,5,0
+PAC-3134,Asimétrica,5,62.5,Medio-Bajo,1017,0,5,1
+PAC-3135,Bilateral Completa,6,9.0,Bajo,559,0,9,1
+PAC-3136,Incompleta,4,100.3,Medio-Bajo,630,1,6,1
+PAC-3137,Incompleta,10,39.2,Bajo,563,0,3,1
+PAC-3138,Incompleta,10,37.8,Medio-Bajo,703,0,6,1
+PAC-3139,Bilateral Completa,6,49.9,Medio-Bajo,785,1,4,1
+PAC-3140,Bilateral Completa,7,92.1,Bajo,377,0,3,1
+PAC-3141,Bilateral Completa,2,26.4,Bajo,459,0,4,1
+PAC-3142,Bilateral Completa,7,61.7,Bajo,530,0,10,1
+PAC-3143,Bilateral Completa,7,46.7,Medio,1452,1,3,0
+PAC-3144,Bilateral Completa,2,20.5,Medio,1218,1,4,0
+PAC-3145,Incompleta,3,110.4,Medio-Bajo,735,0,3,1
+PAC-3146,Bilateral Completa,3,84.8,Bajo,472,0,7,1
+PAC-3147,Bilateral Completa,1,58.7,Bajo,252,0,4,1
+PAC-3148,Bilateral Completa,1,100.1,Medio-Bajo,835,1,5,1
+PAC-3149,Bilateral Completa,10,106.0,Medio-Bajo,1064,0,4,1
+PAC-3150,Bilateral Completa,11,66.6,Bajo,477,0,3,1
+PAC-3151,Bilateral Completa,6,95.7,Bajo,391,1,1,1
+PAC-3152,Incompleta,9,64.8,Medio-Bajo,1098,0,4,0
+PAC-3153,Bilateral Completa,9,62.0,Bajo,258,0,1,1
+PAC-3154,Asimétrica,11,53.2,Bajo,439,1,3,1
+PAC-3155,Bilateral Completa,1,74.9,Bajo,599,0,8,1
+PAC-3156,Asimétrica,7,13.6,Medio-Bajo,738,1,3,0
+PAC-3157,Asimétrica,6,111.4,Medio,2499,0,6,1
+PAC-3158,Incompleta,4,107.7,Alto,4838,0,5,1
+PAC-3159,Asimétrica,11,6.5,Medio-Bajo,652,0,7,1
+PAC-3160,Bilateral Completa,3,92.4,Medio-Bajo,709,0,3,1
+PAC-3161,Bilateral Completa,9,11.9,Bajo,452,0,3,1
+PAC-3162,Bilateral Completa,10,25.4,Medio-Bajo,603,1,9,1
+PAC-3163,Bilateral Completa,5,73.0,Bajo,404,0,3,1
+PAC-3164,Bilateral Completa,8,13.8,Medio-Bajo,646,1,5,0
+PAC-3165,Incompleta,4,90.2,Bajo,343,1,5,0
+PAC-3166,Bilateral Completa,4,94.2,Bajo,297,1,10,1
+PAC-3167,Bilateral Completa,6,40.4,Bajo,489,0,5,1
+PAC-3168,Bilateral Completa,6,5.3,Bajo,596,1,8,0
+PAC-3169,Incompleta,3,21.9,Bajo,462,1,10,1
+PAC-3170,Asimétrica,2,53.0,Bajo,589,1,2,1
+PAC-3171,Incompleta,11,203.7,Alto,5055,1,1,0
+PAC-3172,Bilateral Completa,9,55.0,Bajo,573,0,7,1
+PAC-3173,Bilateral Completa,2,20.0,Medio-Bajo,804,0,2,1
+PAC-3174,Incompleta,9,55.3,Medio,1580,1,2,1
+PAC-3175,Bilateral Completa,11,43.8,Alto,5644,0,3,1
+PAC-3176,Asimétrica,8,80.7,Medio-Bajo,1115,0,3,1
+PAC-3177,Bilateral Completa,11,10.7,Medio,2299,0,4,0
+PAC-3178,Bilateral Completa,10,76.6,Bajo,578,0,2,1
+PAC-3179,Asimétrica,7,44.0,Bajo,326,0,6,1
+PAC-3180,Asimétrica,5,169.8,Bajo,553,1,3,1
+PAC-3181,Incompleta,3,25.9,Medio-Bajo,1009,0,4,1
+PAC-3182,Bilateral Completa,2,55.1,Medio-Bajo,705,0,6,1
+PAC-3183,Incompleta,11,139.4,Bajo,582,0,3,1
+PAC-3184,Bilateral Completa,8,10.4,Bajo,288,0,7,1
+PAC-3185,Bilateral Completa,2,143.4,Medio-Bajo,1075,1,2,0
+PAC-3186,Bilateral Completa,8,63.2,Bajo,563,0,3,1
+PAC-3187,Incompleta,5,8.5,Medio-Bajo,874,0,6,1
+PAC-3188,Incompleta,9,22.9,Medio-Bajo,687,1,2,0
+PAC-3189,Bilateral Completa,4,66.6,Medio-Bajo,676,1,8,1
+PAC-3190,Asimétrica,8,8.5,Medio-Bajo,676,0,4,0
+PAC-3191,Bilateral Completa,11,48.6,Medio,1739,0,4,1
+PAC-3192,Bilateral Completa,7,26.2,Medio-Bajo,844,0,3,1
+PAC-3193,Incompleta,8,53.5,Medio-Bajo,1177,0,4,1
+PAC-3194,Asimétrica,5,7.3,Medio-Bajo,981,0,5,1
+PAC-3195,Asimétrica,2,107.6,Bajo,454,1,9,0
+PAC-3196,Incompleta,7,186.5,Bajo,307,1,2,0
+PAC-3197,Bilateral Completa,3,178.5,Bajo,450,1,2,1
+PAC-3198,Asimétrica,10,74.2,Bajo,474,1,1,0
+PAC-3199,Asimétrica,10,12.0,Medio-Bajo,741,1,6,1
+PAC-3200,Bilateral Completa,10,76.0,Medio,2092,0,5,1
+PAC-3201,Incompleta,11,6.2,Bajo,333,0,1,0
+PAC-3202,Incompleta,10,6.1,Bajo,392,1,5,1
+PAC-3203,Bilateral Completa,2,24.5,Alto,4899,1,4,1
+PAC-3204,Asimétrica,3,38.5,Bajo,282,1,1,0
+PAC-3205,Bilateral Completa,4,78.6,Medio-Bajo,751,0,2,1
+PAC-3206,Incompleta,10,62.5,Medio-Bajo,757,1,6,1
+PAC-3207,Bilateral Completa,11,34.5,Medio-Bajo,1045,1,6,1
+PAC-3208,Incompleta,7,21.0,Bajo,390,0,3,1
+PAC-3209,Incompleta,10,297.6,Bajo,500,0,5,1
+PAC-3210,Bilateral Completa,1,32.8,Bajo,552,1,6,0
+PAC-3211,Bilateral Completa,6,35.0,Medio-Bajo,1049,0,1,1
+PAC-3212,Asimétrica,6,13.9,Medio-Bajo,823,1,6,1
+PAC-3213,Incompleta,8,84.2,Bajo,292,0,5,1
+PAC-3214,Incompleta,2,64.2,Medio-Bajo,863,0,8,1
+PAC-3215,Bilateral Completa,2,17.5,Medio,2226,1,7,0
+PAC-3216,Bilateral Completa,1,9.3,Bajo,374,0,5,1
+PAC-3217,Incompleta,3,62.0,Medio-Bajo,867,1,3,1
+PAC-3218,Asimétrica,7,58.1,Medio-Bajo,1195,1,1,0
+PAC-3219,Bilateral Completa,8,21.0,Bajo,265,1,6,1
+PAC-3220,Incompleta,7,155.7,Bajo,583,0,3,1
+PAC-3221,Bilateral Completa,9,13.2,Medio-Bajo,1063,1,1,1
+PAC-3222,Bilateral Completa,8,33.3,Medio,2282,1,5,1
+PAC-3223,Incompleta,8,148.8,Medio,2212,1,2,1
+PAC-3224,Bilateral Completa,11,32.2,Medio-Bajo,776,1,6,1
+PAC-3225,Bilateral Completa,2,55.9,Medio-Bajo,662,0,2,1
+PAC-3226,Incompleta,1,30.3,Bajo,298,1,4,0
+PAC-3227,Bilateral Completa,6,21.0,Medio-Bajo,906,1,2,1
+PAC-3228,Incompleta,7,211.7,Medio-Bajo,845,0,3,1
+PAC-3229,Incompleta,6,31.3,Bajo,538,0,2,1
+PAC-3230,Incompleta,7,117.3,Medio-Bajo,931,0,3,1
+PAC-3231,Bilateral Completa,8,18.1,Medio-Bajo,1126,0,1,0
+PAC-3232,Bilateral Completa,2,17.0,Bajo,587,1,5,1
+PAC-3233,Incompleta,1,6.6,Medio,2478,0,1,1
+PAC-3234,Bilateral Completa,10,57.7,Bajo,341,0,5,1
+PAC-3235,Asimétrica,8,28.0,Bajo,528,1,4,0
+PAC-3236,Incompleta,8,104.9,Bajo,455,0,4,1
+PAC-3237,Bilateral Completa,8,37.0,Medio-Bajo,1062,1,2,0
+PAC-3238,Incompleta,10,177.4,Medio-Bajo,798,0,5,1
+PAC-3239,Asimétrica,7,15.3,Bajo,520,0,3,1
+PAC-3240,Bilateral Completa,2,106.5,Medio-Bajo,1157,0,5,1
+PAC-3241,Bilateral Completa,4,79.9,Bajo,313,0,2,0
+PAC-3242,Asimétrica,9,78.7,Medio-Bajo,829,0,8,1
+PAC-3243,Bilateral Completa,8,98.1,Medio-Bajo,848,1,7,1
+PAC-3244,Bilateral Completa,4,76.6,Bajo,495,0,6,1
+PAC-3245,Bilateral Completa,8,54.2,Medio,2139,1,9,1
+PAC-3246,Bilateral Completa,10,12.0,Bajo,324,1,4,0
+PAC-3247,Incompleta,6,6.7,Bajo,406,0,4,0
+PAC-3248,Incompleta,11,131.8,Medio-Bajo,1163,1,5,1
+PAC-3249,Asimétrica,9,52.9,Alto,5659,1,9,1
+PAC-3250,Incompleta,1,84.6,Bajo,562,0,2,1
+PAC-3251,Asimétrica,6,37.8,Bajo,588,0,1,1
+PAC-3252,Bilateral Completa,11,11.2,Bajo,315,1,3,0
+PAC-3253,Bilateral Completa,4,11.7,Medio-Bajo,619,1,5,1
+PAC-3254,Asimétrica,3,62.8,Bajo,282,1,4,1
+PAC-3255,Bilateral Completa,5,33.1,Medio-Bajo,1157,0,3,1
+PAC-3256,Incompleta,10,16.2,Alto,4620,1,4,0
+PAC-3257,Bilateral Completa,11,38.8,Medio-Bajo,942,0,1,1
+PAC-3258,Incompleta,8,8.3,Bajo,382,1,2,0
+PAC-3259,Asimétrica,11,48.6,Bajo,304,1,2,0
+PAC-3260,Bilateral Completa,10,20.7,Bajo,310,0,5,1
+PAC-3261,Bilateral Completa,6,84.9,Medio,1471,1,3,1
+PAC-3262,Bilateral Completa,1,23.6,Bajo,495,0,10,1
+PAC-3263,Bilateral Completa,6,35.4,Bajo,425,1,4,1
+PAC-3264,Bilateral Completa,7,5.6,Medio-Bajo,916,0,4,1
+PAC-3265,Incompleta,6,8.8,Bajo,520,0,4,1
+PAC-3266,Bilateral Completa,3,29.9,Medio-Bajo,730,1,4,1
+PAC-3267,Bilateral Completa,11,37.7,Bajo,351,1,4,0
+PAC-3268,Bilateral Completa,9,50.8,Medio,1509,1,4,0
+PAC-3269,Incompleta,10,22.2,Medio,1694,0,6,1
+PAC-3270,Bilateral Completa,10,64.4,Medio-Bajo,960,0,1,1
+PAC-3271,Incompleta,4,103.3,Alto,2837,0,5,1
+PAC-3272,Asimétrica,5,80.7,Bajo,316,0,2,1
+PAC-3273,Bilateral Completa,5,7.0,Medio-Bajo,609,1,6,1
+PAC-3274,Bilateral Completa,3,37.7,Medio-Bajo,648,1,6,1
+PAC-3275,Incompleta,2,10.5,Medio-Bajo,1086,1,2,0
+PAC-3276,Bilateral Completa,8,18.9,Bajo,360,1,5,0
+PAC-3277,Bilateral Completa,7,220.9,Bajo,570,1,4,0
+PAC-3278,Incompleta,5,12.7,Bajo,468,0,2,1
+PAC-3279,Bilateral Completa,1,39.5,Bajo,306,0,5,1
+PAC-3280,Bilateral Completa,10,53.1,Bajo,532,0,4,1
+PAC-3281,Asimétrica,1,65.6,Medio-Bajo,732,1,4,1
+PAC-3282,Bilateral Completa,8,46.0,Bajo,320,0,4,1
+PAC-3283,Asimétrica,4,5.5,Bajo,332,0,4,1
+PAC-3284,Bilateral Completa,4,24.8,Medio-Bajo,656,0,4,1
+PAC-3285,Asimétrica,9,41.5,Medio-Bajo,975,1,3,0
+PAC-3286,Incompleta,2,9.6,Medio,1548,1,3,1
+PAC-3287,Bilateral Completa,5,26.6,Medio-Bajo,870,1,4,1
+PAC-3288,Incompleta,6,6.7,Bajo,360,1,3,0
+PAC-3289,Asimétrica,6,9.1,Medio,2068,0,4,0
+PAC-3290,Bilateral Completa,10,30.3,Medio-Bajo,675,1,2,0
+PAC-3291,Incompleta,3,12.1,Bajo,407,1,6,1
+PAC-3292,Bilateral Completa,10,46.9,Medio-Bajo,1131,0,3,0
+PAC-3293,Incompleta,6,63.5,Medio,1528,0,3,1
+PAC-3294,Incompleta,10,85.6,Bajo,371,0,1,1
+PAC-3295,Bilateral Completa,10,16.2,Bajo,290,0,2,0
+PAC-3296,Bilateral Completa,5,14.2,Bajo,416,1,4,1
+PAC-3297,Bilateral Completa,8,10.5,Bajo,379,1,3,1
+PAC-3298,Asimétrica,4,55.6,Bajo,272,1,6,1
+PAC-3299,Bilateral Completa,10,66.3,Medio-Bajo,878,0,4,1
+PAC-3300,Incompleta,10,6.6,Bajo,500,0,3,1
+PAC-3301,Bilateral Completa,3,142.6,Medio,1668,1,1,1
+PAC-3302,Incompleta,6,7.7,Medio-Bajo,999,0,5,1
+PAC-3303,Incompleta,10,44.0,Medio-Bajo,608,1,4,1
+PAC-3304,Incompleta,9,66.7,Medio,1212,0,3,1
+PAC-3305,Asimétrica,8,107.4,Bajo,556,1,3,0
+PAC-3306,Bilateral Completa,10,67.6,Medio-Bajo,651,1,3,0
+PAC-3307,Bilateral Completa,8,85.9,Medio-Bajo,808,0,4,1
+PAC-3308,Asimétrica,3,25.7,Medio,2414,0,5,1
+PAC-3309,Bilateral Completa,1,89.3,Medio-Bajo,650,0,6,1
+PAC-3310,Incompleta,3,9.2,Bajo,390,1,6,1
+PAC-3311,Incompleta,3,117.6,Medio,1820,1,3,1
+PAC-3312,Incompleta,6,44.7,Bajo,456,1,2,0
+PAC-3313,Bilateral Completa,3,90.0,Medio,1395,0,1,0
+PAC-3314,Bilateral Completa,2,35.1,Alto,2916,0,6,0
+PAC-3315,Incompleta,9,56.6,Bajo,401,0,5,1
+PAC-3316,Bilateral Completa,6,42.4,Medio-Bajo,1019,1,3,1
+PAC-3317,Incompleta,5,70.8,Bajo,492,0,6,1
+PAC-3318,Bilateral Completa,3,9.3,Bajo,377,0,4,1
+PAC-3319,Bilateral Completa,7,8.1,Medio-Bajo,1121,0,3,0
+PAC-3320,Bilateral Completa,7,19.2,Medio-Bajo,955,1,6,0
+PAC-3321,Asimétrica,4,13.7,Medio,1347,0,1,1
+PAC-3322,Incompleta,10,107.7,Medio-Bajo,964,0,3,1
+PAC-3323,Incompleta,2,17.4,Medio-Bajo,963,0,3,1
+PAC-3324,Asimétrica,2,191.2,Medio,1601,0,5,1
+PAC-3325,Incompleta,8,25.5,Alto,5153,1,2,0
+PAC-3326,Asimétrica,4,15.1,Bajo,478,0,6,1
+PAC-3327,Bilateral Completa,7,83.0,Alto,4098,0,7,0
+PAC-3328,Asimétrica,3,58.8,Bajo,589,1,4,0
+PAC-3329,Bilateral Completa,9,39.5,Medio,1736,1,3,0
+PAC-3330,Asimétrica,10,45.5,Bajo,517,1,4,1
+PAC-3331,Asimétrica,9,68.5,Bajo,530,0,2,1
+PAC-3332,Bilateral Completa,7,18.0,Bajo,260,1,6,1
+PAC-3333,Bilateral Completa,7,285.4,Medio-Bajo,919,0,1,1
+PAC-3334,Incompleta,1,189.0,Bajo,450,1,3,0
+PAC-3335,Bilateral Completa,10,57.5,Bajo,375,0,3,0
+PAC-3336,Incompleta,8,16.1,Medio-Bajo,905,1,4,1
+PAC-3337,Bilateral Completa,2,62.0,Medio,2312,1,5,0
+PAC-3338,Asimétrica,8,8.7,Bajo,365,0,2,1
+PAC-3339,Bilateral Completa,11,6.6,Bajo,426,0,9,1
+PAC-3340,Incompleta,2,19.9,Bajo,263,1,6,1
+PAC-3341,Bilateral Completa,1,36.1,Bajo,506,1,8,1
+PAC-3342,Bilateral Completa,11,106.4,Medio,2432,1,2,0
+PAC-3343,Bilateral Completa,8,69.9,Medio,1480,0,11,1
+PAC-3344,Bilateral Completa,4,72.9,Medio-Bajo,1042,0,9,1
+PAC-3345,Bilateral Completa,11,32.7,Bajo,577,0,4,1
+PAC-3346,Asimétrica,10,26.2,Medio-Bajo,988,0,5,1
+PAC-3347,Bilateral Completa,6,28.2,Medio-Bajo,1082,0,5,1
+PAC-3348,Incompleta,10,224.7,Medio,1346,1,11,1
+PAC-3349,Bilateral Completa,11,7.0,Medio-Bajo,878,0,4,0
+PAC-3350,Incompleta,10,105.9,Medio-Bajo,1120,0,2,0
+PAC-3351,Bilateral Completa,1,48.2,Medio-Bajo,1033,1,6,1
+PAC-3352,Incompleta,9,33.9,Bajo,393,1,4,0
+PAC-3353,Incompleta,11,69.6,Alto,2788,1,3,1
+PAC-3354,Bilateral Completa,7,38.3,Medio-Bajo,985,1,2,1
+PAC-3355,Bilateral Completa,5,108.3,Medio-Bajo,613,0,2,1
+PAC-3356,Bilateral Completa,6,120.5,Bajo,506,0,1,0
+PAC-3357,Bilateral Completa,3,32.4,Medio-Bajo,945,0,3,1
+PAC-3358,Bilateral Completa,9,21.2,Medio-Bajo,944,0,2,1
+PAC-3359,Bilateral Completa,2,49.9,Bajo,456,0,2,1
+PAC-3360,Incompleta,10,126.7,Bajo,595,0,7,1
+PAC-3361,Bilateral Completa,1,16.8,Medio-Bajo,771,1,5,1
+PAC-3362,Bilateral Completa,1,53.8,Medio-Bajo,1063,1,5,1
+PAC-3363,Bilateral Completa,10,54.9,Medio-Bajo,869,0,6,0
+PAC-3364,Incompleta,2,71.0,Bajo,470,1,2,1
+PAC-3365,Bilateral Completa,6,12.1,Medio-Bajo,751,1,7,1
+PAC-3366,Incompleta,6,67.9,Bajo,360,0,3,1
+PAC-3367,Incompleta,9,124.9,Bajo,432,0,0,0
+PAC-3368,Incompleta,10,14.9,Bajo,588,1,9,1
+PAC-3369,Bilateral Completa,4,18.6,Bajo,321,0,4,1
+PAC-3370,Incompleta,8,182.7,Bajo,532,0,4,0
+PAC-3371,Bilateral Completa,4,15.0,Bajo,323,1,4,1
+PAC-3372,Asimétrica,3,101.3,Bajo,464,1,2,1
+PAC-3373,Incompleta,4,38.9,Bajo,577,0,2,1
+PAC-3374,Bilateral Completa,1,19.2,Medio-Bajo,1134,1,4,1
+PAC-3375,Asimétrica,9,107.3,Medio-Bajo,1179,1,10,1
+PAC-3376,Incompleta,11,34.5,Bajo,342,0,5,0
+PAC-3377,Bilateral Completa,5,41.2,Medio,1523,0,1,0
+PAC-3378,Bilateral Completa,7,27.3,Bajo,312,1,4,1
+PAC-3379,Incompleta,3,49.9,Medio-Bajo,945,1,3,1
+PAC-3380,Asimétrica,5,13.9,Bajo,586,1,7,1
+PAC-3381,Asimétrica,10,29.8,Bajo,352,0,4,1
+PAC-3382,Incompleta,4,179.4,Medio-Bajo,814,1,3,1
+PAC-3383,Bilateral Completa,7,19.9,Medio-Bajo,791,0,3,1
+PAC-3384,Incompleta,5,58.5,Medio,1918,0,3,0
+PAC-3385,Incompleta,2,24.7,Medio-Bajo,793,1,2,0
+PAC-3386,Bilateral Completa,3,79.2,Alto,3903,0,1,1
+PAC-3387,Bilateral Completa,8,12.0,Bajo,401,0,4,1
+PAC-3388,Incompleta,3,180.0,Bajo,486,0,4,1
+PAC-3389,Asimétrica,7,35.2,Bajo,337,1,5,1
+PAC-3390,Incompleta,5,18.5,Bajo,260,0,2,1
+PAC-3391,Bilateral Completa,7,8.8,Medio-Bajo,786,0,5,1
+PAC-3392,Bilateral Completa,10,14.3,Medio-Bajo,614,0,1,0
+PAC-3393,Asimétrica,9,41.7,Bajo,515,1,3,0
+PAC-3394,Asimétrica,7,25.5,Medio,1610,0,3,1
+PAC-3395,Bilateral Completa,6,93.3,Medio,2155,1,5,0
+PAC-3396,Incompleta,1,33.2,Bajo,322,1,3,1
+PAC-3397,Asimétrica,4,19.3,Bajo,301,0,4,0
+PAC-3398,Asimétrica,8,53.0,Bajo,377,0,5,1
+PAC-3399,Incompleta,1,66.3,Bajo,277,0,5,1
+PAC-3400,Bilateral Completa,6,14.1,Bajo,314,0,5,1
+PAC-3401,Incompleta,2,14.2,Medio-Bajo,616,0,4,1
+PAC-3402,Bilateral Completa,9,6.9,Bajo,387,1,3,0
+PAC-3403,Asimétrica,8,71.7,Bajo,568,0,5,0
+PAC-3404,Bilateral Completa,9,59.5,Alto,5800,1,6,0
+PAC-3405,Incompleta,9,37.2,Medio-Bajo,809,1,8,1
+PAC-3406,Incompleta,2,97.9,Medio,1942,0,5,1
+PAC-3407,Incompleta,2,86.9,Bajo,490,0,2,1
+PAC-3408,Incompleta,9,49.0,Bajo,319,0,0,0
+PAC-3409,Bilateral Completa,2,106.4,Medio-Bajo,703,0,3,1
+PAC-3410,Incompleta,4,16.5,Bajo,453,1,3,0
+PAC-3411,Bilateral Completa,2,10.9,Bajo,302,1,9,1
+PAC-3412,Bilateral Completa,1,20.7,Medio-Bajo,974,0,2,0
+PAC-3413,Asimétrica,11,7.9,Medio-Bajo,653,1,5,1
+PAC-3414,Incompleta,10,42.9,Bajo,525,1,5,1
+PAC-3415,Incompleta,7,142.9,Medio-Bajo,934,0,3,1
+PAC-3416,Incompleta,11,7.0,Bajo,280,1,1,0
+PAC-3417,Incompleta,5,11.5,Bajo,384,1,4,1
+PAC-3418,Incompleta,3,35.1,Bajo,307,0,3,0
+PAC-3419,Incompleta,8,140.8,Bajo,354,0,11,1
+PAC-3420,Asimétrica,5,24.0,Bajo,515,0,3,1
+PAC-3421,Bilateral Completa,1,40.4,Alto,2752,0,4,1
+PAC-3422,Incompleta,9,7.1,Medio-Bajo,894,0,2,0
+PAC-3423,Incompleta,5,13.0,Medio-Bajo,757,0,2,1
+PAC-3424,Bilateral Completa,3,220.7,Bajo,286,0,5,1
+PAC-3425,Bilateral Completa,6,172.8,Bajo,368,1,4,1
+PAC-3426,Asimétrica,8,5.2,Bajo,316,1,3,0
+PAC-3427,Bilateral Completa,2,156.6,Bajo,491,0,4,1
+PAC-3428,Bilateral Completa,11,56.0,Bajo,548,0,4,1
+PAC-3429,Bilateral Completa,3,106.2,Medio-Bajo,1062,0,5,1
+PAC-3430,Bilateral Completa,7,35.3,Medio-Bajo,700,0,2,0
+PAC-3431,Asimétrica,2,41.2,Medio-Bajo,655,0,7,1
+PAC-3432,Bilateral Completa,11,38.6,Medio-Bajo,931,0,8,1
+PAC-3433,Bilateral Completa,11,60.0,Medio,2035,0,4,1
+PAC-3434,Asimétrica,5,12.5,Bajo,488,1,5,1
+PAC-3435,Bilateral Completa,9,6.5,Bajo,480,0,1,0
+PAC-3436,Incompleta,7,23.4,Bajo,341,1,7,1
+PAC-3437,Asimétrica,3,66.0,Medio-Bajo,1046,0,3,1
+PAC-3438,Incompleta,2,16.3,Alto,2608,0,6,1
+PAC-3439,Incompleta,10,61.0,Bajo,566,0,2,0
+PAC-3440,Bilateral Completa,9,180.2,Medio,2391,0,5,1
+PAC-3441,Bilateral Completa,9,9.9,Medio,1641,0,2,1
+PAC-3442,Bilateral Completa,9,60.8,Bajo,467,1,4,1
+PAC-3443,Bilateral Completa,10,34.3,Bajo,471,1,6,1
+PAC-3444,Incompleta,3,106.3,Bajo,410,0,6,1
+PAC-3445,Bilateral Completa,1,14.7,Alto,4051,0,6,1
+PAC-3446,Incompleta,9,64.0,Bajo,527,0,6,1
+PAC-3447,Bilateral Completa,7,96.0,Medio-Bajo,1168,1,6,1
+PAC-3448,Bilateral Completa,2,149.7,Bajo,311,0,3,1
+PAC-3449,Bilateral Completa,6,62.5,Medio-Bajo,1065,0,4,1
+PAC-3450,Bilateral Completa,11,39.4,Bajo,576,0,4,1
+PAC-3451,Incompleta,9,53.1,Medio-Bajo,1183,0,4,1
+PAC-3452,Incompleta,8,106.6,Medio,2037,0,2,1
+PAC-3453,Asimétrica,11,47.3,Medio,1229,0,4,1
+PAC-3454,Asimétrica,6,6.5,Medio,1558,0,4,1
+PAC-3455,Incompleta,6,138.6,Bajo,537,0,5,1
+PAC-3456,Incompleta,8,63.5,Medio-Bajo,685,1,6,1
+PAC-3457,Bilateral Completa,9,61.4,Bajo,483,0,5,1
+PAC-3458,Bilateral Completa,8,17.1,Bajo,484,1,4,1
+PAC-3459,Asimétrica,1,58.8,Medio-Bajo,912,1,7,1
+PAC-3460,Bilateral Completa,2,30.0,Bajo,514,0,8,1
+PAC-3461,Bilateral Completa,6,57.7,Medio-Bajo,868,1,4,1
+PAC-3462,Bilateral Completa,8,10.6,Alto,3197,0,8,1
+PAC-3463,Bilateral Completa,4,58.6,Bajo,380,0,6,0
+PAC-3464,Incompleta,4,300.0,Medio-Bajo,950,0,9,1
+PAC-3465,Bilateral Completa,2,7.5,Bajo,429,0,8,1
+PAC-3466,Bilateral Completa,10,194.0,Bajo,539,1,1,0
+PAC-3467,Bilateral Completa,1,31.1,Bajo,412,0,3,0
+PAC-3468,Incompleta,10,107.3,Medio,2319,1,7,1
+PAC-3469,Incompleta,9,81.3,Medio,1973,0,5,1
+PAC-3470,Bilateral Completa,7,46.9,Medio,1709,0,1,0
+PAC-3471,Incompleta,9,72.1,Alto,2864,1,8,1
+PAC-3472,Bilateral Completa,2,110.4,Bajo,537,0,2,1
+PAC-3473,Incompleta,10,30.9,Bajo,332,0,6,0
+PAC-3474,Incompleta,5,24.8,Medio-Bajo,824,0,1,0
+PAC-3475,Asimétrica,2,60.1,Medio-Bajo,1011,0,2,1
+PAC-3476,Bilateral Completa,10,87.5,Bajo,472,1,9,1
+PAC-3477,Bilateral Completa,7,76.8,Bajo,367,0,4,1
+PAC-3478,Bilateral Completa,9,84.9,Medio-Bajo,1081,0,1,1
+PAC-3479,Bilateral Completa,3,33.6,Medio-Bajo,791,0,3,1
+PAC-3480,Bilateral Completa,1,90.1,Bajo,328,1,3,1
+PAC-3481,Bilateral Completa,4,11.4,Medio-Bajo,1189,0,2,0
+PAC-3482,Bilateral Completa,4,44.3,Medio-Bajo,706,1,2,0
+PAC-3483,Asimétrica,11,5.3,Medio-Bajo,981,1,5,0
+PAC-3484,Bilateral Completa,6,24.6,Bajo,520,0,7,1
+PAC-3485,Asimétrica,5,27.8,Medio-Bajo,989,0,6,1
+PAC-3486,Asimétrica,5,30.2,Bajo,493,0,4,1
+PAC-3487,Asimétrica,9,64.4,Bajo,322,0,7,1
+PAC-3488,Asimétrica,11,29.6,Medio-Bajo,1067,0,9,1
+PAC-3489,Incompleta,1,34.8,Medio-Bajo,1137,1,3,1
+PAC-3490,Incompleta,8,18.6,Bajo,459,0,4,1
+PAC-3491,Bilateral Completa,8,28.4,Medio-Bajo,672,1,2,1
+PAC-3492,Incompleta,11,17.9,Medio-Bajo,908,0,2,1
+PAC-3493,Asimétrica,8,8.8,Medio-Bajo,1189,1,9,1
+PAC-3494,Bilateral Completa,3,51.2,Medio-Bajo,785,1,6,0
+PAC-3495,Bilateral Completa,10,60.2,Medio-Bajo,852,0,10,1
+PAC-3496,Incompleta,8,53.3,Medio-Bajo,612,1,4,0
+PAC-3497,Incompleta,2,36.1,Bajo,548,1,5,0
+PAC-3498,Asimétrica,8,28.9,Bajo,325,0,3,1
+PAC-3499,Bilateral Completa,8,104.5,Bajo,300,1,3,1
+PAC-3500,Incompleta,3,41.6,Medio-Bajo,748,1,3,1
+PAC-3501,Bilateral Completa,4,37.6,Medio-Bajo,721,1,4,0
+PAC-3502,Asimétrica,9,6.3,Bajo,460,0,3,1
+PAC-3503,Bilateral Completa,9,25.9,Bajo,529,0,0,1
+PAC-3504,Asimétrica,10,28.9,Medio-Bajo,1137,0,5,1
+PAC-3505,Bilateral Completa,9,30.4,Bajo,422,0,4,1
+PAC-3506,Bilateral Completa,10,48.4,Medio-Bajo,755,1,6,1
+PAC-3507,Bilateral Completa,6,43.1,Bajo,487,0,5,0
+PAC-3508,Bilateral Completa,1,51.8,Medio-Bajo,975,1,5,0
+PAC-3509,Incompleta,8,77.4,Medio,1281,0,7,1
+PAC-3510,Bilateral Completa,9,88.8,Bajo,522,0,4,1
+PAC-3511,Bilateral Completa,8,68.3,Medio-Bajo,1179,0,4,1
+PAC-3512,Bilateral Completa,1,160.6,Bajo,293,1,5,0
+PAC-3513,Asimétrica,6,5.9,Medio-Bajo,1172,1,3,0
+PAC-3514,Bilateral Completa,9,15.9,Medio-Bajo,722,0,3,1
+PAC-3515,Bilateral Completa,9,5.4,Bajo,598,1,4,0
+PAC-3516,Incompleta,7,57.1,Medio-Bajo,929,0,6,1
+PAC-3517,Asimétrica,7,119.2,Medio,2190,0,6,1
+PAC-3518,Asimétrica,4,19.0,Bajo,572,0,3,0
+PAC-3519,Asimétrica,7,135.9,Bajo,360,1,1,0
+PAC-3520,Bilateral Completa,10,8.1,Medio,1969,0,5,1
+PAC-3521,Asimétrica,5,141.2,Medio-Bajo,688,0,5,1
+PAC-3522,Incompleta,11,26.7,Medio,1632,0,5,1
+PAC-3523,Asimétrica,10,10.3,Medio-Bajo,698,1,3,0
+PAC-3524,Bilateral Completa,5,38.3,Medio,1738,1,1,0
+PAC-3525,Asimétrica,1,19.8,Bajo,338,1,4,0
+PAC-3526,Bilateral Completa,2,21.8,Medio-Bajo,745,1,4,1
+PAC-3527,Incompleta,9,23.4,Medio,1456,0,1,1
+PAC-3528,Bilateral Completa,2,86.2,Medio-Bajo,788,0,5,1
+PAC-3529,Bilateral Completa,10,43.7,Bajo,489,1,3,1
+PAC-3530,Incompleta,11,23.6,Bajo,445,0,0,0
+PAC-3531,Bilateral Completa,2,52.1,Bajo,546,1,1,0
+PAC-3532,Incompleta,9,68.0,Bajo,414,1,2,0
+PAC-3533,Incompleta,3,20.9,Bajo,556,1,4,0
+PAC-3534,Incompleta,2,31.7,Medio-Bajo,870,1,3,1
+PAC-3535,Bilateral Completa,7,11.5,Medio-Bajo,1119,0,0,0
+PAC-3536,Asimétrica,9,15.0,Bajo,287,1,6,1
+PAC-3537,Incompleta,11,62.1,Medio-Bajo,713,0,2,1
+PAC-3538,Bilateral Completa,6,15.0,Bajo,588,0,4,1
+PAC-3539,Incompleta,7,42.2,Bajo,305,0,2,1
+PAC-3540,Bilateral Completa,3,66.7,Bajo,387,1,3,1
+PAC-3541,Bilateral Completa,11,10.7,Medio-Bajo,933,1,6,1
+PAC-3542,Incompleta,3,46.9,Bajo,426,1,5,1
+PAC-3543,Incompleta,8,19.8,Bajo,418,0,1,0
+PAC-3544,Bilateral Completa,7,169.7,Bajo,588,1,2,1
+PAC-3545,Bilateral Completa,5,38.0,Medio,1997,0,3,1
+PAC-3546,Asimétrica,6,87.0,Bajo,510,0,4,1
+PAC-3547,Bilateral Completa,9,45.0,Medio-Bajo,798,0,7,1
+PAC-3548,Bilateral Completa,3,7.2,Medio-Bajo,810,0,4,1
+PAC-3549,Asimétrica,3,55.1,Medio-Bajo,886,1,2,1
+PAC-3550,Bilateral Completa,11,156.2,Medio,1942,0,3,1
+PAC-3551,Incompleta,6,51.0,Bajo,272,0,5,1
+PAC-3552,Bilateral Completa,11,90.5,Bajo,297,0,2,1
+PAC-3553,Incompleta,8,112.8,Medio,2332,0,6,1
+PAC-3554,Bilateral Completa,5,17.9,Medio-Bajo,895,0,3,1
+PAC-3555,Asimétrica,1,16.9,Medio-Bajo,605,1,2,1
+PAC-3556,Bilateral Completa,3,52.2,Medio-Bajo,1149,1,7,1
+PAC-3557,Incompleta,8,31.5,Medio-Bajo,802,1,4,1
+PAC-3558,Asimétrica,4,96.6,Medio,1524,1,2,0
+PAC-3559,Asimétrica,9,120.1,Alto,5372,1,7,1
+PAC-3560,Bilateral Completa,6,26.8,Medio-Bajo,843,0,5,1
+PAC-3561,Asimétrica,10,18.5,Bajo,576,0,3,1
+PAC-3562,Bilateral Completa,4,80.8,Medio,2186,0,2,1
+PAC-3563,Incompleta,4,21.1,Bajo,296,0,4,1
+PAC-3564,Bilateral Completa,10,91.5,Bajo,498,0,2,1
+PAC-3565,Bilateral Completa,5,32.6,Medio,2236,1,3,0
+PAC-3566,Bilateral Completa,7,60.1,Bajo,339,1,3,0
+PAC-3567,Incompleta,7,10.0,Bajo,591,0,2,1
+PAC-3568,Incompleta,10,53.9,Bajo,597,1,10,1
+PAC-3569,Bilateral Completa,7,35.1,Medio,2444,1,7,1
+PAC-3570,Incompleta,5,49.2,Medio-Bajo,672,1,3,1
+PAC-3571,Asimétrica,9,14.2,Medio-Bajo,645,1,2,0
+PAC-3572,Incompleta,2,71.8,Bajo,523,0,6,1
+PAC-3573,Bilateral Completa,8,104.3,Medio-Bajo,1154,0,4,0
+PAC-3574,Asimétrica,10,17.2,Medio-Bajo,807,0,4,1
+PAC-3575,Incompleta,8,10.0,Bajo,598,0,5,1
+PAC-3576,Bilateral Completa,3,6.2,Bajo,352,1,4,1
+PAC-3577,Incompleta,5,56.4,Bajo,373,1,5,1
+PAC-3578,Bilateral Completa,8,51.7,Alto,5581,1,3,0
+PAC-3579,Incompleta,10,44.6,Medio-Bajo,928,1,6,0
+PAC-3580,Asimétrica,9,18.2,Medio,2410,0,5,1
+PAC-3581,Bilateral Completa,7,29.8,Bajo,280,0,2,0
+PAC-3582,Bilateral Completa,4,50.1,Medio-Bajo,659,0,2,0
+PAC-3583,Bilateral Completa,4,39.3,Medio-Bajo,1041,1,5,0
+PAC-3584,Bilateral Completa,3,225.3,Medio-Bajo,816,0,5,1
+PAC-3585,Incompleta,11,12.3,Alto,3410,0,5,1
+PAC-3586,Incompleta,8,64.4,Bajo,251,0,8,1
+PAC-3587,Bilateral Completa,6,30.9,Bajo,273,0,9,1
+PAC-3588,Asimétrica,10,32.9,Medio-Bajo,955,0,7,1
+PAC-3589,Bilateral Completa,6,68.2,Medio-Bajo,764,0,5,1
+PAC-3590,Asimétrica,10,64.0,Medio-Bajo,690,0,4,1
+PAC-3591,Bilateral Completa,10,242.0,Bajo,416,1,6,1
+PAC-3592,Incompleta,9,11.9,Medio-Bajo,806,0,2,1
+PAC-3593,Bilateral Completa,11,10.5,Bajo,531,1,2,0
+PAC-3594,Bilateral Completa,3,69.4,Bajo,314,1,6,1
+PAC-3595,Asimétrica,4,48.2,Medio-Bajo,1115,0,7,1
+PAC-3596,Bilateral Completa,3,21.0,Medio-Bajo,756,0,5,1
+PAC-3597,Asimétrica,3,9.1,Bajo,498,1,1,0
+PAC-3598,Incompleta,1,9.5,Bajo,506,0,6,1
+PAC-3599,Asimétrica,10,117.3,Bajo,484,1,4,1
+PAC-3600,Asimétrica,6,15.7,Bajo,555,0,3,1
+PAC-3601,Bilateral Completa,9,24.5,Medio-Bajo,994,0,1,1
+PAC-3602,Incompleta,5,17.9,Medio,2297,0,7,1
+PAC-3603,Asimétrica,10,26.9,Bajo,436,0,2,1
+PAC-3604,Bilateral Completa,2,8.6,Medio-Bajo,1173,1,7,0
+PAC-3605,Asimétrica,10,41.6,Medio,1822,0,8,1
+PAC-3606,Incompleta,4,8.5,Medio,1929,1,6,0
+PAC-3607,Incompleta,6,85.6,Bajo,489,0,3,0
+PAC-3608,Bilateral Completa,7,18.3,Alto,5080,0,2,0
+PAC-3609,Incompleta,7,43.8,Bajo,390,0,5,1
+PAC-3610,Bilateral Completa,4,111.0,Bajo,514,1,6,1
+PAC-3611,Asimétrica,10,57.6,Bajo,388,1,0,0
+PAC-3612,Incompleta,10,43.1,Medio-Bajo,1058,1,4,0
+PAC-3613,Bilateral Completa,5,24.6,Bajo,319,0,5,1
+PAC-3614,Asimétrica,4,25.2,Bajo,367,0,5,1
+PAC-3615,Incompleta,10,60.4,Bajo,447,1,4,0
+PAC-3616,Asimétrica,6,262.0,Medio,1404,0,4,1
+PAC-3617,Bilateral Completa,11,59.2,Medio,1767,0,2,1
+PAC-3618,Incompleta,7,45.8,Bajo,536,1,1,0
+PAC-3619,Incompleta,2,70.6,Medio,2181,0,3,1
+PAC-3620,Incompleta,10,36.3,Medio,2004,0,6,1
+PAC-3621,Bilateral Completa,3,8.1,Medio-Bajo,1030,0,2,0
+PAC-3622,Bilateral Completa,11,46.3,Bajo,574,1,2,1
+PAC-3623,Asimétrica,8,163.1,Medio-Bajo,1041,1,1,0
+PAC-3624,Bilateral Completa,7,14.6,Medio,2003,1,3,0
+PAC-3625,Asimétrica,1,63.6,Medio-Bajo,887,1,5,1
+PAC-3626,Bilateral Completa,4,16.2,Bajo,475,1,6,1
+PAC-3627,Asimétrica,5,43.4,Medio-Bajo,663,0,5,0
+PAC-3628,Incompleta,3,10.1,Medio-Bajo,1159,0,4,1
+PAC-3629,Incompleta,4,34.9,Medio-Bajo,1097,0,10,1
+PAC-3630,Bilateral Completa,10,75.6,Bajo,586,1,0,0
+PAC-3631,Asimétrica,10,26.4,Bajo,309,0,5,1
+PAC-3632,Incompleta,10,59.7,Medio,1456,0,7,1
+PAC-3633,Incompleta,7,84.3,Medio,1776,0,2,1
+PAC-3634,Bilateral Completa,8,136.0,Bajo,488,0,4,1
+PAC-3635,Incompleta,9,18.4,Alto,2537,0,3,1
+PAC-3636,Asimétrica,2,30.5,Bajo,274,0,7,1
+PAC-3637,Bilateral Completa,4,13.3,Medio-Bajo,1009,1,5,1
+PAC-3638,Incompleta,1,249.5,Medio-Bajo,1060,0,3,1
+PAC-3639,Bilateral Completa,3,135.9,Medio,2187,1,2,1
+PAC-3640,Asimétrica,8,43.8,Medio,1556,1,4,0
+PAC-3641,Asimétrica,7,97.3,Bajo,546,1,6,1
+PAC-3642,Bilateral Completa,8,41.8,Medio,2381,1,2,1
+PAC-3643,Bilateral Completa,11,53.9,Bajo,306,1,4,0
+PAC-3644,Incompleta,6,9.7,Medio-Bajo,1032,1,7,1
+PAC-3645,Bilateral Completa,5,75.4,Medio-Bajo,647,1,2,0
+PAC-3646,Bilateral Completa,10,11.8,Medio-Bajo,927,0,5,1
+PAC-3647,Bilateral Completa,9,92.5,Bajo,305,1,8,1
+PAC-3648,Bilateral Completa,5,81.2,Medio,1776,0,1,1
+PAC-3649,Bilateral Completa,9,66.7,Bajo,517,1,4,1
+PAC-3650,Bilateral Completa,4,6.8,Bajo,318,0,6,1
+PAC-3651,Bilateral Completa,5,23.1,Medio-Bajo,1048,0,4,1
+PAC-3652,Incompleta,1,20.3,Medio-Bajo,856,0,4,1
+PAC-3653,Incompleta,6,27.3,Medio,1871,0,2,1
+PAC-3654,Bilateral Completa,3,9.6,Bajo,483,1,4,0
+PAC-3655,Incompleta,11,143.2,Bajo,380,0,5,1
+PAC-3656,Asimétrica,10,45.3,Medio,1248,0,3,1
+PAC-3657,Bilateral Completa,2,23.2,Medio-Bajo,915,0,6,1
+PAC-3658,Asimétrica,6,30.3,Bajo,251,0,2,0
+PAC-3659,Incompleta,1,34.6,Medio-Bajo,744,1,4,1
+PAC-3660,Bilateral Completa,9,50.9,Medio-Bajo,965,0,6,1
+PAC-3661,Bilateral Completa,5,41.3,Medio-Bajo,1019,1,3,0
+PAC-3662,Incompleta,7,130.9,Medio-Bajo,1172,0,5,1
+PAC-3663,Incompleta,11,39.4,Medio,2043,1,5,1
+PAC-3664,Bilateral Completa,10,247.4,Medio,2115,0,1,1
+PAC-3665,Asimétrica,9,100.3,Medio-Bajo,1033,1,5,1
+PAC-3666,Incompleta,9,16.7,Bajo,380,1,6,0
+PAC-3667,Bilateral Completa,7,138.4,Medio,1256,0,2,0
+PAC-3668,Bilateral Completa,4,11.2,Medio-Bajo,1161,0,3,1
+PAC-3669,Bilateral Completa,4,90.0,Medio-Bajo,777,0,0,0
+PAC-3670,Bilateral Completa,7,29.0,Bajo,542,1,2,0
+PAC-3671,Bilateral Completa,8,110.2,Medio,1245,1,5,1
+PAC-3672,Incompleta,7,106.3,Medio-Bajo,769,0,3,1
+PAC-3673,Incompleta,11,87.0,Bajo,520,0,3,1
+PAC-3674,Bilateral Completa,10,83.0,Bajo,585,0,5,1
+PAC-3675,Incompleta,4,23.2,Medio,1338,0,5,0
+PAC-3676,Bilateral Completa,4,9.2,Bajo,496,0,8,1
+PAC-3677,Bilateral Completa,8,30.8,Alto,5719,0,3,1
+PAC-3678,Incompleta,9,14.5,Medio-Bajo,829,0,4,1
+PAC-3679,Bilateral Completa,7,64.4,Medio-Bajo,973,0,5,1
+PAC-3680,Asimétrica,3,26.2,Bajo,329,0,5,1
+PAC-3681,Asimétrica,10,190.7,Bajo,343,0,6,1
+PAC-3682,Incompleta,1,56.2,Medio,1937,0,2,1
+PAC-3683,Bilateral Completa,5,91.4,Bajo,314,1,0,0
+PAC-3684,Bilateral Completa,6,12.1,Medio-Bajo,687,1,3,1
+PAC-3685,Bilateral Completa,11,104.0,Bajo,337,1,4,1
+PAC-3686,Incompleta,9,133.0,Bajo,450,0,4,0
+PAC-3687,Asimétrica,5,38.4,Bajo,463,1,4,1
+PAC-3688,Incompleta,1,51.6,Medio-Bajo,803,1,4,1
+PAC-3689,Incompleta,11,77.4,Alto,4436,0,5,1
+PAC-3690,Incompleta,11,14.6,Bajo,338,0,6,1
+PAC-3691,Asimétrica,4,39.9,Bajo,310,0,5,1
+PAC-3692,Bilateral Completa,2,30.4,Bajo,520,0,7,1
+PAC-3693,Asimétrica,4,12.9,Medio-Bajo,1138,0,3,0
+PAC-3694,Incompleta,7,27.9,Bajo,463,0,6,1
+PAC-3695,Bilateral Completa,9,8.5,Medio,1273,0,1,0
+PAC-3696,Asimétrica,3,6.3,Medio-Bajo,660,0,0,1
+PAC-3697,Asimétrica,3,12.3,Medio-Bajo,1142,1,3,0
+PAC-3698,Incompleta,11,170.0,Bajo,468,0,3,1
+PAC-3699,Asimétrica,4,44.9,Alto,4559,1,9,0
+PAC-3700,Bilateral Completa,7,173.8,Bajo,551,1,4,1
+PAC-3701,Bilateral Completa,6,33.3,Bajo,281,0,3,1
+PAC-3702,Bilateral Completa,5,23.7,Medio-Bajo,759,1,3,1
+PAC-3703,Incompleta,4,40.3,Medio-Bajo,836,0,8,0
+PAC-3704,Bilateral Completa,8,33.9,Bajo,476,0,2,1
+PAC-3705,Bilateral Completa,4,10.6,Bajo,430,0,2,1
+PAC-3706,Incompleta,3,56.2,Medio-Bajo,1157,0,5,1
+PAC-3707,Bilateral Completa,7,17.2,Bajo,590,0,1,1
+PAC-3708,Bilateral Completa,2,53.3,Medio,2303,1,1,1
+PAC-3709,Bilateral Completa,4,57.5,Medio-Bajo,1072,0,6,1
+PAC-3710,Bilateral Completa,8,13.2,Bajo,408,0,4,1
+PAC-3711,Bilateral Completa,4,8.2,Medio-Bajo,711,0,5,1
+PAC-3712,Bilateral Completa,10,80.9,Bajo,541,0,4,1
+PAC-3713,Bilateral Completa,7,35.8,Medio-Bajo,982,1,7,1
+PAC-3714,Bilateral Completa,2,8.0,Medio-Bajo,616,1,4,0
+PAC-3715,Bilateral Completa,11,268.6,Bajo,580,1,6,1
+PAC-3716,Asimétrica,5,8.0,Medio-Bajo,1085,1,6,1
+PAC-3717,Bilateral Completa,4,64.4,Alto,5977,0,6,1
+PAC-3718,Incompleta,9,210.8,Bajo,366,0,3,1
+PAC-3719,Bilateral Completa,7,18.7,Medio,2079,1,6,0
+PAC-3720,Bilateral Completa,9,12.7,Bajo,364,0,3,1
+PAC-3721,Bilateral Completa,11,11.5,Bajo,532,0,2,1
+PAC-3722,Asimétrica,10,23.1,Bajo,286,1,6,1
+PAC-3723,Bilateral Completa,7,10.3,Bajo,551,1,5,1
+PAC-3724,Incompleta,2,63.9,Bajo,362,0,3,1
+PAC-3725,Incompleta,2,8.2,Bajo,284,0,3,1
+PAC-3726,Bilateral Completa,2,40.6,Medio,1843,0,4,1
+PAC-3727,Asimétrica,5,290.6,Medio,1535,1,3,1
+PAC-3728,Bilateral Completa,1,89.1,Medio-Bajo,746,0,1,0
+PAC-3729,Bilateral Completa,7,52.8,Bajo,371,1,2,1
+PAC-3730,Bilateral Completa,2,23.3,Bajo,330,1,6,0
+PAC-3731,Bilateral Completa,4,53.9,Bajo,422,0,4,1
+PAC-3732,Bilateral Completa,9,42.4,Medio-Bajo,974,1,1,0
+PAC-3733,Incompleta,8,32.8,Medio,1262,1,2,0
+PAC-3734,Bilateral Completa,10,12.0,Bajo,405,1,3,0
+PAC-3735,Incompleta,2,113.8,Bajo,571,1,3,1
+PAC-3736,Bilateral Completa,4,34.9,Medio-Bajo,765,0,4,1
+PAC-3737,Asimétrica,4,15.8,Bajo,334,0,5,1
+PAC-3738,Bilateral Completa,2,27.9,Bajo,386,1,6,0
+PAC-3739,Incompleta,2,31.7,Medio-Bajo,1060,1,8,0
+PAC-3740,Incompleta,5,92.9,Medio-Bajo,1058,1,4,1
+PAC-3741,Bilateral Completa,11,71.1,Bajo,438,0,5,1
+PAC-3742,Bilateral Completa,4,78.3,Bajo,251,1,6,1
+PAC-3743,Bilateral Completa,8,5.6,Alto,4911,0,2,1
+PAC-3744,Bilateral Completa,4,31.9,Bajo,321,1,7,1
+PAC-3745,Bilateral Completa,8,37.8,Bajo,375,1,5,0
+PAC-3746,Incompleta,5,6.0,Bajo,419,0,3,1
+PAC-3747,Bilateral Completa,1,20.0,Bajo,454,0,10,1
+PAC-3748,Incompleta,9,76.4,Bajo,562,1,2,1
+PAC-3749,Bilateral Completa,8,12.4,Medio,1536,0,7,1
+PAC-3750,Asimétrica,1,43.3,Bajo,444,0,3,1
+PAC-3751,Bilateral Completa,3,17.1,Bajo,407,0,2,1
+PAC-3752,Bilateral Completa,3,5.6,Medio-Bajo,874,0,2,1
+PAC-3753,Bilateral Completa,5,18.8,Medio-Bajo,606,0,4,1
+PAC-3754,Bilateral Completa,7,191.2,Medio,2104,0,7,1
+PAC-3755,Incompleta,1,85.9,Medio,2178,1,1,1
+PAC-3756,Incompleta,1,165.4,Bajo,303,0,3,1
+PAC-3757,Incompleta,10,38.5,Medio-Bajo,1172,0,5,1
+PAC-3758,Incompleta,6,10.8,Medio-Bajo,1198,1,5,0
+PAC-3759,Asimétrica,5,44.7,Alto,3269,1,3,0
+PAC-3760,Incompleta,3,35.3,Medio-Bajo,777,1,2,0
+PAC-3761,Bilateral Completa,3,98.0,Alto,4789,0,2,1
+PAC-3762,Bilateral Completa,4,10.2,Medio-Bajo,802,0,6,1
+PAC-3763,Bilateral Completa,11,38.5,Bajo,280,0,3,0
+PAC-3764,Incompleta,10,13.1,Medio-Bajo,1061,1,3,1
+PAC-3765,Bilateral Completa,2,24.6,Alto,5651,0,3,0
+PAC-3766,Incompleta,9,71.8,Medio,1965,0,3,1
+PAC-3767,Bilateral Completa,4,37.3,Bajo,536,1,3,1
+PAC-3768,Asimétrica,10,28.6,Medio-Bajo,725,0,4,1
+PAC-3769,Asimétrica,3,30.1,Bajo,296,0,1,1
+PAC-3770,Bilateral Completa,10,35.8,Bajo,455,0,7,1
+PAC-3771,Asimétrica,11,81.9,Bajo,356,0,6,1
+PAC-3772,Asimétrica,7,116.3,Bajo,524,0,7,1
+PAC-3773,Asimétrica,9,160.4,Medio,1322,1,4,1
+PAC-3774,Bilateral Completa,2,82.3,Bajo,383,0,6,1
+PAC-3775,Incompleta,6,23.9,Medio,2040,1,6,1
+PAC-3776,Bilateral Completa,5,63.3,Bajo,299,1,4,1
+PAC-3777,Incompleta,1,33.8,Bajo,586,1,5,1
+PAC-3778,Incompleta,11,19.7,Bajo,344,0,4,1
+PAC-3779,Incompleta,7,96.9,Bajo,517,0,6,0
+PAC-3780,Bilateral Completa,1,7.0,Bajo,272,1,2,0
+PAC-3781,Asimétrica,10,121.0,Bajo,303,1,6,1
+PAC-3782,Bilateral Completa,9,35.9,Medio-Bajo,834,0,7,1
+PAC-3783,Bilateral Completa,4,55.7,Bajo,308,0,5,1
+PAC-3784,Incompleta,8,58.8,Bajo,413,0,2,1
+PAC-3785,Asimétrica,1,117.7,Bajo,508,0,5,1
+PAC-3786,Asimétrica,5,55.6,Medio,2025,0,4,1
+PAC-3787,Incompleta,3,52.6,Medio,1415,1,6,0
+PAC-3788,Bilateral Completa,4,8.4,Medio-Bajo,782,0,3,1
+PAC-3789,Bilateral Completa,4,41.5,Bajo,306,1,6,1
+PAC-3790,Bilateral Completa,8,13.1,Bajo,394,0,3,1
+PAC-3791,Bilateral Completa,10,71.9,Alto,5482,1,5,0
+PAC-3792,Bilateral Completa,10,40.9,Bajo,339,0,5,1
+PAC-3793,Bilateral Completa,3,62.0,Bajo,560,0,3,1
+PAC-3794,Bilateral Completa,1,7.1,Bajo,294,0,7,1
+PAC-3795,Asimétrica,5,9.4,Bajo,506,1,5,0
+PAC-3796,Incompleta,2,68.0,Bajo,270,0,0,1
+PAC-3797,Incompleta,11,8.7,Medio-Bajo,1132,1,2,1
+PAC-3798,Bilateral Completa,6,8.7,Bajo,301,1,6,0
+PAC-3799,Bilateral Completa,4,5.6,Medio-Bajo,937,1,4,0
+PAC-3800,Bilateral Completa,9,161.8,Bajo,420,0,5,1
+PAC-3801,Bilateral Completa,7,71.9,Bajo,316,0,1,1
+PAC-3802,Incompleta,2,26.8,Medio,1499,0,2,0
+PAC-3803,Bilateral Completa,7,22.6,Bajo,409,0,3,0
+PAC-3804,Asimétrica,10,26.5,Medio,1977,0,7,1
+PAC-3805,Asimétrica,8,79.5,Medio-Bajo,831,0,5,1
+PAC-3806,Bilateral Completa,3,59.1,Bajo,574,1,6,1
+PAC-3807,Bilateral Completa,3,15.2,Alto,5639,1,7,0
+PAC-3808,Asimétrica,11,14.6,Bajo,277,0,1,0
+PAC-3809,Incompleta,2,10.2,Medio,2274,0,6,1
+PAC-3810,Incompleta,1,59.0,Bajo,430,0,2,1
+PAC-3811,Incompleta,3,77.3,Medio,2483,0,2,1
+PAC-3812,Bilateral Completa,10,20.4,Bajo,328,1,3,1
+PAC-3813,Bilateral Completa,11,6.1,Medio-Bajo,1185,1,7,1
+PAC-3814,Bilateral Completa,7,9.3,Medio-Bajo,783,0,4,1
+PAC-3815,Bilateral Completa,11,176.9,Medio,2246,1,3,0
+PAC-3816,Bilateral Completa,9,22.5,Medio,1328,1,4,1
+PAC-3817,Bilateral Completa,9,78.3,Medio,1490,0,2,1
+PAC-3818,Asimétrica,6,54.0,Medio,1700,1,1,0
+PAC-3819,Incompleta,6,29.1,Bajo,435,0,5,1
+PAC-3820,Bilateral Completa,11,16.5,Bajo,308,0,5,0
+PAC-3821,Bilateral Completa,5,11.5,Bajo,250,0,5,1
+PAC-3822,Incompleta,2,52.7,Bajo,380,1,4,1
+PAC-3823,Bilateral Completa,7,79.5,Bajo,316,1,1,1
+PAC-3824,Incompleta,1,56.6,Medio-Bajo,1066,0,3,0
+PAC-3825,Asimétrica,6,42.8,Bajo,534,1,4,0
+PAC-3826,Incompleta,4,7.1,Medio-Bajo,1016,1,2,0
+PAC-3827,Bilateral Completa,3,177.9,Bajo,349,1,8,1
+PAC-3828,Incompleta,11,85.2,Bajo,438,1,5,1
+PAC-3829,Bilateral Completa,1,22.3,Medio-Bajo,987,1,7,1
+PAC-3830,Bilateral Completa,6,200.5,Medio-Bajo,840,0,3,1
+PAC-3831,Bilateral Completa,7,51.1,Medio-Bajo,1016,1,0,0
+PAC-3832,Asimétrica,11,48.7,Medio-Bajo,775,1,4,1
+PAC-3833,Bilateral Completa,1,73.9,Bajo,590,0,3,1
+PAC-3834,Asimétrica,11,88.5,Medio-Bajo,832,0,4,1
+PAC-3835,Bilateral Completa,1,58.4,Bajo,400,1,5,1
+PAC-3836,Bilateral Completa,7,11.9,Bajo,526,1,2,0
+PAC-3837,Incompleta,11,25.6,Bajo,478,0,6,0
+PAC-3838,Bilateral Completa,6,136.6,Bajo,420,0,3,1
+PAC-3839,Bilateral Completa,7,17.7,Bajo,472,0,8,1
+PAC-3840,Bilateral Completa,8,28.3,Alto,2712,0,4,1
+PAC-3841,Bilateral Completa,8,33.3,Alto,5853,1,7,0
+PAC-3842,Bilateral Completa,9,33.9,Bajo,290,0,6,1
+PAC-3843,Incompleta,9,52.5,Bajo,371,1,4,1
+PAC-3844,Incompleta,7,148.3,Bajo,476,0,4,1
+PAC-3845,Asimétrica,9,18.8,Bajo,543,0,4,1
+PAC-3846,Incompleta,6,11.5,Medio,1799,0,7,1
+PAC-3847,Incompleta,9,16.0,Bajo,516,1,6,1
+PAC-3848,Incompleta,11,114.0,Medio-Bajo,1140,1,5,0
+PAC-3849,Asimétrica,2,56.9,Bajo,496,0,3,1
+PAC-3850,Bilateral Completa,11,21.8,Alto,4351,0,1,0
+PAC-3851,Bilateral Completa,2,89.6,Bajo,493,0,2,1
+PAC-3852,Incompleta,6,103.8,Medio-Bajo,660,1,1,1
+PAC-3853,Bilateral Completa,3,98.7,Bajo,396,1,5,0
+PAC-3854,Asimétrica,2,130.6,Medio-Bajo,933,0,3,1
+PAC-3855,Incompleta,8,19.5,Bajo,391,1,3,0
+PAC-3856,Bilateral Completa,7,75.3,Bajo,293,0,7,1
+PAC-3857,Incompleta,8,35.9,Medio,1343,0,4,1
+PAC-3858,Bilateral Completa,6,97.3,Medio,1532,0,3,1
+PAC-3859,Asimétrica,9,70.2,Medio,2197,0,4,1
+PAC-3860,Asimétrica,9,79.9,Medio-Bajo,1096,0,5,1
+PAC-3861,Incompleta,2,58.4,Medio,1254,1,10,1
+PAC-3862,Bilateral Completa,10,14.8,Bajo,556,0,9,1
+PAC-3863,Bilateral Completa,5,44.4,Bajo,410,1,3,1
+PAC-3864,Incompleta,9,213.9,Bajo,534,0,3,1
+PAC-3865,Asimétrica,3,143.5,Medio-Bajo,924,1,4,1
+PAC-3866,Bilateral Completa,5,7.2,Bajo,447,0,7,1
+PAC-3867,Bilateral Completa,8,14.0,Bajo,408,1,4,1
+PAC-3868,Bilateral Completa,2,12.1,Medio-Bajo,679,1,6,1
+PAC-3869,Incompleta,6,69.7,Medio,2254,0,4,1
+PAC-3870,Asimétrica,11,90.1,Bajo,361,1,5,0
+PAC-3871,Bilateral Completa,4,17.0,Bajo,295,0,5,0
+PAC-3872,Bilateral Completa,6,40.2,Bajo,454,0,6,1
+PAC-3873,Incompleta,3,96.8,Bajo,301,1,2,0
+PAC-3874,Asimétrica,6,71.0,Bajo,387,0,5,0
+PAC-3875,Asimétrica,7,44.1,Medio-Bajo,1071,1,4,1
+PAC-3876,Incompleta,10,49.6,Medio-Bajo,673,1,5,1
+PAC-3877,Bilateral Completa,3,40.5,Medio-Bajo,1152,0,4,0
+PAC-3878,Bilateral Completa,5,22.7,Bajo,326,0,8,1
+PAC-3879,Asimétrica,8,46.6,Medio,1763,1,4,1
+PAC-3880,Asimétrica,2,63.4,Bajo,336,0,4,1
+PAC-3881,Incompleta,7,108.3,Medio-Bajo,847,0,3,1
+PAC-3882,Incompleta,1,55.6,Medio,2343,0,4,1
+PAC-3883,Asimétrica,7,76.6,Bajo,316,1,6,1
+PAC-3884,Bilateral Completa,1,13.7,Bajo,310,0,7,1
+PAC-3885,Bilateral Completa,4,36.0,Medio,1902,0,3,1
+PAC-3886,Incompleta,4,5.5,Bajo,438,0,8,1
+PAC-3887,Asimétrica,5,19.2,Medio-Bajo,885,0,2,1
+PAC-3888,Incompleta,2,69.8,Bajo,345,0,7,1
+PAC-3889,Asimétrica,11,245.2,Medio-Bajo,911,1,4,1
+PAC-3890,Bilateral Completa,6,10.2,Bajo,558,0,6,1
+PAC-3891,Bilateral Completa,6,30.7,Bajo,512,1,1,0
+PAC-3892,Bilateral Completa,8,85.5,Medio-Bajo,696,1,5,1
+PAC-3893,Asimétrica,10,16.4,Bajo,362,0,4,1
+PAC-3894,Bilateral Completa,1,45.5,Bajo,374,1,6,1
+PAC-3895,Bilateral Completa,4,71.0,Bajo,381,0,4,1
+PAC-3896,Asimétrica,2,52.9,Bajo,370,0,3,1
+PAC-3897,Bilateral Completa,11,15.4,Bajo,446,1,7,1
+PAC-3898,Asimétrica,8,27.0,Bajo,543,0,3,1
+PAC-3899,Incompleta,4,81.6,Medio,1833,0,6,1
+PAC-3900,Bilateral Completa,8,45.4,Bajo,531,0,5,0
+PAC-3901,Incompleta,2,5.3,Medio-Bajo,638,0,1,1
+PAC-3902,Asimétrica,4,76.6,Bajo,303,1,5,1
+PAC-3903,Bilateral Completa,9,6.8,Bajo,410,0,2,0
+PAC-3904,Asimétrica,5,73.5,Medio,1488,0,5,1
+PAC-3905,Bilateral Completa,6,16.3,Bajo,449,1,4,1
+PAC-3906,Bilateral Completa,10,163.6,Alto,4311,0,9,0
+PAC-3907,Bilateral Completa,9,27.9,Bajo,265,0,6,1
+PAC-3908,Asimétrica,9,24.8,Medio-Bajo,1102,1,7,1
+PAC-3909,Incompleta,7,13.1,Medio-Bajo,847,1,2,0
+PAC-3910,Bilateral Completa,11,23.2,Medio,2441,0,5,1
+PAC-3911,Asimétrica,2,109.6,Medio-Bajo,686,1,5,1
+PAC-3912,Bilateral Completa,7,285.4,Medio-Bajo,681,0,2,1
+PAC-3913,Bilateral Completa,9,28.0,Bajo,311,1,2,0
+PAC-3914,Bilateral Completa,2,34.8,Bajo,536,0,3,0
+PAC-3915,Incompleta,7,69.0,Medio,2265,1,4,1
+PAC-3916,Incompleta,7,113.7,Bajo,261,1,3,1
+PAC-3917,Asimétrica,3,50.0,Bajo,570,0,1,1
+PAC-3918,Bilateral Completa,6,29.8,Medio-Bajo,714,0,3,1
+PAC-3919,Bilateral Completa,8,31.6,Bajo,467,0,4,1
+PAC-3920,Asimétrica,10,64.5,Alto,4172,0,7,1
+PAC-3921,Bilateral Completa,8,5.2,Medio-Bajo,705,1,5,0
+PAC-3922,Asimétrica,3,53.3,Medio-Bajo,1127,1,0,0
+PAC-3923,Bilateral Completa,6,27.0,Medio,2045,0,3,0
+PAC-3924,Bilateral Completa,2,84.0,Bajo,475,0,9,1
+PAC-3925,Bilateral Completa,2,9.9,Bajo,491,0,2,1
+PAC-3926,Bilateral Completa,8,49.4,Medio-Bajo,1007,1,4,1
+PAC-3927,Bilateral Completa,11,37.8,Bajo,390,0,6,1
+PAC-3928,Bilateral Completa,10,56.4,Medio-Bajo,620,1,5,1
+PAC-3929,Bilateral Completa,5,8.4,Medio,2014,0,3,0
+PAC-3930,Bilateral Completa,5,48.4,Bajo,452,0,1,1
+PAC-3931,Bilateral Completa,11,46.2,Bajo,334,1,1,0
+PAC-3932,Bilateral Completa,4,46.1,Alto,2666,0,2,1
+PAC-3933,Bilateral Completa,11,51.3,Bajo,321,1,5,1
+PAC-3934,Bilateral Completa,10,61.4,Medio-Bajo,1120,0,6,1
+PAC-3935,Incompleta,4,86.7,Bajo,530,1,2,0
+PAC-3936,Incompleta,8,20.7,Medio,1672,0,3,0
+PAC-3937,Incompleta,3,92.2,Medio-Bajo,857,1,2,0
+PAC-3938,Bilateral Completa,11,39.5,Medio-Bajo,874,0,2,0
+PAC-3939,Bilateral Completa,3,9.0,Medio,2243,0,5,1
+PAC-3940,Bilateral Completa,8,8.0,Bajo,482,0,2,0
+PAC-3941,Asimétrica,3,25.3,Bajo,470,1,3,0
+PAC-3942,Bilateral Completa,2,81.8,Medio,1525,0,6,1
+PAC-3943,Bilateral Completa,11,66.5,Bajo,266,1,5,1
+PAC-3944,Bilateral Completa,5,82.7,Medio-Bajo,688,0,6,1
+PAC-3945,Asimétrica,11,41.4,Medio,1685,1,1,1
+PAC-3946,Incompleta,3,34.0,Medio-Bajo,949,0,1,0
+PAC-3947,Bilateral Completa,6,13.0,Medio-Bajo,683,1,7,1
+PAC-3948,Bilateral Completa,11,24.9,Medio,1586,1,8,1
+PAC-3949,Asimétrica,7,33.5,Medio,1286,1,1,0
+PAC-3950,Bilateral Completa,3,9.6,Bajo,556,0,4,1
+PAC-3951,Incompleta,9,17.5,Bajo,587,1,5,1
+PAC-3952,Incompleta,10,50.6,Bajo,403,0,3,1
+PAC-3953,Bilateral Completa,1,71.5,Medio-Bajo,1039,0,3,1
+PAC-3954,Bilateral Completa,7,300.0,Medio-Bajo,863,0,2,1
+PAC-3955,Bilateral Completa,4,140.2,Medio-Bajo,1020,0,3,1
+PAC-3956,Asimétrica,7,56.4,Bajo,370,1,4,1
+PAC-3957,Incompleta,9,32.3,Medio-Bajo,1010,0,6,1
+PAC-3958,Asimétrica,9,55.6,Bajo,422,1,1,0
+PAC-3959,Incompleta,1,82.0,Medio-Bajo,603,0,3,1
+PAC-3960,Asimétrica,10,11.3,Medio-Bajo,1071,1,3,0
+PAC-3961,Asimétrica,4,31.4,Bajo,359,0,5,0
+PAC-3962,Bilateral Completa,7,96.6,Bajo,286,1,8,1
+PAC-3963,Bilateral Completa,10,29.2,Medio-Bajo,1182,0,3,1
+PAC-3964,Incompleta,6,47.4,Medio-Bajo,630,1,4,1
+PAC-3965,Incompleta,9,49.3,Bajo,517,0,3,1
+PAC-3966,Bilateral Completa,7,15.2,Alto,5582,1,4,0
+PAC-3967,Asimétrica,3,27.5,Medio-Bajo,943,0,5,1
+PAC-3968,Bilateral Completa,7,25.4,Alto,4092,0,2,0
+PAC-3969,Bilateral Completa,10,6.3,Bajo,415,0,2,1
+PAC-3970,Incompleta,5,6.2,Medio-Bajo,941,0,2,1
+PAC-3971,Bilateral Completa,2,94.1,Medio,2242,0,6,1
+PAC-3972,Bilateral Completa,10,20.9,Medio-Bajo,783,0,5,1
+PAC-3973,Asimétrica,3,41.5,Medio-Bajo,1144,0,4,1
+PAC-3974,Incompleta,6,22.7,Bajo,259,0,3,1
+PAC-3975,Asimétrica,6,146.2,Bajo,329,0,7,1
+PAC-3976,Incompleta,7,20.0,Bajo,441,1,3,1
+PAC-3977,Incompleta,6,33.1,Bajo,569,0,3,1
+PAC-3978,Incompleta,9,108.1,Bajo,439,0,4,1
+PAC-3979,Bilateral Completa,5,97.2,Bajo,317,1,5,1
+PAC-3980,Incompleta,5,15.3,Alto,5022,0,7,1
+PAC-3981,Bilateral Completa,8,86.1,Bajo,597,1,4,1
+PAC-3982,Asimétrica,8,35.6,Medio-Bajo,1026,1,2,0
+PAC-3983,Bilateral Completa,1,38.0,Medio,2282,0,8,1
+PAC-3984,Bilateral Completa,3,12.2,Medio-Bajo,1035,0,5,0
+PAC-3985,Incompleta,6,9.2,Bajo,346,0,2,1
+PAC-3986,Incompleta,6,70.1,Medio-Bajo,1095,0,8,1
+PAC-3987,Bilateral Completa,1,39.3,Medio-Bajo,877,0,4,1
+PAC-3988,Bilateral Completa,2,33.7,Medio-Bajo,864,1,3,1
+PAC-3989,Asimétrica,10,70.4,Medio-Bajo,608,1,4,0
+PAC-3990,Bilateral Completa,7,77.5,Alto,2956,0,5,1
+PAC-3991,Bilateral Completa,1,13.7,Medio-Bajo,872,1,3,0
+PAC-3992,Bilateral Completa,10,52.1,Bajo,550,0,6,1
+PAC-3993,Bilateral Completa,5,12.3,Medio-Bajo,607,0,4,1
+PAC-3994,Bilateral Completa,1,74.6,Bajo,457,1,1,0
+PAC-3995,Asimétrica,6,58.5,Medio,2346,0,3,0
+PAC-3996,Bilateral Completa,7,161.9,Bajo,282,0,5,1
+PAC-3997,Bilateral Completa,8,8.6,Bajo,250,0,5,0
+PAC-3998,Asimétrica,3,7.9,Medio,1403,0,7,1
+PAC-3999,Incompleta,3,21.6,Medio-Bajo,1117,0,2,1
+PAC-4000,Bilateral Completa,11,20.2,Bajo,546,1,1,1
+PAC-4001,Bilateral Completa,1,19.2,Medio-Bajo,1116,0,4,1
+PAC-4002,Asimétrica,3,123.4,Medio,1642,0,4,1
+PAC-4003,Bilateral Completa,5,19.4,Bajo,329,0,6,1
+PAC-4004,Incompleta,6,20.9,Medio,1888,0,4,1
+PAC-4005,Incompleta,3,76.2,Bajo,587,0,2,1
+PAC-4006,Bilateral Completa,4,34.9,Medio-Bajo,938,1,5,0
+PAC-4007,Incompleta,5,80.0,Medio,2359,0,5,1
+PAC-4008,Bilateral Completa,5,8.4,Bajo,274,0,2,1
+PAC-4009,Bilateral Completa,9,38.4,Bajo,574,1,7,1
+PAC-4010,Asimétrica,8,6.7,Bajo,432,1,1,0
+PAC-4011,Bilateral Completa,1,8.2,Medio-Bajo,937,0,3,1
+PAC-4012,Bilateral Completa,2,123.5,Medio-Bajo,694,0,4,1
+PAC-4013,Incompleta,5,12.5,Medio-Bajo,1144,0,2,1
+PAC-4014,Incompleta,3,43.0,Bajo,360,0,3,1
+PAC-4015,Bilateral Completa,7,31.5,Bajo,395,0,5,1
+PAC-4016,Incompleta,11,26.3,Bajo,480,0,7,1
+PAC-4017,Bilateral Completa,6,120.0,Bajo,521,0,4,1
+PAC-4018,Incompleta,2,6.1,Medio-Bajo,1094,1,1,1
+PAC-4019,Asimétrica,8,59.5,Medio,2261,0,6,1
+PAC-4020,Asimétrica,5,170.4,Medio-Bajo,1024,0,4,1
+PAC-4021,Incompleta,6,46.1,Bajo,384,0,2,1
+PAC-4022,Bilateral Completa,8,143.1,Alto,3246,0,3,1
+PAC-4023,Bilateral Completa,6,7.7,Medio-Bajo,1036,0,2,1
+PAC-4024,Bilateral Completa,10,32.1,Medio,1544,1,4,0
+PAC-4025,Incompleta,3,20.1,Medio-Bajo,759,1,3,1
+PAC-4026,Bilateral Completa,7,70.6,Bajo,287,1,3,0
+PAC-4027,Asimétrica,4,204.0,Bajo,399,1,7,1
+PAC-4028,Asimétrica,6,19.8,Medio-Bajo,1140,0,6,1
+PAC-4029,Bilateral Completa,6,58.1,Bajo,393,1,2,0
+PAC-4030,Incompleta,11,16.0,Bajo,325,1,4,0
+PAC-4031,Incompleta,5,46.7,Medio-Bajo,1175,0,2,0
+PAC-4032,Bilateral Completa,1,36.2,Medio-Bajo,944,0,5,1
+PAC-4033,Incompleta,8,183.8,Medio-Bajo,868,1,1,1
+PAC-4034,Bilateral Completa,10,51.9,Bajo,577,0,3,1
+PAC-4035,Bilateral Completa,2,26.5,Bajo,433,0,4,1
+PAC-4036,Incompleta,4,11.1,Medio-Bajo,867,1,2,0
+PAC-4037,Asimétrica,3,13.2,Alto,4716,1,0,0
+PAC-4038,Bilateral Completa,6,17.8,Medio-Bajo,632,0,5,1
+PAC-4039,Incompleta,11,19.4,Medio,1576,0,11,1
+PAC-4040,Bilateral Completa,1,100.1,Medio-Bajo,813,0,3,1
+PAC-4041,Asimétrica,9,46.2,Medio-Bajo,1161,1,4,0
+PAC-4042,Asimétrica,5,42.1,Bajo,459,0,4,1
+PAC-4043,Bilateral Completa,5,11.1,Medio-Bajo,628,0,0,0
+PAC-4044,Asimétrica,4,103.4,Medio-Bajo,638,1,2,0
+PAC-4045,Bilateral Completa,4,69.2,Medio-Bajo,772,0,8,1
+PAC-4046,Bilateral Completa,1,8.5,Medio-Bajo,616,0,3,1
+PAC-4047,Incompleta,9,66.5,Medio-Bajo,655,1,1,1
+PAC-4048,Bilateral Completa,9,44.2,Bajo,475,0,5,1
+PAC-4049,Incompleta,4,9.3,Medio-Bajo,1157,0,4,1
+PAC-4050,Incompleta,10,35.7,Bajo,316,1,5,1
+PAC-4051,Bilateral Completa,10,38.1,Medio,2420,0,3,1
+PAC-4052,Bilateral Completa,4,14.1,Bajo,391,1,4,0
+PAC-4053,Bilateral Completa,7,150.7,Bajo,572,0,5,1
+PAC-4054,Bilateral Completa,4,99.8,Bajo,272,1,5,1
+PAC-4055,Bilateral Completa,1,60.3,Medio-Bajo,836,1,4,0
+PAC-4056,Bilateral Completa,11,36.0,Bajo,303,0,3,1
+PAC-4057,Asimétrica,9,31.5,Bajo,387,0,2,1
+PAC-4058,Asimétrica,2,57.6,Medio-Bajo,1072,0,6,1
+PAC-4059,Bilateral Completa,5,44.4,Bajo,582,1,6,0
+PAC-4060,Bilateral Completa,4,8.2,Medio,1752,1,9,0
+PAC-4061,Incompleta,8,40.9,Medio,1894,0,2,1
+PAC-4062,Asimétrica,6,87.1,Medio-Bajo,828,0,4,1
+PAC-4063,Bilateral Completa,7,35.7,Bajo,566,1,3,1
+PAC-4064,Asimétrica,2,7.7,Medio-Bajo,1197,0,6,1
+PAC-4065,Incompleta,4,82.2,Bajo,505,0,8,1
+PAC-4066,Asimétrica,4,16.2,Medio-Bajo,1160,0,1,0
+PAC-4067,Bilateral Completa,2,20.0,Bajo,450,0,5,1
+PAC-4068,Asimétrica,10,14.0,Medio,1457,1,2,1
+PAC-4069,Bilateral Completa,4,25.0,Bajo,427,0,3,0
+PAC-4070,Asimétrica,9,75.7,Medio-Bajo,722,1,1,1
+PAC-4071,Bilateral Completa,8,41.6,Medio-Bajo,941,0,3,0
+PAC-4072,Incompleta,11,16.5,Medio-Bajo,770,0,8,1
+PAC-4073,Asimétrica,1,110.1,Bajo,582,0,5,1
+PAC-4074,Incompleta,8,110.8,Alto,4171,0,4,1
+PAC-4075,Incompleta,11,107.2,Medio-Bajo,658,0,9,1
+PAC-4076,Bilateral Completa,9,18.6,Medio-Bajo,1064,0,3,0
+PAC-4077,Incompleta,8,35.0,Bajo,517,0,2,0
+PAC-4078,Asimétrica,10,215.0,Medio-Bajo,859,0,7,1
+PAC-4079,Bilateral Completa,1,78.9,Bajo,344,0,1,1
+PAC-4080,Incompleta,8,6.4,Bajo,374,1,2,0
+PAC-4081,Asimétrica,5,8.4,Bajo,290,1,0,0
+PAC-4082,Incompleta,9,36.2,Medio,1453,1,2,0
+PAC-4083,Asimétrica,9,125.0,Bajo,256,0,6,1
+PAC-4084,Asimétrica,6,43.7,Bajo,465,0,2,0
+PAC-4085,Incompleta,3,39.4,Medio-Bajo,1110,0,5,1
+PAC-4086,Incompleta,7,10.6,Medio-Bajo,1180,0,7,1
+PAC-4087,Asimétrica,3,58.5,Bajo,318,0,5,1
+PAC-4088,Asimétrica,7,91.3,Medio-Bajo,680,1,4,1
+PAC-4089,Asimétrica,8,28.9,Bajo,279,1,2,1
+PAC-4090,Bilateral Completa,5,79.7,Bajo,322,0,4,1
+PAC-4091,Bilateral Completa,5,171.9,Bajo,511,1,4,1
+PAC-4092,Incompleta,4,16.4,Medio,1288,0,5,0
+PAC-4093,Incompleta,3,42.0,Bajo,457,0,4,1
+PAC-4094,Bilateral Completa,8,21.9,Bajo,462,0,2,1
+PAC-4095,Bilateral Completa,11,83.7,Bajo,571,0,7,1
+PAC-4096,Bilateral Completa,6,48.1,Medio,1465,0,5,1
+PAC-4097,Incompleta,6,55.3,Bajo,542,1,6,1
+PAC-4098,Asimétrica,2,85.0,Bajo,456,0,1,0
+PAC-4099,Asimétrica,4,30.2,Bajo,582,0,2,0
+PAC-4100,Bilateral Completa,5,128.3,Bajo,326,1,5,1
+PAC-4101,Bilateral Completa,11,43.1,Medio-Bajo,887,1,5,0
+PAC-4102,Bilateral Completa,10,13.6,Medio-Bajo,646,0,6,1
+PAC-4103,Bilateral Completa,5,64.5,Bajo,359,1,4,1
+PAC-4104,Incompleta,3,83.8,Bajo,449,1,3,1
+PAC-4105,Bilateral Completa,10,24.0,Bajo,459,0,2,0
+PAC-4106,Bilateral Completa,5,102.3,Bajo,403,0,4,1
+PAC-4107,Bilateral Completa,5,123.3,Bajo,259,1,5,0
+PAC-4108,Bilateral Completa,2,21.2,Medio-Bajo,1014,1,1,0
+PAC-4109,Bilateral Completa,5,210.3,Alto,5924,0,9,1
+PAC-4110,Bilateral Completa,3,12.6,Alto,3680,1,5,1
+PAC-4111,Bilateral Completa,3,16.3,Medio,2484,0,8,1
+PAC-4112,Bilateral Completa,5,15.2,Medio-Bajo,676,0,6,1
+PAC-4113,Bilateral Completa,9,117.2,Medio-Bajo,1087,1,3,0
+PAC-4114,Incompleta,2,58.1,Bajo,380,1,6,1
+PAC-4115,Asimétrica,9,13.2,Medio-Bajo,1178,1,5,1
+PAC-4116,Incompleta,3,34.0,Medio-Bajo,1054,1,6,0
+PAC-4117,Incompleta,7,52.8,Medio-Bajo,762,1,10,1
+PAC-4118,Asimétrica,1,9.4,Medio-Bajo,614,0,1,0
+PAC-4119,Bilateral Completa,1,112.0,Bajo,481,1,6,1
+PAC-4120,Bilateral Completa,8,86.4,Bajo,444,0,3,1
+PAC-4121,Bilateral Completa,9,40.2,Medio,1741,0,4,1
+PAC-4122,Bilateral Completa,3,175.8,Bajo,587,1,7,1
+PAC-4123,Incompleta,6,32.0,Medio-Bajo,930,1,6,1
+PAC-4124,Bilateral Completa,3,212.1,Medio,1626,1,3,1
+PAC-4125,Asimétrica,6,60.1,Medio-Bajo,1096,1,5,1
+PAC-4126,Bilateral Completa,7,55.3,Medio-Bajo,1085,0,5,1
+PAC-4127,Asimétrica,5,14.1,Bajo,545,1,7,1
+PAC-4128,Asimétrica,3,111.8,Bajo,579,0,3,1
+PAC-4129,Asimétrica,8,32.9,Medio,2088,0,5,0
+PAC-4130,Asimétrica,5,13.9,Medio-Bajo,746,0,5,1
+PAC-4131,Bilateral Completa,1,5.6,Medio-Bajo,858,0,6,1
+PAC-4132,Incompleta,9,46.0,Bajo,541,0,6,1
+PAC-4133,Bilateral Completa,3,42.5,Bajo,548,1,2,1
+PAC-4134,Asimétrica,2,68.5,Alto,2642,1,3,0
+PAC-4135,Bilateral Completa,3,115.5,Bajo,484,0,5,1
+PAC-4136,Bilateral Completa,7,9.1,Medio-Bajo,964,1,8,0
+PAC-4137,Asimétrica,11,70.7,Bajo,339,0,4,1
+PAC-4138,Bilateral Completa,10,15.4,Medio-Bajo,763,0,4,1
+PAC-4139,Bilateral Completa,8,102.7,Medio,1680,0,3,1
+PAC-4140,Bilateral Completa,2,90.5,Medio-Bajo,683,0,4,1
+PAC-4141,Incompleta,7,43.9,Bajo,326,0,4,1
+PAC-4142,Incompleta,11,66.9,Medio-Bajo,1116,0,7,1
+PAC-4143,Incompleta,5,23.9,Medio-Bajo,1084,0,7,1
+PAC-4144,Asimétrica,9,36.9,Bajo,327,0,4,1
+PAC-4145,Bilateral Completa,7,91.2,Medio,1981,0,3,1
+PAC-4146,Incompleta,1,35.7,Medio-Bajo,703,0,2,1
+PAC-4147,Incompleta,1,27.1,Medio,1538,0,3,0
+PAC-4148,Incompleta,6,39.1,Medio-Bajo,1165,0,5,0
+PAC-4149,Bilateral Completa,9,93.1,Bajo,460,0,6,1
+PAC-4150,Bilateral Completa,1,25.4,Bajo,344,0,2,1
+PAC-4151,Bilateral Completa,3,14.5,Bajo,472,1,2,0
+PAC-4152,Bilateral Completa,5,67.2,Medio,2232,0,3,1
+PAC-4153,Bilateral Completa,4,92.4,Medio-Bajo,652,1,1,0
+PAC-4154,Bilateral Completa,1,10.3,Medio-Bajo,676,0,3,0
+PAC-4155,Bilateral Completa,10,18.7,Bajo,455,0,4,1
+PAC-4156,Bilateral Completa,4,12.7,Bajo,565,0,4,0
+PAC-4157,Incompleta,4,26.4,Medio-Bajo,764,1,5,0
+PAC-4158,Asimétrica,11,34.9,Medio-Bajo,878,0,6,1
+PAC-4159,Bilateral Completa,10,74.1,Bajo,276,0,4,1
+PAC-4160,Incompleta,4,57.7,Medio-Bajo,669,1,6,1
+PAC-4161,Asimétrica,3,53.5,Bajo,467,1,6,0
+PAC-4162,Incompleta,7,26.7,Bajo,438,0,2,1
+PAC-4163,Asimétrica,1,97.1,Medio-Bajo,905,0,3,1
+PAC-4164,Bilateral Completa,2,36.9,Bajo,373,1,5,1
+PAC-4165,Asimétrica,1,198.4,Alto,2518,0,1,1
+PAC-4166,Bilateral Completa,4,55.3,Bajo,506,0,5,1
+PAC-4167,Bilateral Completa,5,11.7,Bajo,545,0,9,1
+PAC-4168,Asimétrica,11,61.4,Bajo,271,0,9,0
+PAC-4169,Asimétrica,10,24.7,Medio-Bajo,1049,0,3,1
+PAC-4170,Bilateral Completa,5,63.0,Bajo,289,0,2,1
+PAC-4171,Asimétrica,2,8.6,Medio-Bajo,1149,0,5,1
+PAC-4172,Bilateral Completa,11,14.6,Bajo,297,1,4,0
+PAC-4173,Incompleta,3,101.8,Bajo,432,1,5,1
+PAC-4174,Bilateral Completa,4,17.9,Bajo,324,0,5,1
+PAC-4175,Bilateral Completa,10,95.7,Medio,1920,0,6,1
+PAC-4176,Incompleta,6,21.4,Medio,2406,0,1,0
+PAC-4177,Bilateral Completa,6,56.5,Bajo,356,0,8,1
+PAC-4178,Bilateral Completa,2,64.2,Medio-Bajo,787,0,6,1
+PAC-4179,Bilateral Completa,2,40.9,Medio,1975,0,1,1
+PAC-4180,Bilateral Completa,9,23.2,Bajo,335,1,3,0
+PAC-4181,Incompleta,2,17.0,Medio,2360,0,6,1
+PAC-4182,Bilateral Completa,2,6.7,Bajo,595,1,9,1
+PAC-4183,Asimétrica,3,23.1,Medio,2097,0,3,1
+PAC-4184,Bilateral Completa,9,57.9,Medio-Bajo,935,1,4,1
+PAC-4185,Bilateral Completa,6,144.3,Medio,1806,0,5,1
+PAC-4186,Bilateral Completa,11,107.5,Medio-Bajo,1068,1,4,1
+PAC-4187,Incompleta,6,77.6,Bajo,339,1,1,1
+PAC-4188,Bilateral Completa,10,82.7,Medio,1602,1,0,0
+PAC-4189,Bilateral Completa,5,59.7,Bajo,277,0,4,1
+PAC-4190,Bilateral Completa,7,20.1,Bajo,321,0,1,1
+PAC-4191,Asimétrica,11,123.9,Medio-Bajo,623,0,3,0
+PAC-4192,Bilateral Completa,4,60.5,Medio-Bajo,1084,0,3,0
+PAC-4193,Asimétrica,10,46.1,Medio,2279,0,3,0
+PAC-4194,Bilateral Completa,10,10.9,Bajo,472,0,5,1
+PAC-4195,Bilateral Completa,3,34.6,Medio-Bajo,778,0,4,1
+PAC-4196,Bilateral Completa,7,35.8,Medio-Bajo,1033,1,3,0
+PAC-4197,Bilateral Completa,10,105.0,Bajo,530,1,3,1
+PAC-4198,Incompleta,1,44.6,Bajo,438,0,3,1
+PAC-4199,Asimétrica,6,28.9,Bajo,315,0,1,1
+PAC-4200,Bilateral Completa,11,193.2,Bajo,547,0,7,1
+PAC-4201,Bilateral Completa,11,10.9,Alto,3460,0,6,0
+PAC-4202,Bilateral Completa,11,32.5,Medio-Bajo,1019,1,5,0
+PAC-4203,Bilateral Completa,2,7.1,Medio-Bajo,848,0,9,1
+PAC-4204,Bilateral Completa,2,72.3,Alto,5196,0,9,1
+PAC-4205,Asimétrica,11,130.1,Bajo,413,0,3,1
+PAC-4206,Bilateral Completa,8,21.4,Medio,2478,0,3,0
+PAC-4207,Incompleta,3,102.7,Bajo,543,0,10,1
+PAC-4208,Bilateral Completa,9,22.3,Medio,1369,0,6,1
+PAC-4209,Bilateral Completa,4,125.8,Bajo,566,1,6,1
+PAC-4210,Bilateral Completa,6,75.1,Medio,1373,1,6,1
+PAC-4211,Bilateral Completa,1,86.7,Bajo,594,0,5,0
+PAC-4212,Bilateral Completa,11,5.9,Bajo,267,0,3,1
+PAC-4213,Bilateral Completa,10,169.6,Medio-Bajo,669,1,7,1
+PAC-4214,Bilateral Completa,10,69.9,Bajo,587,0,5,1
+PAC-4215,Asimétrica,3,23.2,Medio-Bajo,1191,0,8,1
+PAC-4216,Bilateral Completa,4,93.4,Bajo,264,0,5,1
+PAC-4217,Incompleta,5,21.5,Medio-Bajo,1055,1,1,0
+PAC-4218,Bilateral Completa,1,108.1,Bajo,518,0,8,1
+PAC-4219,Asimétrica,4,11.0,Bajo,368,0,1,1
+PAC-4220,Bilateral Completa,5,65.8,Bajo,548,0,2,1
+PAC-4221,Bilateral Completa,4,43.9,Medio-Bajo,787,0,5,1
+PAC-4222,Asimétrica,10,10.1,Bajo,306,1,5,1
+PAC-4223,Bilateral Completa,10,18.8,Bajo,448,0,5,1
+PAC-4224,Incompleta,7,5.6,Bajo,266,1,6,0
+PAC-4225,Incompleta,8,36.6,Bajo,537,1,12,1
+PAC-4226,Bilateral Completa,8,22.9,Medio-Bajo,1166,0,4,1
+PAC-4227,Asimétrica,3,50.6,Medio,1698,0,3,1
+PAC-4228,Asimétrica,5,22.6,Bajo,518,0,4,1
+PAC-4229,Asimétrica,10,22.8,Medio-Bajo,902,1,1,0
+PAC-4230,Asimétrica,8,73.0,Medio-Bajo,686,0,4,1
+PAC-4231,Bilateral Completa,7,7.5,Bajo,567,0,7,1
+PAC-4232,Bilateral Completa,9,121.6,Medio-Bajo,1037,0,2,1
+PAC-4233,Incompleta,10,100.6,Bajo,278,0,2,1
+PAC-4234,Bilateral Completa,7,60.1,Medio-Bajo,621,0,1,1
+PAC-4235,Bilateral Completa,2,50.0,Bajo,570,0,4,1
+PAC-4236,Bilateral Completa,4,116.4,Medio-Bajo,1159,1,4,1
+PAC-4237,Asimétrica,8,15.2,Medio-Bajo,1116,1,2,0
+PAC-4238,Bilateral Completa,9,9.1,Bajo,499,1,7,1
+PAC-4239,Asimétrica,7,18.7,Bajo,412,0,5,1
+PAC-4240,Bilateral Completa,5,84.1,Alto,5014,0,4,0
+PAC-4241,Bilateral Completa,1,6.8,Bajo,350,0,5,1
+PAC-4242,Asimétrica,9,48.7,Medio-Bajo,1182,1,4,1
+PAC-4243,Asimétrica,6,274.5,Medio,1874,1,7,1
+PAC-4244,Bilateral Completa,2,101.8,Medio-Bajo,740,1,5,1
+PAC-4245,Bilateral Completa,11,41.8,Medio-Bajo,737,1,5,1
+PAC-4246,Bilateral Completa,10,8.3,Medio-Bajo,1177,0,5,0
+PAC-4247,Asimétrica,10,94.0,Medio,1909,0,2,1
+PAC-4248,Bilateral Completa,2,50.7,Medio-Bajo,827,0,3,1
+PAC-4249,Bilateral Completa,10,11.1,Medio-Bajo,880,0,5,1
+PAC-4250,Incompleta,1,9.9,Bajo,421,0,3,1
+PAC-4251,Bilateral Completa,4,125.2,Alto,3327,0,3,1
+PAC-4252,Bilateral Completa,10,60.3,Medio-Bajo,1030,1,2,0
+PAC-4253,Asimétrica,11,93.4,Bajo,289,0,5,1
+PAC-4254,Asimétrica,2,110.6,Medio,2434,0,4,1
+PAC-4255,Asimétrica,10,47.4,Medio-Bajo,901,0,8,1
+PAC-4256,Bilateral Completa,11,41.4,Bajo,335,1,7,0
+PAC-4257,Asimétrica,9,33.1,Medio-Bajo,996,1,0,0
+PAC-4258,Incompleta,2,24.1,Bajo,502,1,5,1
+PAC-4259,Bilateral Completa,11,33.5,Medio,1732,0,7,1
+PAC-4260,Incompleta,9,79.3,Bajo,506,0,2,1
+PAC-4261,Bilateral Completa,1,51.1,Medio,1643,0,8,1
+PAC-4262,Incompleta,7,116.5,Medio-Bajo,632,0,3,1
+PAC-4263,Incompleta,6,34.3,Bajo,509,1,2,1
+PAC-4264,Incompleta,6,51.7,Alto,5805,0,7,0
+PAC-4265,Bilateral Completa,2,54.9,Medio-Bajo,1114,0,3,1
+PAC-4266,Incompleta,1,49.8,Bajo,596,0,4,1
+PAC-4267,Bilateral Completa,10,65.6,Medio-Bajo,907,0,6,1
+PAC-4268,Asimétrica,8,18.6,Medio,1938,1,7,1
+PAC-4269,Incompleta,8,40.9,Bajo,533,1,3,0
+PAC-4270,Bilateral Completa,2,10.5,Bajo,319,0,2,1
+PAC-4271,Bilateral Completa,4,29.3,Bajo,562,0,7,1
+PAC-4272,Incompleta,4,38.4,Bajo,503,0,3,0
+PAC-4273,Bilateral Completa,2,57.8,Medio-Bajo,1080,0,5,1
+PAC-4274,Incompleta,11,155.3,Medio-Bajo,743,0,3,1
+PAC-4275,Bilateral Completa,9,50.9,Bajo,273,0,2,0
+PAC-4276,Incompleta,4,73.0,Bajo,483,0,5,1
+PAC-4277,Bilateral Completa,4,40.3,Bajo,582,0,5,1
+PAC-4278,Incompleta,4,55.3,Medio,2398,1,10,1
+PAC-4279,Asimétrica,5,8.7,Bajo,581,0,5,1
+PAC-4280,Incompleta,10,19.7,Alto,4872,0,4,0
+PAC-4281,Bilateral Completa,8,27.5,Medio-Bajo,947,0,5,0
+PAC-4282,Asimétrica,4,37.0,Bajo,535,0,4,1
+PAC-4283,Bilateral Completa,3,7.3,Medio,1217,0,5,0
+PAC-4284,Incompleta,11,12.5,Medio-Bajo,643,0,6,1
+PAC-4285,Incompleta,1,21.2,Medio-Bajo,754,1,3,0
+PAC-4286,Bilateral Completa,2,182.9,Alto,3366,0,4,1
+PAC-4287,Bilateral Completa,4,25.1,Bajo,480,0,6,1
+PAC-4288,Bilateral Completa,9,37.9,Bajo,565,0,4,1
+PAC-4289,Asimétrica,1,15.9,Medio-Bajo,1001,1,4,1
+PAC-4290,Asimétrica,6,52.2,Bajo,474,1,5,1
+PAC-4291,Bilateral Completa,6,21.5,Bajo,466,1,3,0
+PAC-4292,Bilateral Completa,10,16.6,Bajo,305,0,5,1
+PAC-4293,Asimétrica,3,41.3,Bajo,280,1,3,1
+PAC-4294,Bilateral Completa,10,5.3,Medio-Bajo,658,0,3,1
+PAC-4295,Bilateral Completa,9,5.4,Bajo,484,1,10,1
+PAC-4296,Bilateral Completa,10,17.4,Medio-Bajo,706,1,3,0
+PAC-4297,Bilateral Completa,3,6.9,Medio-Bajo,790,1,4,0
+PAC-4298,Incompleta,1,10.7,Bajo,267,1,2,0
+PAC-4299,Incompleta,2,25.7,Bajo,475,0,5,1
+PAC-4300,Bilateral Completa,4,86.1,Medio-Bajo,1182,0,3,1
+PAC-4301,Asimétrica,4,47.4,Bajo,303,0,6,1
+PAC-4302,Bilateral Completa,2,40.9,Medio-Bajo,844,1,4,0
+PAC-4303,Incompleta,10,22.4,Medio,1275,1,3,0
+PAC-4304,Bilateral Completa,6,139.2,Bajo,284,0,3,1
+PAC-4305,Incompleta,6,30.3,Medio-Bajo,866,0,2,1
+PAC-4306,Bilateral Completa,3,9.6,Medio-Bajo,916,1,2,1
+PAC-4307,Bilateral Completa,1,53.0,Bajo,549,0,2,0
+PAC-4308,Asimétrica,10,11.0,Medio,2344,0,6,0
+PAC-4309,Bilateral Completa,9,26.2,Medio,1224,1,6,0
+PAC-4310,Incompleta,4,40.4,Bajo,409,0,5,1
+PAC-4311,Asimétrica,9,108.7,Medio-Bajo,1195,1,4,1
+PAC-4312,Incompleta,5,39.0,Medio,2337,0,4,1
+PAC-4313,Bilateral Completa,7,65.6,Alto,3399,1,2,0
+PAC-4314,Bilateral Completa,3,251.8,Medio-Bajo,1101,0,4,1
+PAC-4315,Asimétrica,3,12.0,Medio-Bajo,765,1,9,0
+PAC-4316,Bilateral Completa,8,21.1,Bajo,440,0,3,1
+PAC-4317,Incompleta,1,30.1,Alto,5746,1,4,0
+PAC-4318,Incompleta,8,32.4,Bajo,250,0,3,1
+PAC-4319,Incompleta,8,31.5,Medio-Bajo,685,0,5,1
+PAC-4320,Incompleta,3,124.1,Bajo,311,0,6,1
+PAC-4321,Bilateral Completa,1,67.6,Bajo,569,0,2,0
+PAC-4322,Incompleta,9,51.8,Bajo,455,0,6,1
+PAC-4323,Incompleta,4,23.5,Alto,5889,1,4,0
+PAC-4324,Bilateral Completa,7,91.8,Bajo,540,1,0,0
+PAC-4325,Bilateral Completa,9,160.1,Medio-Bajo,849,0,2,1
+PAC-4326,Incompleta,3,91.1,Bajo,262,1,4,1
+PAC-4327,Incompleta,5,5.1,Bajo,412,0,4,1
+PAC-4328,Bilateral Completa,10,55.6,Bajo,292,1,5,1
+PAC-4329,Incompleta,11,7.6,Medio-Bajo,855,0,7,1
+PAC-4330,Bilateral Completa,3,19.9,Bajo,556,0,6,1
+PAC-4331,Asimétrica,5,8.1,Bajo,393,0,7,1
+PAC-4332,Incompleta,11,51.3,Bajo,395,0,5,1
+PAC-4333,Bilateral Completa,2,63.0,Bajo,550,1,6,1
+PAC-4334,Bilateral Completa,4,11.1,Alto,4199,0,3,1
+PAC-4335,Incompleta,2,29.2,Medio,2392,1,3,0
+PAC-4336,Asimétrica,3,35.5,Bajo,547,0,3,1
+PAC-4337,Bilateral Completa,5,28.0,Medio-Bajo,832,0,3,0
+PAC-4338,Incompleta,9,11.4,Medio,1470,0,3,0
+PAC-4339,Bilateral Completa,3,32.1,Bajo,309,1,6,1
+PAC-4340,Bilateral Completa,10,74.6,Medio,2458,1,4,0
+PAC-4341,Incompleta,6,8.7,Medio,1876,1,5,1
+PAC-4342,Bilateral Completa,4,9.2,Bajo,443,1,0,0
+PAC-4343,Incompleta,4,26.9,Bajo,483,1,3,0
+PAC-4344,Asimétrica,11,147.1,Alto,3891,0,4,1
+PAC-4345,Asimétrica,10,60.2,Medio-Bajo,831,1,1,0
+PAC-4346,Bilateral Completa,10,61.8,Bajo,356,0,4,1
+PAC-4347,Incompleta,5,27.5,Bajo,472,0,6,1
+PAC-4348,Asimétrica,11,50.0,Bajo,329,0,7,1
+PAC-4349,Bilateral Completa,7,5.5,Medio-Bajo,980,1,4,0
+PAC-4350,Bilateral Completa,11,55.5,Medio-Bajo,1027,1,2,0
+PAC-4351,Asimétrica,4,127.3,Alto,5244,0,3,1
+PAC-4352,Bilateral Completa,8,52.4,Bajo,383,1,3,1
+PAC-4353,Asimétrica,9,108.5,Medio-Bajo,963,0,4,1
+PAC-4354,Incompleta,9,69.4,Medio-Bajo,801,1,3,1
+PAC-4355,Bilateral Completa,9,11.4,Bajo,395,0,1,1
+PAC-4356,Bilateral Completa,2,121.4,Bajo,573,0,6,1
+PAC-4357,Bilateral Completa,3,8.4,Alto,5186,0,5,1
+PAC-4358,Bilateral Completa,5,43.2,Medio,1334,1,7,1
+PAC-4359,Incompleta,1,12.7,Medio-Bajo,863,1,2,0
+PAC-4360,Bilateral Completa,4,5.6,Medio-Bajo,663,0,6,1
+PAC-4361,Bilateral Completa,11,32.4,Bajo,384,0,2,0
+PAC-4362,Bilateral Completa,5,22.5,Medio-Bajo,640,1,2,0
+PAC-4363,Asimétrica,9,38.3,Medio-Bajo,895,1,5,0
+PAC-4364,Bilateral Completa,8,48.0,Medio-Bajo,602,1,4,0
+PAC-4365,Asimétrica,1,7.2,Alto,3412,0,5,0
+PAC-4366,Asimétrica,3,11.6,Medio-Bajo,709,1,9,1
+PAC-4367,Bilateral Completa,3,45.9,Bajo,470,0,5,1
+PAC-4368,Bilateral Completa,11,26.0,Medio-Bajo,969,0,3,1
+PAC-4369,Asimétrica,6,70.3,Bajo,253,0,3,1
+PAC-4370,Incompleta,4,57.8,Bajo,493,0,1,1
+PAC-4371,Bilateral Completa,4,98.4,Bajo,415,0,0,0
+PAC-4372,Incompleta,1,64.0,Bajo,275,0,3,1
+PAC-4373,Bilateral Completa,10,33.1,Medio-Bajo,994,1,5,1
+PAC-4374,Bilateral Completa,11,60.9,Medio-Bajo,1073,0,1,1
+PAC-4375,Incompleta,4,21.1,Medio-Bajo,616,0,2,0
+PAC-4376,Bilateral Completa,1,23.3,Medio-Bajo,691,0,3,0
+PAC-4377,Asimétrica,5,82.8,Bajo,280,0,4,1
+PAC-4378,Asimétrica,3,34.6,Medio,2428,1,4,0
+PAC-4379,Incompleta,10,85.1,Bajo,456,0,5,1
+PAC-4380,Bilateral Completa,5,91.4,Bajo,356,1,5,0
+PAC-4381,Bilateral Completa,3,102.4,Medio-Bajo,745,0,4,1
+PAC-4382,Bilateral Completa,5,129.2,Bajo,350,1,5,0
+PAC-4383,Bilateral Completa,4,33.2,Bajo,567,0,5,1
+PAC-4384,Bilateral Completa,9,24.2,Medio-Bajo,840,1,5,1
+PAC-4385,Incompleta,6,48.6,Medio-Bajo,762,0,4,1
+PAC-4386,Bilateral Completa,10,28.2,Bajo,422,0,2,1
+PAC-4387,Asimétrica,2,50.9,Alto,5049,1,4,0
+PAC-4388,Asimétrica,1,66.1,Medio-Bajo,1146,0,3,1
+PAC-4389,Incompleta,1,63.3,Medio,1580,0,10,1
+PAC-4390,Incompleta,1,28.5,Bajo,270,0,2,1
+PAC-4391,Bilateral Completa,9,14.1,Medio-Bajo,762,1,8,1
+PAC-4392,Bilateral Completa,5,33.2,Medio,2201,0,1,1
+PAC-4393,Asimétrica,4,12.7,Medio-Bajo,906,0,1,0
+PAC-4394,Incompleta,10,115.4,Medio-Bajo,938,0,5,1
+PAC-4395,Bilateral Completa,5,26.2,Bajo,304,0,5,1
+PAC-4396,Incompleta,9,13.4,Bajo,582,0,2,1
+PAC-4397,Asimétrica,3,6.3,Medio-Bajo,726,1,5,1
+PAC-4398,Bilateral Completa,3,56.9,Bajo,442,1,8,1
+PAC-4399,Bilateral Completa,2,55.7,Medio,1442,1,8,1
+PAC-4400,Asimétrica,8,25.8,Bajo,598,1,5,0
+PAC-4401,Bilateral Completa,7,8.7,Alto,5147,0,3,0
+PAC-4402,Bilateral Completa,2,31.4,Alto,3932,0,5,0
+PAC-4403,Bilateral Completa,4,23.6,Bajo,464,1,3,0
+PAC-4404,Asimétrica,7,61.5,Bajo,341,0,5,1
+PAC-4405,Asimétrica,1,51.5,Medio,1502,0,4,1
+PAC-4406,Bilateral Completa,1,27.7,Alto,2734,0,2,1
+PAC-4407,Bilateral Completa,8,17.3,Bajo,433,0,10,1
+PAC-4408,Bilateral Completa,6,226.3,Bajo,287,0,3,1
+PAC-4409,Bilateral Completa,2,35.3,Medio-Bajo,738,1,3,0
+PAC-4410,Bilateral Completa,10,63.3,Medio-Bajo,794,1,6,1
+PAC-4411,Bilateral Completa,10,12.6,Bajo,264,1,5,1
+PAC-4412,Bilateral Completa,1,38.2,Medio-Bajo,600,0,7,1
+PAC-4413,Asimétrica,3,6.4,Bajo,298,1,4,0
+PAC-4414,Bilateral Completa,4,40.2,Bajo,345,0,5,1
+PAC-4415,Bilateral Completa,5,171.2,Bajo,450,1,3,1
+PAC-4416,Bilateral Completa,11,29.2,Bajo,275,0,2,1
+PAC-4417,Incompleta,10,7.0,Bajo,592,1,2,0
+PAC-4418,Bilateral Completa,3,6.6,Medio-Bajo,1028,1,4,0
+PAC-4419,Incompleta,5,29.6,Bajo,484,1,5,0
+PAC-4420,Incompleta,7,13.7,Bajo,598,0,5,1
+PAC-4421,Asimétrica,11,6.2,Bajo,493,1,6,1
+PAC-4422,Incompleta,9,75.6,Alto,4393,0,7,0
+PAC-4423,Bilateral Completa,5,35.7,Bajo,576,1,6,1
+PAC-4424,Bilateral Completa,4,22.1,Bajo,300,1,2,1
+PAC-4425,Incompleta,10,120.2,Medio-Bajo,680,0,1,1
+PAC-4426,Bilateral Completa,11,11.2,Alto,4583,1,5,0
+PAC-4427,Bilateral Completa,9,161.1,Bajo,316,0,6,1
+PAC-4428,Asimétrica,8,23.8,Medio-Bajo,1080,0,4,1
+PAC-4429,Asimétrica,5,114.6,Medio-Bajo,1067,1,6,1
+PAC-4430,Asimétrica,9,51.2,Medio-Bajo,741,1,7,1
+PAC-4431,Asimétrica,11,92.6,Bajo,446,1,2,1
+PAC-4432,Incompleta,9,211.8,Medio-Bajo,1070,0,5,1
+PAC-4433,Incompleta,1,22.0,Bajo,358,0,2,1
+PAC-4434,Bilateral Completa,6,167.4,Medio-Bajo,1190,0,6,1
+PAC-4435,Asimétrica,11,29.7,Medio-Bajo,1038,0,7,1
+PAC-4436,Bilateral Completa,5,29.3,Bajo,268,1,4,0
+PAC-4437,Incompleta,6,25.8,Medio,1326,0,5,1
+PAC-4438,Bilateral Completa,10,44.0,Bajo,454,0,4,1
+PAC-4439,Bilateral Completa,3,13.4,Medio,1228,0,4,1
+PAC-4440,Incompleta,3,45.3,Medio-Bajo,1044,0,2,1
+PAC-4441,Bilateral Completa,10,44.0,Bajo,456,0,4,1
+PAC-4442,Incompleta,5,76.8,Bajo,529,1,8,1
+PAC-4443,Incompleta,7,94.7,Alto,4698,0,2,0
+PAC-4444,Incompleta,4,34.0,Bajo,489,0,1,1
+PAC-4445,Bilateral Completa,6,23.0,Bajo,515,1,7,1
+PAC-4446,Bilateral Completa,5,20.0,Bajo,431,0,2,1
+PAC-4447,Asimétrica,2,15.8,Medio-Bajo,704,1,2,0
+PAC-4448,Bilateral Completa,11,8.0,Medio-Bajo,1032,0,3,1
+PAC-4449,Bilateral Completa,1,26.0,Bajo,485,0,5,1
+PAC-4450,Bilateral Completa,6,20.8,Bajo,422,1,4,0
+PAC-4451,Asimétrica,5,174.7,Bajo,407,0,5,1
+PAC-4452,Incompleta,9,45.8,Bajo,421,0,6,1
+PAC-4453,Bilateral Completa,7,26.3,Bajo,560,0,3,1
+PAC-4454,Asimétrica,1,48.4,Medio-Bajo,1002,1,4,0
+PAC-4455,Asimétrica,10,12.5,Bajo,406,1,4,0
+PAC-4456,Incompleta,6,34.4,Bajo,507,1,4,0
+PAC-4457,Bilateral Completa,11,54.2,Bajo,413,1,3,0
+PAC-4458,Incompleta,7,38.6,Alto,3158,0,5,1
+PAC-4459,Bilateral Completa,3,30.7,Alto,5450,0,6,0
+PAC-4460,Incompleta,9,259.6,Medio,1865,0,6,1
+PAC-4461,Asimétrica,11,111.1,Bajo,287,0,2,0
+PAC-4462,Asimétrica,11,53.8,Bajo,380,0,6,1
+PAC-4463,Bilateral Completa,2,47.1,Bajo,504,0,5,0
+PAC-4464,Asimétrica,1,53.5,Bajo,457,0,4,1
+PAC-4465,Bilateral Completa,10,16.2,Medio-Bajo,1049,0,6,1
+PAC-4466,Bilateral Completa,10,30.1,Medio-Bajo,694,0,0,0
+PAC-4467,Incompleta,9,7.0,Medio,2038,1,5,0
+PAC-4468,Incompleta,7,37.3,Medio,1677,1,2,1
+PAC-4469,Bilateral Completa,10,44.2,Bajo,420,0,6,1
+PAC-4470,Bilateral Completa,11,17.9,Medio-Bajo,789,0,7,1
+PAC-4471,Bilateral Completa,1,171.3,Bajo,448,0,4,1
+PAC-4472,Incompleta,4,125.1,Bajo,470,0,4,1
+PAC-4473,Asimétrica,10,69.0,Medio-Bajo,1135,1,7,0
+PAC-4474,Incompleta,3,43.1,Bajo,493,0,2,1
+PAC-4475,Bilateral Completa,11,107.0,Bajo,573,1,6,1
+PAC-4476,Asimétrica,7,12.0,Bajo,377,0,2,1
+PAC-4477,Incompleta,5,83.2,Medio-Bajo,732,0,5,1
+PAC-4478,Asimétrica,9,11.7,Medio-Bajo,654,1,4,0
+PAC-4479,Incompleta,11,84.0,Bajo,407,0,3,1
+PAC-4480,Asimétrica,3,21.1,Medio,1609,0,1,0
+PAC-4481,Asimétrica,11,109.8,Bajo,460,1,2,1
+PAC-4482,Incompleta,6,149.2,Bajo,403,0,3,1
+PAC-4483,Bilateral Completa,10,13.1,Medio-Bajo,892,0,3,1
+PAC-4484,Incompleta,2,36.1,Medio-Bajo,714,0,2,1
+PAC-4485,Incompleta,3,203.1,Alto,4193,1,8,0
+PAC-4486,Incompleta,4,38.0,Bajo,508,1,5,1
+PAC-4487,Bilateral Completa,6,104.6,Medio-Bajo,721,0,4,1
+PAC-4488,Bilateral Completa,11,49.4,Medio-Bajo,898,1,2,0
+PAC-4489,Incompleta,1,28.5,Medio,1760,0,6,1
+PAC-4490,Asimétrica,6,21.8,Bajo,578,1,4,1
+PAC-4491,Incompleta,4,16.4,Medio-Bajo,1100,0,4,0
+PAC-4492,Bilateral Completa,8,76.7,Medio-Bajo,896,0,3,1
+PAC-4493,Bilateral Completa,9,29.4,Bajo,326,1,3,0
+PAC-4494,Bilateral Completa,8,40.8,Medio-Bajo,1062,1,5,1
+PAC-4495,Bilateral Completa,8,38.9,Bajo,376,0,4,1
+PAC-4496,Bilateral Completa,2,48.1,Medio-Bajo,796,0,3,1
+PAC-4497,Incompleta,10,105.3,Medio,1420,1,2,1
+PAC-4498,Asimétrica,2,202.5,Medio-Bajo,690,0,4,1
+PAC-4499,Bilateral Completa,6,31.2,Medio-Bajo,1010,1,3,0
+PAC-4500,Incompleta,5,92.9,Medio-Bajo,607,0,5,1
+PAC-4501,Incompleta,6,77.3,Bajo,281,0,4,1
+PAC-4502,Asimétrica,9,47.6,Bajo,569,1,2,1
+PAC-4503,Asimétrica,10,161.2,Medio-Bajo,993,0,1,1
+PAC-4504,Bilateral Completa,7,16.2,Bajo,518,1,6,0
+PAC-4505,Bilateral Completa,5,10.8,Bajo,440,1,3,0
+PAC-4506,Bilateral Completa,10,101.2,Medio-Bajo,660,1,2,1
+PAC-4507,Incompleta,7,33.9,Bajo,513,0,2,1
+PAC-4508,Incompleta,8,98.9,Bajo,534,0,4,1
+PAC-4509,Bilateral Completa,11,116.8,Medio-Bajo,694,0,5,1
+PAC-4510,Asimétrica,1,8.2,Bajo,290,1,5,1
+PAC-4511,Bilateral Completa,10,112.5,Medio,2125,1,3,0
+PAC-4512,Asimétrica,11,34.7,Medio,1860,0,3,1
+PAC-4513,Bilateral Completa,11,40.7,Medio-Bajo,1113,1,2,1
+PAC-4514,Bilateral Completa,7,54.3,Bajo,427,0,3,1
+PAC-4515,Bilateral Completa,4,135.4,Medio-Bajo,793,1,4,1
+PAC-4516,Bilateral Completa,5,6.0,Medio,1681,0,6,1
+PAC-4517,Incompleta,2,37.4,Medio-Bajo,935,1,3,0
+PAC-4518,Bilateral Completa,10,63.2,Bajo,445,0,5,1
+PAC-4519,Incompleta,5,69.1,Medio-Bajo,848,1,5,1
+PAC-4520,Bilateral Completa,9,64.0,Medio,1697,1,4,0
+PAC-4521,Bilateral Completa,1,12.2,Medio-Bajo,811,1,4,0
+PAC-4522,Asimétrica,3,22.8,Medio-Bajo,1065,1,2,0
+PAC-4523,Asimétrica,4,27.2,Medio-Bajo,820,1,4,1
+PAC-4524,Bilateral Completa,9,86.6,Medio-Bajo,872,0,3,1
+PAC-4525,Asimétrica,2,21.3,Bajo,403,0,6,1
+PAC-4526,Incompleta,7,16.8,Medio-Bajo,848,0,3,1
+PAC-4527,Bilateral Completa,9,162.9,Bajo,528,0,1,1
+PAC-4528,Asimétrica,10,5.4,Bajo,553,0,3,1
+PAC-4529,Bilateral Completa,4,300.0,Bajo,525,0,3,1
+PAC-4530,Bilateral Completa,5,61.5,Medio-Bajo,1113,0,5,1
+PAC-4531,Incompleta,10,93.1,Bajo,337,0,6,1
+PAC-4532,Bilateral Completa,4,22.5,Medio-Bajo,1104,0,8,1
+PAC-4533,Bilateral Completa,7,5.7,Medio-Bajo,1189,1,3,0
+PAC-4534,Bilateral Completa,8,71.9,Bajo,509,1,2,0
+PAC-4535,Incompleta,8,94.8,Bajo,490,0,6,1
+PAC-4536,Incompleta,3,72.4,Bajo,390,1,4,1
+PAC-4537,Bilateral Completa,2,12.7,Medio,1939,0,7,0
+PAC-4538,Asimétrica,6,75.0,Medio-Bajo,835,0,3,1
+PAC-4539,Bilateral Completa,1,78.3,Medio-Bajo,727,1,6,1
+PAC-4540,Incompleta,9,58.7,Bajo,449,1,7,1
+PAC-4541,Asimétrica,7,77.6,Medio-Bajo,1142,0,3,1
+PAC-4542,Asimétrica,8,98.5,Medio,1691,0,2,1
+PAC-4543,Incompleta,7,52.5,Medio,2244,1,4,1
+PAC-4544,Incompleta,5,9.6,Medio-Bajo,833,0,5,1
+PAC-4545,Bilateral Completa,5,38.4,Bajo,451,0,6,1
+PAC-4546,Incompleta,7,9.0,Bajo,528,1,6,0
+PAC-4547,Bilateral Completa,7,31.2,Bajo,380,1,4,0
+PAC-4548,Bilateral Completa,2,31.1,Bajo,397,0,6,1
+PAC-4549,Bilateral Completa,2,8.4,Bajo,278,1,2,1
+PAC-4550,Bilateral Completa,7,26.4,Bajo,557,0,4,1
+PAC-4551,Incompleta,5,10.9,Bajo,411,0,2,1
+PAC-4552,Asimétrica,2,87.6,Medio,2068,0,3,1
+PAC-4553,Bilateral Completa,1,152.5,Medio-Bajo,660,0,4,1
+PAC-4554,Bilateral Completa,9,8.8,Medio,1324,0,4,1
+PAC-4555,Bilateral Completa,11,160.2,Medio-Bajo,1055,1,8,1
+PAC-4556,Incompleta,8,42.0,Bajo,320,1,2,0
+PAC-4557,Bilateral Completa,2,22.8,Medio-Bajo,1065,0,6,1
+PAC-4558,Bilateral Completa,2,9.0,Bajo,492,0,3,1
+PAC-4559,Incompleta,3,39.7,Medio-Bajo,1089,1,3,0
+PAC-4560,Asimétrica,4,84.1,Bajo,498,0,5,1
+PAC-4561,Bilateral Completa,9,66.4,Alto,5792,1,3,0
+PAC-4562,Bilateral Completa,6,7.6,Bajo,270,1,6,1
+PAC-4563,Incompleta,3,8.8,Bajo,331,1,6,0
+PAC-4564,Bilateral Completa,8,30.8,Medio,2055,0,4,0
+PAC-4565,Bilateral Completa,6,22.5,Bajo,259,0,2,1
+PAC-4566,Incompleta,8,18.2,Medio-Bajo,611,1,5,1
+PAC-4567,Asimétrica,10,21.5,Medio-Bajo,862,1,5,1
+PAC-4568,Bilateral Completa,2,86.4,Medio,1648,1,2,0
+PAC-4569,Bilateral Completa,8,137.4,Alto,5763,0,3,1
+PAC-4570,Bilateral Completa,11,31.0,Alto,3261,1,5,1
+PAC-4571,Asimétrica,5,123.3,Bajo,363,0,7,1
+PAC-4572,Bilateral Completa,10,24.4,Medio,1225,1,7,0
+PAC-4573,Incompleta,4,37.4,Medio-Bajo,1098,0,0,0
+PAC-4574,Asimétrica,3,17.8,Medio-Bajo,1107,1,2,0
+PAC-4575,Asimétrica,9,56.1,Bajo,282,0,3,1
+PAC-4576,Incompleta,10,198.1,Medio-Bajo,661,1,8,1
+PAC-4577,Bilateral Completa,7,51.3,Alto,2728,1,7,1
+PAC-4578,Bilateral Completa,7,27.1,Medio,1806,0,6,1
+PAC-4579,Bilateral Completa,6,57.2,Bajo,284,0,5,1
+PAC-4580,Incompleta,9,11.6,Bajo,442,0,2,0
+PAC-4581,Incompleta,3,114.8,Bajo,325,0,2,1
+PAC-4582,Asimétrica,1,40.0,Medio,2090,0,2,1
+PAC-4583,Bilateral Completa,7,34.8,Medio-Bajo,1101,0,1,1
+PAC-4584,Incompleta,9,49.1,Medio-Bajo,1194,1,3,0
+PAC-4585,Asimétrica,6,54.0,Bajo,274,0,3,0
+PAC-4586,Asimétrica,10,8.7,Bajo,306,0,3,1
+PAC-4587,Incompleta,2,62.4,Medio-Bajo,631,1,2,0
+PAC-4588,Incompleta,8,18.8,Medio,2235,0,6,1
+PAC-4589,Incompleta,9,67.6,Medio-Bajo,918,1,4,1
+PAC-4590,Bilateral Completa,10,91.4,Bajo,582,1,7,0
+PAC-4591,Bilateral Completa,8,86.5,Medio-Bajo,600,0,4,1
+PAC-4592,Bilateral Completa,9,45.2,Bajo,575,0,7,1
+PAC-4593,Bilateral Completa,1,41.7,Alto,3659,1,1,0
+PAC-4594,Incompleta,3,12.7,Bajo,445,1,5,0
+PAC-4595,Incompleta,3,79.7,Medio-Bajo,732,0,5,1
+PAC-4596,Incompleta,9,20.8,Bajo,335,1,4,0
+PAC-4597,Bilateral Completa,3,39.3,Medio-Bajo,1075,0,4,1
+PAC-4598,Bilateral Completa,10,21.7,Medio-Bajo,923,0,10,1
+PAC-4599,Bilateral Completa,1,12.2,Medio-Bajo,779,0,1,1
+PAC-4600,Bilateral Completa,3,54.7,Bajo,253,0,5,1
+PAC-4601,Asimétrica,2,7.8,Bajo,375,0,3,0
+PAC-4602,Bilateral Completa,9,74.0,Bajo,424,0,4,1
+PAC-4603,Bilateral Completa,1,24.1,Medio-Bajo,620,0,5,1
+PAC-4604,Bilateral Completa,11,5.0,Bajo,354,0,0,1
+PAC-4605,Incompleta,2,40.8,Medio-Bajo,1177,0,4,1
+PAC-4606,Incompleta,1,7.4,Medio,1248,0,5,1
+PAC-4607,Bilateral Completa,9,21.2,Medio,1727,1,4,1
+PAC-4608,Asimétrica,7,66.4,Bajo,394,1,3,1
+PAC-4609,Asimétrica,1,8.2,Medio-Bajo,939,1,5,1
+PAC-4610,Bilateral Completa,10,96.4,Bajo,499,1,2,0
+PAC-4611,Bilateral Completa,6,5.2,Medio-Bajo,953,1,2,0
+PAC-4612,Bilateral Completa,5,19.2,Medio,2298,0,4,1
+PAC-4613,Bilateral Completa,10,72.5,Bajo,539,0,6,1
+PAC-4614,Asimétrica,11,24.0,Bajo,531,0,4,0
+PAC-4615,Bilateral Completa,5,10.4,Medio,1518,0,7,1
+PAC-4616,Bilateral Completa,4,27.3,Medio,2310,0,7,1
+PAC-4617,Bilateral Completa,3,20.8,Bajo,290,0,1,0
+PAC-4618,Bilateral Completa,8,97.5,Medio-Bajo,641,0,2,1
+PAC-4619,Asimétrica,7,23.8,Bajo,342,1,4,0
+PAC-4620,Bilateral Completa,5,82.8,Bajo,434,0,3,1
+PAC-4621,Bilateral Completa,9,116.2,Medio,1728,0,3,1
+PAC-4622,Incompleta,7,33.4,Medio,2488,1,3,1
+PAC-4623,Bilateral Completa,10,125.4,Medio-Bajo,891,0,3,1
+PAC-4624,Bilateral Completa,2,28.7,Bajo,541,0,5,0
+PAC-4625,Bilateral Completa,7,171.3,Medio,1296,1,2,0
+PAC-4626,Bilateral Completa,7,9.7,Bajo,344,0,3,0
+PAC-4627,Bilateral Completa,4,63.1,Bajo,575,1,3,0
+PAC-4628,Bilateral Completa,8,39.0,Medio-Bajo,673,1,5,0
+PAC-4629,Bilateral Completa,4,29.5,Bajo,585,0,5,1
+PAC-4630,Incompleta,7,55.1,Medio-Bajo,667,0,4,1
+PAC-4631,Bilateral Completa,4,65.8,Medio-Bajo,676,0,7,1
+PAC-4632,Asimétrica,8,5.2,Bajo,457,0,5,1
+PAC-4633,Bilateral Completa,3,14.1,Bajo,503,1,3,0
+PAC-4634,Incompleta,2,67.4,Bajo,470,0,5,1
+PAC-4635,Asimétrica,10,59.9,Bajo,511,0,10,1
+PAC-4636,Bilateral Completa,6,174.1,Medio-Bajo,1009,0,2,1
+PAC-4637,Incompleta,7,76.6,Medio,1530,1,1,0
+PAC-4638,Asimétrica,7,155.6,Bajo,593,0,3,1
+PAC-4639,Bilateral Completa,6,65.6,Bajo,508,0,5,0
+PAC-4640,Asimétrica,11,22.7,Medio-Bajo,673,0,5,1
+PAC-4641,Bilateral Completa,8,10.6,Medio,1453,0,3,0
+PAC-4642,Bilateral Completa,6,81.1,Bajo,570,1,5,1
+PAC-4643,Incompleta,6,56.7,Bajo,557,0,4,1
+PAC-4644,Bilateral Completa,3,7.5,Medio-Bajo,931,0,6,1
+PAC-4645,Incompleta,2,27.3,Bajo,594,1,3,1
+PAC-4646,Asimétrica,7,162.1,Bajo,321,0,2,1
+PAC-4647,Asimétrica,6,39.7,Medio-Bajo,1054,0,5,1
+PAC-4648,Bilateral Completa,1,33.3,Medio-Bajo,714,0,4,1
+PAC-4649,Asimétrica,2,35.6,Medio-Bajo,912,0,2,1
+PAC-4650,Bilateral Completa,2,16.7,Medio-Bajo,827,1,8,1
+PAC-4651,Bilateral Completa,1,28.0,Medio-Bajo,844,0,4,0
+PAC-4652,Incompleta,3,28.1,Bajo,555,0,2,1
+PAC-4653,Incompleta,5,7.7,Bajo,263,1,12,1
+PAC-4654,Bilateral Completa,4,78.0,Bajo,265,1,5,0
+PAC-4655,Incompleta,2,31.9,Bajo,291,1,6,0
+PAC-4656,Bilateral Completa,8,91.3,Medio-Bajo,1064,0,3,1
+PAC-4657,Incompleta,9,100.0,Medio,1477,0,4,1
+PAC-4658,Asimétrica,8,16.9,Alto,5383,0,3,0
+PAC-4659,Bilateral Completa,7,58.6,Medio-Bajo,618,0,6,1
+PAC-4660,Bilateral Completa,10,37.0,Bajo,315,0,6,1
+PAC-4661,Incompleta,2,111.1,Bajo,416,1,2,0
+PAC-4662,Bilateral Completa,6,17.2,Medio,2219,0,0,0
+PAC-4663,Asimétrica,11,61.6,Medio-Bajo,1002,0,6,1
+PAC-4664,Bilateral Completa,4,51.8,Medio-Bajo,1008,0,4,1
+PAC-4665,Bilateral Completa,5,22.5,Medio-Bajo,711,0,4,1
+PAC-4666,Bilateral Completa,9,12.3,Medio-Bajo,873,0,6,1
+PAC-4667,Bilateral Completa,9,57.7,Medio,1796,0,1,0
+PAC-4668,Incompleta,4,72.1,Bajo,388,1,4,1
+PAC-4669,Bilateral Completa,8,24.0,Medio-Bajo,638,0,2,1
+PAC-4670,Asimétrica,11,56.8,Medio,1304,1,3,1
+PAC-4671,Incompleta,5,30.1,Bajo,573,1,0,1
+PAC-4672,Bilateral Completa,9,67.4,Medio-Bajo,1013,0,6,1
+PAC-4673,Incompleta,2,16.1,Bajo,372,1,3,1
+PAC-4674,Incompleta,4,115.5,Alto,5277,1,3,1
+PAC-4675,Incompleta,3,21.9,Bajo,310,1,5,0
+PAC-4676,Incompleta,7,27.9,Medio-Bajo,906,0,2,1
+PAC-4677,Bilateral Completa,2,8.0,Bajo,453,0,1,1
+PAC-4678,Incompleta,3,10.9,Medio-Bajo,857,0,8,1
+PAC-4679,Bilateral Completa,9,41.3,Bajo,254,1,2,1
+PAC-4680,Bilateral Completa,8,20.6,Bajo,446,0,4,1
+PAC-4681,Asimétrica,2,95.2,Medio-Bajo,779,0,4,1
+PAC-4682,Bilateral Completa,6,5.7,Medio,2223,1,3,0
+PAC-4683,Incompleta,3,28.8,Bajo,591,0,2,1
+PAC-4684,Bilateral Completa,6,25.6,Bajo,382,0,3,1
+PAC-4685,Bilateral Completa,5,6.0,Medio-Bajo,1042,1,3,0
+PAC-4686,Bilateral Completa,10,11.6,Medio-Bajo,852,0,4,1
+PAC-4687,Incompleta,4,31.7,Medio,1464,0,5,1
+PAC-4688,Bilateral Completa,7,38.9,Bajo,342,1,5,1
+PAC-4689,Bilateral Completa,11,30.9,Medio-Bajo,1010,1,3,1
+PAC-4690,Asimétrica,10,42.9,Bajo,387,1,3,0
+PAC-4691,Bilateral Completa,7,50.2,Bajo,457,1,3,1
+PAC-4692,Bilateral Completa,4,5.5,Medio-Bajo,1172,0,5,1
+PAC-4693,Asimétrica,3,36.2,Medio-Bajo,906,0,7,1
+PAC-4694,Asimétrica,4,170.5,Medio-Bajo,865,1,1,0
+PAC-4695,Bilateral Completa,2,41.6,Bajo,383,0,5,1
+PAC-4696,Asimétrica,4,61.6,Bajo,567,1,3,1
+PAC-4697,Bilateral Completa,4,23.7,Bajo,362,1,2,0
+PAC-4698,Bilateral Completa,5,79.4,Alto,5448,1,3,0
+PAC-4699,Asimétrica,1,79.1,Bajo,440,0,1,1
+PAC-4700,Asimétrica,2,41.8,Bajo,436,0,5,1
+PAC-4701,Bilateral Completa,8,191.5,Bajo,568,1,3,1
+PAC-4702,Bilateral Completa,8,11.7,Medio-Bajo,966,1,3,1
+PAC-4703,Bilateral Completa,8,5.9,Bajo,338,0,7,1
+PAC-4704,Bilateral Completa,5,78.5,Medio,1386,0,6,1
+PAC-4705,Incompleta,8,87.3,Bajo,556,1,1,0
+PAC-4706,Incompleta,9,11.4,Medio,2220,1,2,0
+PAC-4707,Bilateral Completa,4,20.4,Bajo,381,0,6,0
+PAC-4708,Incompleta,4,5.9,Medio-Bajo,1159,0,3,1
+PAC-4709,Asimétrica,7,22.4,Medio,1890,1,3,1
+PAC-4710,Bilateral Completa,5,79.2,Bajo,429,0,6,1
+PAC-4711,Incompleta,11,41.5,Alto,5670,0,4,0
+PAC-4712,Asimétrica,10,26.4,Medio-Bajo,633,0,9,1
+PAC-4713,Bilateral Completa,1,28.2,Medio,1781,0,7,1
+PAC-4714,Asimétrica,8,5.1,Medio-Bajo,770,0,6,1
+PAC-4715,Incompleta,4,22.8,Bajo,521,0,2,1
+PAC-4716,Bilateral Completa,8,57.0,Bajo,308,1,5,1
+PAC-4717,Bilateral Completa,2,187.9,Bajo,430,1,4,1
+PAC-4718,Incompleta,4,98.9,Bajo,268,0,1,1
+PAC-4719,Incompleta,2,6.2,Bajo,475,1,3,1
+PAC-4720,Incompleta,5,119.4,Bajo,344,0,8,1
+PAC-4721,Bilateral Completa,10,81.4,Bajo,546,0,5,1
+PAC-4722,Incompleta,10,80.8,Medio-Bajo,1192,0,4,1
+PAC-4723,Bilateral Completa,8,35.6,Bajo,424,0,3,1
+PAC-4724,Bilateral Completa,11,30.4,Bajo,471,1,3,1
+PAC-4725,Bilateral Completa,7,23.0,Medio-Bajo,653,0,2,1
+PAC-4726,Incompleta,11,8.4,Bajo,432,0,9,1
+PAC-4727,Bilateral Completa,5,18.0,Bajo,567,1,5,0
+PAC-4728,Bilateral Completa,11,19.2,Bajo,598,0,2,1
+PAC-4729,Bilateral Completa,7,38.1,Medio,1642,1,1,1
+PAC-4730,Bilateral Completa,5,73.8,Medio,2032,0,10,1
+PAC-4731,Bilateral Completa,7,37.1,Bajo,317,0,7,1
+PAC-4732,Incompleta,4,8.0,Medio-Bajo,1139,1,3,0
+PAC-4733,Incompleta,4,163.3,Medio-Bajo,881,0,1,1
+PAC-4734,Incompleta,10,148.0,Medio-Bajo,959,0,6,1
+PAC-4735,Bilateral Completa,4,81.9,Medio-Bajo,607,1,0,1
+PAC-4736,Bilateral Completa,11,242.4,Medio-Bajo,1162,1,5,1
+PAC-4737,Asimétrica,8,44.3,Bajo,590,0,2,1
+PAC-4738,Bilateral Completa,1,169.5,Bajo,530,0,3,1
+PAC-4739,Incompleta,10,8.9,Medio-Bajo,848,0,9,1
+PAC-4740,Asimétrica,5,27.8,Medio,1434,0,3,1
+PAC-4741,Incompleta,10,17.8,Medio-Bajo,682,0,5,1
+PAC-4742,Bilateral Completa,2,15.9,Medio,2316,0,5,1
+PAC-4743,Bilateral Completa,10,12.6,Alto,4408,0,3,0
+PAC-4744,Bilateral Completa,4,53.7,Bajo,561,0,5,1
+PAC-4745,Incompleta,5,81.0,Medio-Bajo,867,1,4,0
+PAC-4746,Incompleta,8,48.2,Medio-Bajo,1016,1,4,1
+PAC-4747,Incompleta,2,12.9,Alto,3131,0,2,1
+PAC-4748,Bilateral Completa,2,88.3,Alto,3028,1,3,0
+PAC-4749,Asimétrica,2,55.5,Medio-Bajo,852,0,6,0
+PAC-4750,Incompleta,8,29.6,Bajo,371,0,4,1
+PAC-4751,Bilateral Completa,3,61.1,Medio-Bajo,609,1,0,0
+PAC-4752,Bilateral Completa,5,20.0,Bajo,536,0,4,1
+PAC-4753,Incompleta,2,26.2,Medio-Bajo,915,0,1,0
+PAC-4754,Bilateral Completa,6,129.7,Medio,2037,0,5,1
+PAC-4755,Bilateral Completa,10,22.2,Bajo,522,1,5,1
+PAC-4756,Bilateral Completa,6,36.7,Medio-Bajo,905,1,6,1
+PAC-4757,Incompleta,2,115.4,Bajo,542,0,4,1
+PAC-4758,Bilateral Completa,4,66.5,Bajo,459,0,2,1
+PAC-4759,Bilateral Completa,11,8.2,Bajo,467,1,2,1
+PAC-4760,Asimétrica,2,13.0,Medio-Bajo,1063,1,4,0
+PAC-4761,Incompleta,10,5.4,Medio,1911,0,1,1
+PAC-4762,Incompleta,4,54.8,Medio,1927,0,1,1
+PAC-4763,Bilateral Completa,11,34.7,Bajo,454,0,7,1
+PAC-4764,Incompleta,7,12.2,Medio,2439,0,6,1
+PAC-4765,Incompleta,5,163.4,Medio-Bajo,679,0,3,1
+PAC-4766,Asimétrica,10,42.7,Bajo,516,1,5,1
+PAC-4767,Bilateral Completa,4,18.8,Bajo,284,0,2,1
+PAC-4768,Bilateral Completa,10,39.7,Bajo,538,1,5,1
+PAC-4769,Bilateral Completa,10,61.9,Medio,1217,0,8,1
+PAC-4770,Incompleta,3,9.0,Medio-Bajo,764,0,5,1
+PAC-4771,Incompleta,6,21.1,Medio-Bajo,1124,1,2,0
+PAC-4772,Bilateral Completa,2,87.2,Bajo,451,0,5,1
+PAC-4773,Bilateral Completa,4,35.8,Medio-Bajo,945,0,5,1
+PAC-4774,Bilateral Completa,8,44.5,Bajo,250,1,7,1
+PAC-4775,Bilateral Completa,2,33.4,Bajo,568,0,5,1
+PAC-4776,Asimétrica,9,7.2,Medio-Bajo,816,1,2,0
+PAC-4777,Incompleta,2,14.1,Bajo,283,0,4,1
+PAC-4778,Bilateral Completa,8,34.5,Medio,1465,0,6,1
+PAC-4779,Bilateral Completa,8,16.7,Bajo,377,1,2,0
+PAC-4780,Bilateral Completa,7,7.6,Medio-Bajo,679,0,2,0
+PAC-4781,Incompleta,10,97.8,Bajo,414,1,1,1
+PAC-4782,Bilateral Completa,6,203.7,Medio-Bajo,1012,0,4,1
+PAC-4783,Asimétrica,1,83.8,Bajo,501,0,4,1
+PAC-4784,Incompleta,2,101.1,Bajo,261,1,5,1
+PAC-4785,Incompleta,7,18.9,Medio,1600,1,0,0
+PAC-4786,Asimétrica,11,166.7,Bajo,553,0,6,1
+PAC-4787,Incompleta,4,16.0,Medio,1923,0,5,0
+PAC-4788,Bilateral Completa,9,156.2,Alto,4829,1,4,1
+PAC-4789,Incompleta,3,268.1,Bajo,361,0,6,1
+PAC-4790,Incompleta,4,67.2,Bajo,460,1,4,1
+PAC-4791,Bilateral Completa,3,203.5,Medio-Bajo,977,1,0,1
+PAC-4792,Bilateral Completa,7,47.1,Alto,3250,0,2,0
+PAC-4793,Bilateral Completa,2,20.0,Medio,1467,1,5,1
+PAC-4794,Bilateral Completa,10,33.7,Medio-Bajo,897,0,4,1
+PAC-4795,Bilateral Completa,2,50.0,Medio-Bajo,916,0,3,1
+PAC-4796,Asimétrica,2,8.8,Bajo,307,0,7,1
+PAC-4797,Incompleta,4,53.7,Alto,5056,0,2,0
+PAC-4798,Incompleta,8,203.6,Alto,4473,0,5,1
+PAC-4799,Incompleta,8,15.5,Bajo,283,0,5,1
+PAC-4800,Incompleta,8,83.7,Bajo,512,0,3,1
+PAC-4801,Asimétrica,8,124.2,Bajo,284,0,1,1
+PAC-4802,Bilateral Completa,7,148.9,Bajo,520,0,3,1
+PAC-4803,Incompleta,6,166.1,Medio,1938,1,3,1
+PAC-4804,Bilateral Completa,7,41.9,Bajo,274,0,8,1
+PAC-4805,Asimétrica,5,194.3,Bajo,483,0,2,1
+PAC-4806,Asimétrica,8,75.8,Bajo,308,0,4,1
+PAC-4807,Asimétrica,2,13.8,Alto,3774,0,5,1
+PAC-4808,Bilateral Completa,5,37.4,Medio-Bajo,685,0,4,1
+PAC-4809,Bilateral Completa,7,68.4,Bajo,500,0,3,1
+PAC-4810,Bilateral Completa,9,19.2,Bajo,429,1,5,1
+PAC-4811,Bilateral Completa,10,56.2,Alto,3218,0,1,0
+PAC-4812,Bilateral Completa,1,59.9,Medio,2055,1,2,1
+PAC-4813,Bilateral Completa,11,13.9,Bajo,398,0,4,1
+PAC-4814,Incompleta,9,46.6,Bajo,320,0,4,1
+PAC-4815,Bilateral Completa,3,78.8,Bajo,370,1,5,0
+PAC-4816,Asimétrica,1,39.5,Bajo,502,1,4,1
+PAC-4817,Bilateral Completa,7,5.6,Medio-Bajo,855,0,1,0
+PAC-4818,Bilateral Completa,3,5.5,Medio,1965,1,8,1
+PAC-4819,Incompleta,8,27.1,Medio-Bajo,908,1,3,1
+PAC-4820,Incompleta,11,135.3,Medio,1258,0,2,1
+PAC-4821,Bilateral Completa,2,18.0,Bajo,318,1,5,1
+PAC-4822,Asimétrica,4,55.3,Medio-Bajo,1045,0,2,0
+PAC-4823,Incompleta,2,17.6,Medio-Bajo,987,0,6,1
+PAC-4824,Asimétrica,11,24.4,Bajo,335,1,5,0
+PAC-4825,Asimétrica,4,99.2,Bajo,523,1,1,1
+PAC-4826,Incompleta,1,70.3,Medio-Bajo,826,0,6,1
+PAC-4827,Asimétrica,10,10.0,Bajo,330,0,4,1
+PAC-4828,Asimétrica,5,33.0,Bajo,363,0,6,1
+PAC-4829,Asimétrica,3,6.5,Medio-Bajo,783,0,3,1
+PAC-4830,Asimétrica,9,37.8,Alto,4315,0,5,1
+PAC-4831,Asimétrica,4,59.3,Medio-Bajo,921,1,1,0
+PAC-4832,Bilateral Completa,6,11.3,Medio,2108,1,5,0
+PAC-4833,Bilateral Completa,9,22.0,Bajo,567,1,4,0
+PAC-4834,Asimétrica,2,30.4,Medio-Bajo,1165,1,4,1
+PAC-4835,Incompleta,7,131.0,Medio-Bajo,998,0,2,0
+PAC-4836,Bilateral Completa,3,254.9,Medio,2098,0,4,1
+PAC-4837,Bilateral Completa,1,7.3,Bajo,542,1,5,1
+PAC-4838,Incompleta,9,76.6,Medio-Bajo,892,0,5,1
+PAC-4839,Bilateral Completa,9,28.2,Medio-Bajo,1084,1,3,1
+PAC-4840,Bilateral Completa,11,29.9,Bajo,540,0,2,1
+PAC-4841,Bilateral Completa,4,75.2,Bajo,429,0,5,1
+PAC-4842,Incompleta,9,130.3,Bajo,471,0,4,1
+PAC-4843,Bilateral Completa,7,155.7,Bajo,523,0,2,1
+PAC-4844,Incompleta,4,48.0,Medio,2089,1,5,0
+PAC-4845,Incompleta,2,27.1,Bajo,493,0,4,1
+PAC-4846,Incompleta,5,82.5,Bajo,403,0,2,1
+PAC-4847,Bilateral Completa,8,19.5,Medio-Bajo,1023,0,3,1
+PAC-4848,Bilateral Completa,10,46.5,Bajo,522,0,6,1
+PAC-4849,Incompleta,10,27.2,Medio-Bajo,1119,0,4,0
+PAC-4850,Incompleta,6,58.4,Bajo,377,0,4,1
+PAC-4851,Bilateral Completa,11,18.7,Alto,3896,0,4,1
+PAC-4852,Bilateral Completa,5,15.6,Medio,1767,1,3,0
+PAC-4853,Asimétrica,4,130.2,Medio,1837,0,3,1
+PAC-4854,Asimétrica,11,10.4,Bajo,408,0,4,1
+PAC-4855,Bilateral Completa,6,40.3,Medio-Bajo,1170,0,2,1
+PAC-4856,Bilateral Completa,11,17.5,Bajo,307,1,4,1
+PAC-4857,Bilateral Completa,3,7.0,Bajo,389,0,5,0
+PAC-4858,Bilateral Completa,2,6.8,Bajo,425,1,5,1
+PAC-4859,Bilateral Completa,1,14.6,Medio-Bajo,810,0,5,1
+PAC-4860,Bilateral Completa,9,105.8,Medio-Bajo,1046,0,7,1
+PAC-4861,Incompleta,1,21.6,Medio-Bajo,1185,0,4,1
+PAC-4862,Bilateral Completa,11,155.2,Bajo,416,0,2,1
+PAC-4863,Asimétrica,4,48.6,Bajo,553,1,4,0
+PAC-4864,Incompleta,6,33.7,Medio-Bajo,832,1,4,0
+PAC-4865,Incompleta,9,48.4,Bajo,576,0,3,1
+PAC-4866,Asimétrica,4,41.4,Medio-Bajo,781,1,5,0
+PAC-4867,Incompleta,7,76.1,Bajo,371,0,3,1
+PAC-4868,Asimétrica,7,21.6,Medio,2252,1,5,1
+PAC-4869,Bilateral Completa,6,26.8,Medio-Bajo,692,0,6,1
+PAC-4870,Bilateral Completa,9,117.3,Bajo,578,0,0,1
+PAC-4871,Incompleta,11,151.4,Bajo,425,1,3,1
+PAC-4872,Incompleta,10,116.5,Medio-Bajo,929,1,5,1
+PAC-4873,Bilateral Completa,7,32.2,Medio,2407,0,6,0
+PAC-4874,Incompleta,3,80.8,Bajo,344,0,4,1
+PAC-4875,Bilateral Completa,6,37.3,Bajo,522,0,4,1
+PAC-4876,Incompleta,7,39.4,Medio,1848,0,5,0
+PAC-4877,Bilateral Completa,7,16.5,Medio-Bajo,952,0,3,0
+PAC-4878,Incompleta,6,49.7,Bajo,514,1,2,0
+PAC-4879,Bilateral Completa,3,15.3,Medio-Bajo,618,0,1,1
+PAC-4880,Asimétrica,6,25.1,Bajo,480,1,5,1
+PAC-4881,Bilateral Completa,2,101.6,Medio-Bajo,1098,1,3,0
+PAC-4882,Asimétrica,10,16.6,Bajo,388,0,8,1
+PAC-4883,Bilateral Completa,1,8.7,Alto,5263,1,2,0
+PAC-4884,Incompleta,8,8.6,Medio-Bajo,1172,1,5,1
+PAC-4885,Bilateral Completa,3,146.3,Medio-Bajo,1124,1,4,1
+PAC-4886,Asimétrica,8,40.4,Medio-Bajo,854,0,4,1
+PAC-4887,Incompleta,3,31.3,Medio,2308,0,7,1
+PAC-4888,Asimétrica,2,88.3,Medio,1875,0,4,1
+PAC-4889,Bilateral Completa,8,95.3,Medio-Bajo,691,0,7,1
+PAC-4890,Asimétrica,3,25.2,Medio-Bajo,1199,0,3,1
+PAC-4891,Bilateral Completa,8,64.1,Medio-Bajo,668,1,6,1
+PAC-4892,Bilateral Completa,2,78.7,Medio-Bajo,636,0,8,1
+PAC-4893,Bilateral Completa,4,58.2,Bajo,502,1,6,1
+PAC-4894,Bilateral Completa,9,13.2,Medio-Bajo,739,1,4,1
+PAC-4895,Incompleta,1,109.3,Bajo,417,1,5,1
+PAC-4896,Bilateral Completa,2,43.7,Medio,2401,0,3,0
+PAC-4897,Bilateral Completa,2,21.6,Bajo,546,1,1,0
+PAC-4898,Incompleta,9,32.7,Alto,4336,1,1,0
+PAC-4899,Asimétrica,10,6.9,Medio-Bajo,736,1,3,0
+PAC-4900,Incompleta,5,11.8,Medio-Bajo,789,1,6,1
+PAC-4901,Incompleta,11,77.5,Medio-Bajo,941,0,2,0
+PAC-4902,Incompleta,4,5.0,Bajo,296,0,1,1
+PAC-4903,Incompleta,10,31.9,Bajo,254,0,2,1
+PAC-4904,Asimétrica,10,42.0,Bajo,506,1,5,1
+PAC-4905,Incompleta,4,7.8,Medio-Bajo,842,1,3,0
+PAC-4906,Bilateral Completa,7,185.7,Bajo,524,0,3,1
+PAC-4907,Asimétrica,3,17.8,Medio-Bajo,1014,1,5,0
+PAC-4908,Asimétrica,9,23.1,Bajo,364,0,2,1
+PAC-4909,Bilateral Completa,5,23.1,Bajo,444,1,3,0
+PAC-4910,Incompleta,11,18.1,Bajo,592,0,1,1
+PAC-4911,Incompleta,9,5.1,Medio,1881,1,8,0
+PAC-4912,Incompleta,1,70.3,Medio-Bajo,978,0,6,1
+PAC-4913,Bilateral Completa,10,175.3,Bajo,331,0,4,1
+PAC-4914,Incompleta,8,17.7,Medio-Bajo,745,0,3,1
+PAC-4915,Bilateral Completa,2,59.4,Bajo,572,1,2,0
+PAC-4916,Bilateral Completa,8,72.7,Alto,4669,0,1,0
+PAC-4917,Asimétrica,4,99.3,Medio-Bajo,851,0,5,1
+PAC-4918,Incompleta,2,32.5,Bajo,592,1,6,1
+PAC-4919,Asimétrica,2,23.0,Medio-Bajo,910,1,5,0
+PAC-4920,Asimétrica,6,24.7,Bajo,338,0,0,1
+PAC-4921,Incompleta,3,67.3,Alto,2974,1,7,1
+PAC-4922,Asimétrica,11,89.9,Bajo,307,0,1,1
+PAC-4923,Bilateral Completa,10,15.0,Medio-Bajo,1091,1,3,1
+PAC-4924,Incompleta,3,28.2,Bajo,312,0,3,1
+PAC-4925,Incompleta,9,121.1,Medio-Bajo,946,1,1,0
+PAC-4926,Incompleta,5,87.2,Medio-Bajo,1086,0,3,1
+PAC-4927,Bilateral Completa,7,214.5,Medio-Bajo,1072,1,3,0
+PAC-4928,Bilateral Completa,5,75.2,Medio-Bajo,981,1,4,1
+PAC-4929,Bilateral Completa,2,30.0,Medio,1271,1,5,0
+PAC-4930,Incompleta,11,49.7,Bajo,258,0,2,1
+PAC-4931,Asimétrica,11,59.1,Bajo,343,1,4,1
+PAC-4932,Asimétrica,8,9.1,Bajo,588,0,3,1
+PAC-4933,Bilateral Completa,9,44.3,Alto,3859,1,6,1
+PAC-4934,Bilateral Completa,11,66.8,Bajo,401,1,4,1
+PAC-4935,Bilateral Completa,2,14.2,Medio-Bajo,1091,0,1,1
+PAC-4936,Bilateral Completa,2,80.9,Medio-Bajo,639,0,5,1
+PAC-4937,Asimétrica,4,48.8,Bajo,311,0,5,1
+PAC-4938,Asimétrica,8,157.1,Bajo,503,0,5,1
+PAC-4939,Bilateral Completa,5,7.2,Bajo,318,0,7,1
+PAC-4940,Bilateral Completa,5,20.4,Bajo,494,0,5,0
+PAC-4941,Bilateral Completa,7,51.0,Bajo,419,0,5,0
+PAC-4942,Bilateral Completa,4,22.6,Bajo,427,1,3,1
+PAC-4943,Asimétrica,9,67.7,Medio,1900,0,4,1
+PAC-4944,Incompleta,4,76.1,Alto,3010,0,6,1
+PAC-4945,Incompleta,8,10.4,Bajo,509,0,5,1
+PAC-4946,Incompleta,3,41.1,Bajo,321,1,4,1
+PAC-4947,Bilateral Completa,6,40.6,Bajo,266,1,3,1
+PAC-4948,Bilateral Completa,1,28.0,Medio-Bajo,940,0,2,0
+PAC-4949,Bilateral Completa,7,140.1,Medio,1256,1,4,1
+PAC-4950,Incompleta,11,92.9,Bajo,467,0,1,1
+PAC-4951,Asimétrica,7,64.7,Bajo,356,1,6,0
+PAC-4952,Incompleta,2,67.6,Medio-Bajo,1063,0,7,1
+PAC-4953,Bilateral Completa,5,36.0,Medio-Bajo,846,1,3,1
+PAC-4954,Incompleta,4,131.9,Bajo,467,0,1,1
+PAC-4955,Bilateral Completa,10,64.3,Medio-Bajo,972,1,3,1
+PAC-4956,Bilateral Completa,9,70.3,Bajo,280,0,6,1
+PAC-4957,Bilateral Completa,2,103.9,Bajo,296,0,5,1
+PAC-4958,Bilateral Completa,3,21.0,Medio-Bajo,707,1,7,1
+PAC-4959,Asimétrica,1,87.3,Medio,1783,0,3,1
+PAC-4960,Incompleta,10,15.9,Bajo,576,1,2,1
+PAC-4961,Bilateral Completa,5,26.2,Medio,1617,1,1,0
+PAC-4962,Bilateral Completa,3,25.4,Bajo,357,0,4,1
+PAC-4963,Bilateral Completa,4,197.0,Medio-Bajo,997,0,7,1
+PAC-4964,Bilateral Completa,4,102.1,Medio-Bajo,871,1,4,1
+PAC-4965,Bilateral Completa,6,65.4,Medio,1882,1,4,0
+PAC-4966,Incompleta,10,69.9,Medio,2339,1,3,1
+PAC-4967,Bilateral Completa,7,46.3,Bajo,578,0,4,1
+PAC-4968,Asimétrica,7,152.0,Medio,1455,1,6,1
+PAC-4969,Bilateral Completa,11,39.3,Medio,2304,0,4,0
+PAC-4970,Bilateral Completa,8,28.9,Medio-Bajo,727,0,5,1
+PAC-4971,Bilateral Completa,3,13.9,Bajo,575,1,1,0
+PAC-4972,Incompleta,5,82.1,Medio,2114,1,5,1
+PAC-4973,Incompleta,10,71.3,Medio,1434,0,4,1
+PAC-4974,Bilateral Completa,6,29.3,Bajo,290,1,3,1
+PAC-4975,Asimétrica,6,6.3,Alto,2680,1,2,0
+PAC-4976,Bilateral Completa,8,96.3,Bajo,406,1,4,1
+PAC-4977,Asimétrica,5,5.6,Bajo,308,0,4,1
+PAC-4978,Bilateral Completa,5,65.8,Medio-Bajo,623,0,3,1
+PAC-4979,Incompleta,1,180.8,Medio-Bajo,1072,1,6,1
+PAC-4980,Incompleta,1,33.8,Medio-Bajo,999,1,6,0
+PAC-4981,Incompleta,6,18.4,Bajo,329,0,7,1
+PAC-4982,Bilateral Completa,10,66.0,Alto,4681,0,2,0
+PAC-4983,Bilateral Completa,10,89.9,Bajo,462,0,1,1
+PAC-4984,Incompleta,5,44.5,Bajo,597,0,5,1
+PAC-4985,Asimétrica,11,175.6,Bajo,415,0,5,1
+PAC-4986,Incompleta,10,7.7,Medio-Bajo,947,0,3,1
+PAC-4987,Bilateral Completa,6,40.1,Medio,2048,1,2,0
+PAC-4988,Bilateral Completa,9,68.4,Medio-Bajo,997,1,5,1
+PAC-4989,Incompleta,8,104.3,Medio,1782,0,6,1
+PAC-4990,Bilateral Completa,7,14.9,Bajo,463,0,4,1
+PAC-4991,Bilateral Completa,7,85.5,Medio-Bajo,1034,0,3,1
+PAC-4992,Incompleta,6,45.2,Medio-Bajo,1176,1,3,0
+PAC-4993,Bilateral Completa,6,30.3,Medio-Bajo,820,0,4,1
+PAC-4994,Bilateral Completa,1,12.1,Bajo,557,0,7,1
+PAC-4995,Bilateral Completa,7,105.2,Medio-Bajo,1065,1,7,1
+PAC-4996,Incompleta,5,13.6,Medio-Bajo,698,0,4,1
+PAC-4997,Bilateral Completa,7,23.5,Medio-Bajo,841,0,4,1
+PAC-4998,Asimétrica,6,22.1,Medio-Bajo,757,0,4,1
+PAC-4999,Bilateral Completa,8,107.6,Bajo,347,0,7,1
