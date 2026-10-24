@@ -1,10 +1,10 @@
-"""Contrato atómico del analista conversacional (ISP: no incluye predicción)."""
+"""Contrato atómico del analista estadístico local (ISP: no incluye predicción)."""
 
 from abc import ABC, abstractmethod
 
 
 class ILLMAnalyst(ABC):
-    """Puerto Strategy para consultas estadísticas en lenguaje natural y gráficos."""
+    """Puerto Strategy para consultas en lenguaje natural y gráficos locales."""
 
     @abstractmethod
     def analyze_data_and_plot(
@@ -13,4 +13,4 @@ class ILLMAnalyst(ABC):
         data_path: str,
         output_image_path: str,
     ) -> str:
-        """Analiza el CSV indicado, persiste un gráfico y retorna un informe textual."""
+        """Analiza el CSV indicado, persiste un gráfico PNG y retorna un informe."""

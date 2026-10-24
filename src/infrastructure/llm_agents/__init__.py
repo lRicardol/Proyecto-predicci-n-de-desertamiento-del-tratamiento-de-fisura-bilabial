@@ -1,3 +1,3 @@
-from src.infrastructure.llm_agents.langchain_analyst import LangchainAnalyst
+from src.infrastructure.llm_agents.local_analyst import LocalStatisticalAnalyst
 
-__all__ = ["LangchainAnalyst"]
+__all__ = ["LocalStatisticalAnalyst"]

@@ -3,114 +3,162 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Analítica de deserción · Fisura bilabial</title>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --card: #1e293b;
-      --accent: #38bdf8;
-      --ok: #34d399;
-      --warn: #fbbf24;
-      --high: #f87171;
-      --text: #e2e8f0;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", system-ui, sans-serif;
-      background: radial-gradient(circle at top, #1e3a5f, var(--bg));
-      color: var(--text);
-    }
-    main { max-width: 960px; margin: 0 auto; padding: 32px 20px 64px; }
-    h1 { margin: 0 0 8px; font-size: 1.8rem; }
-    p.lead { color: #94a3b8; margin-top: 0; }
-    section {
-      background: var(--card);
-      border: 1px solid #334155;
-      border-radius: 16px;
-      padding: 20px;
-      margin-top: 20px;
-    }
-    label { display: block; margin-bottom: 8px; font-weight: 600; }
-    input, textarea {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid #475569;
-      background: #0f172a;
-      color: var(--text);
-    }
-    button {
-      margin-top: 12px;
-      background: var(--accent);
-      color: #0f172a;
-      border: 0;
-      border-radius: 999px;
-      padding: 10px 18px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .result { margin-top: 16px; white-space: pre-wrap; }
-    .Bajo { color: var(--ok); }
-    .Medio { color: var(--warn); }
-    .Alto { color: var(--high); }
-    img { max-width: 100%; border-radius: 12px; margin-top: 12px; }
-  </style>
+  <title>Soporte de deserción · Fisura labiopalatina</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <main>
-    <h1>Predicción de deserción en fisura bilabial</h1>
-    <p class="lead">Consulta el riesgo individual y genera analítica conversacional sobre los CSV de data/raw.</p>
+<body class="min-h-screen bg-slate-950 text-slate-100">
+  <div class="mx-auto max-w-6xl px-4 py-8">
+    <header class="mb-8">
+      <p class="text-xs uppercase tracking-[0.25em] text-cyan-400">Analítica local · sin APIs externas</p>
+      <h1 class="mt-2 text-3xl font-semibold">Deserción del tratamiento de fisura bilabial</h1>
+      <p class="mt-2 max-w-3xl text-slate-400">
+        Predicción XGBoost y gráficos estadísticos sobre
+        <code class="text-cyan-300">dataset_final_limpio.csv</code>
+        (<span id="patient-count">3 500</span> pacientes). IDs de ejemplo:
+        <span id="sample-ids" class="text-cyan-200">PAC-1001, PAC-2001</span>.
+      </p>
+    </header>
 
-    <section>
-      <h2>Riesgo por paciente</h2>
-      <label for="patientId">ID de paciente (ej. PAC-1001 o PAC-2001)</label>
-      <input id="patientId" value="PAC-1001" />
-      <button type="button" onclick="predict()">Calcular riesgo</button>
-      <div id="prediction" class="result"></div>
-    </section>
+    <div class="grid gap-6 lg:grid-cols-2">
+      <section class="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-xl">
+        <h2 class="text-xl font-medium">Panel de predicción</h2>
+        <p class="mt-1 text-sm text-slate-400">Busca un ID real (PAC-XXXX) y verás la ficha clínica más el riesgo coloreado: verde = bajo, rojo = alto.</p>
+        <form id="predict-form" class="mt-4 flex gap-2">
+          <input id="patient-id" value="PAC-1001" class="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 outline-none focus:border-cyan-400" />
+          <button class="rounded-xl bg-cyan-400 px-4 py-3 font-semibold text-slate-950 hover:bg-cyan-300">Calcular</button>
+        </form>
+        <div id="prediction-box" class="mt-5 hidden rounded-2xl border p-4">
+          <div id="risk-badge" class="inline-flex rounded-full px-4 py-1 text-sm font-bold"></div>
+          <p id="risk-percent" class="mt-3 text-4xl font-semibold"></p>
+          <p class="mt-1 text-xs uppercase tracking-wide text-slate-400">Probabilidad de deserción</p>
+          <dl id="patient-card" class="mt-4 grid grid-cols-2 gap-3 text-sm"></dl>
+        </div>
+        <p id="predict-error" class="mt-4 hidden text-rose-400"></p>
+      </section>
 
-    <section>
-      <h2>Analítica en lenguaje natural</h2>
-      <label for="query">Pregunta</label>
-      <textarea id="query" rows="3">Grafica la relación entre inasistencias y deserción</textarea>
-      <button type="button" onclick="analyze()">Generar análisis</button>
-      <div id="analytics" class="result"></div>
-    </section>
-  </main>
+      <section class="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-xl">
+        <h2 class="text-xl font-medium">Panel de analítica</h2>
+        <p class="mt-1 text-sm text-slate-400">El analista local genera <code>static/generated_charts/chart_output.png</code> con Matplotlib/Seaborn.</p>
+        <label class="mt-4 block text-sm text-slate-300">Consulta predefinida</label>
+        <select id="preset" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3">
+          <option value="Grafica la relación entre inasistencias y deserción">Inasistencias y deserción</option>
+          <option value="Muestra el impacto del nivel socioeconómico">Nivel socioeconómico</option>
+          <option value="Distribución de distancia">Distancia al centro médico</option>
+          <option value="Cirugías y complicaciones">Cirugías y complicaciones</option>
+          <option value="Terapia de lenguaje">Terapia de lenguaje</option>
+          <option value="Matriz de correlación">Correlación</option>
+        </select>
+        <label class="mt-4 block text-sm text-slate-300">O escribe una consulta</label>
+        <form id="analytics-form" class="mt-1">
+          <textarea id="query" rows="3" class="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3">Grafica la relación entre inasistencias y deserción</textarea>
+          <button class="mt-3 rounded-xl bg-emerald-400 px-4 py-3 font-semibold text-slate-950 hover:bg-emerald-300">Generar gráfico</button>
+        </form>
+        <p id="analytics-narrative" class="mt-4 text-sm text-slate-300"></p>
+        <img id="chart" alt="Gráfico generado" class="mt-3 hidden w-full rounded-xl border border-slate-800 bg-white" />
+        <p id="analytics-error" class="mt-3 hidden text-rose-400"></p>
+      </section>
+    </div>
+
+    <footer class="mt-10 rounded-2xl border border-amber-900/60 bg-amber-950/40 px-5 py-4 text-sm text-amber-100">
+      <strong>Aviso de salud:</strong> esta aplicación es una herramienta de soporte para la
+      gestión de seguimiento clínico y no constituye diagnóstico, pronóstico ni decisión
+      terapéutica. Las predicciones deben interpretarse por personal de salud junto con
+      la historia clínica completa.
+    </footer>
+  </div>
+
   <script>
-    async function predict() {
-      const patientId = document.getElementById("patientId").value.trim();
-      const box = document.getElementById("prediction");
-      box.textContent = "Calculando...";
-      const response = await fetch("/api/predictions/" + encodeURIComponent(patientId));
-      const data = await response.json();
-      if (!response.ok) {
-        box.textContent = data.detail || "Error de predicción";
-        return;
-      }
-      box.innerHTML =
-        "<strong class='" + data.risk_level + "'>Riesgo " + data.risk_level +
-        "</strong> · probabilidad " + (data.dropout_probability * 100).toFixed(1) + "%";
-    }
+    const panelStyles = {
+      Bajo: "border-green-500 bg-green-950/40",
+      Medio: "border-amber-400 bg-amber-950/30",
+      Alto: "border-red-500 bg-red-950/40",
+    };
+    const riskStyles = {
+      Bajo: "bg-green-600 text-white",
+      Medio: "bg-amber-500 text-slate-950",
+      Alto: "bg-red-600 text-white",
+    };
+    const riskText = { Bajo: "text-green-400", Medio: "text-amber-300", Alto: "text-red-500" };
+    const labels = {
+      id_paciente: "ID",
+      cohorte: "Cohorte",
+      tipo_fisura: "Tipo de fisura",
+      distancia_hospital_km: "Distancia (km)",
+      nivel_socioeconomico: "Nivel SES",
+      citas_perdidas_noshow: "No-shows",
+      complicaciones_quirurgicas: "Complicaciones",
+      apoyo_psicologico: "Apoyo psicológico",
+      ratio_asistencia_terapia: "Asistencia terapia",
+      desertor: "Desertor (histórico)",
+    };
 
-    async function analyze() {
-      const query = document.getElementById("query").value.trim();
-      const box = document.getElementById("analytics");
-      box.textContent = "Generando gráfico...";
-      const response = await fetch("/api/analytics", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query }),
-      });
+    fetch("/api/health").then(async (response) => {
       const data = await response.json();
-      if (!response.ok) {
-        box.textContent = data.detail || "Error de analítica";
-        return;
+      if (data.patients_loaded) {
+        document.getElementById("patient-count").textContent = data.patients_loaded.toLocaleString("es");
       }
-      box.innerHTML =
-        "<p>" + data.narrative + "</p><img alt='Gráfico generado' src='" + data.image_url + "' />";
-    }
+      if (data.sample_patient_ids && data.sample_patient_ids.length) {
+        document.getElementById("sample-ids").textContent = data.sample_patient_ids.join(", ");
+      }
+    }).catch(() => {});
+
+    document.getElementById("preset").addEventListener("change", (event) => {
+      document.getElementById("query").value = event.target.value;
+    });
+
+    document.getElementById("predict-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const patientId = document.getElementById("patient-id").value.trim();
+      const errorBox = document.getElementById("predict-error");
+      const box = document.getElementById("prediction-box");
+      errorBox.classList.add("hidden");
+      try {
+        const response = await fetch("/api/predictions/" + encodeURIComponent(patientId));
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.detail || "No se pudo predecir");
+        box.classList.remove("hidden");
+        box.className = "mt-5 rounded-2xl border p-4 " + (panelStyles[data.risk_level] || "border-slate-700");
+        const badge = document.getElementById("risk-badge");
+        badge.className = "inline-flex rounded-full px-4 py-1 text-sm font-bold " + (riskStyles[data.risk_level] || "");
+        badge.textContent = "Riesgo " + data.risk_level;
+        const percent = document.getElementById("risk-percent");
+        percent.className = "mt-3 text-4xl font-semibold " + (riskText[data.risk_level] || "");
+        percent.textContent = (data.dropout_probability * 100).toFixed(1) + "%";
+        const card = document.getElementById("patient-card");
+        card.innerHTML = Object.entries(labels).map(([key, label]) => {
+          const value = data.patient_snapshot[key];
+          return "<div class='rounded-lg bg-slate-950/80 p-3'><dt class='text-slate-500'>" + label +
+            "</dt><dd class='font-medium'>" + (value ?? "—") + "</dd></div>";
+        }).join("");
+      } catch (error) {
+        box.classList.add("hidden");
+        errorBox.textContent = error.message;
+        errorBox.classList.remove("hidden");
+      }
+    });
+
+    document.getElementById("analytics-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const query = document.getElementById("query").value.trim();
+      const errorBox = document.getElementById("analytics-error");
+      errorBox.classList.add("hidden");
+      try {
+        const response = await fetch("/api/analytics", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query }),
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.detail || "No se pudo generar el gráfico");
+        document.getElementById("analytics-narrative").textContent = data.narrative;
+        const chart = document.getElementById("chart");
+        chart.src = data.image_url;
+        chart.classList.remove("hidden");
+      } catch (error) {
+        errorBox.textContent = error.message;
+        errorBox.classList.remove("hidden");
+      }
+    });
   </script>
 </body>
 </html>

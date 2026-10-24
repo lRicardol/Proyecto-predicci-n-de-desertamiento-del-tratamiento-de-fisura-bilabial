@@ -8,6 +8,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
 from config import get_settings
+from src.app.composition import warmup_predictor
 from src.app.routes import register_routes
 
 
@@ -15,6 +16,7 @@ from src.app.routes import register_routes
 async def lifespan(_app: FastAPI):
     settings = get_settings()
     settings.ensure_runtime_directories()
+    warmup_predictor()
     yield
 
 
@@ -23,8 +25,8 @@ def create_app() -> FastAPI:
     application = FastAPI(
         title="Predicción de deserción · Fisura bilabial",
         description=(
-            "API de analítica predictiva y conversacional para deserción "
-            "del tratamiento de fisura labiopalatina."
+            "Analítica predictiva local (XGBoost) y analista estadístico "
+            "sin APIs externas para deserción del tratamiento de fisura labiopalatina."
         ),
         version="1.0.0",
         lifespan=lifespan,

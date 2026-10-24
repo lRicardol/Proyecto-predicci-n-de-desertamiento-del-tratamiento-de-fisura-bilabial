@@ -15,7 +15,7 @@ from src.core.interfaces.i_patient_repository import IPatientRepository
 from src.core.interfaces.i_predictor_model import IPredictorModel
 from src.core.use_cases.generate_analytics import GenerateAnalyticsUseCase
 from src.core.use_cases.predict_dropout import PredictDropoutUseCase
-from src.infrastructure.llm_agents.langchain_analyst import LangchainAnalyst
+from src.infrastructure.llm_agents.local_analyst import LocalStatisticalAnalyst
 
 
 class FakePatientRepository(IPatientRepository):
@@ -107,17 +107,18 @@ def test_generate_analytics_rejects_empty_query(tmp_path: Path) -> None:
         use_case.execute("  ")
 
 
-def test_local_langchain_analyst_writes_png(tmp_path: Path) -> None:
-    csv_path = tmp_path / "dataset_desercion_fisura_bilabial.csv"
+def test_local_analyst_writes_png(tmp_path: Path) -> None:
+    csv_path = tmp_path / "dataset_final_limpio.csv"
     pd.DataFrame(
         {
-            "ID_Paciente": ["PAC-1", "PAC-2"],
-            "Citas_Perdidas_NoShow": [2, 11],
-            "Desertor": [0, 1],
+            "id_paciente": ["PAC-1", "PAC-2"],
+            "citas_perdidas_noshow": [2, 11],
+            "desertor": [0, 1],
+            "cohorte": ["v1", "v1"],
         }
     ).to_csv(csv_path, index=False)
-    output = tmp_path / "chart.png"
-    analyst = LangchainAnalyst(api_key="")
+    output = tmp_path / "chart_output.png"
+    analyst = LocalStatisticalAnalyst()
     text = analyst.analyze_data_and_plot(
         query="Grafica la relación entre inasistencias y deserción",
         data_path=str(csv_path),
@@ -125,4 +126,4 @@ def test_local_langchain_analyst_writes_png(tmp_path: Path) -> None:
     )
     assert output.exists()
     assert output.stat().st_size > 0
-    assert "inasistencias" in text.lower() or "no-show" in text.lower() or "no-shows" in text.lower()
+    assert "inasistencias" in text.lower() or "no-show" in text.lower()

@@ -1,51 +1,58 @@
-"""Adaptador XGBoost. Sustituye IPredictorModel (LSP) sin filtrar detalles al dominio."""
+"""Entrenamiento e inferencia XGBoost sobre dataset_final_limpio.csv. Sin mocks."""
 
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 import joblib
 import numpy as np
 import pandas as pd
-from sklearn.compose import ColumnTransformer
-from sklearn.impute import SimpleImputer
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import (
+    classification_report,
+    confusion_matrix,
+    f1_score,
+    precision_score,
+    recall_score,
+)
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
 
 from src.core.exceptions import PredictionError
 from src.core.interfaces.i_predictor_model import IPredictorModel
 from src.infrastructure.ai_models.feature_engineering import (
-    FEATURE_COLUMNS,
-    build_feature_frame,
+    MODEL_FEATURES,
+    extract_model_matrix,
+    extract_target,
 )
 
-try:
-    from xgboost import XGBClassifier
-except ImportError:  # pragma: no cover - entorno mínimo
-    XGBClassifier = None  # type: ignore[misc, assignment]
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+DEFAULT_DATASET = PROJECT_ROOT / "data" / "processed" / "dataset_final_limpio.csv"
+DEFAULT_MODEL = Path(__file__).resolve().parent / "serialized" / "model.joblib"
 
 
 class XgboostPredictor(IPredictorModel):
-    """Carga un pipeline serializado o entrena un XGBoost clínico de respaldo."""
+    """Carga model.joblib o entrena XGBoost real sobre el CSV procesado."""
 
     def __init__(
         self,
-        model_path: Path,
+        model_path: Path | None = None,
+        dataset_path: Path | None = None,
         training_frame: pd.DataFrame | None = None,
     ) -> None:
-        self._model_path = Path(model_path)
+        self._model_path = Path(model_path) if model_path else DEFAULT_MODEL
+        self._dataset_path = Path(dataset_path) if dataset_path else DEFAULT_DATASET
         self._training_frame = training_frame
-        self._pipeline: Pipeline | None = None
+        self._model: XGBClassifier | None = None
 
     def predict_dropout_probability(self, features: pd.DataFrame) -> np.ndarray:
         if features is None or features.empty:
             raise PredictionError("No se recibieron características para predecir.")
-
         try:
-            matrix = build_feature_frame(features)
-            pipeline = self._get_pipeline(reference=matrix)
-            probabilities = pipeline.predict_proba(matrix)[:, 1]
-            clipped = np.clip(probabilities.astype(float), 0.0, 1.0)
+            matrix = extract_model_matrix(features)
+            model = self._load_or_train()
+            probabilities = model.predict_proba(matrix)[:, 1]
+            clipped = np.clip(np.asarray(probabilities, dtype=float), 0.0, 1.0)
             if np.isnan(clipped).any():
                 raise PredictionError("El modelo devolvió valores no numéricos.")
             return clipped
@@ -54,123 +61,142 @@ class XgboostPredictor(IPredictorModel):
         except Exception as exc:
             raise PredictionError(f"Fallo al inferir deserción: {exc}") from exc
 
-    def _get_pipeline(self, reference: pd.DataFrame) -> Pipeline:
-        if self._pipeline is not None:
-            return self._pipeline
-
+    def _load_or_train(self) -> XGBClassifier:
+        if self._model is not None:
+            return self._model
         if self._model_path.exists():
-            try:
-                loaded = joblib.load(self._model_path)
-                if not hasattr(loaded, "predict_proba"):
-                    raise PredictionError("El artefacto serializado no expone predict_proba.")
-                self._pipeline = loaded
-                return self._pipeline
-            except PredictionError:
-                raise
-            except Exception as exc:
-                raise PredictionError(
-                    f"No se pudo cargar {self._model_path.name}: {exc}"
-                ) from exc
-
-        self._pipeline = self._fit_or_mock(reference)
-        try:
-            self._model_path.parent.mkdir(parents=True, exist_ok=True)
-            joblib.dump(self._pipeline, self._model_path)
-        except Exception:
-            pass
-        return self._pipeline
-
-    def _fit_or_mock(self, reference: pd.DataFrame) -> Pipeline:
-        training = (
-            build_feature_frame(self._training_frame)
-            if self._training_frame is not None and not self._training_frame.empty
-            else self._synthetic_training_frame(len(reference) or 64)
+            loaded = joblib.load(self._model_path)
+            if not hasattr(loaded, "predict_proba"):
+                raise PredictionError("El artefacto serializado no expone predict_proba.")
+            self._model = loaded
+            return self._model
+        metrics = train_xgboost(
+            dataset_path=self._dataset_path,
+            model_path=self._model_path,
+            frame=self._training_frame,
         )
-        labels = self._extract_labels(training_length=len(training))
-        pipeline = self._build_pipeline(labels)
-        pipeline.fit(training, labels)
-        return pipeline
-
-    def _extract_labels(self, training_length: int) -> np.ndarray:
-        if self._training_frame is not None and "Desertor" in self._training_frame.columns:
-            labels = pd.to_numeric(self._training_frame["Desertor"], errors="coerce")
-            labels = labels.fillna(0).astype(int).to_numpy()
-            if len(labels) == training_length and len(np.unique(labels)) > 1:
-                return labels
-        features = (
-            build_feature_frame(self._training_frame)
-            if self._training_frame is not None
-            else self._synthetic_training_frame(training_length)
-        )
-        return _heuristic_labels(features)
-
-    def _build_pipeline(self, labels: np.ndarray) -> Pipeline:
-        numeric_transformer = Pipeline(
-            steps=[
-                ("imputer", SimpleImputer(strategy="median")),
-                ("scaler", StandardScaler()),
-            ]
-        )
-        preprocessor = ColumnTransformer(
-            transformers=[("numeric", numeric_transformer, list(FEATURE_COLUMNS))],
-            remainder="drop",
-        )
-        estimator = self._build_estimator(labels)
-        return Pipeline(steps=[("preprocess", preprocessor), ("model", estimator)])
-
-    def _build_estimator(self, labels: np.ndarray) -> object:
-        if XGBClassifier is None:
-            from sklearn.linear_model import LogisticRegression
-
-            return LogisticRegression(max_iter=500, class_weight="balanced")
-
-        positives = max(int(np.sum(labels == 1)), 1)
-        negatives = max(int(np.sum(labels == 0)), 1)
-        return XGBClassifier(
-            n_estimators=120,
-            max_depth=4,
-            learning_rate=0.08,
-            subsample=0.9,
-            colsample_bytree=0.9,
-            scale_pos_weight=negatives / positives,
-            objective="binary:logistic",
-            eval_metric="logloss",
-            n_jobs=1,
-            random_state=42,
-        )
-
-    def _synthetic_training_frame(self, rows: int) -> pd.DataFrame:
-        rng = np.random.default_rng(42)
-        n = max(rows, 64)
-        return pd.DataFrame(
-            {
-                "inasistencias": rng.integers(0, 16, size=n),
-                "distancia": rng.uniform(2.0, 180.0, size=n),
-                "nivel_socioeconomico": rng.integers(0, 5, size=n),
-                "cirugias_previas": rng.integers(0, 7, size=n),
-                "ingresos_mensuales": rng.uniform(250.0, 4000.0, size=n),
-                "apoyo_psicologico": rng.integers(0, 2, size=n),
-                "edad_inicio_meses": rng.integers(1, 18, size=n),
-                "ratio_asistencia_terapia": rng.uniform(0.2, 1.0, size=n),
-                "complicaciones_quirurgicas": rng.integers(0, 3, size=n),
-                "insuficiencia_velofaringea": rng.integers(0, 2, size=n),
-                "grado_hipernasalidad": rng.integers(0, 4, size=n),
-                "peso_z_score": rng.normal(-0.8, 1.0, size=n),
-            }
-        )
+        _print_training_report(metrics)
+        self._model = joblib.load(self._model_path)
+        return self._model
 
 
-def _heuristic_labels(features: pd.DataFrame) -> np.ndarray:
-    score = (
-        0.18 * features["inasistencias"]
-        + 0.012 * features["distancia"]
-        - 0.35 * features["nivel_socioeconomico"]
-        + 0.08 * features["cirugias_previas"]
-        - 0.0002 * features["ingresos_mensuales"]
-        - 0.55 * features["apoyo_psicologico"]
-        - 0.9 * features["ratio_asistencia_terapia"]
-        + 0.35 * features["complicaciones_quirurgicas"]
-        + 0.25 * features["insuficiencia_velofaringea"]
+def train_xgboost(
+    dataset_path: Path = DEFAULT_DATASET,
+    model_path: Path = DEFAULT_MODEL,
+    frame: pd.DataFrame | None = None,
+    test_size: float = 0.2,
+    random_state: int = 42,
+) -> dict[str, Any]:
+    """Entrena, evalúa, imprime métricas y persiste serialized/model.joblib."""
+    source = frame if frame is not None else _read_processed(dataset_path)
+    features = extract_model_matrix(source)
+    target = extract_target(source)
+    if len(features) != len(target):
+        raise PredictionError("Features y target no tienen la misma longitud.")
+    if target.nunique() < 2:
+        raise PredictionError("El target desertor no tiene las dos clases.")
+
+    x_train, x_test, y_train, y_test = train_test_split(
+        features,
+        target,
+        test_size=test_size,
+        random_state=random_state,
+        stratify=target,
     )
-    probability = 1.0 / (1.0 + np.exp(-(score - 1.4)))
-    return (probability >= 0.5).astype(int)
+
+    n_pos = int((y_train == 1).sum())
+    n_neg = int((y_train == 0).sum())
+    if n_pos == 0 or n_neg == 0:
+        raise PredictionError("El split de entrenamiento perdió una de las clases.")
+
+    # Deserción real ≈ 74.6% (clase positiva mayoritaria).
+    # XGBoost: scale_pos_weight = n_neg / n_pos = (1 - p) / p
+    scale_pos_weight = n_neg / n_pos
+    dropout_rate = n_pos / (n_pos + n_neg)
+
+    model = XGBClassifier(
+        n_estimators=200,
+        max_depth=4,
+        learning_rate=0.08,
+        subsample=0.9,
+        colsample_bytree=0.9,
+        min_child_weight=3,
+        scale_pos_weight=scale_pos_weight,
+        objective="binary:logistic",
+        eval_metric="logloss",
+        tree_method="hist",
+        n_jobs=1,
+        random_state=random_state,
+    )
+    model.fit(x_train, y_train)
+
+    y_pred = model.predict(x_test)
+    metrics: dict[str, Any] = {
+        "n_rows": int(len(source)),
+        "n_train": int(len(x_train)),
+        "n_test": int(len(x_test)),
+        "n_pos_train": n_pos,
+        "n_neg_train": n_neg,
+        "dropout_rate_train": float(dropout_rate),
+        "scale_pos_weight": float(scale_pos_weight),
+        "features": list(MODEL_FEATURES),
+        "precision": float(precision_score(y_test, y_pred, zero_division=0)),
+        "recall": float(recall_score(y_test, y_pred, zero_division=0)),
+        "f1": float(f1_score(y_test, y_pred, zero_division=0)),
+        "confusion_matrix": confusion_matrix(y_test, y_pred).tolist(),
+        "classification_report": classification_report(
+            y_test, y_pred, digits=3, zero_division=0
+        ),
+        "model_path": str(model_path),
+    }
+
+    model_path.parent.mkdir(parents=True, exist_ok=True)
+    joblib.dump(model, model_path)
+    return metrics
+
+
+def _read_processed(dataset_path: Path) -> pd.DataFrame:
+    path = Path(dataset_path)
+    if not path.exists():
+        raise PredictionError(
+            f"No existe el dataset procesado {path}. "
+            "Ejecuta notebooks/00_procesamiento_dataset_unificado.py"
+        )
+    try:
+        frame = pd.read_csv(path)
+    except Exception as exc:
+        raise PredictionError(f"No se pudo leer {path}: {exc}") from exc
+    if frame.empty:
+        raise PredictionError(f"{path.name} está vacío.")
+    return frame
+
+
+def _print_training_report(metrics: dict[str, Any]) -> None:
+    matrix = metrics["confusion_matrix"]
+    print("=== Entrenamiento XGBoost · deserción fisura bilabial ===")
+    print(f"Filas: {metrics.get('n_rows', metrics['n_train'] + metrics['n_test'])}")
+    print(f"Features: {metrics['features']}")
+    print(f"Train/Test: {metrics['n_train']} / {metrics['n_test']}")
+    print(
+        "Desbalance train: "
+        f"desertores={metrics['n_pos_train']} "
+        f"({metrics['dropout_rate_train']:.1%}) | "
+        f"continuadores={metrics['n_neg_train']}"
+    )
+    print(
+        "scale_pos_weight = n_neg / n_pos = "
+        f"{metrics['scale_pos_weight']:.4f}  "
+        f"(referencia de desbalance ~74.6% deserción)"
+    )
+    print(f"Precisión: {metrics['precision']:.4f}")
+    print(f"Recall:    {metrics['recall']:.4f}")
+    print(f"F1-Score:  {metrics['f1']:.4f}")
+    print("Matriz de confusión [[TN, FP], [FN, TP]]:")
+    print(matrix)
+    print(metrics["classification_report"])
+    print(f"Modelo guardado en: {metrics['model_path']}")
+
+
+if __name__ == "__main__":
+    report = train_xgboost()
+    _print_training_report(report)

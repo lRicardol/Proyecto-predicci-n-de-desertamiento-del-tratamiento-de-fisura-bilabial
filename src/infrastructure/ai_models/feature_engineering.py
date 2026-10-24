@@ -1,4 +1,4 @@
-"""Transformación de fichas clínicas a matriz numérica. SRP: solo features."""
+"""Mapeo de la ficha procesada a la matriz de XGBoost. SRP: solo features."""
 
 from __future__ import annotations
 
@@ -6,7 +6,16 @@ from typing import Any
 
 import pandas as pd
 
-SOCIOECONOMIC_ORDER: dict[str, int] = {
+MODEL_FEATURES: tuple[str, ...] = (
+    "citas_perdidas_noshow",
+    "distancia_hospital_km",
+    "nivel_socioeconomico_ord",
+    "complicaciones_quirurgicas",
+)
+
+TARGET_COLUMN = "desertor"
+
+SES_ORDINAL: dict[str, int] = {
     "bajo": 0,
     "medio-bajo": 1,
     "medio bajo": 1,
@@ -16,97 +25,77 @@ SOCIOECONOMIC_ORDER: dict[str, int] = {
     "alto": 4,
 }
 
-FEATURE_COLUMNS: tuple[str, ...] = (
-    "inasistencias",
-    "distancia",
-    "nivel_socioeconomico",
-    "cirugias_previas",
-    "ingresos_mensuales",
-    "apoyo_psicologico",
-    "edad_inicio_meses",
-    "ratio_asistencia_terapia",
-    "complicaciones_quirurgicas",
-    "insuficiencia_velofaringea",
-    "grado_hipernasalidad",
-    "peso_z_score",
-)
-
 
 def patient_record_to_frame(record: dict[str, Any]) -> pd.DataFrame:
-    """Convierte un dict de repositorio en una fila de características."""
-    return build_feature_frame(pd.DataFrame([record]))
+    return extract_model_matrix(pd.DataFrame([record]))
 
 
-def build_feature_frame(raw: pd.DataFrame) -> pd.DataFrame:
-    """Normaliza nombres heterogéneos de las cohortes v1 y v2."""
-    if raw.empty:
-        return pd.DataFrame(columns=list(FEATURE_COLUMNS))
+def extract_model_matrix(raw: pd.DataFrame) -> pd.DataFrame:
+    """Acepta el CSV limpio (snake_case) o alias legacy y devuelve las 4 features clave."""
+    if raw is None or raw.empty:
+        raise ValueError("No hay filas para construir la matriz de características.")
 
     frame = raw.copy()
-    inasistencias = _first_numeric(frame, ["Citas_Perdidas_NoShow", "inasistencias"])
-    distancia = _first_numeric(frame, ["Distancia_Hospital_KM", "distancia"])
-    ingresos = _first_numeric(frame, ["Ingresos_Mensuales_USD", "ingresos_mensuales"])
-    apoyo = _first_numeric(frame, ["Apoyo_Psicologico", "apoyo_psicologico"])
-    edad = _first_numeric(frame, ["Edad_Inicio_Meses", "edad_inicio_meses"])
-    cirugias = _first_numeric(frame, ["Cirugias_Programadas", "cirugias_previas"])
-    dehiscencia = _first_numeric(frame, ["Dehiscencia_Herida_Postop"])
-    fistula = _first_numeric(frame, ["Fistula_Palatina_Residual"])
-    terapia_prog = _first_numeric(frame, ["Citas_Terapia_Programadas"])
-    terapia_asist = _first_numeric(frame, ["Citas_Terapia_Asistidas"])
-    ivf = _first_numeric(frame, ["Insuficiencia_Velofaringea_IVF"])
-    hipernasalidad = _first_numeric(frame, ["Grado_Hipernasalidad"])
-    peso = _first_numeric(frame, ["Peso_Z_Score_2Anos", "peso_z_score"])
-    ses = _encode_socioeconomic(frame)
+    frame.columns = [str(col).strip() for col in frame.columns]
 
-    ratio = (terapia_asist / terapia_prog.replace(0, pd.NA)).fillna(0.0).clip(0.0, 1.0)
-    complicaciones = (dehiscencia.fillna(0) + fistula.fillna(0)).clip(lower=0)
+    noshow = _numeric(
+        frame,
+        ["citas_perdidas_noshow", "Citas_Perdidas_NoShow", "inasistencias"],
+    )
+    distancia = _numeric(
+        frame,
+        ["distancia_hospital_km", "Distancia_Hospital_KM", "distancia"],
+    )
+    ses = _socioeconomic_ordinal(frame)
+    complicaciones = _numeric(
+        frame,
+        ["complicaciones_quirurgicas"],
+    )
+    if complicaciones.isna().all():
+        dehiscencia = _numeric(frame, ["dehiscencia_herida_postop", "Dehiscencia_Herida_Postop"])
+        fistula = _numeric(frame, ["fistula_palatina_residual", "Fistula_Palatina_Residual"])
+        complicaciones = dehiscencia.fillna(0) + fistula.fillna(0)
 
-    features = pd.DataFrame(
+    matrix = pd.DataFrame(
         {
-            "inasistencias": inasistencias.fillna(0.0),
-            "distancia": distancia.fillna(0.0),
-            "nivel_socioeconomico": ses,
-            "cirugias_previas": cirugias.fillna(0.0),
-            "ingresos_mensuales": ingresos.fillna(0.0),
-            "apoyo_psicologico": apoyo.fillna(0.0),
-            "edad_inicio_meses": edad.fillna(0.0),
-            "ratio_asistencia_terapia": ratio,
-            "complicaciones_quirurgicas": complicaciones,
-            "insuficiencia_velofaringea": ivf.fillna(0.0),
-            "grado_hipernasalidad": hipernasalidad.fillna(0.0),
-            "peso_z_score": peso.fillna(0.0),
+            "citas_perdidas_noshow": noshow.fillna(0.0),
+            "distancia_hospital_km": distancia.fillna(0.0),
+            "nivel_socioeconomico_ord": ses.fillna(2.0),
+            "complicaciones_quirurgicas": complicaciones.fillna(0.0),
         }
     )
-    return features[list(FEATURE_COLUMNS)].apply(pd.to_numeric, errors="coerce").fillna(0.0)
+    return matrix[list(MODEL_FEATURES)].astype(float)
 
 
-def _first_numeric(frame: pd.DataFrame, candidates: list[str]) -> pd.Series:
+def extract_target(raw: pd.DataFrame) -> pd.Series:
+    for column in ("desertor", "Desertor"):
+        if column in raw.columns:
+            return pd.to_numeric(raw[column], errors="coerce").fillna(0).astype(int)
+    raise ValueError("El dataset no contiene la columna objetivo desertor.")
+
+
+def _numeric(frame: pd.DataFrame, candidates: list[str]) -> pd.Series:
     for column in candidates:
         if column in frame.columns:
             return pd.to_numeric(frame[column], errors="coerce")
-    return pd.Series([0.0] * len(frame), index=frame.index, dtype="float64")
+    return pd.Series([float("nan")] * len(frame), index=frame.index, dtype="float64")
 
 
-def _encode_socioeconomic(frame: pd.DataFrame) -> pd.Series:
-    if "nivel_socioeconomico" in frame.columns and pd.api.types.is_numeric_dtype(
-        frame["nivel_socioeconomico"]
-    ):
-        return pd.to_numeric(frame["nivel_socioeconomico"], errors="coerce").fillna(2.0)
+def _socioeconomic_ordinal(frame: pd.DataFrame) -> pd.Series:
+    if "nivel_socioeconomico_ord" in frame.columns:
+        return pd.to_numeric(frame["nivel_socioeconomico_ord"], errors="coerce")
 
-    source = None
-    for column in ("Nivel_Socioeconomico", "nivel_socioeconomico"):
-        if column in frame.columns:
-            source = frame[column]
-            break
-    if source is None:
-        return pd.Series([2.0] * len(frame), index=frame.index, dtype="float64")
-
-    encoded = (
-        source.astype(str)
-        .str.strip()
-        .str.lower()
-        .map(SOCIOECONOMIC_ORDER)
-        .fillna(2.0)
-        .astype(float)
-    )
-    return encoded
+    for column in ("nivel_socioeconomico", "Nivel_Socioeconomico"):
+        if column not in frame.columns:
+            continue
+        if pd.api.types.is_numeric_dtype(frame[column]):
+            return pd.to_numeric(frame[column], errors="coerce")
+        return (
+            frame[column]
+            .astype(str)
+            .str.strip()
+            .str.lower()
+            .map(SES_ORDINAL)
+            .astype(float)
+        )
+    return pd.Series([2.0] * len(frame), index=frame.index, dtype="float64")

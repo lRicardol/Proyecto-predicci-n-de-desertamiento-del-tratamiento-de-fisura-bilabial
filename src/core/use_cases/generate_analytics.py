@@ -1,15 +1,15 @@
-"""Caso de uso: analítica conversacional y persistencia del gráfico."""
+"""Caso de uso: consulta en lenguaje natural → analista local → chart_output.png."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime, timezone
 from pathlib import Path
-import re
-import uuid
+from time import time
 
 from src.core.exceptions import AnalyticsError
 from src.core.interfaces.i_llm_analyst import ILLMAnalyst
+
+CHART_FILENAME = "chart_output.png"
 
 
 @dataclass(frozen=True)
@@ -21,8 +21,6 @@ class AnalyticsResult:
 
 
 class GenerateAnalyticsUseCase:
-    """Delega al puerto ILLMAnalyst y garantiza que el PNG quede en static/."""
-
     def __init__(
         self,
         llm_analyst: ILLMAnalyst,
@@ -41,27 +39,24 @@ class GenerateAnalyticsUseCase:
             raise AnalyticsError(f"No existe el dataset {self._dataset_path}.")
 
         self._charts_dir.mkdir(parents=True, exist_ok=True)
-        image_path = self._charts_dir / self._build_filename(cleaned_query)
-
-        narrative = self._llm_analyst.analyze_data_and_plot(
-            query=cleaned_query,
-            data_path=str(self._dataset_path),
-            output_image_path=str(image_path),
-        )
-        if not image_path.exists():
-            raise AnalyticsError(
-                "El analista no almacenó el gráfico en el directorio estático."
+        image_path = self._charts_dir / CHART_FILENAME
+        try:
+            narrative = self._llm_analyst.analyze_data_and_plot(
+                query=cleaned_query,
+                data_path=str(self._dataset_path),
+                output_image_path=str(image_path),
             )
+        except AnalyticsError:
+            raise
+        except Exception as exc:
+            raise AnalyticsError(f"Fallo del analista local: {exc}") from exc
+
+        if not image_path.exists():
+            raise AnalyticsError("El analista no almacenó chart_output.png.")
+        cache_bust = int(time())
         return AnalyticsResult(
             query=cleaned_query,
             narrative=narrative,
             image_path=str(image_path),
-            image_url=f"/static/generated_charts/{image_path.name}",
+            image_url=f"/static/generated_charts/{CHART_FILENAME}?t={cache_bust}",
         )
-
-    def _build_filename(self, query: str) -> str:
-        slug = re.sub(r"[^a-zA-Z0-9_-]+", "-", query.lower()).strip("-")[:40]
-        stamp = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S")
-        token = uuid.uuid4().hex[:8]
-        safe_slug = slug or "consulta"
-        return f"{stamp}_{safe_slug}_{token}.png"

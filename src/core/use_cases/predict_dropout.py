@@ -1,4 +1,4 @@
-"""Caso de uso: estimar probabilidad de deserción y clasificar riesgo clínico."""
+"""Caso de uso: probabilidad de deserción y etiqueta de riesgo Bajo/Medio/Alto."""
 
 from __future__ import annotations
 
@@ -14,8 +14,6 @@ from src.core.interfaces.i_predictor_model import IPredictorModel
 
 @dataclass(frozen=True)
 class DropoutPrediction:
-    """Resultado inmutable del caso de uso (no es un DTO HTTP)."""
-
     patient_id: str
     dropout_probability: float
     risk_level: str
@@ -44,8 +42,9 @@ class PredictDropoutUseCase:
         features = self._format_features(record)
         probabilities = self._predictor_model.predict_dropout_probability(features)
         probability = self._extract_scalar(probabilities)
+        resolved_id = str(record.get("id_paciente") or record.get("ID_Paciente") or patient_id)
         return DropoutPrediction(
-            patient_id=str(record.get("ID_Paciente", patient_id)),
+            patient_id=resolved_id,
             dropout_probability=probability,
             risk_level=self._classify_risk(probability),
             patient_snapshot=record,

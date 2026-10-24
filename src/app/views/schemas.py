@@ -34,3 +34,4 @@ class HealthResponse(BaseModel):
     status: str
     patients_loaded: int
     dataset: str
+    sample_patient_ids: list[str] = Field(default_factory=list)
