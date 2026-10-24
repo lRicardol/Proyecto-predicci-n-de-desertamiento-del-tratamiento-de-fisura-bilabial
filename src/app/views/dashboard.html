@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Analítica de deserción · Fisura bilabial</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --accent: #38bdf8;
+      --ok: #34d399;
+      --warn: #fbbf24;
+      --high: #f87171;
+      --text: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(circle at top, #1e3a5f, var(--bg));
+      color: var(--text);
+    }
+    main { max-width: 960px; margin: 0 auto; padding: 32px 20px 64px; }
+    h1 { margin: 0 0 8px; font-size: 1.8rem; }
+    p.lead { color: #94a3b8; margin-top: 0; }
+    section {
+      background: var(--card);
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    label { display: block; margin-bottom: 8px; font-weight: 600; }
+    input, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #475569;
+      background: #0f172a;
+      color: var(--text);
+    }
+    button {
+      margin-top: 12px;
+      background: var(--accent);
+      color: #0f172a;
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .result { margin-top: 16px; white-space: pre-wrap; }
+    .Bajo { color: var(--ok); }
+    .Medio { color: var(--warn); }
+    .Alto { color: var(--high); }
+    img { max-width: 100%; border-radius: 12px; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Predicción de deserción en fisura bilabial</h1>
+    <p class="lead">Consulta el riesgo individual y genera analítica conversacional sobre los CSV de data/raw.</p>
+
+    <section>
+      <h2>Riesgo por paciente</h2>
+      <label for="patientId">ID de paciente (ej. PAC-1001 o PAC-2001)</label>
+      <input id="patientId" value="PAC-1001" />
+      <button type="button" onclick="predict()">Calcular riesgo</button>
+      <div id="prediction" class="result"></div>
+    </section>
+
+    <section>
+      <h2>Analítica en lenguaje natural</h2>
+      <label for="query">Pregunta</label>
+      <textarea id="query" rows="3">Grafica la relación entre inasistencias y deserción</textarea>
+      <button type="button" onclick="analyze()">Generar análisis</button>
+      <div id="analytics" class="result"></div>
+    </section>
+  </main>
+  <script>
+    async function predict() {
+      const patientId = document.getElementById("patientId").value.trim();
+      const box = document.getElementById("prediction");
+      box.textContent = "Calculando...";
+      const response = await fetch("/api/predictions/" + encodeURIComponent(patientId));
+      const data = await response.json();
+      if (!response.ok) {
+        box.textContent = data.detail || "Error de predicción";
+        return;
+      }
+      box.innerHTML =
+        "<strong class='" + data.risk_level + "'>Riesgo " + data.risk_level +
+        "</strong> · probabilidad " + (data.dropout_probability * 100).toFixed(1) + "%";
+    }
+
+    async function analyze() {
+      const query = document.getElementById("query").value.trim();
+      const box = document.getElementById("analytics");
+      box.textContent = "Generando gráfico...";
+      const response = await fetch("/api/analytics", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        box.textContent = data.detail || "Error de analítica";
+        return;
+      }
+      box.innerHTML =
+        "<p>" + data.narrative + "</p><img alt='Gráfico generado' src='" + data.image_url + "' />";
+    }
+  </script>
+</body>
+</html>
