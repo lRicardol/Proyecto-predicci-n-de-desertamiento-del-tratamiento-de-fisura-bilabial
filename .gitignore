@@ -1,0 +1,12 @@
+# Entornos y cachés locales
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Configuración local (puede contener secretos)
+.env
+
+# IDE: archivos de usuario
+.idea/workspace.xml
