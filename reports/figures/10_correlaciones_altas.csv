@@ -1,0 +1,8 @@
+Variable 1,Variable 2,Spearman,|r|
+nivel_socioeconomico_ord,ingresos_mensuales_usd,0.9261548861429713,0.9261548861429713
+grado_hipernasalidad,insuficiencia_velofaringea_ivf,0.5457548901685808,0.5457548901685808
+edad_queiloplastia_meses,edad_palatoplastia_meses,0.5407835941704742,0.5407835941704742
+fistula_palatina_residual,grado_hipernasalidad,0.5120495259459398,0.5120495259459398
+grado_hipernasalidad,desertor,0.449850337447026,0.449850337447026
+fistula_palatina_residual,insuficiencia_velofaringea_ivf,0.37692185352864527,0.37692185352864527
+dehiscencia_herida_postop,fistula_palatina_residual,0.3314075032793564,0.3314075032793564
