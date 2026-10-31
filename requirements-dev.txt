@@ -1,0 +1,5 @@
+# Dependencias para DESARROLLAR: incluye todo lo de ejecución más pruebas y notebooks.
+# Instalación: python -m pip install -r requirements-dev.txt
+-r requirements.txt
+pytest==9.2.0
+nbformat==5.11.1

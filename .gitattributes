@@ -1,0 +1,18 @@
+# Saltos de línea: el repositorio guarda LF y las copias de trabajo también usan LF,
+# en Windows y en Linux. Evita diffs falsos por CRLF/LF entre máquinas.
+* text=auto eol=lf
+
+# Scripts propios de Windows conservan CRLF
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+*.ps1   text eol=crlf
+
+# Binarios: sin conversión ni diff de texto
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.pdf    binary
+*.zip    binary
+*.joblib binary
+*.pkl    binary

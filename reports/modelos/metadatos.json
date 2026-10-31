@@ -1,0 +1,62 @@
+{
+  "configuracion": {
+    "scenarios": [
+      "T0",
+      "T1",
+      "T1_sin_habla"
+    ],
+    "models": [
+      "dummy_mayoritaria",
+      "dummy_prior",
+      "dummy_estratificado",
+      "regresion_logistica",
+      "arbol",
+      "random_forest",
+      "xgboost"
+    ],
+    "repeats": 3,
+    "outer_splits": 5,
+    "inner_splits": 3,
+    "holdout_size": 0.2,
+    "min_recall": 0.9,
+    "n_bootstrap": 1000,
+    "seed": 42,
+    "n_jobs": -1,
+    "quick": false
+  },
+  "pacientes_desarrollo": 2400,
+  "pacientes_holdout": 600,
+  "tasa_desercion_desarrollo": 0.7141666666666666,
+  "tasa_desercion_holdout": 0.7133333333333334,
+  "segundos_por_modelo": {
+    "T0/dummy_mayoritaria": 19.3,
+    "T0/dummy_prior": 9.6,
+    "T0/dummy_estratificado": 9.7,
+    "T0/regresion_logistica": 14.7,
+    "T0/arbol": 18.3,
+    "T0/random_forest": 118.0,
+    "T0/xgboost": 33.3,
+    "T1/dummy_mayoritaria": 9.8,
+    "T1/dummy_prior": 9.5,
+    "T1/dummy_estratificado": 9.6,
+    "T1/regresion_logistica": 15.7,
+    "T1/arbol": 18.9,
+    "T1/random_forest": 148.8,
+    "T1/xgboost": 36.1,
+    "T1_sin_habla/dummy_mayoritaria": 9.1,
+    "T1_sin_habla/dummy_prior": 9.1,
+    "T1_sin_habla/dummy_estratificado": 9.5,
+    "T1_sin_habla/regresion_logistica": 14.7,
+    "T1_sin_habla/arbol": 18.7,
+    "T1_sin_habla/random_forest": 129.6,
+    "T1_sin_habla/xgboost": 51.1
+  },
+  "segundos_totales": 713.7,
+  "python": "3.11.9",
+  "bibliotecas": {
+    "numpy": "2.4.6",
+    "pandas": "3.1.0",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.2.0"
+  }
+}
