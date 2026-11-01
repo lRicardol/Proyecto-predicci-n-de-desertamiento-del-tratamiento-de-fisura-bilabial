@@ -1,0 +1,14 @@
+escenario,variable,valor,probabilidad_media,n
+T0,nivel_socioeconomico_ord,0.0,0.723199,2400
+T0,nivel_socioeconomico_ord,1.0,0.713101,2400
+T0,nivel_socioeconomico_ord,2.0,0.702802,2400
+T0,nivel_socioeconomico_ord,4.0,0.681628,2400
+T0,distancia_hospital_km,9.8,0.662416,2400
+T0,distancia_hospital_km,15.3,0.669493,2400
+T0,distancia_hospital_km,22.3,0.678396,2400
+T0,distancia_hospital_km,30.3,0.688422,2400
+T0,distancia_hospital_km,40.0,0.700359,2400
+T0,distancia_hospital_km,50.7,0.713234,2400
+T0,distancia_hospital_km,64.5,0.729369,2400
+T0,distancia_hospital_km,85.7,0.753078,2400
+T0,distancia_hospital_km,118.5,0.787065,2400

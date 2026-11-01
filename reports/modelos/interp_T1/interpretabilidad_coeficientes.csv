@@ -1,0 +1,17 @@
+variable,coeficiente,or_por_de,or_por_unidad,unidad,ic95_inf,ic95_sup,estabilidad_signo,n_bootstrap
+edad_inicio_meses,-0.074645,0.928073,0.976707,1 unidad,0.847621,1.038319,0.92,200
+distancia_hospital_km,0.445303,1.560963,1.009121,1 unidad,1.379455,1.784418,1.0,200
+nivel_socioeconomico_ord,0.139839,1.150088,1.147731,1 unidad,0.944058,1.44279,0.92,200
+ingresos_mensuales_usd,-0.40636,0.66607,0.99957,1 unidad,0.538309,0.796474,1.0,200
+apoyo_psicologico,-0.634513,0.530194,0.271942,1 unidad,0.477443,0.583779,1.0,200
+dificultad_alimentacion_preop,0.021361,1.021591,1.045567,1 unidad,0.935888,1.13947,0.645,200
+edad_queiloplastia_meses,-0.056087,0.945457,0.957897,1 unidad,0.839994,1.067742,0.775,200
+edad_palatoplastia_meses,0.013364,1.013454,1.00588,1 unidad,0.893085,1.128911,0.545,200
+dehiscencia_herida_postop,0.017267,1.017417,1.054658,1 unidad,0.918672,1.126632,0.65,200
+fistula_palatina_residual,-1.14225,0.3191,0.036878,1 unidad,0.268222,0.360724,1.0,200
+hipoacusia_conductiva,0.050216,1.051498,1.1098,1 unidad,0.94667,1.15931,0.82,200
+grado_hipernasalidad,1.995614,7.356718,10.353716,1 unidad,6.344353,8.76036,1.0,200
+insuficiencia_velofaringea_ivf,-0.135014,0.873703,0.750548,1 unidad,0.753866,1.003008,0.97,200
+tipo_fisura_Asimetrica,0.069013,1.07145,1.07145,vs categoría de referencia,0.930189,1.280209,0.815,200
+tipo_fisura_Completa,-0.09158,0.912488,0.912488,vs categoría de referencia,0.799058,1.057317,0.91,200
+tipo_fisura_Incompleta,0.023098,1.023367,1.023367,vs categoría de referencia,0.875951,1.176655,0.61,200

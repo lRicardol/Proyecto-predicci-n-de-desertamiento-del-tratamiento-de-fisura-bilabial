@@ -1,0 +1,10 @@
+variable,coeficiente,or_por_de,or_por_unidad,unidad,ic95_inf,ic95_sup,estabilidad_signo,n_bootstrap
+edad_inicio_meses,-0.023863,0.97642,0.992494,1 unidad,0.91303,1.048125,0.71,200
+distancia_hospital_km,0.309631,1.362922,1.006333,1 unidad,1.265373,1.480299,1.0,200
+nivel_socioeconomico_ord,-0.05545,0.946059,0.946829,1 unidad,0.879654,1.026165,0.915,200
+ingresos_mensuales_usd,-0.232034,0.792919,0.999755,1 unidad,0.734931,0.851928,1.0,200
+apoyo_psicologico,-0.551313,0.576193,0.322575,1 unidad,0.536165,0.615282,1.0,200
+dificultad_alimentacion_preop,0.016173,1.016305,1.034313,1 unidad,0.935644,1.097257,0.63,200
+tipo_fisura_Asimetrica,0.007487,1.007515,1.007515,vs categoría de referencia,0.939996,1.087573,0.605,200
+tipo_fisura_Completa,-0.053757,0.947663,0.947663,vs categoría de referencia,0.87808,1.014202,0.93,200
+tipo_fisura_Incompleta,0.046141,1.047222,1.047222,vs categoría de referencia,0.972907,1.13446,0.885,200
