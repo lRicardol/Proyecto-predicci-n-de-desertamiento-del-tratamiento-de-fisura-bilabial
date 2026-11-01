@@ -1,5 +1,6 @@
 # Predicción de deserción del tratamiento de fisura bilabial
 
+
 Sistema de **analítica predictiva local** para el seguimiento de pacientes con fisura labiopalatina (fisura bilabial). El objetivo es estimar el riesgo de abandono terapéutico y explicar, con evidencia estadística, los factores asociados: inasistencias (no-show), distancia al centro, nivel socioeconómico y complicaciones quirúrgicas.
 
 Toda la inteligencia vive **en el equipo**: no hay API keys, ni OpenAI, ni Anthropic, ni agentes LangChain. El modelo es un clasificador **XGBoost** entrenado sobre el CSV unificado de **3 500 pacientes reales**. Las consultas en lenguaje natural se resuelven con un motor de reglas que dispara gráficos de Matplotlib y Seaborn.
@@ -235,3 +236,87 @@ IDs reales de prueba: `PAC-1001`, `PAC-2001`, `PAC-1000`.
 ```
 
 El dominio queda cerrado: un modelo serializado, un analista estadístico reproducible y una interfaz de soporte clínico, todo ejecutable en un portátil de laboratorio sin servicios de terceros.
+
+---
+
+## Evaluación, interpretabilidad y limitaciones
+
+> **Esta sección corrige y complementa el texto anterior.** Donde haya diferencias, prevalece lo que dice aquí (ver "Correcciones al texto anterior").
+
+### Datos sintéticos
+
+Los 3 500 pacientes del repositorio son **sintéticos**, no reales (confirmado por el equipo; ver [`reports/auditoria.md`](reports/auditoria.md)). Los resultados son un ejercicio metodológico y **no se pueden extrapolar a pacientes reales**. Antes de cualquier uso real faltan datos reales con fechas, validación con Fisulab y revisión ética.
+
+### Correcciones al texto anterior
+
+| Texto anterior | Corrección |
+|---|---|
+| "3 500 pacientes reales", "6 CSV reales", "IDs reales de prueba", "CSV clínicos reales" | Los datos son **sintéticos**. |
+| "sin datos sintéticos de relleno" | El ETL sí imputa columnas faltantes de v2 con valores de v1 (`citas_asistidas` queda constante en 11; `cirugias_programadas` se estima con otra fórmula). Esas columnas identifican la cohorte y se excluyen del modelado. |
+| Métricas del XGBoost (precisión 0.8588, F1 0.7709) | **No son evidencia de desempeño.** El modelo usa `citas_perdidas_noshow`, una variable con fuga, mezcla dos cohortes distintas y la accuracy (0.690) queda por debajo del 0.746 de un clasificador que siempre predice "desertor". Se evaluó con una sola partición, sin línea base ni validación cruzada. |
+| Cortes Bajo / Medio / Alto de 0.33 y 0.66 | No tienen respaldo (ver "Salida recomendada"). |
+| Gráficos de inasistencias y de asistencia a terapia en el analista local | Muestran variables con fuga: son descriptivos y no deben interpretarse como factores predictivos. |
+
+### Resultados de la evaluación
+
+La evaluación se hizo solo sobre la **cohorte v2** (3 000 pacientes; la cohorte v1 tiene 30 no desertores y se usa solo de forma descriptiva), con validación cruzada anidada 5 × 3 sobre 2 400 pacientes de desarrollo y un holdout de 600 evaluado una sola vez. Detalle en [`reports/comparacion_modelos.md`](reports/comparacion_modelos.md).
+
+| Escenario | Cuándo se predice | Variables | ROC-AUC en holdout (IC 95 %) | Línea base |
+|---|---|---|---|---|
+| **T0** | Al ingreso | Tipo de fisura, edad de inicio, distancia, SES, ingresos, apoyo psicológico, dificultad de alimentación | **0.737** [0.693–0.783] | 0.500 (`DummyClassifier`) |
+| T1 sin habla | Tras cirugías primarias | T0 + hitos quirúrgicos, complicaciones, hipoacusia | 0.731 [0.687–0.777] | 0.500 |
+| T1 (cota superior) | Tras cirugías primarias | T1 sin habla + hipernasalidad e IVF | 0.877 [0.846–0.908] | 0.500 |
+
+- **Modelo de referencia: regresión logística regularizada en T0.** Random Forest y XGBoost no la mejoran (diferencias ≤ 0.003 de ROC-AUC en T0) y la regresión logística está bien calibrada (ECE 0.026).
+- **T1 es una cota superior, no un resultado.** Todo el salto de 0.73 a 0.88 viene de `grado_hipernasalidad` e IVF, que pueden ser consecuencia del abandono (no hay fechas para saber cuándo se miden).
+- En T0, PR-AUC 0.868 frente a 0.713 (prevalencia). Exigir recall ≥ 0.90 obliga a alertar a ≈ 83 % de los pacientes (especificidad 0.34): la alerta filtra poco.
+- **Variables excluidas por fuga:** `citas_perdidas_noshow`, `citas_terapia_asistidas`, `ratio_asistencia_terapia`, `citas_asistidas`, `cirugias_programadas`, `peso_z_score_2anos` y otras. Motivos en [`reports/diccionario_datos.md`](reports/diccionario_datos.md).
+
+### Qué pesa en el modelo (T0)
+
+Caída de ROC-AUC al permutar la variable en el holdout: `apoyo_psicologico` 0.150, `distancia_hospital_km` 0.043, `ingresos_mensuales_usd` 0.026; el resto, < 0.003. Regresión logística, Random Forest y XGBoost coinciden en el ranking. Son **asociaciones, no causas**: que el apoyo psicológico se asocie con menos deserción no demuestra que ofrecerlo la reduzca. En T1 los coeficientes de fístula e IVF salen "protectores" por su relación con la hipernasalidad y no deben leerse como efectos clínicos. Detalle en [`reports/interpretabilidad.md`](reports/interpretabilidad.md).
+
+### Salida recomendada: prioridad de seguimiento
+
+Con los cortes 0.33 y 0.66, el 1.2 % de los pacientes del holdout quedaría en "Bajo" y el 62.7 % en "Alto". Ni siquiera el 30 % de pacientes con menor puntaje es de bajo riesgo (deserción observada: 49 %). Se recomienda presentar una **prioridad de seguimiento** (alta / media / habitual) definida por la capacidad semanal del equipo, con textos que no hablen de diagnóstico, y usarla para **dirigir apoyo**, nunca para limitar la atención de quien vive lejos o tiene menos recursos. Detalle en `reports/interpretabilidad.md` §6 y en [`reports/limitaciones_y_plan_mejora.md`](reports/limitaciones_y_plan_mejora.md).
+
+### Estado de integración
+
+| Componente | Estado |
+|---|---|
+| ETL, EDA, contrato de features, comparación de modelos, interpretabilidad | Documentados en `reports/` |
+| `model.joblib` y la API (`src/app`) | **Aún sirven el modelo anterior** (XGBoost con `citas_perdidas_noshow`). Reemplazar por la regresión logística en T0 antes de usar el panel para algo más que una demostración. |
+| Entrenamiento al arrancar la API (`warmup_predictor`) | Pendiente de eliminar: el modelo debe ser un artefacto versionado. |
+| Datos reales y fechas | No disponibles. Ver el plan de mejora. |
+
+### Nuevos módulos de infraestructura
+
+- `modeling_features.py` — contrato de variables por escenario: `FEATURES_T0`, `FEATURES_T1`, `EXCLUDED_LEAKAGE` y `select_features`.
+- `experiments.py` — protocolo de evaluación (validación cruzada repetida, líneas base, calibración, subgrupos).
+- `interpretability.py` — coeficientes con IC bootstrap, importancia por permutación, efectos marginales y explicación por paciente.
+
+### Reproducir la evaluación y la interpretabilidad
+
+```bash
+.\.venv\Scripts\python.exe -m src.infrastructure.ai_models.experiments
+.\.venv\Scripts\python.exe -m src.infrastructure.ai_models.interpretability --scenario T0 --output-dir reports\modelos\interp_T0
+.\.venv\Scripts\python.exe -m src.infrastructure.ai_models.interpretability --scenario T1 --output-dir reports\modelos\interp_T1
+```
+
+La evaluación completa tarda alrededor de 12 minutos (semilla 42). Interpretabilidad escribe cuatro CSV y una figura por escenario; usa `--output-dir` para que un escenario no sobrescriba al otro.
+
+### Documentación
+
+| Documento | Contenido |
+|---|---|
+| [`reports/auditoria.md`](reports/auditoria.md) | Auditoría del repositorio y del dataset |
+| [`reports/diccionario_datos.md`](reports/diccionario_datos.md) | Diccionario de datos y decisión por variable |
+| [`reports/definicion_problema.md`](reports/definicion_problema.md) | Qué es abandonar, población, escenarios T0 / T1, preguntas para Fisulab |
+| [`reports/eda.md`](reports/eda.md) · [`reports/eda_tables.md`](reports/eda_tables.md) | Análisis exploratorio y tablas |
+| [`reports/comparacion_modelos.md`](reports/comparacion_modelos.md) | Comparación de modelos, calibración, subgrupos |
+| [`reports/interpretabilidad.md`](reports/interpretabilidad.md) | Coeficientes, importancia, explicación por paciente, salida del sistema |
+| [`reports/limitaciones_y_plan_mejora.md`](reports/limitaciones_y_plan_mejora.md) | Limitaciones, ética y plan de mejora |
+
+### Privacidad
+
+**Nunca subir datos de pacientes reales a GitHub ni a ningún repositorio público.** Este repositorio contiene datos y un modelo serializado solo porque los datos son sintéticos. Con datos reales: repositorio privado o datos fuera del repositorio, `.gitignore` para `data/` y modelos, y seudonimización acordada con la institución. Los CSV de explicación por paciente (`interpretabilidad_pacientes.csv`) contienen identificadores y tampoco deben subirse en ese caso.

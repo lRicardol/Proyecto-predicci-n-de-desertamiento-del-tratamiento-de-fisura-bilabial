@@ -1,4 +1,4 @@
-# Limitaciones, ética y plan de mejora — frente 5
+# Limitaciones, ética y plan de mejora 
 
 Datos **sintéticos** · Fuentes: `auditoria.md`, `diccionario_datos.md`, `definicion_problema.md`, `eda.md`, `comparacion_modelos.md`, `interpretabilidad.md`.
 
