@@ -77,12 +77,19 @@ def test_explain_prediction_returns_top_factors(saved_artifact: Path, frame: pd.
     assert magnitudes == sorted(magnitudes, reverse=True)
 
 
-def test_predictor_ignores_leakage_columns(saved_artifact: Path, frame: pd.DataFrame) -> None:
+def test_predictor_rejects_leakage_columns(saved_artifact: Path, frame: pd.DataFrame) -> None:
+    """Las columnas con fuga no se ignoran en silencio: la predicción T0 las rechaza."""
     predictor = LogisticT0Predictor(saved_artifact)
     patient = frame.iloc[[0]].copy()
     base = predictor.predict_dropout_probability(patient)[0]
     patient["citas_perdidas_noshow"] = 99
-    assert predictor.predict_dropout_probability(patient)[0] == base
+    with pytest.raises(InvalidPatientDataError, match="fuga"):
+        predictor.predict_dropout_probability(patient)
+    patient = frame.iloc[[0]].copy()
+    patient["citas_terapia_asistidas"] = 30
+    with pytest.raises(InvalidPatientDataError, match="fuga"):
+        predictor.predict_dropout_probability(patient)
+    assert predictor.predict_dropout_probability(frame.iloc[[0]])[0] == base
 
 
 def test_predictor_rejects_missing_columns(saved_artifact: Path) -> None:
@@ -107,3 +114,49 @@ def test_committed_artifact_loads() -> None:
     predictor = LogisticT0Predictor(DEFAULT_ARTIFACT)
     assert predictor.metadata["escenario"] == "T0"
     assert predictor.feature_names == FEATURES_T0
+
+
+def _save_mutated(saved_artifact: Path, tmp_path: Path, mutate) -> Path:
+    """Copia el artefacto válido, le aplica ``mutate`` y lo vuelve a serializar."""
+    import joblib
+
+    artifact = joblib.load(saved_artifact)
+    mutate(artifact)
+    path = tmp_path / "modelo_mutado.joblib"
+    joblib.dump(artifact, path)
+    return path
+
+
+def test_predictor_rejects_artifact_with_wrong_scenario(saved_artifact: Path, tmp_path: Path) -> None:
+    def mutate(artifact: dict) -> None:
+        artifact["metadata"] = {**artifact["metadata"], "escenario": "T1"}
+
+    path = _save_mutated(saved_artifact, tmp_path, mutate)
+    with pytest.raises(PredictionError, match="escenario"):
+        LogisticT0Predictor(path).load()
+
+
+def test_predictor_rejects_artifact_with_leakage_feature(saved_artifact: Path, tmp_path: Path) -> None:
+    def mutate(artifact: dict) -> None:
+        artifact["features"] = [*artifact["features"], "citas_perdidas_noshow"]
+
+    path = _save_mutated(saved_artifact, tmp_path, mutate)
+    with pytest.raises(PredictionError):
+        LogisticT0Predictor(path).load()
+
+
+def test_priority_policy_uses_artifact_cutoffs(saved_artifact: Path) -> None:
+    """Los cortes del artefacto separan alta/media/habitual en los límites exactos."""
+    from src.core.use_cases.predict_dropout import PriorityPolicy
+
+    predictor = LogisticT0Predictor(saved_artifact)
+    cutoffs = predictor.priority_cutoffs
+    policy = PriorityPolicy(
+        high_cutoff=cutoffs["alta"],
+        low_cutoff=cutoffs["habitual"],
+        observed_rates=predictor.priority_observed_rates,
+    )
+    assert policy.classify(cutoffs["alta"]) == "alta"
+    assert policy.classify(cutoffs["alta"] - 1e-9) == "media"
+    assert policy.classify(cutoffs["habitual"]) == "media"
+    assert policy.classify(cutoffs["habitual"] - 1e-9) == "habitual"

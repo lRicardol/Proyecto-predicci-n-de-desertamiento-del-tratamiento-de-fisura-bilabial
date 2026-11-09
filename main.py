@@ -5,6 +5,7 @@ from __future__ import annotations
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from config import get_settings
@@ -25,11 +26,19 @@ def create_app() -> FastAPI:
     application = FastAPI(
         title="Predicción de deserción · Fisura bilabial",
         description=(
-            "Analítica predictiva local (XGBoost) y analista estadístico "
-            "sin APIs externas para deserción del tratamiento de fisura labiopalatina."
+            "Prototipo académico con datos sintéticos. Regresión logística T0 "
+            "y analítica local, sin APIs externas. No es una herramienta diagnóstica."
         ),
         version="1.0.0",
         lifespan=lifespan,
+    )
+    # Solo orígenes locales: el dashboard se sirve same-origin; esto cubre
+    # herramientas de desarrollo locales sin abrir la API a la red.
+    application.add_middleware(
+        CORSMiddleware,
+        allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
+        allow_methods=["GET", "POST"],
+        allow_headers=["Content-Type"],
     )
     application.mount(
         "/static",

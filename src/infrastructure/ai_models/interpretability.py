@@ -56,6 +56,8 @@ def coefficient_table(
     n_bootstrap: int = 200, seed: int = 42,
 ) -> pd.DataFrame:
     """OR por 1 DE, IC 95 % bootstrap y estabilidad de signo. El OR por 10 km es or_por_unidad ** 10."""
+    if X.empty or y.empty:
+        raise ValueError("coefficient_table necesita datos de entrenamiento no vacíos.")
     names = _feature_names(pipeline)
     scales = _scales(pipeline, columns)
     point = pipeline.named_steps["clf"].coef_[0]
@@ -68,6 +70,10 @@ def coefficient_table(
             continue
         fitted = clone(pipeline).fit(X.iloc[positions], sample_y)
         draws.append(fitted.named_steps["clf"].coef_[0])
+    if len(draws) < 2:
+        raise ValueError(
+            f"Bootstrap insuficiente: solo {len(draws)} remuestreos válidos de {n_bootstrap}."
+        )
     bootstrap = np.vstack(draws)
     sd = np.array([scales.get(name, np.nan) for name in names])
     per_unit = np.where(np.isnan(sd), point, point / np.where(np.isnan(sd), 1.0, sd))
@@ -136,6 +142,8 @@ def patient_table(
     pipeline: Pipeline, X: pd.DataFrame, patient_ids: pd.Series, top: int = 3,
 ) -> pd.DataFrame:
     """Descomposición exacta en log-odds: 5 pacientes de mayor y 5 de menor puntaje."""
+    if X.empty:
+        raise ValueError("patient_table necesita al menos un paciente.")
     names = _feature_names(pipeline)
     coefficient = pipeline.named_steps["clf"].coef_[0]
     transformed = pipeline.named_steps["prep"].transform(X)
@@ -157,7 +165,7 @@ def patient_table(
     return pd.DataFrame(rows)
 
 
-def plot_odds_ratios(table: pd.DataFrame, path: Path) -> None:
+def plot_odds_ratios(table: pd.DataFrame, path: Path, scenario: str = "T0") -> None:
     from matplotlib.figure import Figure  # sin pyplot, igual que experiments.py
 
     ordered = table.sort_values("or_por_de")
@@ -173,7 +181,7 @@ def plot_odds_ratios(table: pd.DataFrame, path: Path) -> None:
     axes.set_xscale("log")
     axes.set_yticks(positions, [name.replace("_", " ") for name in ordered["variable"]], fontsize=8)
     axes.set_xlabel("Odds ratio por 1 DE (escala log)")
-    axes.set_title("Regresión logística T0 — coeficientes con IC 95 % bootstrap")
+    axes.set_title(f"Regresión logística {scenario} — coeficientes con IC 95 % bootstrap")
     figure.tight_layout()
     figure.savefig(path, dpi=130)
 
@@ -228,7 +236,11 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     figures = args.output_dir / "figuras"
     figures.mkdir(parents=True, exist_ok=True)
-    plot_odds_ratios(tables["interpretabilidad_coeficientes.csv"], figures / "interpretabilidad_or.png")
+    plot_odds_ratios(
+        tables["interpretabilidad_coeficientes.csv"],
+        figures / "interpretabilidad_or.png",
+        scenario=args.scenario,
+    )
 
     print(json.dumps({"escenario": args.scenario, "hiperparametros": params,
                       "umbral": threshold}, indent=2, ensure_ascii=False, default=str))

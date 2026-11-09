@@ -29,7 +29,10 @@ def test_prediction_returns_priority(client: TestClient) -> None:
     assert set(data["model_inputs"]) == set(FEATURES_T0)
     assert len(data["top_factors"]) == 3
     assert data["warnings"] == []
+    assert data["scenario"] == "T0"
+    assert data["model_version"]
     assert "risk_level" not in data
+    assert "patient_snapshot" not in data
 
 
 def test_prediction_post_matches_get(client: TestClient) -> None:
@@ -38,13 +41,37 @@ def test_prediction_post_matches_get(client: TestClient) -> None:
     assert by_post["dropout_probability"] == by_get["dropout_probability"]
 
 
-def test_prediction_warns_for_v1_patient(client: TestClient) -> None:
-    data = client.get("/api/predictions/PAC-1001").json()
-    assert any("v1" in warning for warning in data["warnings"])
+def test_prediction_v1_patient_is_not_in_modeling_cohort(client: TestClient) -> None:
+    """El flujo predictivo solo usa la cohorte v2: un ID de v1 no existe para el modelo."""
+    assert client.get("/api/predictions/PAC-1001").status_code == 404
+
+
+def test_prediction_rejects_invalid_patient_id(client: TestClient) -> None:
+    assert client.get("/api/predictions/ID%20con%20espacios").status_code == 422
+    response = client.post("/api/predictions", json={"patient_id": ""})
+    assert response.status_code == 422
 
 
 def test_prediction_unknown_patient_is_404(client: TestClient) -> None:
     assert client.get("/api/predictions/PAC-NO-EXISTE").status_code == 404
+
+
+def test_health_reports_model_metadata(client: TestClient) -> None:
+    data = client.get("/api/health").json()
+    assert data["model_scenario"] == "T0"
+    assert data["model_version"]
+
+
+def test_prediction_reports_model_metadata(client: TestClient) -> None:
+    data = client.get("/api/predictions/PAC-2001").json()
+    assert data["scenario"] == "T0"
+    assert data["model_version"]
+
+
+def test_analytics_unknown_query_is_422(client: TestClient) -> None:
+    response = client.post("/api/analytics", json={"query": "clima de mañana"})
+    assert response.status_code == 422
+    assert "No se reconoció" in response.json()["detail"]
 
 
 def test_health_suggests_v2_patients(client: TestClient) -> None:

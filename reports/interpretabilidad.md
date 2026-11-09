@@ -180,7 +180,7 @@ Estas variables **no están en el modelo** y no deben reaparecer en explicacione
 |---|---|---|
 | `ratio_asistencia_terapia` | 0.000 | Separa la etiqueta perfectamente (desertor ≤ 0.49; no desertor ≥ 0.58): acumulado de todo el tratamiento. |
 | `citas_terapia_asistidas` | 0.030 | Casi define la etiqueta. Un paciente que abandona deja de asistir *porque* abandonó. |
-| `citas_perdidas_noshow` | 0.669 (v1: 0.991) | Acumulado que incluye el periodo posterior al abandono. Es la variable que usa el `model.joblib` actual. |
+| `citas_perdidas_noshow` | 0.669 (v1: 0.991) | Acumulado que incluye el periodo posterior al abandono. Es la variable que usaba el modelo legado (`legacy/model.joblib`, ya fuera de la API). |
 | `cirugias_programadas`, `citas_asistidas` (+ `citas_asistidas_imputada`) | — | En v2 se imputan con valores de v1: identifican la cohorte. |
 | `peso_z_score_2anos` | 0.495 | Medido a los 2 años, posterior al momento de predicción. |
 
@@ -199,4 +199,6 @@ Opciones útiles: `--scenario {T0,T1,T1_sin_habla}`, `--bootstrap N` (por defect
 
 **Procedencia de las cifras [H].** Todas las tablas de §2, §3 y §7 (coeficientes, razones de momios, intervalos, estabilidad de signo, permutación, efectos marginales y pacientes) vienen de la corrida completa de `interpretability.py` en T0 y T1 (200 remuestreos bootstrap, 20 repeticiones de permutación). Los números de §6 (grupos de puntaje, umbrales 0.33 / 0.66, distribución de probabilidades) y el párrafo "T1 sin habla es T0" de §2 vienen de un cálculo exploratorio independiente sobre la misma partición, y los coeficientes del módulo en T0 coinciden con ese cálculo. La caída de ROC-AUC de la distancia en una corrida rápida previa (0.029, con 3 repeticiones) no se repitió: la corrida completa da 0.043, igual que el cálculo independiente.
 
-**Archivos:** `reports/modelos/interp_T0/` y `reports/modelos/interp_T1/` (CSV y `figuras/interpretabilidad_or.png`). La figura de T1 lleva el título "T0" porque `plot_odds_ratios` lo tiene fijo; corregir pasando el escenario como parámetro antes de usarla en el informe.
+**Archivos:** `reports/modelos/interp_T0/` y `reports/modelos/interp_T1/` (CSV y `figuras/interpretabilidad_or.png`). `plot_odds_ratios` recibe el escenario como parámetro, así que la figura indica el escenario correcto (T0 o T1).
+
+> **Nota sobre el artefacto desplegado.** Las cifras de discriminación de este informe (ROC-AUC 0.737 en T0) corresponden al *holdout* único de 600 pacientes de la partición experimental. El artefacto que sirve la API (`serialized/modelo_t0.joblib`, entrenado con los 3 000 pacientes) reporta en `modelo_t0.json → fuera_de_muestra` un ROC-AUC de **0.722**, calculado con predicciones *out-of-fold* de una validación cruzada de 5 pliegues (semilla 42). Son métodos distintos y ambos son correctos; los cortes de prioridad del artefacto también se derivan de predicciones fuera de muestra.

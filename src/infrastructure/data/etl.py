@@ -35,6 +35,8 @@ from src.infrastructure.ai_models.modeling_features import (
 
 PROJECT_ROOT: Final[Path] = Path(__file__).resolve().parents[3]
 DEFAULT_RAW_DIR: Final[Path] = PROJECT_ROOT / "data" / "raw"
+DEFAULT_MODELING_CSV: Final[Path] = PROJECT_ROOT / "data" / "processed" / "dataset_modelado_v2.csv"
+_PROTECTED_OUTPUTS: Final[frozenset[str]] = frozenset({"dataset_final_limpio.csv"})
 
 _RAW_ID: Final[str] = "ID_Paciente"
 
@@ -132,6 +134,19 @@ def validate_modeling_frame(frame: pd.DataFrame) -> None:
     select_features(frame, "T1")  # T1 incluye T0
 
 
+def export_modeling_dataset(
+    destination: Path | None = None, raw_dir: Path | None = None, cohort: str = "v2"
+) -> Path:
+    """Escribe el marco de modelado. No sobrescribe CSV crudos ni ``dataset_final_limpio.csv``."""
+    path = Path(destination) if destination else DEFAULT_MODELING_CSV
+    if path.name in _PROTECTED_OUTPUTS or path.parent.name == "raw":
+        raise DataAccessError(f"No se sobrescribe {path}. El marco de modelado va a otro archivo.")
+    frame = build_modeling_frame(raw_dir, cohort=cohort)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    frame.to_csv(path, index=False)
+    return path
+
+
 def quality_report(frame: pd.DataFrame) -> dict[str, object]:
     """Resumen para la bitácora: filas, tasa de deserción y faltantes por columna."""
     nulls = frame.isna().sum()
@@ -184,11 +199,12 @@ def _encode_ses(series: pd.Series) -> pd.Series:
 
 def main() -> int:
     try:
-        frame = build_modeling_frame()
-    except (DataAccessError, InvalidPatientDataError) as exc:
+        path = export_modeling_dataset()
+        frame = pd.read_csv(path)
+    except (DataAccessError, InvalidPatientDataError, ValueError) as exc:
         print(f"[ERROR] {exc}", file=sys.stderr)
         return 1
-    print(f"Marco de modelado v2: {frame.shape[0]} filas x {frame.shape[1]} columnas")
+    print(f"Marco de modelado v2 escrito en {path}: {frame.shape[0]} filas x {frame.shape[1]} columnas")
     print(quality_report(frame))
     return 0
 

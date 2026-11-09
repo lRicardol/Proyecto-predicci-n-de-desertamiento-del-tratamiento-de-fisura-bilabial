@@ -4,7 +4,7 @@ Sistema de **analítica predictiva local** para el seguimiento de pacientes con 
 
 El modelo es una **regresión logística** entrenada con la cohorte v2 (**3 000 pacientes sintéticos**) usando solo información disponible **al ingreso** del paciente (escenario T0). Todo corre en el equipo: no hay API keys ni servicios externos. Las consultas en lenguaje natural del panel se resuelven con un motor de reglas que genera gráficos de Matplotlib y Seaborn.
 
-> **Datos sintéticos.** Los 3 500 pacientes del repositorio no son reales. Los resultados son un ejercicio metodológico y **no se pueden extrapolar a pacientes reales**.
+> **Datos sintéticos.** Los pacientes del repositorio (3 500 en el dataset unificado histórico y 3 000 en la cohorte v2 de modelado) no son reales. Los resultados son un ejercicio metodológico y **no se pueden extrapolar a pacientes reales**.
 
 > **Aviso de salud.** Esta aplicación es una herramienta de apoyo para priorizar el seguimiento. **No constituye diagnóstico, pronóstico ni decisión terapéutica.** Las estimaciones deben interpretarse por personal de salud junto con la historia clínica completa.
 
@@ -22,6 +22,8 @@ python -m venv .venv
 ```
 
 Abrir **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)** y buscar un paciente de la cohorte v2 (por ejemplo `PAC-2001`).
+
+El servidor escucha solo en `127.0.0.1` por defecto (`HOST` en `.env` / `config.py`). Exponerlo en la red local (`HOST=0.0.0.0`) es una decisión explícita del equipo: el servicio **no tiene autenticación** y CORS solo admite orígenes `localhost`/`127.0.0.1`.
 
 ### Demo en Jupyter
 
@@ -62,7 +64,7 @@ El diseño sigue **Clean Architecture** y los principios SOLID. El dominio no im
 |---|---|
 | `src/core/interfaces/` | Puertos atómicos (ISP). `IPredictorModel` devuelve probabilidades y, opcionalmente, la explicación de cada predicción (`FactorContribution`). |
 | `src/core/use_cases/predict_dropout.py` | Orquesta repositorio + modelo y asigna la **prioridad de seguimiento** con `PriorityPolicy`. Añade el mensaje para el equipo, las variables que más pesaron, la fecha y avisos (por ejemplo, paciente fuera de la cohorte de entrenamiento). |
-| `src/core/use_cases/generate_analytics.py` | Entrega la consulta al analista y exige `chart_output.png`. |
+| `src/core/use_cases/generate_analytics.py` | Entrega la consulta al analista y exige el PNG con nombre único que este persiste. |
 | `src/core/exceptions.py` | Errores de dominio; los controladores los traducen a HTTP. |
 
 ### Capa Infrastructure
@@ -75,9 +77,9 @@ El diseño sigue **Clean Architecture** y los principios SOLID. El dominio no im
 | `ai_models/interpretability.py` | Coeficientes, importancia por permutación y explicación por paciente. |
 | `ai_models/final_model.py` | Entrena el modelo final con toda la cohorte v2 y guarda `serialized/modelo_t0.joblib` + `modelo_t0.json`. |
 | `ai_models/logistic_predictor.py` | Carga el artefacto, predice y explica. **Nunca entrena.** |
-| `repositories/csv_patient_repository.py` | Lee `dataset_final_limpio.csv` y busca fichas `PAC-XXXX`. |
+| `repositories/csv_patient_repository.py` | Lee `dataset_modelado_v2.csv` (solo cohorte v2, una fila por paciente) y busca fichas `PAC-XXXX`. |
 | `llm_agents/local_analyst.py` | Motor de reglas + Seaborn (sin LLM). |
-| `ai_models/xgboost_predictor.py`, `feature_engineering.py` | **Legado**: modelo anterior, con fuga. La API ya no lo usa; se conserva como referencia. |
+| `ai_models/legacy/xgboost_predictor.py` + `legacy/model.joblib` | **Legado (fuera de la API):** modelo XGBoost anterior con fuga (`citas_perdidas_noshow`). Se movió a `legacy/` como referencia del antes/después; no lo importe desde `composition.py`. `feature_engineering.py` se conserva porque `etl.py` y `modeling_features.py` usan su `SES_ORDINAL`. |
 
 ### Capa Presentation
 
@@ -99,18 +101,18 @@ El diseño sigue **Clean Architecture** y los principios SOLID. El dominio no im
 | Población | Cohorte v2: 3 000 pacientes, 71.4 % desertores (v1 tiene solo 30 no desertores y queda fuera) |
 | Variables (T0, al ingreso) | `tipo_fisura`, `edad_inicio_meses`, `distancia_hospital_km`, `nivel_socioeconomico_ord`, `ingresos_mensuales_usd`, `apoyo_psicologico`, `dificultad_alimentacion_preop` |
 | Excluidas por fuga | Asistencia y citas perdidas (acumuladas durante el tratamiento), peso a los 2 años y columnas que identifican la cohorte. Ver [`reports/diccionario_datos.md`](reports/diccionario_datos.md) |
-| Desempeño | ROC-AUC **0.737** en el holdout (IC 95 % 0.693–0.783) frente a 0.500 de la línea base; PR-AUC 0.868 frente a 0.713. Fuera de muestra con los 3 000 pacientes: ROC-AUC 0.722 |
+| Desempeño | Dos cifras, dos métodos: **0.737** es el ROC-AUC en el *holdout* único de la evaluación experimental (600 pacientes, IC 95 % bootstrap 0.693–0.783); **0.722** es el que reporta el propio artefacto (`modelo_t0.json → fuera_de_muestra`), calculado con predicciones *out-of-fold* de una validación cruzada de 5 pliegues sobre los 3 000 pacientes. PR-AUC 0.868 (holdout) frente a 0.713 de la prevalencia |
 | Artefacto | `src/infrastructure/ai_models/serialized/modelo_t0.joblib` (ficha legible en `modelo_t0.json`) |
 
 ### Salida: prioridad de seguimiento
 
 | Prioridad | Regla (puntaje del modelo) | Deserción observada en el grupo* |
 |---|---|---|
-| **Alta** | 20 % de pacientes con mayor puntaje (≥ 0.832) | 90 % |
-| **Media** | El resto | 77 % |
-| **Habitual** | 30 % con menor puntaje (< 0.619) | 49 % |
+| **Alta** | Cuantil 80 del puntaje fuera de muestra (≥ 0.832 en el artefacto actual) | 90 % |
+| **Media** | Entre ambos cuantiles | 77 % |
+| **Habitual** | Cuantil 30 del puntaje fuera de muestra (< 0.619 en el artefacto actual) | 49 % |
 
-\* Validación cruzada sobre los 3 000 pacientes de v2. No se habla de "riesgo bajo": incluso el grupo habitual deserta cerca de la mitad de las veces. Los porcentajes 20 / 30 son un punto de partida y **deben ajustarse con Fisulab según cuántos pacientes puede acompañar el equipo por semana**. La prioridad sirve para dirigir apoyo, nunca para limitar la atención.
+\* Los cortes de prioridad se calculan así: se obtienen predicciones *out-of-fold* (validación cruzada de 5 pliegues sobre los 3 000 pacientes de v2, sin que el modelo vea al paciente que predice), se ordenan y se toman los cuantiles 80 y 30 como cortes de probabilidad. Las tasas observadas por grupo se calculan sobre esas mismas predicciones fuera de muestra. Los valores concretos (0.832 / 0.619) viajan dentro del artefacto (`priority_cutoffs` en `modelo_t0.json`), no están escritos en el código. No se habla de "riesgo bajo": incluso el grupo habitual deserta cerca de la mitad de las veces. Los cuantiles 20 / 30 son un punto de partida y **deben ajustarse con Fisulab según cuántos pacientes puede acompañar el equipo por semana**. La prioridad sirve para dirigir apoyo, nunca para limitar la atención.
 
 Ejemplo de respuesta de `GET /api/predictions/PAC-2001` (resumida):
 
@@ -128,11 +130,13 @@ Ejemplo de respuesta de `GET /api/predictions/PAC-2001` (resumida):
   "model_inputs": {"tipo_fisura": "Asimetrica", "distancia_hospital_km": 155.5},
   "prediction_date": "2026-11-09",
   "warnings": [],
+  "scenario": "T0",
+  "model_version": "t0-logistica-1",
   "disclaimer": "Herramienta de apoyo a la gestión del seguimiento, entrenada con datos sintéticos. ..."
 }
 ```
 
-`contribution` está en log-odds frente al paciente promedio: positivo sube la estimación, negativo la baja. Es asociación, no causa. Para pacientes de la cohorte v1 la respuesta incluye un aviso en `warnings`.
+`contribution` está en log-odds frente al paciente promedio: positivo sube la estimación, negativo la baja. Es asociación, no causa. El flujo predictivo usa **solo la cohorte v2**: un ID de la cohorte v1 (por ejemplo `PAC-1001`) responde 404, y los identificadores con formato inválido responden 422.
 
 ### Regenerar el modelo
 
@@ -155,27 +159,31 @@ Tarda unos segundos, sobrescribe `modelo_t0.joblib` y `modelo_t0.json` e imprime
 | `GET /api/health` | Pacientes cargados e IDs de ejemplo |
 | `/docs` | OpenAPI de FastAPI |
 
-IDs de ejemplo (sintéticos): `PAC-2001`, `PAC-2002` (cohorte del modelo) y `PAC-1001` (cohorte v1, con aviso).
+IDs de ejemplo (sintéticos, cohorte v2): `PAC-2001`, `PAC-2002`, `PAC-2003`.
 
-El panel lee `data/processed/dataset_final_limpio.csv`. Si hay que regenerarlo:
+La API y el panel leen `data/processed/dataset_modelado_v2.csv` (solo cohorte v2, sin columnas con fuga y sin imputar). Si hay que regenerarlo:
 
 ```bash
-.\.venv\Scripts\python.exe notebooks/00_procesamiento_dataset_unificado.py
+.\.venv\Scripts\python.exe -m src.infrastructure.data.etl
 ```
+
+El dataset histórico `dataset_final_limpio.csv` (v1 + v2, para analítica descriptiva) se sigue generando con `notebooks/00_procesamiento_dataset_unificado.py` y **no** alimenta las predicciones.
 
 ### Módulo de analítica local
 
-`LocalStatisticalAnalyst` implementa `ILLMAnalyst` **sin modelos de lenguaje**: recibe una frase, la normaliza y genera un gráfico en `static/generated_charts/chart_output.png`.
+`LocalStatisticalAnalyst` implementa `IStatisticalAnalyst` **sin modelos de lenguaje**: recibe una frase, la normaliza y genera un gráfico con nombre único en `static/generated_charts/` (los más antiguos se depuran automáticamente). Las consultas no reconocidas devuelven un error 422 con ejemplos de consultas admitidas.
 
 | Palabras clave | Gráfico |
 |---|---|
-| `inasistencias`, `noshow`, `citas perdidas` | Boxplot + stripplot de no-shows vs deserción (variable con fuga: solo descriptivo) |
+| `inasistencias`, `noshow`, `citas perdidas` | Boxplot + stripplot de no-shows vs deserción (variable retrospectiva: solo descriptivo) |
 | `socioeconómico`, `ses` | Tasas de deserción por SES y apoyo psicológico |
 | `distancia`, `km` | Densidad KDE de km al hospital |
 | `cirugías`, `complicaciones` | Carga operatoria vs complicaciones |
-| `terapia`, `lenguaje`, `ivf` | Asistencia a terapia e hipernasalidad (variable con fuga: solo descriptivo) |
+| `terapia`, `lenguaje`, `ivf` | Asistencia a terapia e hipernasalidad (variable retrospectiva: solo descriptivo) |
 | `correlación`, `matriz` | Heatmap de Pearson |
-| resto | Distribución global de la etiqueta `desertor` |
+| `comparar`, `grupos` | Tasa de deserción por grupo (tipo de fisura, SES o cohorte) |
+| `distribución`, `tasa de deserción` | Distribución global de la etiqueta `desertor` |
+| resto | Error con ejemplos de consultas admitidas |
 
 ---
 
@@ -183,7 +191,8 @@ El panel lee `data/processed/dataset_final_limpio.csv`. Si hay que regenerarlo:
 
 ```
 ├── data/raw/                          # 6 CSV sintéticos (= contenido del zip)
-├── data/processed/dataset_final_limpio.csv
+├── data/processed/dataset_final_limpio.csv   # histórico v1+v2 (analítica descriptiva)
+├── data/processed/dataset_modelado_v2.csv    # marco de modelado v2 (predicciones)
 ├── notebooks/
 │   ├── 00_procesamiento_dataset_unificado.py   # ETL del panel
 │   ├── 01_*, 02_*                     # notebooks iniciales (modelo anterior, con fuga)
