@@ -12,13 +12,30 @@ import pandas as pd  # noqa: E402
 import seaborn as sns  # noqa: E402
 
 from src.core.exceptions import AnalyticsError
-from src.core.interfaces.i_llm_analyst import ILLMAnalyst
+from src.core.interfaces.i_llm_analyst import IStatisticalAnalyst
 
 SES_ORDER = ("Bajo", "Medio-Bajo", "Medio", "Alto")
 PALETTE = {0: "#4c78a8", 1: "#e45756"}
 
 
-class LocalStatisticalAnalyst(ILLMAnalyst):
+_EXAMPLES = (
+    "inasistencias y deserción",
+    "nivel socioeconómico",
+    "distancia al hospital",
+    "complicaciones quirúrgicas",
+    "terapia de lenguaje",
+    "distribución de deserción",
+    "matriz de correlación",
+    "comparar grupos de deserción",
+)
+
+_RETROSPECTIVE = (
+    " Aviso: esta variable resume el tratamiento ya ocurrido; no sirve para predecir al ingreso "
+    "y la asociación no implica causalidad."
+)
+
+
+class LocalStatisticalAnalyst(IStatisticalAnalyst):
     """Mapea lenguaje natural a gráficos equivalentes a los notebooks 01 y 02."""
 
     def analyze_data_and_plot(
@@ -59,19 +76,23 @@ class LocalStatisticalAnalyst(ILLMAnalyst):
         return narrative
 
     def _dispatch(self, query: str, frame: pd.DataFrame, image_path: Path) -> str:
-        if "inasistencias" in query or "noshow" in query or "no-show" in query or "citas perdidas" in query or "no show" in query:
-            return self._plot_noshow(frame, image_path)
-        if "socioeconom" in query or "ses" in query or "ingreso" in query or "pobreza" in query:
-            return self._plot_socioeconomic(frame, image_path)
-        if "distancia" in query or "km" in query or "viaje" in query:
-            return self._plot_distance(frame, image_path)
-        if "cirug" in query or "complic" in query or "fistula" in query or "dehisc" in query or "quirurg" in query:
-            return self._plot_surgery(frame, image_path)
-        if "terapia" in query or "lenguaje" in query or "ivf" in query or "hipernasal" in query:
-            return self._plot_therapy(frame, image_path)
-        if "correl" in query or "heatmap" in query or "matriz" in query:
-            return self._plot_correlation(frame, image_path)
-        return self._plot_dropout_overview(frame, image_path)
+        intents = (
+            (("inasistencia", "noshow", "no-show", "no show", "citas perdidas"), self._plot_noshow),
+            (("socioeconom", "ses", "ingreso", "pobreza"), self._plot_socioeconomic),
+            (("distancia", "km", "viaje"), self._plot_distance),
+            (("cirug", "complic", "fistula", "dehisc", "quirurg"), self._plot_surgery),
+            (("terapia", "lenguaje", "ivf", "hipernasal"), self._plot_therapy),
+            (("correl", "heatmap", "matriz"), self._plot_correlation),
+            (("compar", "grupo"), self._plot_group_comparison),
+            (("distrib", "etiqueta", "cuantos desert", "cuántos desert", "tasa de desert"), self._plot_dropout_overview),
+        )
+        for keywords, handler in intents:
+            if any(keyword in query for keyword in keywords):
+                return handler(frame, image_path)
+        examples = "; ".join(_EXAMPLES)
+        raise AnalyticsError(
+            "No se reconoció la consulta. Pruebe con: " + examples + "."
+        )
 
     def _plot_noshow(self, frame: pd.DataFrame, image_path: Path) -> str:
         _require(frame, ["citas_perdidas_noshow", "desertor"])
@@ -107,7 +128,7 @@ class LocalStatisticalAnalyst(ILLMAnalyst):
             label="media",
         )
         axes[0].set_xticks([0, 1], ["Continúa (0)", "Deserta (1)"])
-        axes[0].set_title("Boxplot: inasistencias según deserción")
+        axes[0].set_title("Asociación: inasistencias según deserción (retrospectiva)")
         axes[0].set_ylabel("Citas perdidas (no-show)")
         axes[0].legend(loc="upper left")
 
@@ -130,7 +151,8 @@ class LocalStatisticalAnalyst(ILLMAnalyst):
             "Boxplot de inasistencias: "
             f"media en continuadores = {means.get(0, float('nan')):.2f}; "
             f"en desertores = {means.get(1, float('nan')):.2f}. "
-            f"n={len(frame)}."
+            f"n={len(frame)}. Unidad: citas perdidas acumuladas."
+            + _RETROSPECTIVE
         )
 
     def _plot_socioeconomic(self, frame: pd.DataFrame, image_path: Path) -> str:
@@ -149,7 +171,7 @@ class LocalStatisticalAnalyst(ILLMAnalyst):
         )
         axes[0].set_ylim(0, 1)
         axes[0].set_ylabel("Tasa de deserción")
-        axes[0].set_title("Impacto del nivel socioeconómico")
+        axes[0].set_title("Asociación entre nivel socioeconómico y deserción")
         axes[0].tick_params(axis="x", rotation=15)
 
         if "apoyo_psicologico" in frame.columns:
@@ -170,7 +192,10 @@ class LocalStatisticalAnalyst(ILLMAnalyst):
 
         _save(fig, image_path)
         rendered = ", ".join(f"{idx}: {tasas.get(idx, float('nan')):.1%}" for idx in present)
-        return f"Tasa de deserción por nivel socioeconómico. {rendered}."
+        return (
+            f"Tasa de deserción por nivel socioeconómico (n={len(frame)}). {rendered}. "
+            "Es una asociación, no un efecto causal."
+        )
 
     def _plot_distance(self, frame: pd.DataFrame, image_path: Path) -> str:
         _require(frame, ["distancia_hospital_km", "desertor"])
@@ -277,6 +302,40 @@ class LocalStatisticalAnalyst(ILLMAnalyst):
         _save(fig, image_path)
         corr_noshow = float(corr.loc["citas_perdidas_noshow", "desertor"])
         return f"Matriz de correlación. Pearson no-show vs deserción = {corr_noshow:.2f}."
+
+    def _plot_group_comparison(self, frame: pd.DataFrame, image_path: Path) -> str:
+        _require(frame, ["desertor"])
+        group_column = next(
+            (column for column in ("tipo_fisura", "nivel_socioeconomico", "cohorte") if column in frame.columns),
+            None,
+        )
+        if group_column is None:
+            raise AnalyticsError(
+                "No hay columna de agrupación (tipo_fisura, nivel_socioeconomico o cohorte) en el CSV."
+            )
+        rates = frame.groupby(group_column, dropna=False)["desertor"].agg(["mean", "count"])
+        rates = rates[rates["count"] > 0]
+        fig, ax = plt.subplots(figsize=(9, 5.2))
+        sns.barplot(
+            data=frame,
+            x=group_column,
+            y="desertor",
+            errorbar=("ci", 95),
+            color="#4c78a8",
+            ax=ax,
+        )
+        ax.set_ylim(0, 1)
+        ax.set_ylabel("Tasa de deserción")
+        ax.set_title(f"Asociación: tasa de deserción por {group_column.replace('_', ' ')}")
+        ax.tick_params(axis="x", rotation=20)
+        _save(fig, image_path)
+        rendered = "; ".join(
+            f"{index}: {row['mean']:.1%} (n={int(row['count'])})" for index, row in rates.iterrows()
+        )
+        return (
+            f"Comparación de grupos por {group_column} (n={len(frame)}). {rendered}. "
+            "Son asociaciones observadas, no efectos causales."
+        )
 
     def _plot_dropout_overview(self, frame: pd.DataFrame, image_path: Path) -> str:
         _require(frame, ["desertor"])

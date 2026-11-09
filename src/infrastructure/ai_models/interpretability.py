@@ -56,6 +56,8 @@ def coefficient_table(
     n_bootstrap: int = 200, seed: int = 42,
 ) -> pd.DataFrame:
     """OR por 1 DE, IC 95 % bootstrap y estabilidad de signo. El OR por 10 km es or_por_unidad ** 10."""
+    if X.empty or y.empty:
+        raise ValueError("coefficient_table necesita datos de entrenamiento no vacíos.")
     names = _feature_names(pipeline)
     scales = _scales(pipeline, columns)
     point = pipeline.named_steps["clf"].coef_[0]
@@ -68,6 +70,10 @@ def coefficient_table(
             continue
         fitted = clone(pipeline).fit(X.iloc[positions], sample_y)
         draws.append(fitted.named_steps["clf"].coef_[0])
+    if len(draws) < 2:
+        raise ValueError(
+            f"Bootstrap insuficiente: solo {len(draws)} remuestreos válidos de {n_bootstrap}."
+        )
     bootstrap = np.vstack(draws)
     sd = np.array([scales.get(name, np.nan) for name in names])
     per_unit = np.where(np.isnan(sd), point, point / np.where(np.isnan(sd), 1.0, sd))
@@ -136,6 +142,8 @@ def patient_table(
     pipeline: Pipeline, X: pd.DataFrame, patient_ids: pd.Series, top: int = 3,
 ) -> pd.DataFrame:
     """Descomposición exacta en log-odds: 5 pacientes de mayor y 5 de menor puntaje."""
+    if X.empty:
+        raise ValueError("patient_table necesita al menos un paciente.")
     names = _feature_names(pipeline)
     coefficient = pipeline.named_steps["clf"].coef_[0]
     transformed = pipeline.named_steps["prep"].transform(X)

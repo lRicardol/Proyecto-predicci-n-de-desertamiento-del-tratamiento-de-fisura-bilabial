@@ -15,8 +15,15 @@ import pandas as pd
 
 from src.core.exceptions import InvalidPatientDataError, PredictionError
 from src.core.interfaces.i_predictor_model import FactorContribution, IPredictorModel
-from src.infrastructure.ai_models.final_model import DEFAULT_ARTIFACT
-from src.infrastructure.ai_models.modeling_features import CATEGORICAL_FEATURES
+from src.infrastructure.ai_models.final_model import ARTIFACT_VERSION, DEFAULT_ARTIFACT, SCENARIO
+from src.infrastructure.ai_models.modeling_features import (
+    CATEGORICAL_FEATURES,
+    EXCLUDED_LEAKAGE,
+    FEATURES_T0,
+    FEATURES_T1,
+    ID_COLUMN,
+    TARGET,
+)
 
 _REQUIRED_KEYS = (
     "pipeline",
@@ -60,8 +67,33 @@ class LogisticT0Predictor(IPredictorModel):
         missing = [key for key in _REQUIRED_KEYS if not isinstance(artifact, dict) or key not in artifact]
         if missing:
             raise PredictionError(f"El artefacto {self._artifact_path.name} no tiene {missing}.")
+        self._validate_contract(artifact)
         self._artifact = artifact
         return artifact
+
+    @staticmethod
+    def _validate_contract(artifact: dict[str, Any]) -> None:
+        metadata = artifact.get("metadata")
+        if not isinstance(metadata, dict):
+            raise PredictionError("El artefacto no incluye metadatos.")
+        scenario = metadata.get("escenario")
+        if scenario != SCENARIO:
+            raise PredictionError(f"El artefacto es del escenario {scenario!r}; se esperaba {SCENARIO}.")
+        version = metadata.get("version")
+        if version != ARTIFACT_VERSION:
+            raise PredictionError(
+                f"Versión de artefacto incompatible: {version!r}. Se esperaba {ARTIFACT_VERSION}."
+            )
+        features = list(artifact["features"])
+        if features != list(FEATURES_T0):
+            raise PredictionError(f"Las características del artefacto no coinciden con T0: {features}.")
+        leaked = [name for name in features if name in EXCLUDED_LEAKAGE]
+        t1_only = [name for name in features if name in set(FEATURES_T1) - set(FEATURES_T0)]
+        if leaked or t1_only:
+            raise PredictionError(f"El artefacto T0 incluye columnas no permitidas: {leaked + t1_only}.")
+        pipeline = artifact["pipeline"]
+        if not hasattr(pipeline, "predict_proba"):
+            raise PredictionError("El pipeline del artefacto no expone predict_proba.")
 
     @property
     def feature_names(self) -> tuple[str, ...]:
@@ -79,7 +111,7 @@ class LogisticT0Predictor(IPredictorModel):
     def metadata(self) -> dict[str, Any]:
         return dict(self.load()["metadata"])
 
-    def predict_dropout_probability(self, features: pd.DataFrame) -> np.ndarray:
+    def predict_dropout_probability(self, features: Any) -> np.ndarray:
         matrix = self._matrix(features)
         try:
             probabilities = self.load()["pipeline"].predict_proba(matrix)[:, 1]
@@ -90,7 +122,7 @@ class LogisticT0Predictor(IPredictorModel):
             raise PredictionError("El modelo devolvió valores no numéricos.")
         return np.clip(probabilities, 0.0, 1.0)
 
-    def explain_prediction(self, features: pd.DataFrame, top: int = 3) -> list[FactorContribution]:
+    def explain_prediction(self, features: Any, top: int = 3) -> list[FactorContribution]:
         """Descomposición exacta en log-odds de la primera fila frente al paciente promedio.
 
         log-odds(paciente) = log-odds(paciente promedio) + suma de contribuciones.
@@ -109,7 +141,7 @@ class LogisticT0Predictor(IPredictorModel):
             for column, value in ranked[:top]
         ]
 
-    def contributions(self, features: pd.DataFrame) -> dict[str, float]:
+    def contributions(self, features: Any) -> dict[str, float]:
         """Contribución en log-odds de cada variable de entrada, para la primera fila."""
         artifact = self.load()
         pipeline = artifact["pipeline"]
@@ -127,17 +159,35 @@ class LogisticT0Predictor(IPredictorModel):
         classifier = artifact["pipeline"].named_steps["clf"]
         return float(classifier.intercept_[0] + artifact["reference_mean"] @ classifier.coef_[0])
 
-    def _matrix(self, features: pd.DataFrame) -> pd.DataFrame:
-        if features is None or features.empty:
+    def _matrix(self, features: Any) -> pd.DataFrame:
+        frame = _as_frame(features)
+        if frame.empty:
             raise InvalidPatientDataError("No se recibieron características para predecir.")
+        leaked = [
+            column
+            for column in frame.columns
+            if column in EXCLUDED_LEAKAGE and column not in {ID_COLUMN, TARGET}
+        ]
+        if leaked:
+            raise InvalidPatientDataError(
+                f"La predicción T0 no acepta columnas con fuga: {leaked}."
+            )
         columns = list(self.load()["features"])
-        missing = [column for column in columns if column not in features.columns]
+        missing = [column for column in columns if column not in frame.columns]
         if missing:
             raise InvalidPatientDataError(f"Faltan columnas para el modelo T0: {missing}")
-        matrix = features.loc[:, columns].copy()
+        matrix = frame.loc[:, columns].copy()
         numeric = [column for column in columns if column not in CATEGORICAL_FEATURES]
         matrix[numeric] = matrix[numeric].apply(pd.to_numeric, errors="coerce")
         return matrix
+
+
+def _as_frame(features: Any) -> pd.DataFrame:
+    if isinstance(features, pd.DataFrame):
+        return features.copy()
+    if isinstance(features, list | tuple):
+        return pd.DataFrame(list(features))
+    raise InvalidPatientDataError("Las características deben ser una tabla o una lista de registros.")
 
 
 def _source_column(transformed_name: str, columns: list[str]) -> str:

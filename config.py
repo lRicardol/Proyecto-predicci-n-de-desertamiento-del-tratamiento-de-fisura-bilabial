@@ -21,6 +21,9 @@ class Settings(BaseSettings):
     processed_dataset_path: Path = Field(
         default=PROJECT_ROOT / "data" / "processed" / "dataset_final_limpio.csv"
     )
+    modeling_dataset_path: Path = Field(
+        default=PROJECT_ROOT / "data" / "processed" / "dataset_modelado_v2.csv"
+    )
     charts_dir: Path = Field(default=PROJECT_ROOT / "static" / "generated_charts")
     static_dir: Path = Field(default=PROJECT_ROOT / "static")
     model_artifact_path: Path = Field(
@@ -33,7 +36,7 @@ class Settings(BaseSettings):
     )
     primary_dataset_name: str = Field(default="dataset_final_limpio.csv")
 
-    host: str = Field(default="0.0.0.0")
+    host: str = Field(default="127.0.0.1")
     port: int = Field(default=8000)
     debug: bool = Field(default=False)
 

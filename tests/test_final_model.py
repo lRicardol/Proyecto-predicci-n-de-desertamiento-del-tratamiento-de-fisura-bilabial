@@ -77,12 +77,19 @@ def test_explain_prediction_returns_top_factors(saved_artifact: Path, frame: pd.
     assert magnitudes == sorted(magnitudes, reverse=True)
 
 
-def test_predictor_ignores_leakage_columns(saved_artifact: Path, frame: pd.DataFrame) -> None:
+def test_predictor_rejects_leakage_columns(saved_artifact: Path, frame: pd.DataFrame) -> None:
+    """Las columnas con fuga no se ignoran en silencio: la predicción T0 las rechaza."""
     predictor = LogisticT0Predictor(saved_artifact)
     patient = frame.iloc[[0]].copy()
     base = predictor.predict_dropout_probability(patient)[0]
     patient["citas_perdidas_noshow"] = 99
-    assert predictor.predict_dropout_probability(patient)[0] == base
+    with pytest.raises(InvalidPatientDataError, match="fuga"):
+        predictor.predict_dropout_probability(patient)
+    patient = frame.iloc[[0]].copy()
+    patient["citas_terapia_asistidas"] = 30
+    with pytest.raises(InvalidPatientDataError, match="fuga"):
+        predictor.predict_dropout_probability(patient)
+    assert predictor.predict_dropout_probability(frame.iloc[[0]])[0] == base
 
 
 def test_predictor_rejects_missing_columns(saved_artifact: Path) -> None:

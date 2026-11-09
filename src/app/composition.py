@@ -13,7 +13,7 @@ from src.infrastructure.repositories.csv_patient_repository import CsvPatientRep
 @lru_cache(maxsize=1)
 def get_patient_repository() -> CsvPatientRepository:
     settings = get_settings()
-    return CsvPatientRepository(settings.processed_dataset_path)
+    return CsvPatientRepository(settings.modeling_dataset_path)
 
 
 @lru_cache(maxsize=1)
@@ -45,6 +45,8 @@ def get_predict_dropout_use_case() -> PredictDropoutUseCase:
         predictor_model=predictor,
         priority_policy=get_priority_policy(),
         training_cohort=predictor.metadata.get("cohorte"),
+        scenario=str(predictor.metadata.get("escenario") or "T0"),
+        model_version=str(predictor.metadata.get("version") or ""),
     )
 
 

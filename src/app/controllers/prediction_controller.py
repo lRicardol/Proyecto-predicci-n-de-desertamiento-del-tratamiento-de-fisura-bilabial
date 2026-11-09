@@ -1,5 +1,7 @@
 """Controlador HTTP de predicción. Solo traduce request/response."""
 
+import re
+
 from fastapi import APIRouter, Depends, HTTPException, status
 
 from src.app.composition import get_predict_dropout_use_case
@@ -8,6 +10,7 @@ from src.core.exceptions import DomainError, PatientNotFoundError
 from src.core.use_cases.predict_dropout import PredictDropoutUseCase
 
 prediction_router = APIRouter(prefix="/predictions", tags=["predicción"])
+_PATIENT_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,31}$")
 
 
 @prediction_router.get("/{patient_id}", response_model=PredictionResponse)
@@ -27,8 +30,13 @@ def predict_dropout_post(
 
 
 def _execute(patient_id: str, use_case: PredictDropoutUseCase) -> PredictionResponse:
+    if not _PATIENT_ID.fullmatch(patient_id.strip()):
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Identificador inválido. Use letras, números, guion o guion bajo (máximo 32).",
+        )
     try:
-        result = use_case.execute(patient_id)
+        result = use_case.execute(patient_id.strip())
     except PatientNotFoundError as exc:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc
     except DomainError as exc:
@@ -53,5 +61,6 @@ def _execute(patient_id: str, use_case: PredictDropoutUseCase) -> PredictionResp
         prediction_date=result.prediction_date,
         warnings=result.warnings,
         disclaimer=result.disclaimer,
-        patient_snapshot=result.patient_snapshot,
+        scenario=result.scenario,
+        model_version=result.model_version,
     )

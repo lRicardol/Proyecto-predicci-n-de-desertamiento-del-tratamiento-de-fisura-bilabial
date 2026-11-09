@@ -25,8 +25,8 @@ def create_app() -> FastAPI:
     application = FastAPI(
         title="Predicción de deserción · Fisura bilabial",
         description=(
-            "Analítica predictiva local (XGBoost) y analista estadístico "
-            "sin APIs externas para deserción del tratamiento de fisura labiopalatina."
+            "Prototipo académico con datos sintéticos. Regresión logística T0 "
+            "y analítica local, sin APIs externas. No es una herramienta diagnóstica."
         ),
         version="1.0.0",
         lifespan=lifespan,

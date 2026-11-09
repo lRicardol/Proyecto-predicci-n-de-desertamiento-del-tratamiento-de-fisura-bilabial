@@ -1,10 +1,10 @@
-"""Contrato atómico del analista estadístico local (ISP: no incluye predicción)."""
+"""Contrato del intérprete estadístico local (palabras clave, no un modelo de lenguaje)."""
 
 from abc import ABC, abstractmethod
 
 
-class ILLMAnalyst(ABC):
-    """Puerto Strategy para consultas en lenguaje natural y gráficos locales."""
+class IStatisticalAnalyst(ABC):
+    """Puerto para consultas en lenguaje natural y gráficos locales."""
 
     @abstractmethod
     def analyze_data_and_plot(
@@ -14,3 +14,7 @@ class ILLMAnalyst(ABC):
         output_image_path: str,
     ) -> str:
         """Analiza el CSV indicado, persiste un gráfico PNG y retorna un informe."""
+
+
+# Nombre histórico. La implementación no llama a un LLM.
+ILLMAnalyst = IStatisticalAnalyst

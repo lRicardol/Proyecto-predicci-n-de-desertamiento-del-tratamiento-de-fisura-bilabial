@@ -10,3 +10,6 @@ __pycache__/
 
 # IDE: archivos de usuario
 .idea/workspace.xml
+
+# Gráficos generados en ejecución por el analista local
+static/generated_charts/chart_*.png

@@ -1,10 +1,9 @@
 """Contrato atómico del modelo de deserción (ISP: no incluye analítica conversacional)."""
 
 from abc import ABC, abstractmethod
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
-
-import numpy as np
-import pandas as pd
+from typing import Any
 
 
 @dataclass(frozen=True)
@@ -25,10 +24,14 @@ class IPredictorModel(ABC):
     """Puerto Strategy: cualquier modelo sustituible debe devolver P(deserción)."""
 
     @abstractmethod
-    def predict_dropout_probability(self, features: pd.DataFrame) -> np.ndarray:
-        """Retorna un vector de probabilidades en el intervalo [0.0, 1.0]."""
+    def predict_dropout_probability(
+        self, features: Sequence[Mapping[str, Any]]
+    ) -> Sequence[float]:
+        """Retorna probabilidades en el intervalo [0.0, 1.0], una por fila."""
 
-    def explain_prediction(self, features: pd.DataFrame, top: int = 3) -> list[FactorContribution]:
+    def explain_prediction(
+        self, features: Sequence[Mapping[str, Any]], top: int = 3
+    ) -> list[FactorContribution]:
         """Variables que más pesan en la predicción de la primera fila. Opcional: vacío por defecto."""
         return []
 

@@ -4,7 +4,7 @@ Sistema de **analítica predictiva local** para el seguimiento de pacientes con 
 
 El modelo es una **regresión logística** entrenada con la cohorte v2 (**3 000 pacientes sintéticos**) usando solo información disponible **al ingreso** del paciente (escenario T0). Todo corre en el equipo: no hay API keys ni servicios externos. Las consultas en lenguaje natural del panel se resuelven con un motor de reglas que genera gráficos de Matplotlib y Seaborn.
 
-> **Datos sintéticos.** Los 3 500 pacientes del repositorio no son reales. Los resultados son un ejercicio metodológico y **no se pueden extrapolar a pacientes reales**.
+> **Datos sintéticos.** Los pacientes del repositorio (3 500 en el dataset unificado histórico y 3 000 en la cohorte v2 de modelado) no son reales. Los resultados son un ejercicio metodológico y **no se pueden extrapolar a pacientes reales**.
 
 > **Aviso de salud.** Esta aplicación es una herramienta de apoyo para priorizar el seguimiento. **No constituye diagnóstico, pronóstico ni decisión terapéutica.** Las estimaciones deben interpretarse por personal de salud junto con la historia clínica completa.
 
@@ -62,7 +62,7 @@ El diseño sigue **Clean Architecture** y los principios SOLID. El dominio no im
 |---|---|
 | `src/core/interfaces/` | Puertos atómicos (ISP). `IPredictorModel` devuelve probabilidades y, opcionalmente, la explicación de cada predicción (`FactorContribution`). |
 | `src/core/use_cases/predict_dropout.py` | Orquesta repositorio + modelo y asigna la **prioridad de seguimiento** con `PriorityPolicy`. Añade el mensaje para el equipo, las variables que más pesaron, la fecha y avisos (por ejemplo, paciente fuera de la cohorte de entrenamiento). |
-| `src/core/use_cases/generate_analytics.py` | Entrega la consulta al analista y exige `chart_output.png`. |
+| `src/core/use_cases/generate_analytics.py` | Entrega la consulta al analista y exige el PNG con nombre único que este persiste. |
 | `src/core/exceptions.py` | Errores de dominio; los controladores los traducen a HTTP. |
 
 ### Capa Infrastructure
@@ -75,7 +75,7 @@ El diseño sigue **Clean Architecture** y los principios SOLID. El dominio no im
 | `ai_models/interpretability.py` | Coeficientes, importancia por permutación y explicación por paciente. |
 | `ai_models/final_model.py` | Entrena el modelo final con toda la cohorte v2 y guarda `serialized/modelo_t0.joblib` + `modelo_t0.json`. |
 | `ai_models/logistic_predictor.py` | Carga el artefacto, predice y explica. **Nunca entrena.** |
-| `repositories/csv_patient_repository.py` | Lee `dataset_final_limpio.csv` y busca fichas `PAC-XXXX`. |
+| `repositories/csv_patient_repository.py` | Lee `dataset_modelado_v2.csv` (solo cohorte v2, una fila por paciente) y busca fichas `PAC-XXXX`. |
 | `llm_agents/local_analyst.py` | Motor de reglas + Seaborn (sin LLM). |
 | `ai_models/xgboost_predictor.py`, `feature_engineering.py` | **Legado**: modelo anterior, con fuga. La API ya no lo usa; se conserva como referencia. |
 
@@ -128,11 +128,13 @@ Ejemplo de respuesta de `GET /api/predictions/PAC-2001` (resumida):
   "model_inputs": {"tipo_fisura": "Asimetrica", "distancia_hospital_km": 155.5},
   "prediction_date": "2026-11-09",
   "warnings": [],
+  "scenario": "T0",
+  "model_version": "t0-logistica-1",
   "disclaimer": "Herramienta de apoyo a la gestión del seguimiento, entrenada con datos sintéticos. ..."
 }
 ```
 
-`contribution` está en log-odds frente al paciente promedio: positivo sube la estimación, negativo la baja. Es asociación, no causa. Para pacientes de la cohorte v1 la respuesta incluye un aviso en `warnings`.
+`contribution` está en log-odds frente al paciente promedio: positivo sube la estimación, negativo la baja. Es asociación, no causa. El flujo predictivo usa **solo la cohorte v2**: un ID de la cohorte v1 (por ejemplo `PAC-1001`) responde 404, y los identificadores con formato inválido responden 422.
 
 ### Regenerar el modelo
 
@@ -155,27 +157,31 @@ Tarda unos segundos, sobrescribe `modelo_t0.joblib` y `modelo_t0.json` e imprime
 | `GET /api/health` | Pacientes cargados e IDs de ejemplo |
 | `/docs` | OpenAPI de FastAPI |
 
-IDs de ejemplo (sintéticos): `PAC-2001`, `PAC-2002` (cohorte del modelo) y `PAC-1001` (cohorte v1, con aviso).
+IDs de ejemplo (sintéticos, cohorte v2): `PAC-2001`, `PAC-2002`, `PAC-2003`.
 
-El panel lee `data/processed/dataset_final_limpio.csv`. Si hay que regenerarlo:
+La API y el panel leen `data/processed/dataset_modelado_v2.csv` (solo cohorte v2, sin columnas con fuga y sin imputar). Si hay que regenerarlo:
 
 ```bash
-.\.venv\Scripts\python.exe notebooks/00_procesamiento_dataset_unificado.py
+.\.venv\Scripts\python.exe -m src.infrastructure.data.etl
 ```
+
+El dataset histórico `dataset_final_limpio.csv` (v1 + v2, para analítica descriptiva) se sigue generando con `notebooks/00_procesamiento_dataset_unificado.py` y **no** alimenta las predicciones.
 
 ### Módulo de analítica local
 
-`LocalStatisticalAnalyst` implementa `ILLMAnalyst` **sin modelos de lenguaje**: recibe una frase, la normaliza y genera un gráfico en `static/generated_charts/chart_output.png`.
+`LocalStatisticalAnalyst` implementa `IStatisticalAnalyst` **sin modelos de lenguaje**: recibe una frase, la normaliza y genera un gráfico con nombre único en `static/generated_charts/` (los más antiguos se depuran automáticamente). Las consultas no reconocidas devuelven un error 422 con ejemplos de consultas admitidas.
 
 | Palabras clave | Gráfico |
 |---|---|
-| `inasistencias`, `noshow`, `citas perdidas` | Boxplot + stripplot de no-shows vs deserción (variable con fuga: solo descriptivo) |
+| `inasistencias`, `noshow`, `citas perdidas` | Boxplot + stripplot de no-shows vs deserción (variable retrospectiva: solo descriptivo) |
 | `socioeconómico`, `ses` | Tasas de deserción por SES y apoyo psicológico |
 | `distancia`, `km` | Densidad KDE de km al hospital |
 | `cirugías`, `complicaciones` | Carga operatoria vs complicaciones |
-| `terapia`, `lenguaje`, `ivf` | Asistencia a terapia e hipernasalidad (variable con fuga: solo descriptivo) |
+| `terapia`, `lenguaje`, `ivf` | Asistencia a terapia e hipernasalidad (variable retrospectiva: solo descriptivo) |
 | `correlación`, `matriz` | Heatmap de Pearson |
-| resto | Distribución global de la etiqueta `desertor` |
+| `comparar`, `grupos` | Tasa de deserción por grupo (tipo de fisura, SES o cohorte) |
+| `distribución`, `tasa de deserción` | Distribución global de la etiqueta `desertor` |
+| resto | Error con ejemplos de consultas admitidas |
 
 ---
 
@@ -183,7 +189,8 @@ El panel lee `data/processed/dataset_final_limpio.csv`. Si hay que regenerarlo:
 
 ```
 ├── data/raw/                          # 6 CSV sintéticos (= contenido del zip)
-├── data/processed/dataset_final_limpio.csv
+├── data/processed/dataset_final_limpio.csv   # histórico v1+v2 (analítica descriptiva)
+├── data/processed/dataset_modelado_v2.csv    # marco de modelado v2 (predicciones)
 ├── notebooks/
 │   ├── 00_procesamiento_dataset_unificado.py   # ETL del panel
 │   ├── 01_*, 02_*                     # notebooks iniciales (modelo anterior, con fuga)
