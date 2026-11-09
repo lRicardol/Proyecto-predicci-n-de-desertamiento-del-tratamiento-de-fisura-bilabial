@@ -114,3 +114,49 @@ def test_committed_artifact_loads() -> None:
     predictor = LogisticT0Predictor(DEFAULT_ARTIFACT)
     assert predictor.metadata["escenario"] == "T0"
     assert predictor.feature_names == FEATURES_T0
+
+
+def _save_mutated(saved_artifact: Path, tmp_path: Path, mutate) -> Path:
+    """Copia el artefacto válido, le aplica ``mutate`` y lo vuelve a serializar."""
+    import joblib
+
+    artifact = joblib.load(saved_artifact)
+    mutate(artifact)
+    path = tmp_path / "modelo_mutado.joblib"
+    joblib.dump(artifact, path)
+    return path
+
+
+def test_predictor_rejects_artifact_with_wrong_scenario(saved_artifact: Path, tmp_path: Path) -> None:
+    def mutate(artifact: dict) -> None:
+        artifact["metadata"] = {**artifact["metadata"], "escenario": "T1"}
+
+    path = _save_mutated(saved_artifact, tmp_path, mutate)
+    with pytest.raises(PredictionError, match="escenario"):
+        LogisticT0Predictor(path).load()
+
+
+def test_predictor_rejects_artifact_with_leakage_feature(saved_artifact: Path, tmp_path: Path) -> None:
+    def mutate(artifact: dict) -> None:
+        artifact["features"] = [*artifact["features"], "citas_perdidas_noshow"]
+
+    path = _save_mutated(saved_artifact, tmp_path, mutate)
+    with pytest.raises(PredictionError):
+        LogisticT0Predictor(path).load()
+
+
+def test_priority_policy_uses_artifact_cutoffs(saved_artifact: Path) -> None:
+    """Los cortes del artefacto separan alta/media/habitual en los límites exactos."""
+    from src.core.use_cases.predict_dropout import PriorityPolicy
+
+    predictor = LogisticT0Predictor(saved_artifact)
+    cutoffs = predictor.priority_cutoffs
+    policy = PriorityPolicy(
+        high_cutoff=cutoffs["alta"],
+        low_cutoff=cutoffs["habitual"],
+        observed_rates=predictor.priority_observed_rates,
+    )
+    assert policy.classify(cutoffs["alta"]) == "alta"
+    assert policy.classify(cutoffs["alta"] - 1e-9) == "media"
+    assert policy.classify(cutoffs["habitual"]) == "media"
+    assert policy.classify(cutoffs["habitual"] - 1e-9) == "habitual"

@@ -299,3 +299,5 @@ Valor más frecuente en los pliegues externos (veces / total) y valor elegido pa
 Semilla 42; Python 3.11.9, scikit-learn 1.9.1, XGBoost 3.2.0, pandas 3.1.0, numpy 2.4.6. Tiempo total 713.7 s. No usar `--quick` para reportar.
 
 Salidas en `reports/modelos/`: `cv_resultados_por_pliegue.csv`, `cv_resumen.csv`, `cv_hiperparametros.csv`, `holdout_resultados.csv`, `calibracion_cajas.csv`, `calibracion_resumen.csv`, `subgrupos.csv`, `metadatos.json` y `figuras/calibracion_*.png`. Este documento se generó a partir de esos archivos.
+
+> **Nota sobre el artefacto desplegado.** El modelo que sirve la API (`serialized/modelo_t0.joblib`) se entrena con los 3 000 pacientes y reporta en `modelo_t0.json → fuera_de_muestra` un ROC-AUC de **0.722** (predicciones *out-of-fold* de una validación cruzada de 5 pliegues, semilla 42). La cifra **0.737** de este informe es la del *holdout* único de 600 pacientes de la evaluación experimental (§3); ambas son correctas y responden a métodos distintos. Los cortes de prioridad del artefacto también se derivan de predicciones fuera de muestra (cuantiles 80/30), no del holdout.

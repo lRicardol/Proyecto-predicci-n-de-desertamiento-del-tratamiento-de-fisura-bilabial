@@ -23,6 +23,8 @@ python -m venv .venv
 
 Abrir **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)** y buscar un paciente de la cohorte v2 (por ejemplo `PAC-2001`).
 
+El servidor escucha solo en `127.0.0.1` por defecto (`HOST` en `.env` / `config.py`). Exponerlo en la red local (`HOST=0.0.0.0`) es una decisión explícita del equipo: el servicio **no tiene autenticación** y CORS solo admite orígenes `localhost`/`127.0.0.1`.
+
 ### Demo en Jupyter
 
 [`notebooks/04_demo_modelo.ipynb`](notebooks/04_demo_modelo.ipynb) recorre todo el flujo con explicaciones celda por celda: datos de entrenamiento, variables excluidas por fuga, comparación de modelos, modelo final, explicación de predicciones, paciente nuevo y llamada a la API. Tarda alrededor de un minuto con *Run All* y no modifica archivos del repositorio. El archivo se guarda ya ejecutado, así que también se puede leer sin correrlo (por ejemplo, en GitHub).
@@ -77,7 +79,7 @@ El diseño sigue **Clean Architecture** y los principios SOLID. El dominio no im
 | `ai_models/logistic_predictor.py` | Carga el artefacto, predice y explica. **Nunca entrena.** |
 | `repositories/csv_patient_repository.py` | Lee `dataset_modelado_v2.csv` (solo cohorte v2, una fila por paciente) y busca fichas `PAC-XXXX`. |
 | `llm_agents/local_analyst.py` | Motor de reglas + Seaborn (sin LLM). |
-| `ai_models/xgboost_predictor.py`, `feature_engineering.py` | **Legado**: modelo anterior, con fuga. La API ya no lo usa; se conserva como referencia. |
+| `ai_models/legacy/xgboost_predictor.py` + `legacy/model.joblib` | **Legado (fuera de la API):** modelo XGBoost anterior con fuga (`citas_perdidas_noshow`). Se movió a `legacy/` como referencia del antes/después; no lo importe desde `composition.py`. `feature_engineering.py` se conserva porque `etl.py` y `modeling_features.py` usan su `SES_ORDINAL`. |
 
 ### Capa Presentation
 
@@ -99,18 +101,18 @@ El diseño sigue **Clean Architecture** y los principios SOLID. El dominio no im
 | Población | Cohorte v2: 3 000 pacientes, 71.4 % desertores (v1 tiene solo 30 no desertores y queda fuera) |
 | Variables (T0, al ingreso) | `tipo_fisura`, `edad_inicio_meses`, `distancia_hospital_km`, `nivel_socioeconomico_ord`, `ingresos_mensuales_usd`, `apoyo_psicologico`, `dificultad_alimentacion_preop` |
 | Excluidas por fuga | Asistencia y citas perdidas (acumuladas durante el tratamiento), peso a los 2 años y columnas que identifican la cohorte. Ver [`reports/diccionario_datos.md`](reports/diccionario_datos.md) |
-| Desempeño | ROC-AUC **0.737** en el holdout (IC 95 % 0.693–0.783) frente a 0.500 de la línea base; PR-AUC 0.868 frente a 0.713. Fuera de muestra con los 3 000 pacientes: ROC-AUC 0.722 |
+| Desempeño | Dos cifras, dos métodos: **0.737** es el ROC-AUC en el *holdout* único de la evaluación experimental (600 pacientes, IC 95 % bootstrap 0.693–0.783); **0.722** es el que reporta el propio artefacto (`modelo_t0.json → fuera_de_muestra`), calculado con predicciones *out-of-fold* de una validación cruzada de 5 pliegues sobre los 3 000 pacientes. PR-AUC 0.868 (holdout) frente a 0.713 de la prevalencia |
 | Artefacto | `src/infrastructure/ai_models/serialized/modelo_t0.joblib` (ficha legible en `modelo_t0.json`) |
 
 ### Salida: prioridad de seguimiento
 
 | Prioridad | Regla (puntaje del modelo) | Deserción observada en el grupo* |
 |---|---|---|
-| **Alta** | 20 % de pacientes con mayor puntaje (≥ 0.832) | 90 % |
-| **Media** | El resto | 77 % |
-| **Habitual** | 30 % con menor puntaje (< 0.619) | 49 % |
+| **Alta** | Cuantil 80 del puntaje fuera de muestra (≥ 0.832 en el artefacto actual) | 90 % |
+| **Media** | Entre ambos cuantiles | 77 % |
+| **Habitual** | Cuantil 30 del puntaje fuera de muestra (< 0.619 en el artefacto actual) | 49 % |
 
-\* Validación cruzada sobre los 3 000 pacientes de v2. No se habla de "riesgo bajo": incluso el grupo habitual deserta cerca de la mitad de las veces. Los porcentajes 20 / 30 son un punto de partida y **deben ajustarse con Fisulab según cuántos pacientes puede acompañar el equipo por semana**. La prioridad sirve para dirigir apoyo, nunca para limitar la atención.
+\* Los cortes de prioridad se calculan así: se obtienen predicciones *out-of-fold* (validación cruzada de 5 pliegues sobre los 3 000 pacientes de v2, sin que el modelo vea al paciente que predice), se ordenan y se toman los cuantiles 80 y 30 como cortes de probabilidad. Las tasas observadas por grupo se calculan sobre esas mismas predicciones fuera de muestra. Los valores concretos (0.832 / 0.619) viajan dentro del artefacto (`priority_cutoffs` en `modelo_t0.json`), no están escritos en el código. No se habla de "riesgo bajo": incluso el grupo habitual deserta cerca de la mitad de las veces. Los cuantiles 20 / 30 son un punto de partida y **deben ajustarse con Fisulab según cuántos pacientes puede acompañar el equipo por semana**. La prioridad sirve para dirigir apoyo, nunca para limitar la atención.
 
 Ejemplo de respuesta de `GET /api/predictions/PAC-2001` (resumida):
 

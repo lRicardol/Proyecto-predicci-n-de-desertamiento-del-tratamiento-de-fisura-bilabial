@@ -56,6 +56,24 @@ def test_prediction_unknown_patient_is_404(client: TestClient) -> None:
     assert client.get("/api/predictions/PAC-NO-EXISTE").status_code == 404
 
 
+def test_health_reports_model_metadata(client: TestClient) -> None:
+    data = client.get("/api/health").json()
+    assert data["model_scenario"] == "T0"
+    assert data["model_version"]
+
+
+def test_prediction_reports_model_metadata(client: TestClient) -> None:
+    data = client.get("/api/predictions/PAC-2001").json()
+    assert data["scenario"] == "T0"
+    assert data["model_version"]
+
+
+def test_analytics_unknown_query_is_422(client: TestClient) -> None:
+    response = client.post("/api/analytics", json={"query": "clima de mañana"})
+    assert response.status_code == 422
+    assert "No se reconoció" in response.json()["detail"]
+
+
 def test_health_suggests_v2_patients(client: TestClient) -> None:
     data = client.get("/api/health").json()
     assert data["sample_patient_ids"][0] == "PAC-2001"

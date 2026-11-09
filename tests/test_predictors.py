@@ -1,4 +1,4 @@
-"""Pruebas del predictor XGBoost y del repositorio sobre el CSV procesado."""
+"""Pruebas del predictor XGBoost LEGADO (con fuga, solo referencia) y del repositorio CSV."""
 
 from __future__ import annotations
 
@@ -9,7 +9,10 @@ import pandas as pd
 import pytest
 
 from src.core.exceptions import PatientNotFoundError
-from src.infrastructure.ai_models.xgboost_predictor import XgboostPredictor, train_xgboost
+from src.infrastructure.ai_models.legacy.xgboost_predictor import (
+    XgboostPredictor,
+    train_xgboost,
+)
 from src.infrastructure.repositories.csv_patient_repository import CsvPatientRepository
 
 ROOT = Path(__file__).resolve().parents[1]

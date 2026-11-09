@@ -25,9 +25,11 @@
       <p class="text-xs uppercase tracking-[0.25em] text-cyan-400">Analítica local · sin APIs externas</p>
       <h1 class="mt-2 text-3xl font-semibold">Deserción del tratamiento de fisura bilabial</h1>
       <p class="mt-2 max-w-3xl text-slate-400">
-        Prioridad de seguimiento con regresión logística (escenario T0, al ingreso) y gráficos
-        estadísticos sobre <code class="text-cyan-300">dataset_modelado_v2.csv</code>
-        (<span id="patient-count">3 000</span> pacientes, <strong>datos sintéticos</strong>). IDs de ejemplo:
+        Prioridad de seguimiento con regresión logística (escenario T0, al ingreso) sobre
+        <code class="text-cyan-300">dataset_modelado_v2.csv</code>
+        (<span id="patient-count">3 000</span> pacientes, <strong>datos sintéticos</strong>).
+        Los gráficos del panel de analítica son descriptivos y usan el histórico
+        <code class="text-cyan-300">dataset_final_limpio.csv</code> (v1 + v2). IDs de ejemplo:
         <span id="sample-ids" class="text-cyan-200">PAC-2001, PAC-2002</span>.
       </p>
     </header>
@@ -60,7 +62,7 @@
 
       <section class="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-xl">
         <h2 class="text-xl font-medium">Panel de analítica</h2>
-        <p class="mt-1 text-sm text-slate-400">El analista local genera un PNG con nombre único en <code>static/generated_charts/</code> con Matplotlib/Seaborn.</p>
+        <p class="mt-1 text-sm text-slate-400">El analista local genera un PNG con nombre único en <code>static/generated_charts/</code> con Matplotlib/Seaborn. Lee <code>dataset_final_limpio.csv</code> (v1 + v2): es descriptivo e incluye variables retrospectivas que no sirven para predecir al ingreso.</p>
         <label class="mt-4 block text-sm text-slate-300">Consulta predefinida</label>
         <select id="preset" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3">
           <option value="Grafica la relación entre inasistencias y deserción">Inasistencias y deserción</option>

@@ -9,7 +9,8 @@ __pycache__/
 .env
 
 # IDE: archivos de usuario
-.idea/workspace.xml
+.idea/
+.vscode/
 
 # Gráficos generados en ejecución por el analista local
 static/generated_charts/chart_*.png

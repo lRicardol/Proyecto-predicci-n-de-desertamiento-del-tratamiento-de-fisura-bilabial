@@ -58,3 +58,5 @@ class HealthResponse(BaseModel):
     patients_loaded: int
     dataset: str
     sample_patient_ids: list[str] = Field(default_factory=list)
+    model_scenario: str = ""
+    model_version: str = ""
