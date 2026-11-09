@@ -12,26 +12,33 @@
       <p class="text-xs uppercase tracking-[0.25em] text-cyan-400">Analítica local · sin APIs externas</p>
       <h1 class="mt-2 text-3xl font-semibold">Deserción del tratamiento de fisura bilabial</h1>
       <p class="mt-2 max-w-3xl text-slate-400">
-        Predicción XGBoost y gráficos estadísticos sobre
-        <code class="text-cyan-300">dataset_final_limpio.csv</code>
-        (<span id="patient-count">3 500</span> pacientes). IDs de ejemplo:
-        <span id="sample-ids" class="text-cyan-200">PAC-1001, PAC-2001</span>.
+        Prioridad de seguimiento con regresión logística (escenario T0, al ingreso) y gráficos
+        estadísticos sobre <code class="text-cyan-300">dataset_final_limpio.csv</code>
+        (<span id="patient-count">3 500</span> pacientes, <strong>datos sintéticos</strong>). IDs de ejemplo:
+        <span id="sample-ids" class="text-cyan-200">PAC-2001, PAC-2002</span>.
       </p>
     </header>
 
     <div class="grid gap-6 lg:grid-cols-2">
       <section class="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-xl">
         <h2 class="text-xl font-medium">Panel de predicción</h2>
-        <p class="mt-1 text-sm text-slate-400">Busca un ID real (PAC-XXXX) y verás la ficha clínica más el riesgo coloreado: verde = bajo, rojo = alto.</p>
+        <p class="mt-1 text-sm text-slate-400">Busca un ID (PAC-XXXX) y verás la prioridad de seguimiento (alta, media o habitual), los datos que usó el modelo y las variables que más pesaron. El modelo se entrenó con la cohorte v2 (PAC-2000 a PAC-4999).</p>
         <form id="predict-form" class="mt-4 flex gap-2">
-          <input id="patient-id" value="PAC-1001" class="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 outline-none focus:border-cyan-400" />
+          <input id="patient-id" value="PAC-2001" class="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 outline-none focus:border-cyan-400" />
           <button class="rounded-xl bg-cyan-400 px-4 py-3 font-semibold text-slate-950 hover:bg-cyan-300">Calcular</button>
         </form>
         <div id="prediction-box" class="mt-5 hidden rounded-2xl border p-4">
-          <div id="risk-badge" class="inline-flex rounded-full px-4 py-1 text-sm font-bold"></div>
-          <p id="risk-percent" class="mt-3 text-4xl font-semibold"></p>
-          <p class="mt-1 text-xs uppercase tracking-wide text-slate-400">Probabilidad de deserción</p>
-          <dl id="patient-card" class="mt-4 grid grid-cols-2 gap-3 text-sm"></dl>
+          <div id="priority-badge" class="inline-flex rounded-full px-4 py-1 text-sm font-bold"></div>
+          <p id="priority-percent" class="mt-3 text-4xl font-semibold"></p>
+          <p class="mt-1 text-xs uppercase tracking-wide text-slate-400">Probabilidad estimada de abandono</p>
+          <p id="priority-message" class="mt-3 text-sm text-slate-200"></p>
+          <p id="group-rate" class="mt-2 text-xs text-slate-400"></p>
+          <ul id="warnings" class="mt-3 space-y-1 text-xs text-amber-300"></ul>
+          <h3 class="mt-4 text-sm font-medium text-slate-300">Variables que más pesaron (asociación, no causa)</h3>
+          <ul id="factors" class="mt-2 space-y-1 text-sm"></ul>
+          <h3 class="mt-4 text-sm font-medium text-slate-300">Datos usados por el modelo</h3>
+          <dl id="patient-card" class="mt-2 grid grid-cols-2 gap-3 text-sm"></dl>
+          <p id="disclaimer" class="mt-4 text-xs text-slate-500"></p>
         </div>
         <p id="predict-error" class="mt-4 hidden text-rose-400"></p>
       </section>
@@ -69,28 +76,28 @@
 
   <script>
     const panelStyles = {
-      Bajo: "border-green-500 bg-green-950/40",
-      Medio: "border-amber-400 bg-amber-950/30",
-      Alto: "border-red-500 bg-red-950/40",
+      habitual: "border-sky-500 bg-sky-950/30",
+      media: "border-amber-400 bg-amber-950/30",
+      alta: "border-rose-500 bg-rose-950/40",
     };
-    const riskStyles = {
-      Bajo: "bg-green-600 text-white",
-      Medio: "bg-amber-500 text-slate-950",
-      Alto: "bg-red-600 text-white",
+    const badgeStyles = {
+      habitual: "bg-sky-600 text-white",
+      media: "bg-amber-500 text-slate-950",
+      alta: "bg-rose-600 text-white",
     };
-    const riskText = { Bajo: "text-green-400", Medio: "text-amber-300", Alto: "text-red-500" };
+    const percentStyles = { habitual: "text-sky-300", media: "text-amber-300", alta: "text-rose-400" };
     const labels = {
-      id_paciente: "ID",
-      cohorte: "Cohorte",
       tipo_fisura: "Tipo de fisura",
+      edad_inicio_meses: "Edad al iniciar (meses)",
       distancia_hospital_km: "Distancia (km)",
-      nivel_socioeconomico: "Nivel SES",
-      citas_perdidas_noshow: "No-shows",
-      complicaciones_quirurgicas: "Complicaciones",
+      nivel_socioeconomico_ord: "Nivel SES (0–4)",
+      ingresos_mensuales_usd: "Ingresos (USD)",
       apoyo_psicologico: "Apoyo psicológico",
-      ratio_asistencia_terapia: "Asistencia terapia",
-      desertor: "Desertor (histórico)",
+      dificultad_alimentacion_preop: "Dificultad de alimentación",
     };
+    const escapeHtml = (value) => String(value ?? "—").replace(/[&<>"']/g, (char) => (
+      { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]
+    ));
 
     fetch("/api/health").then(async (response) => {
       const data = await response.json();
@@ -117,19 +124,32 @@
         const data = await response.json();
         if (!response.ok) throw new Error(data.detail || "No se pudo predecir");
         box.classList.remove("hidden");
-        box.className = "mt-5 rounded-2xl border p-4 " + (panelStyles[data.risk_level] || "border-slate-700");
-        const badge = document.getElementById("risk-badge");
-        badge.className = "inline-flex rounded-full px-4 py-1 text-sm font-bold " + (riskStyles[data.risk_level] || "");
-        badge.textContent = "Riesgo " + data.risk_level;
-        const percent = document.getElementById("risk-percent");
-        percent.className = "mt-3 text-4xl font-semibold " + (riskText[data.risk_level] || "");
+        const level = data.priority_level;
+        box.className = "mt-5 rounded-2xl border p-4 " + (panelStyles[level] || "border-slate-700");
+        const badge = document.getElementById("priority-badge");
+        badge.className = "inline-flex rounded-full px-4 py-1 text-sm font-bold " + (badgeStyles[level] || "");
+        badge.textContent = "Prioridad de seguimiento: " + level;
+        const percent = document.getElementById("priority-percent");
+        percent.className = "mt-3 text-4xl font-semibold " + (percentStyles[level] || "");
         percent.textContent = (data.dropout_probability * 100).toFixed(1) + "%";
+        document.getElementById("priority-message").textContent = data.priority_message;
+        document.getElementById("group-rate").textContent = data.group_observed_dropout_rate == null ? "" :
+          "En este grupo de prioridad desertó el " + (data.group_observed_dropout_rate * 100).toFixed(0) +
+          "% de los pacientes de entrenamiento (validación cruzada). Predicción del " + data.prediction_date + ".";
+        document.getElementById("warnings").innerHTML = data.warnings
+          .map((text) => "<li>⚠ " + escapeHtml(text) + "</li>").join("");
+        document.getElementById("factors").innerHTML = data.top_factors.map((factor) => (
+          "<li class='rounded-lg bg-slate-950/80 px-3 py-2'><span class='font-medium'>" + escapeHtml(factor.label) +
+          "</span> = " + escapeHtml(factor.value) + " → <span class='" +
+          (factor.contribution > 0 ? "text-rose-300" : "text-sky-300") + "'>" + escapeHtml(factor.direction) +
+          "</span></li>"
+        )).join("");
         const card = document.getElementById("patient-card");
-        card.innerHTML = Object.entries(labels).map(([key, label]) => {
-          const value = data.patient_snapshot[key];
-          return "<div class='rounded-lg bg-slate-950/80 p-3'><dt class='text-slate-500'>" + label +
-            "</dt><dd class='font-medium'>" + (value ?? "—") + "</dd></div>";
-        }).join("");
+        card.innerHTML = Object.entries(labels).map(([key, label]) => (
+          "<div class='rounded-lg bg-slate-950/80 p-3'><dt class='text-slate-500'>" + label +
+          "</dt><dd class='font-medium'>" + escapeHtml(data.model_inputs[key]) + "</dd></div>"
+        )).join("");
+        document.getElementById("disclaimer").textContent = data.disclaimer;
       } catch (error) {
         box.classList.add("hidden");
         errorBox.textContent = error.message;

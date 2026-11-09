@@ -1,0 +1,52 @@
+{
+  "features": [
+    "tipo_fisura",
+    "edad_inicio_meses",
+    "distancia_hospital_km",
+    "nivel_socioeconomico_ord",
+    "ingresos_mensuales_usd",
+    "apoyo_psicologico",
+    "dificultad_alimentacion_preop"
+  ],
+  "priority_cutoffs": {
+    "alta": 0.8319376695287867,
+    "habitual": 0.619384094353562
+  },
+  "priority_observed_rates": {
+    "alta": 0.8966666666666666,
+    "media": 0.7726666666666666,
+    "habitual": 0.49444444444444446
+  },
+  "version": "t0-logistica-1",
+  "modelo": "regresion_logistica",
+  "escenario": "T0",
+  "entrenado_utc": "2026-11-09T17:20:34+00:00",
+  "cohorte": "v2",
+  "pacientes": 3000,
+  "tasa_desercion": 0.714,
+  "hiperparametros": {
+    "clf__C": 0.01
+  },
+  "umbral_recall_minimo": {
+    "min_recall": 0.9,
+    "umbral": 0.5547195226902468
+  },
+  "fuera_de_muestra": {
+    "roc_auc": 0.7224872077813254,
+    "pr_auc": 0.8575748924955082,
+    "pliegues": 5
+  },
+  "cuantiles_prioridad": {
+    "alta": 0.8,
+    "habitual": 0.3
+  },
+  "semilla": 42,
+  "python": "3.11.9",
+  "bibliotecas": {
+    "numpy": "2.4.6",
+    "pandas": "3.1.0",
+    "scikit-learn": "1.9.1",
+    "joblib": "1.6.0"
+  },
+  "datos": "sintéticos; no extrapolable a pacientes reales"
+}

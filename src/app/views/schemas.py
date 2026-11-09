@@ -9,10 +9,25 @@ class PredictionRequest(BaseModel):
     patient_id: str = Field(..., min_length=1, examples=["PAC-1001"])
 
 
+class FactorResponse(BaseModel):
+    variable: str
+    label: str
+    value: Any = None
+    contribution: float = Field(..., description="Log-odds frente al paciente promedio; > 0 sube la estimación.")
+    direction: str
+
+
 class PredictionResponse(BaseModel):
     patient_id: str
     dropout_probability: float
-    risk_level: str
+    priority_level: str = Field(..., examples=["alta", "media", "habitual"])
+    priority_message: str
+    group_observed_dropout_rate: float | None = None
+    top_factors: list[FactorResponse] = Field(default_factory=list)
+    model_inputs: dict[str, Any] = Field(default_factory=dict)
+    prediction_date: str
+    warnings: list[str] = Field(default_factory=list)
+    disclaimer: str
     patient_snapshot: dict[str, Any]
 
 

@@ -3,7 +3,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 
 from src.app.composition import get_predict_dropout_use_case
-from src.app.views.schemas import PredictionRequest, PredictionResponse
+from src.app.views.schemas import FactorResponse, PredictionRequest, PredictionResponse
 from src.core.exceptions import DomainError, PatientNotFoundError
 from src.core.use_cases.predict_dropout import PredictDropoutUseCase
 
@@ -36,6 +36,22 @@ def _execute(patient_id: str, use_case: PredictDropoutUseCase) -> PredictionResp
     return PredictionResponse(
         patient_id=result.patient_id,
         dropout_probability=result.dropout_probability,
-        risk_level=result.risk_level,
+        priority_level=result.priority_level,
+        priority_message=result.priority_message,
+        group_observed_dropout_rate=result.group_observed_rate,
+        top_factors=[
+            FactorResponse(
+                variable=factor.variable,
+                label=factor.label,
+                value=factor.value,
+                contribution=factor.contribution,
+                direction="aumenta la estimación" if factor.contribution > 0 else "reduce la estimación",
+            )
+            for factor in result.top_factors
+        ],
+        model_inputs=result.model_inputs,
+        prediction_date=result.prediction_date,
+        warnings=result.warnings,
+        disclaimer=result.disclaimer,
         patient_snapshot=result.patient_snapshot,
     )

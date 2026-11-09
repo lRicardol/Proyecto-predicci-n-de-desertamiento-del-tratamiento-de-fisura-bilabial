@@ -31,7 +31,7 @@ def health() -> HealthResponse:
     repository = get_patient_repository()
     frame = repository.get_all_patients_data()
     ids = set(frame["id_paciente"].astype(str)) if "id_paciente" in frame.columns else set()
-    preferred = [pid for pid in ("PAC-1001", "PAC-2001", "PAC-1000") if pid in ids]
+    preferred = [pid for pid in ("PAC-2001", "PAC-2002", "PAC-1001") if pid in ids]
     if not preferred:
         preferred = list(frame["id_paciente"].astype(str).head(3)) if ids else []
     return HealthResponse(

@@ -1,17 +1,41 @@
 # Predicción de deserción del tratamiento de fisura bilabial
 
+Sistema de **analítica predictiva local** para el seguimiento de pacientes con fisura labiopalatina (fisura bilabial) en Fisulab. Estima la probabilidad de que un paciente abandone el tratamiento y la traduce en una **prioridad de seguimiento** (alta / media / habitual), explicando qué variables pesaron en cada estimación.
 
-Sistema de **analítica predictiva local** para el seguimiento de pacientes con fisura labiopalatina (fisura bilabial). El objetivo es estimar el riesgo de abandono terapéutico y explicar, con evidencia estadística, los factores asociados: inasistencias (no-show), distancia al centro, nivel socioeconómico y complicaciones quirúrgicas.
+El modelo es una **regresión logística** entrenada con la cohorte v2 (**3 000 pacientes sintéticos**) usando solo información disponible **al ingreso** del paciente (escenario T0). Todo corre en el equipo: no hay API keys ni servicios externos. Las consultas en lenguaje natural del panel se resuelven con un motor de reglas que genera gráficos de Matplotlib y Seaborn.
 
-Toda la inteligencia vive **en el equipo**: no hay API keys, ni OpenAI, ni Anthropic, ni agentes LangChain. El modelo es un clasificador **XGBoost** entrenado sobre el CSV unificado de **3 500 pacientes reales**. Las consultas en lenguaje natural se resuelven con un motor de reglas que dispara gráficos de Matplotlib y Seaborn.
+> **Datos sintéticos.** Los 3 500 pacientes del repositorio no son reales. Los resultados son un ejercicio metodológico y **no se pueden extrapolar a pacientes reales**.
 
-> **Aviso de salud.** Esta aplicación es una herramienta de soporte para la gestión de seguimiento clínico. **No constituye diagnóstico, pronóstico ni decisión terapéutica.** Las predicciones deben interpretarse por personal de salud junto con la historia clínica completa.
+> **Aviso de salud.** Esta aplicación es una herramienta de apoyo para priorizar el seguimiento. **No constituye diagnóstico, pronóstico ni decisión terapéutica.** Las estimaciones deben interpretarse por personal de salud junto con la historia clínica completa.
+
+---
+
+## Inicio rápido
+
+Requisitos: Python 3.11 en Windows.
+
+```bash
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe main.py
+```
+
+Abrir **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)** y buscar un paciente de la cohorte v2 (por ejemplo `PAC-2001`).
+
+### Demo en Jupyter
+
+[`notebooks/04_demo_modelo.ipynb`](notebooks/04_demo_modelo.ipynb) recorre todo el flujo con explicaciones celda por celda: datos de entrenamiento, variables excluidas por fuga, comparación de modelos, modelo final, explicación de predicciones, paciente nuevo y llamada a la API. Tarda alrededor de un minuto con *Run All* y no modifica archivos del repositorio. El archivo se guarda ya ejecutado, así que también se puede leer sin correrlo (por ejemplo, en GitHub).
+
+Se abre con VS Code (extensión Jupyter) o JupyterLab, usando el kernel del `.venv`. El kernel necesita `ipykernel`, incluido en `requirements-dev.txt`. Para regenerar el notebook desde su script: `python notebooks/_build_04_demo_modelo.py`.
+
+> **Windows y rutas largas.** `ipykernel` instala archivos con rutas muy largas. Si `pip` falla con *"Windows Long Path support"*, habilita las rutas largas de Windows (requiere administrador; ver [la guía de pip](https://pip.pypa.io/warnings/enable-long-paths)) o clona el repositorio en una carpeta corta, como `C:\proyectos\fisulab`.
 
 ---
 
 ## Arquitectura del software
 
-El diseño sigue **Clean Architecture** y los principios SOLID. El dominio no importa Pandas de infraestructura, ni XGBoost, ni FastAPI: solo contratos. Las implementaciones concretas se inyectan en un único composition root.
+El diseño sigue **Clean Architecture** y los principios SOLID. El dominio no importa pandas de infraestructura, ni scikit-learn, ni FastAPI: solo contratos. Las implementaciones concretas se inyectan en un único composition root.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -24,236 +48,171 @@ El diseño sigue **Clean Architecture** y los principios SOLID. El dominio no im
 │  Interfaces (puertos) · casos de uso · excepciones          │
 │  IPatientRepository · IPredictorModel · ILLMAnalyst         │
 └────────────────────────────┬────────────────────────────────┘
-                             │ DIP: el core no conoce CSV ni XGBoost
+                             │ DIP: el core no conoce CSV ni scikit-learn
 ┌────────────────────────────▼────────────────────────────────┐
 │  Infrastructure (src/infrastructure)                        │
-│  CsvPatientRepository · XgboostPredictor                    │
-│  LocalStatisticalAnalyst · feature_engineering              │
+│  CsvPatientRepository · LogisticT0Predictor · etl           │
+│  experiments · interpretability · LocalStatisticalAnalyst   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ### Capa Core
 
-Es el corazón del sistema y no conoce detalles de I/O.
-
 | Pieza | Responsabilidad |
 |---|---|
-| `src/core/interfaces/` | Puertos atómicos (ISP). Un contrato para predicción, otro para analítica, otro para persistencia. |
-| `src/core/use_cases/predict_dropout.py` | Orquesta repositorio + modelo y mapea la probabilidad a **Bajo / Medio / Alto**. |
+| `src/core/interfaces/` | Puertos atómicos (ISP). `IPredictorModel` devuelve probabilidades y, opcionalmente, la explicación de cada predicción (`FactorContribution`). |
+| `src/core/use_cases/predict_dropout.py` | Orquesta repositorio + modelo y asigna la **prioridad de seguimiento** con `PriorityPolicy`. Añade el mensaje para el equipo, las variables que más pesaron, la fecha y avisos (por ejemplo, paciente fuera de la cohorte de entrenamiento). |
 | `src/core/use_cases/generate_analytics.py` | Entrega la consulta al analista y exige `chart_output.png`. |
 | `src/core/exceptions.py` | Errores de dominio; los controladores los traducen a HTTP. |
 
-`PredictDropoutUseCase` recibe `IPatientRepository` e `IPredictorModel`, nunca `CsvPatientRepository` ni `XgboostPredictor`. Eso es **Inversión de Dependencias (DIP)**: el caso de uso depende de abstracciones.
-
-### Patrón Strategy
-
-Los tres puertos son estrategias intercambiables:
-
-- `IPredictorModel.predict_dropout_probability` — hoy XGBoost; mañana otro clasificador con `predict_proba`.
-- `ILLMAnalyst.analyze_data_and_plot` — hoy el analista estadístico local; el nombre del puerto se conservó por compatibilidad, pero **no hay LLM**.
-- `IPatientRepository` — hoy un CSV unificado; podría ser una base clínica sin tocar el core.
-
 ### Capa Infrastructure
 
-Aquí viven los adaptadores que sí conocen disco, Pandas y librerías de ML:
+| Módulo | Qué hace |
+|---|---|
+| `data/etl.py` | Construye el marco de modelado de una cohorte sin columnas con fuga y sin imputar. |
+| `ai_models/modeling_features.py` | Contrato de variables: `FEATURES_T0`, `FEATURES_T1`, `EXCLUDED_LEAKAGE`, `select_features`. |
+| `ai_models/experiments.py` | Comparación de modelos con validación cruzada anidada y holdout. |
+| `ai_models/interpretability.py` | Coeficientes, importancia por permutación y explicación por paciente. |
+| `ai_models/final_model.py` | Entrena el modelo final con toda la cohorte v2 y guarda `serialized/modelo_t0.joblib` + `modelo_t0.json`. |
+| `ai_models/logistic_predictor.py` | Carga el artefacto, predice y explica. **Nunca entrena.** |
+| `repositories/csv_patient_repository.py` | Lee `dataset_final_limpio.csv` y busca fichas `PAC-XXXX`. |
+| `llm_agents/local_analyst.py` | Motor de reglas + Seaborn (sin LLM). |
+| `ai_models/xgboost_predictor.py`, `feature_engineering.py` | **Legado**: modelo anterior, con fuga. La API ya no lo usa; se conserva como referencia. |
 
-- `csv_patient_repository.py` — lee `dataset_final_limpio.csv` y busca fichas `PAC-XXXX`.
-- `xgboost_predictor.py` — entrena, evalúa, serializa con **joblib** y predice.
-- `feature_engineering.py` — matriz de cuatro features: no-shows, distancia, SES ordinal, complicaciones.
-- `local_analyst.py` — motor de reglas + Seaborn.
+### Capa Presentation
 
-### Capa Presentation (MVC)
-
-- **Modelo de aplicación:** casos de uso + DTOs en `src/app/views/schemas.py`.
-- **Controladores:** `prediction_controller.py` y `dashboard_controller.py` (FastAPI). No contienen reglas de negocio.
-- **Vista:** `src/app/views/dashboard.html` — panel de predicción (riesgo verde / ámbar / rojo) y panel de analítica con gráfico dinámico.
+- **Controladores:** `prediction_controller.py` y `dashboard_controller.py` (FastAPI), sin reglas de negocio.
+- **DTOs:** `src/app/views/schemas.py`.
+- **Vista:** `src/app/views/dashboard.html` — prioridad de seguimiento, datos usados por el modelo, variables que más pesaron y panel de analítica.
 
 ### Composition root
 
-`src/app/composition.py` es el **único** lugar que instancia clases concretas y las inyecta:
-
-```python
-def get_predict_dropout_use_case() -> PredictDropoutUseCase:
-    return PredictDropoutUseCase(
-        patient_repository=get_patient_repository(),
-        predictor_model=get_predictor_model(),
-        ...
-    )
-```
-
-Al arrancar, `main.py` llama a `warmup_predictor()`: si no existe `model.joblib`, se entrena XGBoost sobre el CSV procesado; si existe, se carga.
+`src/app/composition.py` es el único lugar que instancia clases concretas. Los cortes de prioridad viajan dentro del artefacto, así que el modelo y sus cortes siempre son de la misma versión. Al arrancar, `main.py` llama a `warmup_predictor()`, que **solo carga** `modelo_t0.joblib`; si falta, la API no arranca y el error indica cómo generarlo.
 
 ---
 
-## Fase de ciencia de datos
-
-### ETL: seis CSV reales → un tablero de 3 500 pacientes
-
-Los orígenes están en `data/raw/`. Hay dos cohortes unidas por la llave `ID_Paciente`:
-
-| Cohorte | Archivos | Identificadores |
-|---|---|---|
-| v1 | deserción, hitos quirúrgicos, terapia de lenguaje / IVF | `PAC-1000`… |
-| v2 | deserción socioeconómica, hitos quirúrgicos, terapia | `PAC-2000`… |
-
-Pipeline (`notebooks/00_procesamiento_dataset_unificado.py` y el notebook homónimo):
-
-1. Lectura de los **6 CSV reales** (sin datos sintéticos de relleno).
-2. Limpieza de columnas, duplicados por ID y normalización de tipos.
-3. Inner join por paciente **solo si existe la etiqueta `Desertor`**.
-4. Ingeniería: `nivel_socioeconomico_ord`, `complicaciones_quirurgicas` (dehiscencia + fístula), ratios de terapia.
-5. Persistencia en `data/processed/dataset_final_limpio.csv` (**3 500 filas**, una por paciente).
-
-Los notebooks `01` y `02` documentan EDA clínico, boxplots de inasistencias, SES, distancia y la justificación de `scale_pos_weight`.
-
-### Entrenamiento local de XGBoost
-
-Ejecutado sobre el CSV limpio, con `train_test_split` estratificado (80 / 20) y `scale_pos_weight = n_neg / n_pos` calculado sobre el desbalance real del train (**74.6 %** de deserción).
+## El modelo
 
 | Concepto | Valor |
 |---|---|
-| Filas | 3 500 |
-| Features | `citas_perdidas_noshow`, `distancia_hospital_km`, `nivel_socioeconomico_ord`, `complicaciones_quirurgicas` |
-| Objetivo | `desertor` |
-| Train / Test | 2 800 / 700 |
-| Desbalance train | 2 090 desertores (74.6 %) · 710 continuadores |
-| `scale_pos_weight` | **0.3397** (`n_neg / n_pos`) |
-| Precisión | **0.8588** (85.88 %) |
-| Recall | **0.6992** |
-| F1-Score | **0.7709** |
+| Algoritmo | Regresión logística regularizada (`C = 0.01`), con imputación, one-hot y estandarización dentro del `Pipeline` |
+| Población | Cohorte v2: 3 000 pacientes, 71.4 % desertores (v1 tiene solo 30 no desertores y queda fuera) |
+| Variables (T0, al ingreso) | `tipo_fisura`, `edad_inicio_meses`, `distancia_hospital_km`, `nivel_socioeconomico_ord`, `ingresos_mensuales_usd`, `apoyo_psicologico`, `dificultad_alimentacion_preop` |
+| Excluidas por fuga | Asistencia y citas perdidas (acumuladas durante el tratamiento), peso a los 2 años y columnas que identifican la cohorte. Ver [`reports/diccionario_datos.md`](reports/diccionario_datos.md) |
+| Desempeño | ROC-AUC **0.737** en el holdout (IC 95 % 0.693–0.783) frente a 0.500 de la línea base; PR-AUC 0.868 frente a 0.713. Fuera de muestra con los 3 000 pacientes: ROC-AUC 0.722 |
+| Artefacto | `src/infrastructure/ai_models/serialized/modelo_t0.joblib` (ficha legible en `modelo_t0.json`) |
 
-Matriz de confusión `[[TN, FP], [FN, TP]]` impresa en consola:
+### Salida: prioridad de seguimiento
 
+| Prioridad | Regla (puntaje del modelo) | Deserción observada en el grupo* |
+|---|---|---|
+| **Alta** | 20 % de pacientes con mayor puntaje (≥ 0.832) | 90 % |
+| **Media** | El resto | 77 % |
+| **Habitual** | 30 % con menor puntaje (< 0.619) | 49 % |
+
+\* Validación cruzada sobre los 3 000 pacientes de v2. No se habla de "riesgo bajo": incluso el grupo habitual deserta cerca de la mitad de las veces. Los porcentajes 20 / 30 son un punto de partida y **deben ajustarse con Fisulab según cuántos pacientes puede acompañar el equipo por semana**. La prioridad sirve para dirigir apoyo, nunca para limitar la atención.
+
+Ejemplo de respuesta de `GET /api/predictions/PAC-2001` (resumida):
+
+```json
+{
+  "patient_id": "PAC-2001",
+  "dropout_probability": 0.7519,
+  "priority_level": "media",
+  "priority_message": "Probabilidad estimada intermedia. Seguimiento según la rutina del servicio.",
+  "group_observed_dropout_rate": 0.7727,
+  "top_factors": [
+    {"variable": "apoyo_psicologico", "value": 1, "contribution": -0.7188, "direction": "reduce la estimación"},
+    {"variable": "distancia_hospital_km", "value": 155.5, "contribution": 0.6646, "direction": "aumenta la estimación"}
+  ],
+  "model_inputs": {"tipo_fisura": "Asimetrica", "distancia_hospital_km": 155.5},
+  "prediction_date": "2026-11-09",
+  "warnings": [],
+  "disclaimer": "Herramienta de apoyo a la gestión del seguimiento, entrenada con datos sintéticos. ..."
+}
 ```
-[[118,  60],
- [157, 365]]
-```
 
-Informe de clasificación (conjunto de prueba, 700 pacientes):
+`contribution` está en log-odds frente al paciente promedio: positivo sube la estimación, negativo la baja. Es asociación, no causa. Para pacientes de la cohorte v1 la respuesta incluye un aviso en `warnings`.
 
-```
-              precision    recall  f1-score   support
-           0      0.429     0.663     0.521       178
-           1      0.859     0.699     0.771       522
-    accuracy                          0.690       700
-```
-
-El artefacto queda en `src/infrastructure/ai_models/serialized/model.joblib`. En inferencia, la probabilidad se traduce a:
-
-- **Bajo** si *p* < 0.33 (verde)
-- **Medio** si 0.33 ≤ *p* < 0.66
-- **Alto** si *p* ≥ 0.66 (rojo)
-
----
-
-## Módulo de analítica local
-
-`LocalStatisticalAnalyst` implementa `ILLMAnalyst` **sin modelos de lenguaje**. Recibe una frase del usuario, la normaliza y dispara gráficos equivalentes a los de los notebooks:
-
-| Palabras clave | Gráfico |
-|---|---|
-| `inasistencias`, `noshow`, `citas perdidas` | Boxplot + stripplot de no-shows vs deserción |
-| `socioeconómico`, `ses` | Tasas de deserción por SES y apoyo psicológico |
-| `distancia`, `km` | Densidad KDE de km al hospital |
-| `cirugías`, `complicaciones` | Carga operatoria vs complicaciones |
-| `terapia`, `lenguaje`, `ivf` | Asistencia a terapia e hipernasalidad |
-| `correlación`, `matriz` | Heatmap de Pearson |
-| resto | Distribución global de la etiqueta `desertor` |
-
-El PNG se escribe siempre en `static/generated_charts/chart_output.png` y el panel lo refresca con un parámetro de caché. No hay llamadas de red ni costos de tokens.
-
----
-
-## Guía de despliegue local
-
-Requisitos: Python 3.11+ en Windows, con el entorno virtual del proyecto.
-
-### 1. Dependencias (si el venv aún no está listo)
+### Regenerar el modelo
 
 ```bash
-python -m venv .venv
-.\.venv\Scripts\activate
-pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m src.infrastructure.ai_models.final_model
 ```
 
-### 2. Dataset procesado
+Tarda unos segundos, sobrescribe `modelo_t0.joblib` y `modelo_t0.json` e imprime hiperparámetros, métricas fuera de muestra y cortes de prioridad.
 
-Debe existir `data/processed/dataset_final_limpio.csv`. Si hay que regenerarlo desde los seis CSV:
+---
+
+## Guía de uso local
+
+| Recurso | Uso |
+|---|---|
+| `/` | Panel: prioridad de seguimiento por ID y analítica gráfica |
+| `GET /api/predictions/PAC-2001` | Probabilidad, prioridad, variables que más pesaron, datos usados y avisos |
+| `POST /api/predictions` | Lo mismo con `{"patient_id": "PAC-2001"}` |
+| `POST /api/analytics` | `{"query": "Muestra el impacto del nivel socioeconómico"}` |
+| `GET /api/health` | Pacientes cargados e IDs de ejemplo |
+| `/docs` | OpenAPI de FastAPI |
+
+IDs de ejemplo (sintéticos): `PAC-2001`, `PAC-2002` (cohorte del modelo) y `PAC-1001` (cohorte v1, con aviso).
+
+El panel lee `data/processed/dataset_final_limpio.csv`. Si hay que regenerarlo:
 
 ```bash
 .\.venv\Scripts\python.exe notebooks/00_procesamiento_dataset_unificado.py
 ```
 
-### 3. Entrenar el modelo (opcional)
+### Módulo de analítica local
 
-Si no hay `model.joblib`, el arranque de la API lo entrena. Para entrenar a mano y ver las métricas en consola:
+`LocalStatisticalAnalyst` implementa `ILLMAnalyst` **sin modelos de lenguaje**: recibe una frase, la normaliza y genera un gráfico en `static/generated_charts/chart_output.png`.
 
-```bash
-.\.venv\Scripts\python.exe -m src.infrastructure.ai_models.xgboost_predictor
-```
-
-### 4. Levantar el panel
-
-```bash
-.\.venv\Scripts\python.exe main.py
-```
-
-Abrir el navegador en:
-
-**[http://127.0.0.1:8000/](http://127.0.0.1:8000/)**
-
-| Recurso | Uso |
+| Palabras clave | Gráfico |
 |---|---|
-| `/` | Panel MVC: predicción por ID y analítica gráfica |
-| `GET /api/predictions/PAC-1001` | Ficha clínica + probabilidad + riesgo |
-| `POST /api/analytics` | `{"query": "Grafica la relación entre inasistencias y deserción"}` |
-| `GET /api/health` | Pacientes cargados y IDs de ejemplo |
-| `/docs` | OpenAPI de FastAPI |
-
-IDs reales de prueba: `PAC-1001`, `PAC-2001`, `PAC-1000`.
-
-### 5. Pruebas automáticas
-
-```bash
-.\.venv\Scripts\python.exe -m pytest -q
-```
+| `inasistencias`, `noshow`, `citas perdidas` | Boxplot + stripplot de no-shows vs deserción (variable con fuga: solo descriptivo) |
+| `socioeconómico`, `ses` | Tasas de deserción por SES y apoyo psicológico |
+| `distancia`, `km` | Densidad KDE de km al hospital |
+| `cirugías`, `complicaciones` | Carga operatoria vs complicaciones |
+| `terapia`, `lenguaje`, `ivf` | Asistencia a terapia e hipernasalidad (variable con fuga: solo descriptivo) |
+| `correlación`, `matriz` | Heatmap de Pearson |
+| resto | Distribución global de la etiqueta `desertor` |
 
 ---
 
 ## Estructura relevante
 
 ```
-├── data/raw/                          # 6 CSV clínicos reales
+├── data/raw/                          # 6 CSV sintéticos (= contenido del zip)
 ├── data/processed/dataset_final_limpio.csv
-├── notebooks/                         # ETL + EDA + análisis predictivo
+├── notebooks/
+│   ├── 00_procesamiento_dataset_unificado.py   # ETL del panel
+│   ├── 01_*, 02_*                     # notebooks iniciales (modelo anterior, con fuga)
+│   ├── 03_eda.py                      # EDA (frente 3)
+│   └── 04_demo_modelo.ipynb           # demo de punta a punta del modelo final
+├── reports/                           # auditoría, diccionario, EDA, modelos, interpretabilidad
 ├── src/core/                          # puertos, casos de uso, excepciones
-├── src/infrastructure/                # CSV, XGBoost, analista local
+├── src/infrastructure/                # ETL, modelo, repositorio CSV, analista local
 ├── src/app/                           # composition, controladores, vista HTML
-├── static/generated_charts/           # chart_output.png
 ├── tests/
 ├── config.py
 └── main.py
 ```
 
-El dominio queda cerrado: un modelo serializado, un analista estadístico reproducible y una interfaz de soporte clínico, todo ejecutable en un portátil de laboratorio sin servicios de terceros.
-
 ---
 
 ## Evaluación, interpretabilidad y limitaciones
-
-> **Esta sección corrige y complementa el texto anterior.** Donde haya diferencias, prevalece lo que dice aquí (ver "Correcciones al texto anterior").
 
 ### Datos sintéticos
 
 Los 3 500 pacientes del repositorio son **sintéticos**, no reales (confirmado por el equipo; ver [`reports/auditoria.md`](reports/auditoria.md)). Los resultados son un ejercicio metodológico y **no se pueden extrapolar a pacientes reales**. Antes de cualquier uso real faltan datos reales con fechas, validación con Fisulab y revisión ética.
 
-### Correcciones al texto anterior
+### El modelo anterior (XGBoost) y por qué se reemplazó
 
-| Texto anterior | Corrección |
+| Problema del modelo anterior | Detalle |
 |---|---|
-| "3 500 pacientes reales", "6 CSV reales", "IDs reales de prueba", "CSV clínicos reales" | Los datos son **sintéticos**. |
-| "sin datos sintéticos de relleno" | El ETL sí imputa columnas faltantes de v2 con valores de v1 (`citas_asistidas` queda constante en 11; `cirugias_programadas` se estima con otra fórmula). Esas columnas identifican la cohorte y se excluyen del modelado. |
-| Métricas del XGBoost (precisión 0.8588, F1 0.7709) | **No son evidencia de desempeño.** El modelo usa `citas_perdidas_noshow`, una variable con fuga, mezcla dos cohortes distintas y la accuracy (0.690) queda por debajo del 0.746 de un clasificador que siempre predice "desertor". Se evaluó con una sola partición, sin línea base ni validación cruzada. |
+| Datos descritos como "reales" | Los datos son **sintéticos**. |
+| ETL "sin datos sintéticos de relleno" | El ETL sí imputa columnas faltantes de v2 con valores de v1 (`citas_asistidas` queda constante en 11; `cirugias_programadas` se estima con otra fórmula). Esas columnas identifican la cohorte y se excluyen del modelado. |
+| Métricas reportadas (precisión 0.8588, F1 0.7709) | **No son evidencia de desempeño.** El modelo usa `citas_perdidas_noshow`, una variable con fuga, mezcla dos cohortes distintas y la accuracy (0.690) queda por debajo del 0.746 de un clasificador que siempre predice "desertor". Se evaluó con una sola partición, sin línea base ni validación cruzada. |
 | Cortes Bajo / Medio / Alto de 0.33 y 0.66 | No tienen respaldo (ver "Salida recomendada"). |
 | Gráficos de inasistencias y de asistencia a terapia en el analista local | Muestran variables con fuga: son descriptivos y no deben interpretarse como factores predictivos. |
 
@@ -285,8 +244,9 @@ Con los cortes 0.33 y 0.66, el 1.2 % de los pacientes del holdout quedaría en "
 | Componente | Estado |
 |---|---|
 | ETL, EDA, contrato de features, comparación de modelos, interpretabilidad | Documentados en `reports/` |
-| `model.joblib` y la API (`src/app`) | **Aún sirven el modelo anterior** (XGBoost con `citas_perdidas_noshow`). Reemplazar por la regresión logística en T0 antes de usar el panel para algo más que una demostración. |
-| Entrenamiento al arrancar la API (`warmup_predictor`) | Pendiente de eliminar: el modelo debe ser un artefacto versionado. |
+| Modelo final y API | **Integrados.** La API sirve la regresión logística T0 (`modelo_t0.joblib`) con prioridad de seguimiento. |
+| Entrenamiento al arrancar la API | Eliminado: la API solo carga el artefacto versionado. |
+| Cortes de prioridad (20 % / 30 %) | Punto de partida; pendiente de validar con la capacidad real de Fisulab. |
 | Datos reales y fechas | No disponibles. Ver el plan de mejora. |
 
 ### Nuevos módulos de infraestructura
@@ -294,6 +254,8 @@ Con los cortes 0.33 y 0.66, el 1.2 % de los pacientes del holdout quedaría en "
 - `modeling_features.py` — contrato de variables por escenario: `FEATURES_T0`, `FEATURES_T1`, `EXCLUDED_LEAKAGE` y `select_features`.
 - `experiments.py` — protocolo de evaluación (validación cruzada repetida, líneas base, calibración, subgrupos).
 - `interpretability.py` — coeficientes con IC bootstrap, importancia por permutación, efectos marginales y explicación por paciente.
+- `final_model.py` — entrena y guarda el modelo final (`modelo_t0.joblib`) con sus cortes de prioridad.
+- `logistic_predictor.py` — adaptador de inferencia que usa la API.
 
 ### Reproducir la evaluación y la interpretabilidad
 
@@ -316,6 +278,7 @@ La evaluación completa tarda alrededor de 12 minutos (semilla 42). Interpretabi
 | [`reports/comparacion_modelos.md`](reports/comparacion_modelos.md) | Comparación de modelos, calibración, subgrupos |
 | [`reports/interpretabilidad.md`](reports/interpretabilidad.md) | Coeficientes, importancia, explicación por paciente, salida del sistema |
 | [`reports/limitaciones_y_plan_mejora.md`](reports/limitaciones_y_plan_mejora.md) | Limitaciones, ética y plan de mejora |
+| [`notebooks/04_demo_modelo.ipynb`](notebooks/04_demo_modelo.ipynb) | Demo ejecutable de todo el flujo |
 
 ### Privacidad
 

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -9,12 +10,16 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.core.exceptions import AnalyticsError, PatientNotFoundError
+from src.core.exceptions import AnalyticsError, PatientNotFoundError, PredictionError
 from src.core.interfaces.i_llm_analyst import ILLMAnalyst
 from src.core.interfaces.i_patient_repository import IPatientRepository
-from src.core.interfaces.i_predictor_model import IPredictorModel
+from src.core.interfaces.i_predictor_model import FactorContribution, IPredictorModel
 from src.core.use_cases.generate_analytics import GenerateAnalyticsUseCase
-from src.core.use_cases.predict_dropout import PredictDropoutUseCase
+from src.core.use_cases.predict_dropout import (
+    PRIORITY_MESSAGES,
+    PredictDropoutUseCase,
+    PriorityPolicy,
+)
 from src.infrastructure.llm_agents.local_analyst import LocalStatisticalAnalyst
 
 
@@ -31,6 +36,14 @@ class FakePatientRepository(IPatientRepository):
         return self._records[patient_id]
 
 
+FACTOR = FactorContribution(
+    variable="distancia_hospital_km",
+    label="Distancia al hospital (km)",
+    value=120.0,
+    contribution=0.66,
+)
+
+
 class FakePredictor(IPredictorModel):
     def __init__(self, probability: float) -> None:
         self._probability = probability
@@ -38,6 +51,13 @@ class FakePredictor(IPredictorModel):
     def predict_dropout_probability(self, features: pd.DataFrame) -> np.ndarray:
         assert not features.empty
         return np.array([self._probability], dtype=float)
+
+    def explain_prediction(self, features: pd.DataFrame, top: int = 3) -> list[FactorContribution]:
+        return [FACTOR]
+
+    @property
+    def feature_names(self) -> tuple[str, ...]:
+        return ("distancia_hospital_km",)
 
 
 class FakeAnalyst(ILLMAnalyst):
@@ -51,34 +71,65 @@ class FakeAnalyst(ILLMAnalyst):
         return f"ok:{query}:{data_path}"
 
 
-def test_predict_dropout_classifies_high_risk() -> None:
-    use_case = PredictDropoutUseCase(
-        patient_repository=FakePatientRepository(
-            {
-                "PAC-1001": {
-                    "ID_Paciente": "PAC-1001",
-                    "Citas_Perdidas_NoShow": 12,
-                    "Distancia_Hospital_KM": 80,
-                    "Nivel_Socioeconomico": "Bajo",
-                }
-            }
-        ),
-        predictor_model=FakePredictor(0.91),
-    )
-    result = use_case.execute("PAC-1001")
-    assert result.risk_level == "Alto"
-    assert result.dropout_probability == 0.91
+POLICY = PriorityPolicy(
+    high_cutoff=0.83,
+    low_cutoff=0.62,
+    observed_rates={"alta": 0.9, "media": 0.77, "habitual": 0.49},
+)
 
 
-def test_predict_dropout_classifies_low_risk() -> None:
-    use_case = PredictDropoutUseCase(
-        patient_repository=FakePatientRepository(
-            {"PAC-1000": {"ID_Paciente": "PAC-1000", "Citas_Perdidas_NoShow": 1}}
-        ),
-        predictor_model=FakePredictor(0.12),
+def _use_case(record: dict[str, Any], probability: float, **kwargs: Any) -> PredictDropoutUseCase:
+    return PredictDropoutUseCase(
+        patient_repository=FakePatientRepository({record["id_paciente"]: record}),
+        predictor_model=FakePredictor(probability),
+        priority_policy=POLICY,
+        today=lambda: date(2026, 11, 9),
+        **kwargs,
     )
-    result = use_case.execute("PAC-1000")
-    assert result.risk_level == "Bajo"
+
+
+@pytest.mark.parametrize(
+    ("probability", "level"),
+    [(0.91, "alta"), (0.83, "alta"), (0.75, "media"), (0.62, "media"), (0.40, "habitual")],
+)
+def test_predict_dropout_assigns_priority(probability: float, level: str) -> None:
+    result = _use_case({"id_paciente": "PAC-2001", "cohorte": "v2"}, probability).execute("PAC-2001")
+    assert result.priority_level == level
+    assert result.dropout_probability == probability
+    assert result.priority_message == PRIORITY_MESSAGES[level]
+    assert result.group_observed_rate == POLICY.observed_rates[level]
+
+
+def test_predict_dropout_reports_factors_inputs_and_date() -> None:
+    record = {"id_paciente": "PAC-2001", "cohorte": "v2", "distancia_hospital_km": 120.0}
+    result = _use_case(record, 0.9).execute("PAC-2001")
+    assert result.top_factors == [FACTOR]
+    assert result.model_inputs == {"distancia_hospital_km": 120.0}
+    assert result.prediction_date == "2026-11-09"
+    assert result.warnings == []
+    assert "datos sintéticos" in result.disclaimer
+
+
+def test_predict_dropout_warns_outside_training_cohort() -> None:
+    result = _use_case({"id_paciente": "PAC-1001", "cohorte": "v1"}, 0.9).execute("PAC-1001")
+    assert len(result.warnings) == 1
+    assert "v1" in result.warnings[0]
+
+
+def test_predict_dropout_unknown_patient() -> None:
+    with pytest.raises(PatientNotFoundError):
+        _use_case({"id_paciente": "PAC-2001"}, 0.5).execute("PAC-9999")
+
+
+def test_predict_dropout_rejects_out_of_range_probability() -> None:
+    with pytest.raises(PredictionError):
+        _use_case({"id_paciente": "PAC-2001"}, 1.5).execute("PAC-2001")
+
+
+@pytest.mark.parametrize(("high", "low"), [(0.5, 0.6), (0.5, 0.5), (1.2, 0.3)])
+def test_priority_policy_rejects_inconsistent_cutoffs(high: float, low: float) -> None:
+    with pytest.raises(ValueError):
+        PriorityPolicy(high_cutoff=high, low_cutoff=low)
 
 
 def test_generate_analytics_persists_chart(tmp_path: Path) -> None:

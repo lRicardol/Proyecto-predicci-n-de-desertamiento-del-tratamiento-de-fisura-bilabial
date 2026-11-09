@@ -29,12 +29,9 @@ class Settings(BaseSettings):
         / "infrastructure"
         / "ai_models"
         / "serialized"
-        / "model.joblib"
+        / "modelo_t0.joblib"
     )
     primary_dataset_name: str = Field(default="dataset_final_limpio.csv")
-
-    low_risk_threshold: float = Field(default=0.33, ge=0.0, le=1.0)
-    high_risk_threshold: float = Field(default=0.66, ge=0.0, le=1.0)
 
     host: str = Field(default="0.0.0.0")
     port: int = Field(default=8000)
