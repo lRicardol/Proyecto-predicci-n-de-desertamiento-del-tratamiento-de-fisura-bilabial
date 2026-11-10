@@ -17,6 +17,41 @@
     .hidden { display: none !important; }
     code { color: #67e8f9; }
     img { max-width: 100%; border-radius: .75rem; }
+    /* Pestañas Pacientes / Variables y formulario de escenario (no dependen del CDN). */
+    .tabs { display: flex; gap: .25rem; margin-top: .75rem; border-bottom: 1px solid #1e293b; }
+    .tab { background: transparent; color: #94a3b8; padding: .5rem 1rem; border-radius: .5rem .5rem 0 0; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .15s, border-color .15s; }
+    .tab:hover { color: #e2e8f0; }
+    .tab[aria-selected="true"] { color: #67e8f9; border-bottom-color: #22d3ee; }
+    .tab:focus-visible, .switch:focus-visible, input[type="range"]:focus-visible { outline: 2px solid #22d3ee; outline-offset: 2px; }
+    .view { margin-top: 1rem; }
+    .view-enter { animation: view-in .18s ease-out; }
+    @keyframes view-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+    .scenario-form { display: block !important; margin-top: 1rem; }
+    .scenario-form .field { margin-bottom: .9rem; }
+    .scenario-form label { display: block; font-size: .85rem; color: #cbd5e1; margin-bottom: .3rem; }
+    .slider-row { display: flex; align-items: center; gap: .75rem; }
+    .slider-row input[type="range"] { flex: 1; padding: 0; border: 0; background: transparent; accent-color: #22d3ee; }
+    .slider-row input[type="number"] { width: 6.5rem; flex: none; }
+    /* Más aire a los lados del texto en selectores y campos numéricos. */
+    .scenario-form select, .scenario-form input[type="number"] { padding-left: 1rem; padding-right: 1rem; }
+    .scenario-form select { padding-right: 2.5rem; }
+    /* Sin flechas de subir/bajar en los campos numéricos (se usa el deslizador o se escribe). */
+    .scenario-form input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+    .scenario-form input[type="number"]::-webkit-outer-spin-button,
+    .scenario-form input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .switches { display: grid; gap: .6rem; }
+    .scenario-form .switch-row { display: flex; align-items: center; gap: .75rem; margin: 0; cursor: pointer; }
+    input.switch { appearance: none; -webkit-appearance: none; width: 2.5rem; height: 1.4rem; padding: 0; flex: none; border-radius: 999px; border: 1px solid #334155; background: #0f172a; position: relative; cursor: pointer; transition: background .15s, border-color .15s; }
+    input.switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 1rem; height: 1rem; border-radius: 50%; background: #94a3b8; transition: transform .15s, background .15s; }
+    input.switch:checked { background: #0e7490; border-color: #22d3ee; }
+    input.switch:checked::after { transform: translateX(1.1rem); background: #f1f5f9; }
+    .actions { display: flex; align-items: center; gap: .9rem; flex-wrap: wrap; margin-top: 1.1rem; }
+    .button-wrap { display: inline-block; }
+    .button-wrap button:disabled { opacity: .45; cursor: not-allowed; pointer-events: none; }
+    .hint { font-size: .8rem; color: #94a3b8; margin: 0; }
+    .result-panel { transition: opacity .15s; }
+    .result-box.stale .result-panel { opacity: .55; }
+    @media (prefers-reduced-motion: reduce) { .view-enter { animation: none; } .tab, .result-panel, input.switch, input.switch::after { transition: none; } }
   </style>
 </head>
 <body class="min-h-screen bg-slate-950 text-slate-100">
@@ -37,27 +72,84 @@
     <div class="grid gap-6 lg:grid-cols-2">
       <section class="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-xl">
         <h2 class="text-xl font-medium">Panel de predicción</h2>
-        <p class="mt-1 text-sm text-slate-400">Busca un ID (PAC-XXXX) y verás la prioridad de seguimiento (alta, media o habitual), los datos que usó el modelo y las variables que más pesaron. El modelo se entrenó con la cohorte v2 (PAC-2000 a PAC-4999).</p>
-        <form id="predict-form" class="mt-4 flex gap-2">
-          <input id="patient-id" value="PAC-2001" pattern="[A-Za-z0-9][A-Za-z0-9_-]{0,31}" maxlength="32" required class="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 outline-none focus:border-cyan-400" />
-          <button id="predict-button" type="submit" class="rounded-xl bg-cyan-400 px-4 py-3 font-semibold text-slate-950 hover:bg-cyan-300">Calcular</button>
-        </form>
-        <p id="predict-loading" class="mt-3 hidden text-sm text-cyan-300">Calculando…</p>
-        <div id="prediction-box" class="mt-5 hidden rounded-2xl border p-4">
-          <div id="priority-badge" class="inline-flex rounded-full px-4 py-1 text-sm font-bold"></div>
-          <p id="priority-percent" class="mt-3 text-4xl font-semibold"></p>
-          <p class="mt-1 text-xs uppercase tracking-wide text-slate-400">Probabilidad estimada de abandono</p>
-          <p id="priority-message" class="mt-3 text-sm text-slate-200"></p>
-          <p id="model-info" class="mt-1 text-xs text-slate-500"></p>
-          <p id="group-rate" class="mt-2 text-xs text-slate-400"></p>
-          <ul id="warnings" class="mt-3 space-y-1 text-xs text-amber-300"></ul>
-          <h3 class="mt-4 text-sm font-medium text-slate-300">Variables que más pesaron (asociación, no causa)</h3>
-          <ul id="factors" class="mt-2 space-y-1 text-sm"></ul>
-          <h3 class="mt-4 text-sm font-medium text-slate-300">Datos usados por el modelo</h3>
-          <dl id="patient-card" class="mt-2 grid grid-cols-2 gap-3 text-sm"></dl>
-          <p id="disclaimer" class="mt-4 text-xs text-slate-500"></p>
+        <div class="tabs" role="tablist" aria-label="Modo de predicción">
+          <button type="button" role="tab" id="tab-patients" class="tab" aria-selected="true" aria-controls="view-patients" data-view="patients">Pacientes</button>
+          <button type="button" role="tab" id="tab-variables" class="tab" aria-selected="false" aria-controls="view-variables" data-view="variables" tabindex="-1">Variables</button>
         </div>
-        <p id="predict-error" class="mt-4 hidden text-rose-400"></p>
+
+        <div id="view-patients" class="view" role="tabpanel" aria-labelledby="tab-patients" data-view="patients">
+          <p class="text-sm text-slate-400">Busca un ID (PAC-XXXX) y verás la prioridad de seguimiento (alta, media o habitual), los datos que usó el modelo y las variables que más pesaron. Estos pacientes (PAC-2000 a PAC-4999, cohorte v2) son los mismos con los que se entrenó el modelo, así que la estimación es orientativa.</p>
+          <form id="predict-form" class="mt-4 flex gap-2">
+            <input id="patient-id" value="PAC-2001" pattern="[A-Za-z0-9][A-Za-z0-9_-]{0,31}" maxlength="32" required aria-label="Identificador del paciente" class="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 outline-none focus:border-cyan-400" />
+            <button id="predict-button" type="submit" class="rounded-xl bg-cyan-400 px-4 py-3 font-semibold text-slate-950 hover:bg-cyan-300">Calcular</button>
+          </form>
+          <p id="predict-loading" class="mt-3 hidden text-sm text-cyan-300">Calculando…</p>
+          <div id="patients-result"></div>
+          <p id="predict-error" class="mt-4 hidden text-rose-400"></p>
+        </div>
+
+        <div id="view-variables" class="view hidden" role="tabpanel" aria-labelledby="tab-variables" data-view="variables">
+          <p class="text-sm text-slate-400">Cambia las variables de un paciente hipotético y pulsa <strong>Predecir</strong>. Los rangos son los observados en los datos de entrenamiento. El modelo describe asociaciones: mover una variable aquí no equivale a que intervenir sobre ella cambie la deserción.</p>
+          <form id="scenario-form" class="scenario-form" novalidate>
+            <div class="field">
+              <label for="sc-tipo_fisura">Tipo de fisura</label>
+              <select id="sc-tipo_fisura" data-var="tipo_fisura" data-default="Completa">
+                <option value="Completa">Completa</option>
+                <option value="Incompleta">Incompleta</option>
+                <option value="Asimetrica">Asimétrica</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sc-nivel_socioeconomico_ord">Nivel socioeconómico</label>
+              <select id="sc-nivel_socioeconomico_ord" data-var="nivel_socioeconomico_ord" data-default="1">
+                <option value="0">Bajo</option>
+                <option value="1">Medio-bajo</option>
+                <option value="2">Medio</option>
+                <option value="4">Alto</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sc-edad_inicio_meses">Edad al iniciar el tratamiento (meses)</label>
+              <div class="slider-row">
+                <input type="range" min="1" max="11" step="1" value="6" data-sync="edad_inicio_meses" aria-label="Edad al iniciar (control deslizante)" />
+                <input type="number" id="sc-edad_inicio_meses" min="1" max="11" step="1" value="6" data-var="edad_inicio_meses" data-default="6" data-integer="1" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="sc-distancia_hospital_km">Distancia al hospital (km)</label>
+              <div class="slider-row">
+                <input type="range" min="5" max="300" step="1" value="40" data-sync="distancia_hospital_km" aria-label="Distancia (control deslizante)" />
+                <input type="number" id="sc-distancia_hospital_km" min="5" max="300" step="0.5" value="40" data-var="distancia_hospital_km" data-default="40" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="sc-ingresos_mensuales_usd">Ingresos mensuales (USD)</label>
+              <div class="slider-row">
+                <input type="range" min="250" max="6000" step="10" value="660" data-sync="ingresos_mensuales_usd" aria-label="Ingresos (control deslizante)" />
+                <input type="number" id="sc-ingresos_mensuales_usd" min="250" max="6000" step="10" value="660" data-var="ingresos_mensuales_usd" data-default="660" data-integer="1" />
+              </div>
+            </div>
+            <div class="field switches">
+              <label class="switch-row" for="sc-apoyo_psicologico">
+                <input type="checkbox" class="switch" id="sc-apoyo_psicologico" data-var="apoyo_psicologico" data-default="0" />
+                <span>Recibe apoyo psicológico</span>
+              </label>
+              <label class="switch-row" for="sc-dificultad_alimentacion_preop">
+                <input type="checkbox" class="switch" id="sc-dificultad_alimentacion_preop" data-var="dificultad_alimentacion_preop" data-default="0" />
+                <span>Dificultad de alimentación antes de la cirugía</span>
+              </label>
+            </div>
+            <div class="actions">
+              <span id="scenario-button-wrap" class="button-wrap">
+                <button id="scenario-button" type="submit" class="rounded-xl bg-cyan-400 px-4 py-3 font-semibold text-slate-950 hover:bg-cyan-300">Predecir</button>
+              </span>
+              <p id="scenario-hint" class="hint hidden" aria-live="polite"></p>
+            </div>
+          </form>
+          <p id="scenario-loading" class="mt-3 hidden text-sm text-cyan-300">Calculando…</p>
+          <div id="scenario-result"></div>
+          <p id="scenario-error" class="mt-4 hidden text-rose-400"></p>
+        </div>
       </section>
 
       <section class="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-xl">
@@ -92,6 +184,28 @@
       la historia clínica completa.
     </footer>
   </div>
+
+  <template id="result-template">
+    <div data-f="box" class="result-box mt-5">
+      <div data-f="panel" class="result-panel rounded-2xl border p-4">
+        <p data-f="stale" class="mb-3 hidden text-xs text-amber-300"></p>
+        <div data-f="badge" class="inline-flex rounded-full px-4 py-1 text-sm font-bold"></div>
+        <p data-f="percent" class="mt-3 text-4xl font-semibold"></p>
+        <p class="mt-1 text-xs uppercase tracking-wide text-slate-400">Probabilidad estimada de abandono</p>
+        <p data-f="message" class="mt-3 text-sm text-slate-200"></p>
+        <p data-f="model-info" class="mt-1 text-xs text-slate-500"></p>
+        <p data-f="group-rate" class="mt-2 text-xs text-slate-400"></p>
+        <ul data-f="warnings" class="mt-3 space-y-1 text-xs text-amber-300"></ul>
+        <h3 class="mt-4 text-sm font-medium text-slate-300">Variables que más pesaron (asociación, no causa)</h3>
+        <ul data-f="factors" class="mt-2 space-y-1 text-sm"></ul>
+        <div data-f="inputs-block">
+          <h3 class="mt-4 text-sm font-medium text-slate-300">Datos usados por el modelo</h3>
+          <dl data-f="card" class="mt-2 grid grid-cols-2 gap-3 text-sm"></dl>
+        </div>
+        <p data-f="disclaimer" class="mt-4 text-xs text-slate-500"></p>
+      </div>
+    </div>
+  </template>
 
   <script>
     const panelStyles = {
@@ -135,12 +249,108 @@
       return node;
     };
 
+    // ---- Resultado compartido por las dos pestañas -------------------------------------------
+    const resultTemplate = document.getElementById("result-template");
+
+    function resultParts(slot) {
+      if (!slot.firstElementChild) slot.appendChild(resultTemplate.content.cloneNode(true));
+      const parts = {};
+      slot.querySelectorAll("[data-f]").forEach((node) => { parts[node.dataset.f] = node; });
+      return parts;
+    }
+
+    function renderPrediction(slot, data, options = {}) {
+      const parts = resultParts(slot);
+      const level = data.priority_level;
+      parts.box.classList.remove("stale");
+      parts.stale.classList.add("hidden");
+      parts.panel.className = "result-panel rounded-2xl border p-4 " + (panelStyles[level] || "border-slate-700");
+      parts.badge.className = "inline-flex rounded-full px-4 py-1 text-sm font-bold " + (badgeStyles[level] || "");
+      parts.badge.textContent = "Prioridad de seguimiento: " + level;
+      parts.percent.className = "mt-3 text-4xl font-semibold " + (percentStyles[level] || "");
+      parts.percent.textContent = (data.dropout_probability * 100).toFixed(1) + "%";
+      parts.message.textContent = data.priority_message;
+      parts["model-info"].textContent =
+        "Escenario " + (data.scenario || "?") + " · versión del modelo " + (data.model_version || "?");
+      parts["group-rate"].textContent = data.group_observed_dropout_rate == null ? "" :
+        "En este grupo de prioridad desertó el " + (data.group_observed_dropout_rate * 100).toFixed(0) +
+        "% de los pacientes de entrenamiento (validación cruzada). Predicción del " + data.prediction_date + ".";
+
+      parts.warnings.replaceChildren();
+      (data.warnings || []).forEach((text) => {
+        parts.warnings.appendChild(make("li", "", "⚠ " + text));
+      });
+
+      parts.factors.replaceChildren();
+      (data.top_factors || []).forEach((factor) => {
+        const item = make("li", "rounded-lg bg-slate-950/80 px-3 py-2");
+        item.appendChild(make("span", "font-medium", factor.label));
+        item.appendChild(document.createTextNode(" = " + String(factor.value ?? "—") + " → "));
+        item.appendChild(make(
+          "span",
+          factor.contribution > 0 ? "text-rose-300" : "text-sky-300",
+          factor.direction || (factor.contribution > 0 ? "aumenta la estimación" : "reduce la estimación")
+        ));
+        parts.factors.appendChild(item);
+      });
+
+      parts["inputs-block"].classList.toggle("hidden", options.showInputs === false);
+      parts.card.replaceChildren();
+      Object.entries(labels).forEach(([key, label]) => {
+        const wrapper = make("div", "rounded-lg bg-slate-950/80 p-3");
+        wrapper.appendChild(make("dt", "text-slate-500", label));
+        wrapper.appendChild(make("dd", "font-medium", String((data.model_inputs || {})[key] ?? "—")));
+        parts.card.appendChild(wrapper);
+      });
+      parts.disclaimer.textContent = data.disclaimer;
+    }
+
+    function setStale(slot, stale) {
+      if (!slot.firstElementChild) return;
+      const parts = resultParts(slot);
+      parts.box.classList.toggle("stale", stale);
+      parts.stale.classList.toggle("hidden", !stale);
+      parts.stale.textContent = stale
+        ? "Cambiaste las variables: esta estimación corresponde a los valores anteriores."
+        : "";
+    }
+
+    // ---- Pestañas Pacientes / Variables ------------------------------------------------------
+    const tabs = Array.from(document.querySelectorAll(".tab"));
+    function showView(name) {
+      tabs.forEach((tab) => {
+        const active = tab.dataset.view === name;
+        tab.setAttribute("aria-selected", String(active));
+        tab.tabIndex = active ? 0 : -1;
+      });
+      document.querySelectorAll(".view").forEach((view) => {
+        const active = view.dataset.view === name;
+        const wasHidden = view.classList.contains("hidden");
+        view.classList.toggle("hidden", !active);
+        view.classList.remove("view-enter");
+        if (active && wasHidden) {
+          void view.offsetWidth; // reinicia la animación
+          view.classList.add("view-enter");
+        }
+      });
+    }
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => showView(tab.dataset.view));
+      tab.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+        const next = tabs[(index + (event.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+        showView(next.dataset.view);
+        next.focus();
+      });
+    });
+
+    // ---- Pestaña Pacientes -------------------------------------------------------------------
     document.getElementById("predict-form").addEventListener("submit", async (event) => {
       event.preventDefault();
       const patientId = document.getElementById("patient-id").value.trim();
       const errorBox = document.getElementById("predict-error");
       const loadingBox = document.getElementById("predict-loading");
-      const box = document.getElementById("prediction-box");
+      const slot = document.getElementById("patients-result");
       const button = document.getElementById("predict-button");
       errorBox.classList.add("hidden");
       loadingBox.classList.add("hidden");
@@ -155,54 +365,9 @@
         const response = await fetch("/api/predictions/" + encodeURIComponent(patientId));
         const data = await response.json();
         if (!response.ok) throw new Error(data.detail || "No se pudo predecir");
-        box.classList.remove("hidden");
-        const level = data.priority_level;
-        box.className = "mt-5 rounded-2xl border p-4 " + (panelStyles[level] || "border-slate-700");
-        const badge = document.getElementById("priority-badge");
-        badge.className = "inline-flex rounded-full px-4 py-1 text-sm font-bold " + (badgeStyles[level] || "");
-        badge.textContent = "Prioridad de seguimiento: " + level;
-        const percent = document.getElementById("priority-percent");
-        percent.className = "mt-3 text-4xl font-semibold " + (percentStyles[level] || "");
-        percent.textContent = (data.dropout_probability * 100).toFixed(1) + "%";
-        document.getElementById("priority-message").textContent = data.priority_message;
-        document.getElementById("model-info").textContent =
-          "Escenario " + (data.scenario || "?") + " · versión del modelo " + (data.model_version || "?");
-        document.getElementById("group-rate").textContent = data.group_observed_dropout_rate == null ? "" :
-          "En este grupo de prioridad desertó el " + (data.group_observed_dropout_rate * 100).toFixed(0) +
-          "% de los pacientes de entrenamiento (validación cruzada). Predicción del " + data.prediction_date + ".";
-
-        const warnings = document.getElementById("warnings");
-        warnings.replaceChildren();
-        (data.warnings || []).forEach((text) => {
-          warnings.appendChild(make("li", "", "⚠ " + text));
-        });
-
-        const factors = document.getElementById("factors");
-        factors.replaceChildren();
-        (data.top_factors || []).forEach((factor) => {
-          const item = make("li", "rounded-lg bg-slate-950/80 px-3 py-2");
-          item.appendChild(make("span", "font-medium", factor.label));
-          item.appendChild(document.createTextNode(" = " + String(factor.value ?? "—") + " → "));
-          const direction = make(
-            "span",
-            factor.contribution > 0 ? "text-rose-300" : "text-sky-300",
-            factor.direction || (factor.contribution > 0 ? "aumenta la estimación" : "reduce la estimación")
-          );
-          item.appendChild(direction);
-          factors.appendChild(item);
-        });
-
-        const card = document.getElementById("patient-card");
-        card.replaceChildren();
-        Object.entries(labels).forEach(([key, label]) => {
-          const wrapper = make("div", "rounded-lg bg-slate-950/80 p-3");
-          wrapper.appendChild(make("dt", "text-slate-500", label));
-          wrapper.appendChild(make("dd", "font-medium", String(data.model_inputs[key] ?? "—")));
-          card.appendChild(wrapper);
-        });
-        document.getElementById("disclaimer").textContent = data.disclaimer;
+        renderPrediction(slot, data);
       } catch (error) {
-        box.classList.add("hidden");
+        slot.replaceChildren();
         errorBox.textContent = error.message;
         errorBox.classList.remove("hidden");
       } finally {
@@ -210,6 +375,100 @@
         loadingBox.classList.add("hidden");
       }
     });
+
+    // ---- Pestaña Variables -------------------------------------------------------------------
+    const scenarioForm = document.getElementById("scenario-form");
+    const scenarioButton = document.getElementById("scenario-button");
+    const scenarioWrap = document.getElementById("scenario-button-wrap");
+    const scenarioHint = document.getElementById("scenario-hint");
+    const scenarioSlot = document.getElementById("scenario-result");
+    const scenarioFields = Array.from(scenarioForm.querySelectorAll("[data-var]"));
+    const UNCHANGED_HINT = "Cambia alguna variable para hacer una nueva predicción.";
+    let lastPredicted = null; // valores de la última predicción mostrada
+    let scenarioBusy = false;
+
+    // Devuelve los valores del formulario o null si alguno es inválido.
+    function readScenario() {
+      const values = {};
+      for (const field of scenarioFields) {
+        const name = field.dataset.var;
+        if (field.type === "checkbox") {
+          values[name] = field.checked ? 1 : 0;
+        } else if (field.tagName === "SELECT") {
+          values[name] = name === "tipo_fisura" ? field.value : Number(field.value);
+        } else {
+          const number = Number(field.value);
+          const valid = field.value.trim() !== "" && Number.isFinite(number) &&
+            number >= Number(field.min) && number <= Number(field.max) &&
+            (!field.dataset.integer || Number.isInteger(number));
+          if (!valid) return null;
+          values[name] = number;
+        }
+      }
+      return values;
+    }
+
+    function refreshScenarioButton() {
+      const values = readScenario();
+      const changed = values !== null && JSON.stringify(values) !== lastPredicted;
+      scenarioButton.disabled = scenarioBusy || !changed;
+      let hint = "";
+      if (!scenarioBusy) {
+        if (values === null) hint = "Revisa que los valores estén dentro de los rangos indicados.";
+        else if (!changed) hint = UNCHANGED_HINT;
+      }
+      scenarioHint.textContent = hint;
+      scenarioHint.classList.toggle("hidden", hint === "");
+      scenarioWrap.title = scenarioButton.disabled && hint ? hint : "";
+      setStale(scenarioSlot, lastPredicted !== null && values !== null && changed);
+    }
+
+    // Deslizador y número de cada variable van sincronizados.
+    scenarioForm.querySelectorAll("input[type=range]").forEach((range) => {
+      const number = document.getElementById("sc-" + range.dataset.sync);
+      range.addEventListener("input", () => { number.value = range.value; refreshScenarioButton(); });
+      number.addEventListener("input", () => {
+        if (number.value !== "" && Number.isFinite(Number(number.value))) range.value = number.value;
+        refreshScenarioButton();
+      });
+    });
+    scenarioForm.addEventListener("input", refreshScenarioButton);
+    scenarioForm.addEventListener("change", refreshScenarioButton);
+
+    scenarioForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const values = readScenario();
+      const errorBox = document.getElementById("scenario-error");
+      const loadingBox = document.getElementById("scenario-loading");
+      errorBox.classList.add("hidden");
+      if (values === null || JSON.stringify(values) === lastPredicted) return;
+      scenarioBusy = true;
+      refreshScenarioButton();
+      loadingBox.classList.remove("hidden");
+      try {
+        const response = await fetch("/api/predictions/scenario", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          const detail = Array.isArray(data.detail) ? "Hay valores fuera de rango." : data.detail;
+          throw new Error(detail || "No se pudo predecir");
+        }
+        renderPrediction(scenarioSlot, data, { showInputs: false });
+        lastPredicted = JSON.stringify(values);
+      } catch (error) {
+        errorBox.textContent = error.message;
+        errorBox.classList.remove("hidden");
+      } finally {
+        scenarioBusy = false;
+        loadingBox.classList.add("hidden");
+        refreshScenarioButton();
+      }
+    });
+    refreshScenarioButton();
+    // Al inicio no hay predicción previa: el botón está activo con los valores por defecto.
 
     document.getElementById("analytics-form").addEventListener("submit", async (event) => {
       event.preventDefault();

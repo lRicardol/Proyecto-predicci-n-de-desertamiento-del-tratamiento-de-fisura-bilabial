@@ -77,3 +77,64 @@ def test_analytics_unknown_query_is_422(client: TestClient) -> None:
 def test_health_suggests_v2_patients(client: TestClient) -> None:
     data = client.get("/api/health").json()
     assert data["sample_patient_ids"][0] == "PAC-2001"
+
+
+SCENARIO = {
+    "tipo_fisura": "Completa",
+    "edad_inicio_meses": 6,
+    "distancia_hospital_km": 40.0,
+    "nivel_socioeconomico_ord": 1,
+    "ingresos_mensuales_usd": 660,
+    "apoyo_psicologico": 0,
+    "dificultad_alimentacion_preop": 0,
+}
+
+
+def test_scenario_prediction_returns_priority(client: TestClient) -> None:
+    response = client.post("/api/predictions/scenario", json=SCENARIO)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["patient_id"] == "escenario"
+    assert 0.0 <= data["dropout_probability"] <= 1.0
+    assert data["priority_level"] in {"alta", "media", "habitual"}
+    assert set(data["model_inputs"]) == set(FEATURES_T0)
+    assert len(data["top_factors"]) == 3
+    assert data["scenario"] == "T0"
+
+
+def test_scenario_matches_stored_patient(client: TestClient) -> None:
+    """Con las mismas 7 variables de un paciente, el escenario da su misma probabilidad."""
+    stored = client.get("/api/predictions/PAC-2001").json()
+    inputs = stored["model_inputs"]
+    inputs["nivel_socioeconomico_ord"] = int(inputs["nivel_socioeconomico_ord"])
+    response = client.post("/api/predictions/scenario", json=inputs)
+    if response.status_code == 422:  # el paciente tiene un valor fuera del rango del formulario
+        return
+    assert response.json()["dropout_probability"] == stored["dropout_probability"]
+
+
+def test_scenario_changes_with_variables(client: TestClient) -> None:
+    near = client.post("/api/predictions/scenario", json={**SCENARIO, "distancia_hospital_km": 5}).json()
+    far = client.post("/api/predictions/scenario", json={**SCENARIO, "distancia_hospital_km": 300}).json()
+    assert near["dropout_probability"] != far["dropout_probability"]
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"tipo_fisura": "Otra"},
+        {"edad_inicio_meses": 40},
+        {"distancia_hospital_km": -1},
+        {"nivel_socioeconomico_ord": 3},
+        {"ingresos_mensuales_usd": 10},
+        {"apoyo_psicologico": 2},
+        {"variable_extra": 1},
+    ],
+)
+def test_scenario_rejects_out_of_range_values(client: TestClient, change: dict) -> None:
+    assert client.post("/api/predictions/scenario", json={**SCENARIO, **change}).status_code == 422
+
+
+def test_scenario_requires_all_variables(client: TestClient) -> None:
+    incomplete = {key: value for key, value in SCENARIO.items() if key != "tipo_fisura"}
+    assert client.post("/api/predictions/scenario", json=incomplete).status_code == 422

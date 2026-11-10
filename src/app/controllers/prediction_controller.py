@@ -5,12 +5,30 @@ import re
 from fastapi import APIRouter, Depends, HTTPException, status
 
 from src.app.composition import get_predict_dropout_use_case
-from src.app.views.schemas import FactorResponse, PredictionRequest, PredictionResponse
+from src.app.views.schemas import (
+    FactorResponse,
+    PredictionRequest,
+    PredictionResponse,
+    ScenarioRequest,
+)
 from src.core.exceptions import DomainError, PatientNotFoundError
-from src.core.use_cases.predict_dropout import PredictDropoutUseCase
+from src.core.use_cases.predict_dropout import DropoutPrediction, PredictDropoutUseCase
 
 prediction_router = APIRouter(prefix="/predictions", tags=["predicción"])
 _PATIENT_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,31}$")
+
+
+@prediction_router.post("/scenario", response_model=PredictionResponse, status_code=status.HTTP_200_OK)
+def predict_dropout_scenario(
+    payload: ScenarioRequest,
+    use_case: PredictDropoutUseCase = Depends(get_predict_dropout_use_case),
+) -> PredictionResponse:
+    """Predicción para un paciente hipotético a partir de las variables del modelo."""
+    try:
+        result = use_case.execute_scenario(payload.model_dump())
+    except DomainError as exc:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(exc)) from exc
+    return _to_response(result)
 
 
 @prediction_router.get("/{patient_id}", response_model=PredictionResponse)
@@ -41,6 +59,10 @@ def _execute(patient_id: str, use_case: PredictDropoutUseCase) -> PredictionResp
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc
     except DomainError as exc:
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(exc)) from exc
+    return _to_response(result)
+
+
+def _to_response(result: DropoutPrediction) -> PredictionResponse:
     return PredictionResponse(
         patient_id=result.patient_id,
         dropout_probability=result.dropout_probability,

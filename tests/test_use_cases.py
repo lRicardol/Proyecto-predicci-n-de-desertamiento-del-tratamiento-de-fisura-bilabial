@@ -249,3 +249,18 @@ def test_local_analyst_writes_png(tmp_path: Path) -> None:
     assert output.exists()
     assert output.stat().st_size > 0
     assert "inasistencias" in text.lower() or "no-show" in text.lower()
+
+
+def test_predict_scenario_does_not_use_repository() -> None:
+    record = {"id_paciente": "PAC-2001", "distancia_hospital_km": 10.0}
+    result = _use_case(record, 0.9).execute_scenario({"distancia_hospital_km": 120.0})
+    assert result.patient_id == "escenario"
+    assert result.model_inputs == {"distancia_hospital_km": 120.0}
+    assert result.priority_level == "alta"
+    assert result.warnings == []
+
+
+def test_predict_scenario_requires_model_features() -> None:
+    record = {"id_paciente": "PAC-2001", "distancia_hospital_km": 10.0}
+    with pytest.raises(InvalidPatientDataError):
+        _use_case(record, 0.9).execute_scenario({"otra_variable": 1})

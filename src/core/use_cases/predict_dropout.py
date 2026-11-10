@@ -18,6 +18,8 @@ from src.core.interfaces.i_predictor_model import FactorContribution, IPredictor
 
 PRIORITY_LEVELS: tuple[str, ...] = ("alta", "media", "habitual")
 
+SCENARIO_ID: str = "escenario"
+
 PRIORITY_MESSAGES: dict[str, str] = {
     "alta": (
         "Este paciente está entre los de mayor probabilidad estimada de abandono. "
@@ -95,10 +97,20 @@ class PredictDropoutUseCase:
 
     def execute(self, patient_id: str) -> DropoutPrediction:
         record = self._patient_repository.get_patient_by_id(patient_id)
+        return self._predict(record, fallback_id=patient_id)
+
+    def execute_scenario(self, values: Mapping[str, Any]) -> DropoutPrediction:
+        """Predice para un paciente hipotético: los valores los entrega quien consulta.
+
+        No toca el repositorio. Los valores deben venir ya validados (rangos y categorías).
+        """
+        return self._predict(dict(values), fallback_id=SCENARIO_ID)
+
+    def _predict(self, record: dict[str, Any], fallback_id: str) -> DropoutPrediction:
         features = self._format_features(record)
         probability = self._extract_scalar(self._predictor_model.predict_dropout_probability(features))
         level = self._priority_policy.classify(probability)
-        resolved_id = str(record.get("id_paciente") or record.get("ID_Paciente") or patient_id)
+        resolved_id = str(record.get("id_paciente") or record.get("ID_Paciente") or fallback_id)
         inputs = {name: features[0][name] for name in self._predictor_model.feature_names}
         return DropoutPrediction(
             patient_id=resolved_id,
