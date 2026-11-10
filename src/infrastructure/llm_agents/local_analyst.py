@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+import unicodedata
 from pathlib import Path
 
 import matplotlib
@@ -64,7 +66,7 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
         sns.set_theme(style="whitegrid", context="talk")
 
         try:
-            narrative = self._dispatch(cleaned.lower(), frame, image_path)
+            narrative = self._dispatch(_fold_accents(cleaned), frame, image_path)
         except AnalyticsError:
             raise
         except Exception as exc:
@@ -84,10 +86,11 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
             (("terapia", "lenguaje", "ivf", "hipernasal"), self._plot_therapy),
             (("correl", "heatmap", "matriz"), self._plot_correlation),
             (("compar", "grupo"), self._plot_group_comparison),
-            (("distrib", "etiqueta", "cuantos desert", "cuántos desert", "tasa de desert"), self._plot_dropout_overview),
+            (("distrib", "etiqueta", "cuantos desert", "tasa de desert"), self._plot_dropout_overview),
         )
+        words = set(re.findall(r"\w+", query))
         for keywords, handler in intents:
-            if any(keyword in query for keyword in keywords):
+            if any(_matches(keyword, query, words) for keyword in keywords):
                 return handler(frame, image_path)
         examples = "; ".join(_EXAMPLES)
         raise AnalyticsError(
@@ -367,6 +370,19 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
             f"({deserters / total:.1%}). "
             "Prueba consultas como 'inasistencias', 'nivel socioeconómico' o 'distancia'."
         )
+
+
+def _fold_accents(text: str) -> str:
+    """Minúsculas y sin tildes, para que "socioeconómico" y "socioeconomico" den lo mismo."""
+    decomposed = unicodedata.normalize("NFKD", text.lower())
+    return "".join(char for char in decomposed if not unicodedata.combining(char))
+
+
+def _matches(keyword: str, query: str, words: set[str]) -> bool:
+    """"ses" es una sigla: solo cuenta como palabra completa (no dentro de "sesión")."""
+    if keyword == "ses":
+        return keyword in words
+    return keyword in query
 
 
 def _require(frame: pd.DataFrame, columns: list[str]) -> None:
