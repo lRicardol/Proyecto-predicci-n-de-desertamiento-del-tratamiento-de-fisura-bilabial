@@ -175,7 +175,6 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
         axes[0].set_ylim(0, 1)
         axes[0].set_ylabel("Tasa de deserción")
         axes[0].set_title("Asociación entre nivel socioeconómico y deserción")
-        axes[0].tick_params(axis="x", rotation=15)
 
         if "apoyo_psicologico" in frame.columns:
             sns.pointplot(
@@ -189,7 +188,6 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
             )
             axes[1].set_ylim(0, 1)
             axes[1].set_title("SES × apoyo psicológico")
-            axes[1].tick_params(axis="x", rotation=15)
         else:
             axes[1].axis("off")
 
@@ -341,7 +339,6 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
         ax.set_ylim(0, 1)
         ax.set_ylabel("Tasa de deserción")
         ax.set_title(f"Asociación: tasa de deserción por {group_column.replace('_', ' ')}")
-        ax.tick_params(axis="x", rotation=20)
         _save(fig, image_path)
         rendered = "; ".join(
             f"{index}: {row['mean']:.1%} (n={int(row['count'])})" for index, row in rates.iterrows()
