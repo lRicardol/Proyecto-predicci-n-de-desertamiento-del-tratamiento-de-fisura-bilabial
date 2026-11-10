@@ -79,13 +79,13 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
 
     def _dispatch(self, query: str, frame: pd.DataFrame, image_path: Path) -> str:
         intents = (
+            (("compar", "grupo"), lambda f, p: self._plot_group_comparison(f, p, query)),
             (("inasistencia", "noshow", "no-show", "no show", "citas perdidas"), self._plot_noshow),
             (("socioeconom", "ses", "ingreso", "pobreza"), self._plot_socioeconomic),
             (("distancia", "km", "viaje"), self._plot_distance),
             (("cirug", "complic", "fistula", "dehisc", "quirurg"), self._plot_surgery),
             (("terapia", "lenguaje", "ivf", "hipernasal"), self._plot_therapy),
             (("correl", "heatmap", "matriz"), self._plot_correlation),
-            (("compar", "grupo"), self._plot_group_comparison),
             (("distrib", "etiqueta", "cuantos desert", "tasa de desert"), self._plot_dropout_overview),
         )
         words = set(re.findall(r"\w+", query))
@@ -315,23 +315,32 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
         corr_noshow = float(corr.loc["citas_perdidas_noshow", "desertor"])
         return f"Matriz de correlación de Spearman. No-show vs deserción: rho = {corr_noshow:.2f}."
 
-    def _plot_group_comparison(self, frame: pd.DataFrame, image_path: Path) -> str:
+    def _plot_group_comparison(self, frame: pd.DataFrame, image_path: Path, query: str = "") -> str:
         _require(frame, ["desertor"])
-        group_column = next(
-            (column for column in ("tipo_fisura", "nivel_socioeconomico", "cohorte") if column in frame.columns),
-            None,
-        )
+        requested = _requested_group(query)
+        if requested is not None:
+            if requested not in frame.columns:
+                raise AnalyticsError(f"El CSV no tiene la columna de agrupación {requested}.")
+            group_column = requested
+        else:
+            group_column = next((column for column in GROUP_COLUMNS if column in frame.columns), None)
         if group_column is None:
             raise AnalyticsError(
                 "No hay columna de agrupación (tipo_fisura, nivel_socioeconomico o cohorte) en el CSV."
             )
+        order = None
+        if group_column == "nivel_socioeconomico":
+            order = [nivel for nivel in SES_ORDER if nivel in set(frame[group_column])]
         rates = frame.groupby(group_column, dropna=False)["desertor"].agg(["mean", "count"])
         rates = rates[rates["count"] > 0]
+        if order:
+            rates = rates.reindex(order)
         fig, ax = plt.subplots(figsize=(9, 5.2))
         sns.barplot(
             data=frame,
             x=group_column,
             y="desertor",
+            order=order,
             errorbar=("ci", 95),
             color="#4c78a8",
             ax=ax,
@@ -378,6 +387,20 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
             f"({deserters / total:.1%}). "
             "Prueba consultas como 'inasistencias', 'nivel socioeconómico' o 'distancia'."
         )
+
+
+GROUP_COLUMNS = ("tipo_fisura", "nivel_socioeconomico", "cohorte")
+
+
+def _requested_group(query: str) -> str | None:
+    """Variable de agrupación pedida en la consulta (ya sin tildes); None si no se nombra ninguna."""
+    if "cohorte" in query:
+        return "cohorte"
+    if "socioeconom" in query or "nivel" in query:
+        return "nivel_socioeconomico"
+    if "fisura" in query:
+        return "tipo_fisura"
+    return None
 
 
 def _fold_accents(text: str) -> str:

@@ -264,3 +264,42 @@ def test_predict_scenario_requires_model_features() -> None:
     record = {"id_paciente": "PAC-2001", "distancia_hospital_km": 10.0}
     with pytest.raises(InvalidPatientDataError):
         _use_case(record, 0.9).execute_scenario({"otra_variable": 1})
+
+
+@pytest.mark.parametrize(
+    ("query", "expected"),
+    [
+        ("Comparar grupos de deserción por tipo de fisura", "tipo_fisura"),
+        ("Comparar grupos de deserción por nivel socioeconómico", "nivel_socioeconomico"),
+        ("Comparar grupos de deserción por cohorte", "cohorte"),
+        ("Compara las tasas de deserción entre grupos", "tipo_fisura"),
+    ],
+)
+def test_local_analyst_group_comparison_uses_requested_variable(
+    tmp_path: Path, query: str, expected: str
+) -> None:
+    csv_path = tmp_path / "dataset.csv"
+    pd.DataFrame(
+        {
+            "id_paciente": [f"PAC-{i}" for i in range(8)],
+            "tipo_fisura": ["Completa", "Incompleta"] * 4,
+            "nivel_socioeconomico": ["Bajo", "Alto"] * 4,
+            "cohorte": ["v1"] * 4 + ["v2"] * 4,
+            "desertor": [1, 0, 1, 1, 0, 1, 0, 1],
+        }
+    ).to_csv(csv_path, index=False)
+    text = LocalStatisticalAnalyst().analyze_data_and_plot(
+        query=query, data_path=str(csv_path), output_image_path=str(tmp_path / "g.png")
+    )
+    assert f"por {expected}" in text
+
+
+def test_local_analyst_group_comparison_missing_variable_fails(tmp_path: Path) -> None:
+    csv_path = tmp_path / "dataset.csv"
+    pd.DataFrame({"tipo_fisura": ["Completa", "Incompleta"], "desertor": [1, 0]}).to_csv(csv_path, index=False)
+    with pytest.raises(AnalyticsError, match="cohorte"):
+        LocalStatisticalAnalyst().analyze_data_and_plot(
+            query="Comparar grupos de deserción por cohorte",
+            data_path=str(csv_path),
+            output_image_path=str(tmp_path / "g.png"),
+        )

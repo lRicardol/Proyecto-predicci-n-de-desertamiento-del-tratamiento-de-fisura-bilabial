@@ -51,6 +51,10 @@
     .tab[aria-selected="true"] { color: var(--accent-text); border-bottom-color: var(--accent); }
     .tab:focus-visible, .switch:focus-visible, input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     .view { margin-top: 1rem; }
+    #analytics-form { display: block; margin-top: 1rem; }
+    #analytics-form label { display: block; font-size: .85rem; color: var(--label); margin: .9rem 0 .3rem; }
+    #analytics-form label:first-child { margin-top: 0; }
+    #analytics-form select { padding-left: 1rem; padding-right: 2.5rem; }
     /* Cajas grises del resultado (factores y datos): borde fino para separarlas del fondo. */
     .chip { border: 1px solid var(--border-strong); }
     .view-enter { animation: view-in .18s ease-out; }
@@ -214,20 +218,27 @@
       <section class="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-xl">
         <h2 class="text-xl font-medium">Panel de analítica</h2>
         <p class="mt-1 text-sm text-slate-400">El analista local genera un PNG con nombre único en <code>static/generated_charts/</code> con Matplotlib/Seaborn. Lee <code>dataset_final_limpio.csv</code> (v1 + v2): es descriptivo e incluye variables retrospectivas que no sirven para predecir al ingreso.</p>
-        <label class="mt-4 block text-sm text-slate-300">Consulta predefinida</label>
-        <select id="preset" class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3">
-          <option value="Grafica la relación entre inasistencias y deserción">Inasistencias y deserción</option>
-          <option value="Muestra el impacto del nivel socioeconómico">Nivel socioeconómico</option>
-          <option value="Distribución de distancia">Distancia al centro médico</option>
-          <option value="Cirugías y complicaciones">Cirugías y complicaciones</option>
-          <option value="Terapia de lenguaje">Terapia de lenguaje</option>
-          <option value="Matriz de correlación">Correlación</option>
-          <option value="Compara las tasas de deserción entre grupos">Comparar grupos de deserción</option>
-        </select>
-        <label class="mt-4 block text-sm text-slate-300">O escribe una consulta</label>
-        <form id="analytics-form" class="mt-1">
-          <textarea id="query" rows="3" class="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3">Grafica la relación entre inasistencias y deserción</textarea>
-          <button id="analytics-button" type="submit" class="mt-3 rounded-xl bg-emerald-400 px-4 py-3 font-semibold text-slate-950 hover:bg-emerald-300">Generar gráfico</button>
+        <form id="analytics-form" class="analytics-form">
+          <label for="analysis">Análisis</label>
+          <select id="analysis" class="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3">
+            <option value="Grafica la relación entre inasistencias y deserción">Inasistencias y deserción</option>
+            <option value="Muestra el impacto del nivel socioeconómico">Nivel socioeconómico</option>
+            <option value="Distribución de distancia">Distancia al centro médico</option>
+            <option value="Cirugías y complicaciones">Cirugías y complicaciones</option>
+            <option value="Terapia de lenguaje">Terapia de lenguaje</option>
+            <option value="Matriz de correlación">Correlación</option>
+            <option value="Distribución de la deserción">Distribución de la deserción</option>
+            <option value="Comparar grupos de deserción">Comparar grupos de deserción</option>
+          </select>
+          <div id="group-field" class="hidden">
+            <label for="group-by">Agrupar por</label>
+            <select id="group-by" class="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3">
+              <option value="por tipo de fisura">Tipo de fisura</option>
+              <option value="por nivel socioeconómico">Nivel socioeconómico</option>
+              <option value="por cohorte">Cohorte (v1 / v2)</option>
+            </select>
+          </div>
+          <button id="analytics-button" type="submit" class="mt-4 rounded-xl bg-emerald-400 px-4 py-3 font-semibold text-slate-950 hover:bg-emerald-300">Generar gráfico</button>
         </form>
         <p id="analytics-loading" class="mt-3 hidden text-sm text-emerald-300">Generando gráfico…</p>
         <p id="analytics-narrative" class="mt-4 text-sm text-slate-300"></p>
@@ -297,8 +308,19 @@
       }
     }).catch(() => {});
 
-    document.getElementById("preset").addEventListener("change", (event) => {
-      document.getElementById("query").value = event.target.value;
+    // Análisis predefinidos: "Comparar grupos" pide además la variable de agrupación.
+    const analysisSelect = document.getElementById("analysis");
+    const groupField = document.getElementById("group-field");
+    const GROUP_ANALYSIS = "Comparar grupos de deserción";
+    analysisSelect.addEventListener("change", () => {
+      const show = analysisSelect.value === GROUP_ANALYSIS;
+      const wasHidden = groupField.classList.contains("hidden");
+      groupField.classList.toggle("hidden", !show);
+      groupField.classList.remove("view-enter");
+      if (show && wasHidden) {
+        void groupField.offsetWidth;
+        groupField.classList.add("view-enter");
+      }
     });
 
     const make = (tag, className, text) => {
@@ -546,7 +568,9 @@
 
     document.getElementById("analytics-form").addEventListener("submit", async (event) => {
       event.preventDefault();
-      const query = document.getElementById("query").value.trim();
+      const query = analysisSelect.value === GROUP_ANALYSIS
+        ? analysisSelect.value + " " + document.getElementById("group-by").value
+        : analysisSelect.value;
       const errorBox = document.getElementById("analytics-error");
       const loadingBox = document.getElementById("analytics-loading");
       const button = document.getElementById("analytics-button");
