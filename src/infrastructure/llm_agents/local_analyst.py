@@ -298,13 +298,24 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
         ]
         selected = cols + [col for col in extras if col in frame.columns]
         _require(frame, cols)
-        corr = frame[selected].corr(numeric_only=True)
+        # Spearman: las variables son continuas, ordinales y binarias; no se asume linealidad.
+        corr = frame[selected].corr(method="spearman", numeric_only=True)
         fig, ax = plt.subplots(figsize=(9, 7))
-        sns.heatmap(corr, annot=True, fmt=".2f", cmap="vlag", center=0, linewidths=0.4, ax=ax)
-        ax.set_title("Matriz de correlación (Pearson)")
+        sns.heatmap(
+            corr,
+            annot=False,
+            cmap="vlag",
+            center=0,
+            vmin=-1,
+            vmax=1,
+            linewidths=0.4,
+            cbar_kws={"label": "Correlación de Spearman"},
+            ax=ax,
+        )
+        ax.set_title("Matriz de correlación (Spearman)")
         _save(fig, image_path)
         corr_noshow = float(corr.loc["citas_perdidas_noshow", "desertor"])
-        return f"Matriz de correlación. Pearson no-show vs deserción = {corr_noshow:.2f}."
+        return f"Matriz de correlación de Spearman. No-show vs deserción: rho = {corr_noshow:.2f}."
 
     def _plot_group_comparison(self, frame: pd.DataFrame, image_path: Path) -> str:
         _require(frame, ["desertor"])
