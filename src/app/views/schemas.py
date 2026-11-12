@@ -1,8 +1,8 @@
 """DTOs HTTP. No contienen reglas de negocio."""
 
-from typing import Any
+from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class PredictionRequest(BaseModel):
@@ -13,6 +13,25 @@ class PredictionRequest(BaseModel):
         pattern=r"^[A-Za-z0-9][A-Za-z0-9_-]*$",
         examples=["PAC-2001"],
     )
+
+
+class ScenarioRequest(BaseModel):
+    """Paciente hipotético: las 7 variables del modelo T0, con los rangos del entrenamiento.
+
+    Los límites son los observados en la cohorte v2 (no se extrapola fuera de lo que el modelo vio).
+    ``nivel_socioeconomico_ord`` solo admite los niveles presentes en los datos: 0 bajo,
+    1 medio-bajo, 2 medio y 4 alto (el 3 no aparece en la cohorte).
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    tipo_fisura: Literal["Completa", "Incompleta", "Asimetrica"]
+    edad_inicio_meses: int = Field(..., ge=1, le=11)
+    distancia_hospital_km: float = Field(..., ge=5, le=300)
+    nivel_socioeconomico_ord: Literal[0, 1, 2, 4]
+    ingresos_mensuales_usd: int = Field(..., ge=250, le=6000)
+    apoyo_psicologico: Literal[0, 1]
+    dificultad_alimentacion_preop: Literal[0, 1]
 
 
 class FactorResponse(BaseModel):

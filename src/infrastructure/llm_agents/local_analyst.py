@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+import unicodedata
 from pathlib import Path
 
 import matplotlib
@@ -64,7 +66,7 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
         sns.set_theme(style="whitegrid", context="talk")
 
         try:
-            narrative = self._dispatch(cleaned.lower(), frame, image_path)
+            narrative = self._dispatch(_fold_accents(cleaned), frame, image_path)
         except AnalyticsError:
             raise
         except Exception as exc:
@@ -77,17 +79,18 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
 
     def _dispatch(self, query: str, frame: pd.DataFrame, image_path: Path) -> str:
         intents = (
+            (("compar", "grupo"), lambda f, p: self._plot_group_comparison(f, p, query)),
             (("inasistencia", "noshow", "no-show", "no show", "citas perdidas"), self._plot_noshow),
             (("socioeconom", "ses", "ingreso", "pobreza"), self._plot_socioeconomic),
             (("distancia", "km", "viaje"), self._plot_distance),
             (("cirug", "complic", "fistula", "dehisc", "quirurg"), self._plot_surgery),
             (("terapia", "lenguaje", "ivf", "hipernasal"), self._plot_therapy),
             (("correl", "heatmap", "matriz"), self._plot_correlation),
-            (("compar", "grupo"), self._plot_group_comparison),
-            (("distrib", "etiqueta", "cuantos desert", "cuántos desert", "tasa de desert"), self._plot_dropout_overview),
+            (("distrib", "etiqueta", "cuantos desert", "tasa de desert"), self._plot_dropout_overview),
         )
+        words = set(re.findall(r"\w+", query))
         for keywords, handler in intents:
-            if any(keyword in query for keyword in keywords):
+            if any(_matches(keyword, query, words) for keyword in keywords):
                 return handler(frame, image_path)
         examples = "; ".join(_EXAMPLES)
         raise AnalyticsError(
@@ -172,7 +175,6 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
         axes[0].set_ylim(0, 1)
         axes[0].set_ylabel("Tasa de deserción")
         axes[0].set_title("Asociación entre nivel socioeconómico y deserción")
-        axes[0].tick_params(axis="x", rotation=15)
 
         if "apoyo_psicologico" in frame.columns:
             sns.pointplot(
@@ -186,7 +188,6 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
             )
             axes[1].set_ylim(0, 1)
             axes[1].set_title("SES × apoyo psicológico")
-            axes[1].tick_params(axis="x", rotation=15)
         else:
             axes[1].axis("off")
 
@@ -295,31 +296,51 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
         ]
         selected = cols + [col for col in extras if col in frame.columns]
         _require(frame, cols)
-        corr = frame[selected].corr(numeric_only=True)
+        # Spearman: las variables son continuas, ordinales y binarias; no se asume linealidad.
+        corr = frame[selected].corr(method="spearman", numeric_only=True)
         fig, ax = plt.subplots(figsize=(9, 7))
-        sns.heatmap(corr, annot=True, fmt=".2f", cmap="vlag", center=0, linewidths=0.4, ax=ax)
-        ax.set_title("Matriz de correlación (Pearson)")
+        sns.heatmap(
+            corr,
+            annot=False,
+            cmap="vlag",
+            center=0,
+            vmin=-1,
+            vmax=1,
+            linewidths=0.4,
+            cbar_kws={"label": "Correlación de Spearman"},
+            ax=ax,
+        )
+        ax.set_title("Matriz de correlación (Spearman)")
         _save(fig, image_path)
         corr_noshow = float(corr.loc["citas_perdidas_noshow", "desertor"])
-        return f"Matriz de correlación. Pearson no-show vs deserción = {corr_noshow:.2f}."
+        return f"Matriz de correlación de Spearman. No-show vs deserción: rho = {corr_noshow:.2f}."
 
-    def _plot_group_comparison(self, frame: pd.DataFrame, image_path: Path) -> str:
+    def _plot_group_comparison(self, frame: pd.DataFrame, image_path: Path, query: str = "") -> str:
         _require(frame, ["desertor"])
-        group_column = next(
-            (column for column in ("tipo_fisura", "nivel_socioeconomico", "cohorte") if column in frame.columns),
-            None,
-        )
+        requested = _requested_group(query)
+        if requested is not None:
+            if requested not in frame.columns:
+                raise AnalyticsError(f"El CSV no tiene la columna de agrupación {requested}.")
+            group_column = requested
+        else:
+            group_column = next((column for column in GROUP_COLUMNS if column in frame.columns), None)
         if group_column is None:
             raise AnalyticsError(
                 "No hay columna de agrupación (tipo_fisura, nivel_socioeconomico o cohorte) en el CSV."
             )
+        order = None
+        if group_column == "nivel_socioeconomico":
+            order = [nivel for nivel in SES_ORDER if nivel in set(frame[group_column])]
         rates = frame.groupby(group_column, dropna=False)["desertor"].agg(["mean", "count"])
         rates = rates[rates["count"] > 0]
+        if order:
+            rates = rates.reindex(order)
         fig, ax = plt.subplots(figsize=(9, 5.2))
         sns.barplot(
             data=frame,
             x=group_column,
             y="desertor",
+            order=order,
             errorbar=("ci", 95),
             color="#4c78a8",
             ax=ax,
@@ -327,7 +348,6 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
         ax.set_ylim(0, 1)
         ax.set_ylabel("Tasa de deserción")
         ax.set_title(f"Asociación: tasa de deserción por {group_column.replace('_', ' ')}")
-        ax.tick_params(axis="x", rotation=20)
         _save(fig, image_path)
         rendered = "; ".join(
             f"{index}: {row['mean']:.1%} (n={int(row['count'])})" for index, row in rates.iterrows()
@@ -367,6 +387,33 @@ class LocalStatisticalAnalyst(IStatisticalAnalyst):
             f"({deserters / total:.1%}). "
             "Prueba consultas como 'inasistencias', 'nivel socioeconómico' o 'distancia'."
         )
+
+
+GROUP_COLUMNS = ("tipo_fisura", "nivel_socioeconomico", "cohorte")
+
+
+def _requested_group(query: str) -> str | None:
+    """Variable de agrupación pedida en la consulta (ya sin tildes); None si no se nombra ninguna."""
+    if "cohorte" in query:
+        return "cohorte"
+    if "socioeconom" in query or "nivel" in query:
+        return "nivel_socioeconomico"
+    if "fisura" in query:
+        return "tipo_fisura"
+    return None
+
+
+def _fold_accents(text: str) -> str:
+    """Minúsculas y sin tildes, para que "socioeconómico" y "socioeconomico" den lo mismo."""
+    decomposed = unicodedata.normalize("NFKD", text.lower())
+    return "".join(char for char in decomposed if not unicodedata.combining(char))
+
+
+def _matches(keyword: str, query: str, words: set[str]) -> bool:
+    """"ses" es una sigla: solo cuenta como palabra completa (no dentro de "sesión")."""
+    if keyword == "ses":
+        return keyword in words
+    return keyword in query
 
 
 def _require(frame: pd.DataFrame, columns: list[str]) -> None:

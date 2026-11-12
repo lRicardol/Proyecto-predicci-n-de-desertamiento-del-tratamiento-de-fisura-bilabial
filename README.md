@@ -2,7 +2,7 @@
 
 Sistema de **analítica predictiva local** para el seguimiento de pacientes con fisura labiopalatina (fisura bilabial) en Fisulab. Estima la probabilidad de que un paciente abandone el tratamiento y la traduce en una **prioridad de seguimiento** (alta / media / habitual), explicando qué variables pesaron en cada estimación.
 
-El modelo es una **regresión logística** entrenada con la cohorte v2 (**3 000 pacientes sintéticos**) usando solo información disponible **al ingreso** del paciente (escenario T0). Todo corre en el equipo: no hay API keys ni servicios externos. Las consultas en lenguaje natural del panel se resuelven con un motor de reglas que genera gráficos de Matplotlib y Seaborn.
+El modelo es una **regresión logística** entrenada con la cohorte v2 (**3 000 pacientes sintéticos**) usando solo información disponible **al ingreso** del paciente (escenario T0). Todo corre en el equipo: no hay API keys ni servicios externos. Los análisis del panel se resuelven con un motor de reglas (sin modelos de lenguaje) que genera gráficos de Matplotlib y Seaborn.
 
 > **Datos sintéticos.** Los pacientes del repositorio (3 500 en el dataset unificado histórico y 3 000 en la cohorte v2 de modelado) no son reales. Los resultados son un ejercicio metodológico y **no se pueden extrapolar a pacientes reales**.
 
@@ -21,7 +21,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe main.py
 ```
 
-Abrir **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)** y buscar un paciente de la cohorte v2 (por ejemplo `PAC-2001`).
+Abrir **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)**. El panel de predicción tiene dos pestañas: **Pacientes** (buscar un ID de la cohorte v2, por ejemplo `PAC-2001`) y **Variables** (cambiar las 7 variables del modelo y predecir para un paciente hipotético). El botón de la esquina superior derecha alterna entre tema claro y oscuro.
 
 El servidor escucha solo en `127.0.0.1` por defecto (`HOST` en `.env` / `config.py`). Exponerlo en la red local (`HOST=0.0.0.0`) es una decisión explícita del equipo: el servicio **no tiene autenticación** y CORS solo admite orígenes `localhost`/`127.0.0.1`.
 
@@ -85,7 +85,7 @@ El diseño sigue **Clean Architecture** y los principios SOLID. El dominio no im
 
 - **Controladores:** `prediction_controller.py` y `dashboard_controller.py` (FastAPI), sin reglas de negocio.
 - **DTOs:** `src/app/views/schemas.py`.
-- **Vista:** `src/app/views/dashboard.html` — prioridad de seguimiento, datos usados por el modelo, variables que más pesaron y panel de analítica.
+- **Vista:** `src/app/views/dashboard.html` — panel de predicción con pestañas (Pacientes / Variables), prioridad de seguimiento, datos usados por el modelo, variables que más pesaron, panel de analítica con selector de análisis y tema claro/oscuro.
 
 ### Composition root
 
@@ -152,9 +152,10 @@ Tarda unos segundos, sobrescribe `modelo_t0.joblib` y `modelo_t0.json` e imprime
 
 | Recurso | Uso |
 |---|---|
-| `/` | Panel: prioridad de seguimiento por ID y analítica gráfica |
+| `/` | Panel: predicción por ID o por variables, y analítica gráfica |
 | `GET /api/predictions/PAC-2001` | Probabilidad, prioridad, variables que más pesaron, datos usados y avisos |
 | `POST /api/predictions` | Lo mismo con `{"patient_id": "PAC-2001"}` |
+| `POST /api/predictions/scenario` | Predicción para un paciente hipotético: recibe las 7 variables del modelo (`tipo_fisura`, `edad_inicio_meses` 1–11, `distancia_hospital_km` 5–300, `nivel_socioeconomico_ord` 0/1/2/4, `ingresos_mensuales_usd` 250–6000, `apoyo_psicologico` 0/1, `dificultad_alimentacion_preop` 0/1). Los rangos son los observados en el entrenamiento; fuera de ellos responde 422 |
 | `POST /api/analytics` | `{"query": "Muestra el impacto del nivel socioeconómico"}` |
 | `GET /api/health` | Pacientes cargados e IDs de ejemplo |
 | `/docs` | OpenAPI de FastAPI |
@@ -171,19 +172,40 @@ El dataset histórico `dataset_final_limpio.csv` (v1 + v2, para analítica descr
 
 ### Módulo de analítica local
 
-`LocalStatisticalAnalyst` implementa `IStatisticalAnalyst` **sin modelos de lenguaje**: recibe una frase, la normaliza y genera un gráfico con nombre único en `static/generated_charts/` (los más antiguos se depuran automáticamente). Las consultas no reconocidas devuelven un error 422 con ejemplos de consultas admitidas.
+`LocalStatisticalAnalyst` implementa `IStatisticalAnalyst` **sin modelos de lenguaje**: recibe una frase, la normaliza (minúsculas y sin tildes) y genera un gráfico con nombre único en `static/generated_charts/` (los más antiguos se depuran automáticamente). El panel ofrece los análisis como un selector (no hay cuadro de texto libre); `POST /api/analytics` sigue aceptando la frase. Las consultas no reconocidas devuelven un error 422 con ejemplos de consultas admitidas.
 
 | Palabras clave | Gráfico |
 |---|---|
 | `inasistencias`, `noshow`, `citas perdidas` | Boxplot + stripplot de no-shows vs deserción (variable retrospectiva: solo descriptivo) |
-| `socioeconómico`, `ses` | Tasas de deserción por SES y apoyo psicológico |
+| `socioeconómico`, `ses` (como palabra completa) | Tasas de deserción por SES y apoyo psicológico |
 | `distancia`, `km` | Densidad KDE de km al hospital |
 | `cirugías`, `complicaciones` | Carga operatoria vs complicaciones |
 | `terapia`, `lenguaje`, `ivf` | Asistencia a terapia e hipernasalidad (variable retrospectiva: solo descriptivo) |
-| `correlación`, `matriz` | Heatmap de Pearson |
-| `comparar`, `grupos` | Tasa de deserción por grupo (tipo de fisura, SES o cohorte) |
+| `correlación`, `matriz` | Heatmap de correlación de Spearman, sin valores en las celdas (solo colores) |
+| `comparar`, `grupos` | Tasa de deserción por grupo. La variable se pide en la frase: `por tipo de fisura`, `por nivel socioeconómico` o `por cohorte` (sin indicarla, usa tipo de fisura) |
 | `distribución`, `tasa de deserción` | Distribución global de la etiqueta `desertor` |
 | resto | Error con ejemplos de consultas admitidas |
+
+### Compartir una demo temporal desde tu computador
+
+Para que otras personas prueben el panel (por ejemplo, desde sus teléfonos) durante una sesión concreta, sin desplegar la aplicación, se puede abrir un túnel temporal con [`cloudflared`](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) (no requiere cuenta). Con dos terminales:
+
+```bash
+# Una sola vez (reiniciar la terminal después de instalar)
+winget install --id Cloudflare.cloudflared
+
+# Terminal 1: la aplicación
+.\.venv\Scripts\python.exe main.py
+
+# Terminal 2: el túnel
+cloudflared tunnel --url http://localhost:8000
+```
+
+El túnel imprime un enlace `https://….trycloudflare.com`; ese es el que se comparte. `HOST` puede quedarse en `127.0.0.1`, porque el túnel se conecta desde el mismo equipo. Para terminar, `Ctrl+C` en ambas terminales: el enlace deja de funcionar.
+
+- El enlace **cambia en cada ejecución** y solo sirve mientras el computador esté encendido, sin suspenderse, y la aplicación corriendo.
+- Conviene probarlo antes desde un teléfono con datos móviles (no con el mismo wifi) y generar un gráfico para que Matplotlib arranque en frío antes de la demo.
+- **La aplicación no tiene autenticación:** quien tenga el enlace puede usarla. Es aceptable solo porque los datos son sintéticos; no compartir el enlace en lugares abiertos y no usar este método con datos reales (ver [Privacidad](#privacidad)).
 
 ---
 
@@ -291,4 +313,4 @@ La evaluación completa tarda alrededor de 12 minutos (semilla 42). Interpretabi
 
 ### Privacidad
 
-**Nunca subir datos de pacientes reales a GitHub ni a ningún repositorio público.** Este repositorio contiene datos y un modelo serializado solo porque los datos son sintéticos. Con datos reales: repositorio privado o datos fuera del repositorio, `.gitignore` para `data/` y modelos, y seudonimización acordada con la institución. Los CSV de explicación por paciente (`interpretabilidad_pacientes.csv`) contienen identificadores y tampoco deben subirse en ese caso.
+**Nunca subir datos de pacientes reales a GitHub ni a ningún repositorio público.** Este repositorio contiene datos y un modelo serializado solo porque los datos son sintéticos. Con datos reales: repositorio privado o datos fuera del repositorio, `.gitignore` para `data/` y modelos, y seudonimización acordada con la institución. Los CSV de explicación por paciente (`interpretabilidad_pacientes.csv`) contienen identificadores y tampoco deben subirse en ese caso. Del mismo modo, compartir la aplicación mediante un túnel (ver [Compartir una demo temporal](#compartir-una-demo-temporal-desde-tu-computador)) expone un servicio sin autenticación: solo con datos sintéticos.
