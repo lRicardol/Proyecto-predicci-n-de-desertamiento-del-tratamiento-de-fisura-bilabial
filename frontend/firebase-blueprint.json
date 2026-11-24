@@ -1,0 +1,205 @@
+{
+  "entities": {
+    "SpecialistProfile": {
+      "title": "SpecialistProfile",
+      "description": "Authenticated medical specialist profile with isolated PII.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "specialty": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "institution": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "role": {
+          "type": "string",
+          "enum": ["specialist"],
+          "maxLength": 20
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "displayName", "email", "specialty", "institution", "role", "createdAt", "updatedAt"]
+    },
+    "PatientFollowUp": {
+      "title": "PatientFollowUp",
+      "description": "Pseudonymized synthetic cleft lip T0 follow-up record aligned with modelo_t0.",
+      "type": "object",
+      "properties": {
+        "specialistId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "syntheticCode": {
+          "type": "string",
+          "pattern": "^PAC-SYN-[0-9]{4}$",
+          "maxLength": 16
+        },
+        "tipoFisura": {
+          "type": "string",
+          "enum": ["Completa", "Incompleta", "Asimetrica"],
+          "maxLength": 24
+        },
+        "edadInicioMeses": {
+          "type": "integer"
+        },
+        "distanciaHospitalKm": {
+          "type": "number"
+        },
+        "nivelSocioeconomicoOrd": {
+          "type": "integer",
+          "enum": [0, 1, 2, 4]
+        },
+        "ingresosMensualesUsd": {
+          "type": "integer"
+        },
+        "apoyoPsicologico": {
+          "type": "boolean"
+        },
+        "dificultadAlimentacionPreop": {
+          "type": "boolean"
+        },
+        "riskScore": {
+          "type": "number"
+        },
+        "prioridad": {
+          "type": "string",
+          "enum": ["Alta", "Media", "Habitual"],
+          "maxLength": 16
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Activo", "En Intervención", "Retenido", "Alerta Crítica"],
+          "maxLength": 24
+        },
+        "nextAppointmentDate": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "maxLength": 12
+        },
+        "interventionPlan": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 300
+        },
+        "clinicalNotes": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "isSynthetic": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "specialistId",
+        "syntheticCode",
+        "tipoFisura",
+        "edadInicioMeses",
+        "distanciaHospitalKm",
+        "nivelSocioeconomicoOrd",
+        "ingresosMensualesUsd",
+        "apoyoPsicologico",
+        "dificultadAlimentacionPreop",
+        "riskScore",
+        "prioridad",
+        "status",
+        "nextAppointmentDate",
+        "interventionPlan",
+        "clinicalNotes",
+        "isSynthetic",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "FollowUpEntry": {
+      "title": "FollowUpEntry",
+      "description": "Individual clinical follow-up intervention log entry.",
+      "type": "object",
+      "properties": {
+        "followUpId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 64
+        },
+        "specialistId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "actionType": {
+          "type": "string",
+          "enum": [
+            "Control Presencial",
+            "Telemedicina",
+            "Apoyo Psicosocial",
+            "Gestión Transporte",
+            "Reprogramación"
+          ],
+          "maxLength": 40
+        },
+        "outcome": {
+          "type": "string",
+          "enum": ["Asistió", "Reprogramado", "Inasistencia", "Pendiente"],
+          "maxLength": 24
+        },
+        "note": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["followUpId", "specialistId", "actionType", "outcome", "note", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/specialists/{specialistId}": {
+      "schema": { "$ref": "#/entities/SpecialistProfile" },
+      "description": "Authenticated medical specialist profiles (owner-only read/write)."
+    },
+    "/followUps/{followUpId}": {
+      "schema": { "$ref": "#/entities/PatientFollowUp" },
+      "description": "Pseudonymized synthetic cleft lip T0 follow-up cases owned by a specialist."
+    },
+    "/followUps/{followUpId}/entries/{entryId}": {
+      "schema": { "$ref": "#/entities/FollowUpEntry" },
+      "description": "Follow-up intervention timeline entries gated by parent followUp ownership."
+    }
+  }
+}

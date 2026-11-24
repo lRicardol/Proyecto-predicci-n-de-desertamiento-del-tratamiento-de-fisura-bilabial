@@ -1,0 +1,6 @@
+{
+  "name": "FisuraCare — Predicción de Deserción y Seguimiento Clínico",
+  "description": "Plataforma clínica multipágina para la predicción de deserción en el tratamiento de fisura bilabial, visualización interactiva de factores de riesgo con datos sintéticos y seguimiento personalizado para especialistas médicos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
