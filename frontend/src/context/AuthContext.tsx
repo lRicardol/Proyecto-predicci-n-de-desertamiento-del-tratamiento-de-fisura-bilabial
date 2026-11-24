@@ -169,8 +169,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try {
         await ensureSpecialistProfile(firebaseUser);
       } catch (err) {
+        const denied = err instanceof Error && /insufficient permissions/i.test(err.message);
+        if (denied) {
+          // Cuenta fuera de la lista (config/allowlist): se cierra la sesión para que el
+          // aviso se vea en la pantalla de acceso y no quede un panel inutilizable.
+          try {
+            await firebaseSignOut(auth);
+          } catch {
+            // Si falla el cierre, el aviso igualmente se muestra.
+          }
+        }
         setAuthError(
-          err instanceof Error && /insufficient permissions/i.test(err.message)
+          denied
             ? 'Tu cuenta de Google no está autorizada para usar el seguimiento. Pide al administrador que agregue tu correo.'
             : err instanceof Error
             ? 'No fue posible inicializar el perfil clínico del especialista.'
