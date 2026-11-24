@@ -170,7 +170,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         await ensureSpecialistProfile(firebaseUser);
       } catch (err) {
         setAuthError(
-          err instanceof Error
+          err instanceof Error && /insufficient permissions/i.test(err.message)
+            ? 'Tu cuenta de Google no está autorizada para usar el seguimiento. Pide al administrador que agregue tu correo.'
+            : err instanceof Error
             ? 'No fue posible inicializar el perfil clínico del especialista.'
             : 'Error al conectar con el perfil de especialista.'
         );

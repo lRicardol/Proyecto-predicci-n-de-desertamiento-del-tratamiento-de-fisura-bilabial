@@ -6,8 +6,17 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
+    // Lista de correos autorizados: documento `config/allowlist` con el campo
+    // `emails` (array de strings en minúsculas). Se edita en la consola de Firebase,
+    // así los correos no quedan en el repositorio. Si el documento no existe, nadie entra.
+    function isAllowed() {
+      return request.auth.token.email != null
+        && exists(/databases/$(database)/documents/config/allowlist)
+        && request.auth.token.email.lower() in get(/databases/$(database)/documents/config/allowlist).data.emails;
+    }
+
     function isSignedIn() {
-      return request.auth != null;
+      return request.auth != null && isAllowed();
     }
 
     function isVerified() {
