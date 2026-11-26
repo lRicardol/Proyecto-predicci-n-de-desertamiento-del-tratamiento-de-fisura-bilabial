@@ -1,9 +1,6 @@
-"""Controlador del panel: salud, vista HTML y analítica conversacional."""
-
-from pathlib import Path
+"""Controlador del panel: salud y analítica local. La interfaz es la SPA de `frontend/`."""
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.responses import HTMLResponse
 
 from config import get_settings
 from src.app.composition import (
@@ -16,15 +13,6 @@ from src.core.exceptions import DomainError
 from src.core.use_cases.generate_analytics import GenerateAnalyticsUseCase
 
 dashboard_router = APIRouter(tags=["dashboard"])
-DASHBOARD_TEMPLATE = Path(__file__).resolve().parent.parent / "views" / "dashboard.html"
-
-
-@dashboard_router.get("/", response_class=HTMLResponse)
-def dashboard_home() -> HTMLResponse:
-    if not DASHBOARD_TEMPLATE.exists():
-        raise HTTPException(status_code=500, detail="No existe la plantilla del dashboard.")
-    return HTMLResponse(DASHBOARD_TEMPLATE.read_text(encoding="utf-8"))
-
 
 @dashboard_router.get("/api/health", response_model=HealthResponse)
 def health() -> HealthResponse:

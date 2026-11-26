@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     )
     charts_dir: Path = Field(default=PROJECT_ROOT / "static" / "generated_charts")
     static_dir: Path = Field(default=PROJECT_ROOT / "static")
+    frontend_dist_dir: Path = Field(default=PROJECT_ROOT / "frontend" / "dist")
     model_artifact_path: Path = Field(
         default=PROJECT_ROOT
         / "src"

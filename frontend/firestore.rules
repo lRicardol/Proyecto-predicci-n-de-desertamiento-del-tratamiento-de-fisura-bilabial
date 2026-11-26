@@ -1,0 +1,169 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Lista de correos autorizados: documento `config/allowlist` con el campo
+    // `emails` (array de strings en minúsculas). Se edita en la consola de Firebase,
+    // así los correos no quedan en el repositorio. Si el documento no existe, nadie entra.
+    function isAllowed() {
+      return request.auth.token.email != null
+        && exists(/databases/$(database)/documents/config/allowlist)
+        && request.auth.token.email.lower() in get(/databases/$(database)/documents/config/allowlist).data.emails;
+    }
+
+    function isSignedIn() {
+      return request.auth != null && isAllowed();
+    }
+
+    function isVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidSpecialist(data, specialistId) {
+      return data.keys().hasAll([
+        'uid', 'displayName', 'email', 'specialty', 'institution', 'role', 'createdAt', 'updatedAt'
+      ])
+      && data.keys().hasOnly([
+        'uid', 'displayName', 'email', 'specialty', 'institution', 'role', 'createdAt', 'updatedAt'
+      ])
+      && data.uid is string && data.uid == request.auth.uid && data.uid == specialistId && data.uid.size() <= 128
+      && data.displayName is string && data.displayName.size() >= 2 && data.displayName.size() <= 100
+      && data.email is string && data.email.size() >= 3 && data.email.size() <= 160
+      && data.specialty is string && data.specialty.size() >= 2 && data.specialty.size() <= 80
+      && data.institution is string && data.institution.size() >= 2 && data.institution.size() <= 120
+      && data.role == 'specialist'
+      && data.createdAt is timestamp
+      && data.updatedAt is timestamp;
+    }
+
+    function isValidFollowUp(data) {
+      return data.keys().hasAll([
+        'specialistId', 'syntheticCode', 'tipoFisura', 'edadInicioMeses',
+        'distanciaHospitalKm', 'nivelSocioeconomicoOrd', 'ingresosMensualesUsd',
+        'apoyoPsicologico', 'dificultadAlimentacionPreop',
+        'riskScore', 'prioridad', 'status',
+        'nextAppointmentDate', 'interventionPlan', 'clinicalNotes',
+        'isSynthetic', 'createdAt', 'updatedAt'
+      ])
+      && data.keys().hasOnly([
+        'specialistId', 'syntheticCode', 'tipoFisura', 'edadInicioMeses',
+        'distanciaHospitalKm', 'nivelSocioeconomicoOrd', 'ingresosMensualesUsd',
+        'apoyoPsicologico', 'dificultadAlimentacionPreop',
+        'riskScore', 'prioridad', 'status',
+        'nextAppointmentDate', 'interventionPlan', 'clinicalNotes',
+        'isSynthetic', 'createdAt', 'updatedAt'
+      ])
+      && data.specialistId is string && data.specialistId == request.auth.uid && data.specialistId.size() <= 128
+      && data.syntheticCode is string && data.syntheticCode.size() <= 16 && data.syntheticCode.matches('^PAC-SYN-[0-9]{4}$')
+      && data.tipoFisura is string && data.tipoFisura.size() <= 24
+      && data.tipoFisura in ['Completa', 'Incompleta', 'Asimetrica']
+      && data.edadInicioMeses is int && data.edadInicioMeses >= 0 && data.edadInicioMeses <= 216
+      && (data.distanciaHospitalKm is int || data.distanciaHospitalKm is float) && data.distanciaHospitalKm >= 0 && data.distanciaHospitalKm <= 1500
+      && data.nivelSocioeconomicoOrd is int && data.nivelSocioeconomicoOrd in [0, 1, 2, 4]
+      && data.ingresosMensualesUsd is int && data.ingresosMensualesUsd >= 0 && data.ingresosMensualesUsd <= 50000
+      && data.apoyoPsicologico is bool
+      && data.dificultadAlimentacionPreop is bool
+      && (data.riskScore is int || data.riskScore is float) && data.riskScore >= 0 && data.riskScore <= 100
+      && data.prioridad is string && data.prioridad.size() <= 16 && data.prioridad in ['Alta', 'Media', 'Habitual']
+      && data.status is string && data.status.size() <= 24 && data.status in ['Activo', 'En Intervención', 'Retenido', 'Alerta Crítica']
+      && data.nextAppointmentDate is string && data.nextAppointmentDate.size() <= 12 && data.nextAppointmentDate.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+      && data.interventionPlan is string && data.interventionPlan.size() >= 3 && data.interventionPlan.size() <= 300
+      && data.clinicalNotes is string && data.clinicalNotes.size() <= 1000
+      && data.isSynthetic == true
+      && data.createdAt is timestamp
+      && data.updatedAt is timestamp;
+    }
+
+    function isValidFollowUpEntry(data, followUpId) {
+      return data.keys().hasAll(['followUpId', 'specialistId', 'actionType', 'outcome', 'note', 'createdAt'])
+      && data.keys().hasOnly(['followUpId', 'specialistId', 'actionType', 'outcome', 'note', 'createdAt'])
+      && data.followUpId is string && data.followUpId == followUpId && data.followUpId.size() <= 64
+      && data.specialistId is string && data.specialistId == request.auth.uid && data.specialistId.size() <= 128
+      && data.actionType is string && data.actionType.size() <= 40
+      && data.actionType in ['Control Presencial', 'Telemedicina', 'Apoyo Psicosocial', 'Gestión Transporte', 'Reprogramación']
+      && data.outcome is string && data.outcome.size() <= 24
+      && data.outcome in ['Asistió', 'Reprogramado', 'Inasistencia', 'Pendiente']
+      && data.note is string && data.note.size() >= 3 && data.note.size() <= 500
+      && data.createdAt is timestamp;
+    }
+
+    match /specialists/{specialistId} {
+      allow get: if isSignedIn() && isValidId(specialistId) && request.auth.uid == specialistId;
+      allow list: if false;
+      allow create: if isVerified()
+        && isValidId(specialistId)
+        && request.auth.uid == specialistId
+        && isValidSpecialist(incoming(), specialistId)
+        && incoming().createdAt == request.time
+        && incoming().updatedAt == request.time;
+      allow update: if isVerified()
+        && isValidId(specialistId)
+        && request.auth.uid == specialistId
+        && isValidSpecialist(incoming(), specialistId)
+        && incoming().uid == existing().uid
+        && incoming().role == existing().role
+        && incoming().createdAt == existing().createdAt
+        && incoming().updatedAt == request.time
+        && incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'specialty', 'institution', 'updatedAt']);
+      allow delete: if false;
+    }
+
+    match /followUps/{followUpId} {
+      allow get: if isSignedIn() && isValidId(followUpId) && existing().specialistId == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.specialistId == request.auth.uid;
+      allow create: if isVerified()
+        && isValidId(followUpId)
+        && isValidFollowUp(incoming())
+        && incoming().createdAt == request.time
+        && incoming().updatedAt == request.time;
+      allow update: if isVerified()
+        && isValidId(followUpId)
+        && existing().specialistId == request.auth.uid
+        && existing().status != 'Retenido'
+        && isValidFollowUp(incoming())
+        && incoming().specialistId == existing().specialistId
+        && incoming().syntheticCode == existing().syntheticCode
+        && incoming().isSynthetic == existing().isSynthetic
+        && incoming().createdAt == existing().createdAt
+        && incoming().updatedAt == request.time
+        && incoming().diff(existing()).affectedKeys().hasOnly(['status', 'interventionPlan', 'clinicalNotes', 'nextAppointmentDate', 'updatedAt']);
+      allow delete: if isVerified() && isValidId(followUpId) && existing().specialistId == request.auth.uid;
+
+      match /entries/{entryId} {
+        allow get: if isSignedIn()
+          && isValidId(followUpId)
+          && isValidId(entryId)
+          && get(/databases/$(database)/documents/followUps/$(followUpId)).data.specialistId == request.auth.uid;
+        allow list: if isSignedIn() && resource.data.specialistId == request.auth.uid;
+        allow create: if isVerified()
+          && isValidId(followUpId)
+          && isValidId(entryId)
+          && isValidFollowUpEntry(incoming(), followUpId)
+          && incoming().createdAt == request.time
+          && exists(/databases/$(database)/documents/followUps/$(followUpId))
+          && get(/databases/$(database)/documents/followUps/$(followUpId)).data.specialistId == request.auth.uid;
+        allow update: if false;
+        allow delete: if isVerified()
+          && isValidId(followUpId)
+          && isValidId(entryId)
+          && existing().specialistId == request.auth.uid;
+      }
+    }
+  }
+}

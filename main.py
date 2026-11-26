@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 
 from config import get_settings
@@ -46,6 +47,23 @@ def create_app() -> FastAPI:
         name="static",
     )
     register_routes(application)
+    # Interfaz: SPA de React compilada (`cd frontend && npm run build`). Se monta al
+    # final para que /api y /static tengan prioridad.
+    if (settings.frontend_dist_dir / "index.html").exists():
+        application.mount(
+            "/",
+            StaticFiles(directory=str(settings.frontend_dist_dir), html=True),
+            name="frontend",
+        )
+    else:
+
+        @application.get("/", response_class=PlainTextResponse)
+        def frontend_missing() -> PlainTextResponse:
+            return PlainTextResponse(
+                "Interfaz no compilada. Ejecuta: cd frontend && npm install && npm run build",
+                status_code=503,
+            )
+
     return application
 
 

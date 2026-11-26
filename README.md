@@ -42,7 +42,7 @@ El diseño sigue **Clean Architecture** y los principios SOLID. El dominio no im
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  Presentation (src/app)                                     │
-│  FastAPI · controladores · dashboard.html (Tailwind)        │
+│  FastAPI · controladores · SPA React (frontend/)        │
 └────────────────────────────┬────────────────────────────────┘
                              │ depende de casos de uso
 ┌────────────────────────────▼────────────────────────────────┐
@@ -85,7 +85,7 @@ El diseño sigue **Clean Architecture** y los principios SOLID. El dominio no im
 
 - **Controladores:** `prediction_controller.py` y `dashboard_controller.py` (FastAPI), sin reglas de negocio.
 - **DTOs:** `src/app/views/schemas.py`.
-- **Vista:** `src/app/views/dashboard.html` — panel de predicción con pestañas (Pacientes / Variables), prioridad de seguimiento, datos usados por el modelo, variables que más pesaron, panel de analítica con selector de análisis y tema claro/oscuro.
+- **Vista:** `frontend/` — aplicación FisuraCare (React + Vite + Tailwind): resumen, factores de riesgo, simulador T0, seguimiento y privacidad. FastAPI sirve la versión compilada (`frontend/dist`) en `/`. Reemplaza al antiguo `dashboard.html`. Para desarrollo: `cd frontend && npm install && npm run dev` (puerto 3000); para servirla desde FastAPI: `npm run build`. El simulador y la cohorte se calculan en el navegador (`frontend/src/data/syntheticCohort.ts`), y el seguimiento usa Firebase (Auth + Firestore; ver `frontend/firebase-applet-config.json`).
 
 ### Composition root
 

@@ -14,3 +14,7 @@ __pycache__/
 
 # Gráficos generados en ejecución por el analista local
 static/generated_charts/chart_*.png
+
+# Frontend (React/Vite)
+frontend/node_modules/
+frontend/dist/
