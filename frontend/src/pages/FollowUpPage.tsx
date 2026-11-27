@@ -29,6 +29,8 @@ import {
   SesLevel,
 } from '../types/clinical';
 import { RiskLabel, StatusLabel } from '../components/RiskStatusText';
+import heroImage from '../assets/images/clinical_care_hero_1795476472432.jpg';
+import specialistAvatar from '../assets/images/specialist_avatar_1795476477934.jpg';
 
 const ACTION_TYPES: ActionType[] = [
   'Control Presencial',
@@ -221,7 +223,7 @@ export const FollowUpPage: React.FC = () => {
 
           <div className="lg:col-span-5 relative min-h-[240px] bg-slate-100 border-t lg:border-t-0 lg:border-l border-slate-200">
             <img
-              src="/src/assets/images/clinical_care_hero_1795476472432.jpg"
+              src={heroImage}
               alt="Unidad clínica pediátrica de atención multidisciplinaria"
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover lg:absolute lg:inset-0"
@@ -344,7 +346,7 @@ export const FollowUpPage: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-4 min-w-0">
             <img
-              src={user.photoURL || '/src/assets/images/specialist_avatar_1795476477934.jpg'}
+              src={user.photoURL || specialistAvatar}
               alt={profile?.displayName || 'Especialista médico'}
               referrerPolicy="no-referrer"
               className="w-12 h-12 rounded-full object-cover border border-slate-200 shrink-0"
