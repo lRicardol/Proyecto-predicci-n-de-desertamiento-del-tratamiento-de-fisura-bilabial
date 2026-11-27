@@ -6,6 +6,8 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    // Rutas relativas: sirve igual en GitHub Pages (/<repo>/) y desde FastAPI (/).
+    base: './',
     plugins: [
       react(),
       tailwindcss(),
