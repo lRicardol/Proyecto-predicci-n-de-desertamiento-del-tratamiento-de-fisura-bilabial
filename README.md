@@ -186,6 +186,18 @@ El dataset histórico `dataset_final_limpio.csv` (v1 + v2, para analítica descr
 | `distribución`, `tasa de deserción` | Distribución global de la etiqueta `desertor` |
 | resto | Error con ejemplos de consultas admitidas |
 
+### Publicar el frontend en GitHub Pages
+
+El workflow [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) compila `frontend/` y lo publica con cada push a `main`. En los pull requests solo compila. Requiere:
+
+- En GitHub: **Settings → Pages → Source → GitHub Actions**.
+- En Firebase (Authentication): agregar `lricardol.github.io` a los dominios autorizados, para que funcione el acceso con Google.
+- Node.js 24.12 o superior para compilar (lo exigen las dependencias de Firebase).
+
+Pages solo sirve archivos estáticos: la API FastAPI (`/api/...`) no se publica. El sitio es público; úsalo solo con datos sintéticos.
+
+---
+
 ### Compartir una demo temporal desde tu computador
 
 Para que otras personas prueben el panel (por ejemplo, desde sus teléfonos) durante una sesión concreta, sin desplegar la aplicación, se puede abrir un túnel temporal con [`cloudflared`](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) (no requiere cuenta). Con dos terminales:

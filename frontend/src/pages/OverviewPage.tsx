@@ -9,6 +9,7 @@ import {
 import { PageId } from '../types/clinical';
 import { RetentionCurveChart } from '../components/charts/RetentionCurveChart';
 import { RiskLabel } from '../components/RiskStatusText';
+import heroImage from '../assets/images/clinical_care_hero_1795476472432.jpg';
 
 interface OverviewPageProps {
   onNavigate: (page: PageId) => void;
@@ -64,7 +65,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
 
           <div className="lg:col-span-5 relative min-h-[220px] bg-slate-100 border-t lg:border-t-0 lg:border-l border-slate-200">
             <img
-              src="/src/assets/images/clinical_care_hero_1795476472432.jpg"
+              src={heroImage}
               alt="Sala de consulta pediátrica craneofacial con iluminación natural"
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover lg:absolute lg:inset-0"
